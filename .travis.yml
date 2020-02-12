@@ -1,10 +1,10 @@
 language: sh
+
+# latest ubuntu
+# https://docs.travis-ci.com/user/reference/overview/
 dist: bionic
 
-#install: sudo apt-get install -y doxygen
-
-packages:
- - doxygen
+install: sudo apt-get install -y doxygen
 
 script:
  - ./makeDoxy
