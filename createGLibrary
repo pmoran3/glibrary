@@ -22,13 +22,14 @@ echo " "
 for f in SConstruct SConscript example.cc settings.xcconfig README.md
 do
 	echo " "copying $f
-	cp templateLibrary/$f $library/
+	cp templateGLibrary/$f $library/
 done
 
 echo " "
 for f in changelog todo
 do
 	echo " "touching $f
+	rm $f
 	touch $library/$f
 done
 
@@ -36,7 +37,7 @@ cheader=$(echo $library"_h" | tr "[:lower:]" "[:upper:]")
 echo " "
 echo " "Creating $library header using $cheader
 
-touch $library/$library".h"
+rm $library/$library".h" ; touch $library/$library".h"
 
 echo "#ifndef " $cheader      >> $library/$library".h"
 echo "#define " $cheader " 1" >> $library/$library".h"
@@ -53,18 +54,20 @@ echo "#endif"                 >> $library/$library".h"
 
 echo " "
 echo " "Creating $library source
-touch $library/$library".cc"
+rm $library/$library".cc"; touch $library/$library".cc"
+
 echo "// $library "             >> $library/$library".cc"
 echo '#include "'$library'.h"'  >> $library/$library".cc"
 
 
-#foreach f(README.md example.cc SConscript SConstruct)
-#	sed -i '' s/textProgressBar/$library/g     $library/$f
-#	sed -i '' s/TextProgressBar/$library/g     $library/$f
-#	sed -i '' s/"Text Progress Bar"/$library/g $library/$f
-#	sed -i '' s/"text progress bar"/$library/g $library/$f
-#end
-#
+echo " "
+echo " "Changing template name to $library in:
+echo " "
+for f in SConstruct SConscript example.cc README.md
+do
+	echo " "$f
+	sed -i '' s/templateGLibrary/$library/g     $library/$f
+done
 
 ./createDoxyFile $library
 
