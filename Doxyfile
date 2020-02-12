@@ -1236,16 +1236,6 @@ HTML_COLORSTYLE_GAMMA  = 80
 
 HTML_TIMESTAMP         = YES
 
-# If the HTML_DYNAMIC_MENUS tag is set to YES then the generated HTML
-# documentation will contain a main index with vertical navigation menus that
-# are dynamically created via JavaScript. If disabled, the navigation index will
-# consists of multiple levels of tabs that are statically embedded in every HTML
-# page. Disable this option to support browsers that do not have JavaScript,
-# like the Qt help browser.
-# The default value is: YES.
-# This tag requires that the tag GENERATE_HTML is set to YES.
-
-HTML_DYNAMIC_MENUS     = YES
 
 # If the HTML_DYNAMIC_SECTIONS tag is set to YES then the generated HTML
 # documentation will contain sections that can be hidden and shown after the
@@ -1528,11 +1518,6 @@ FORMULA_FONTSIZE       = 10
 
 FORMULA_TRANSPARENT    = YES
 
-# The FORMULA_MACROFILE can contain LaTeX \newcommand and \renewcommand commands
-# to create new LaTeX commands to be used in formulas as building blocks. See
-# the section "Including formulas" for details.
-
-FORMULA_MACROFILE      =
 
 # Enable the USE_MATHJAX option to render LaTeX formulas using MathJax (see
 # https://www.mathjax.org) which uses client side JavaScript for the rendering
@@ -1698,15 +1683,7 @@ LATEX_OUTPUT           = latex
 
 LATEX_CMD_NAME         =
 
-# The MAKEINDEX_CMD_NAME tag can be used to specify the command name to generate
-# index for LaTeX.
-# Note: This tag is used in the Makefile / make.bat.
-# See also: LATEX_MAKEINDEX_CMD for the part in the generated output file
-# (.tex).
-# The default file is: makeindex.
-# This tag requires that the tag GENERATE_LATEX is set to YES.
 
-MAKEINDEX_CMD_NAME     = makeindex
 
 # The LATEX_MAKEINDEX_CMD tag can be used to specify the command name to
 # generate index for LaTeX. In case there is no backslash (\) as first character
@@ -1852,19 +1829,12 @@ LATEX_BIB_STYLE        = plain
 
 LATEX_TIMESTAMP        = NO
 
-# The LATEX_EMOJI_DIRECTORY tag is used to specify the (relative or absolute)
-# path from which the emoji images will be read. If a relative path is entered,
-# it will be relative to the LATEX_OUTPUT directory. If left blank the
-# LATEX_OUTPUT directory will be used.
-# This tag requires that the tag GENERATE_LATEX is set to YES.
-
-LATEX_EMOJI_DIRECTORY  =
 
 #---------------------------------------------------------------------------
 # Configuration options related to the RTF output
 #---------------------------------------------------------------------------
 
-# If the GENERATE_RTF tag is set to YES, doxygen will generate RTF output. The
+# If the GENERATE_RTF tag is set XML_NS_MEMB_FILE_SCOPEto YES, doxygen will generate RTF output. The
 # RTF output is optimized for Word 97 and may not look too pretty with other RTF
 # readers/editors.
 # The default value is: NO.
@@ -1997,12 +1967,6 @@ XML_OUTPUT             = xml
 
 XML_PROGRAMLISTING     = YES
 
-# If the XML_NS_MEMB_FILE_SCOPE tag is set to YES, doxygen will include
-# namespace members in file scope as well, matching the HTML output.
-# The default value is: NO.
-# This tag requires that the tag GENERATE_XML is set to YES.
-
-XML_NS_MEMB_FILE_SCOPE = NO
 
 #---------------------------------------------------------------------------
 # Configuration options related to the DOCBOOK output

@@ -6,6 +6,9 @@
 # 0. not done yet: modify doxyfile according to directives in README
 #
 # 1. replaces the templateGLibrary entry in the Doxyfile
+#
+# 2. not done yet: remove tags not seen by travis
+#
 
 if [ "$#" -ne 1 ]; then
 	echo " "       >&2
