@@ -4,8 +4,6 @@ language: sh
 # https://docs.travis-ci.com/user/reference/overview/
 dist: bionic
 
-#install: sudo apt-get install -y doxygen
-
 branches:
   only:
     - master
