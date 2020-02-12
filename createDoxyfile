@@ -26,7 +26,8 @@ echo " Creating Doxyfile for " $library
 
 cp Doxyfile $library/
 
-sed -i '' s/templateGLibrary/$library/g $library/Doxyfile
+sed -i '' s/templateGLibrary/$library/g $library/Doxyfile # name
+sed -i '' s/templateHTML/$library/g $library/Doxyfile     # output dir
 echo " "
 
 

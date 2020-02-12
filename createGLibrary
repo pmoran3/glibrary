@@ -29,7 +29,7 @@ echo " "
 for f in changelog todo
 do
 	echo " "touching $f
-	rm $f
+	rm $library/$f
 	touch $library/$f
 done
 
