@@ -1,4 +1,5 @@
-language: zsh
+language: sh
+
 
 script:
  - ./makeDoxy
