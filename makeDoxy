@@ -10,6 +10,8 @@ do
 	echo " "Creating $l documentation
 	cd $l
 	doxygen Doxyfile
+	mv $l/html/* $l
+	rm -rf $l/html
 	cd ..
 done
 echo " "
