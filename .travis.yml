@@ -24,7 +24,9 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: goptions/goptions
+  local_dir:
+   - goptions/goptions
+	- gfields/gfields
   github_token: $GH_REPO_TOKEN
   on:
     branch: master
