@@ -4,7 +4,27 @@ language: sh
 # https://docs.travis-ci.com/user/reference/overview/
 dist: bionic
 
-install: sudo apt-get install -y doxygen
+#install: sudo apt-get install -y doxygen
+
+branches:
+  only:
+    - master
+
+# Install dependencies
+addons:
+  apt:
+    packages:
+      - doxygen
+
 
 script:
  - ./makeDoxy
+
+# Generate and deploy documentation
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: goptions/html
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: master
