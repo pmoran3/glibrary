@@ -1,0 +1,18 @@
+# This compiles the example and the templateGLibrary (if it's not built already)
+
+from init_env import init_environment
+
+# load glibraries
+env = init_environment("glibrary")
+
+# manually appending this library so the example can be compiled
+# the environment above will not load templateGLibrary if it's not there
+env.Append(LIBS = 'templateGLibrary')
+
+# calling SConscript here to build just the library as in the hierarchy build
+lib = SConscript('SConscript')
+
+# builds the example
+example = env.Program(source = "example.cc", target = "example")
+
+Depends(example,  lib);

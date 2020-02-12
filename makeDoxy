@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+
+libraries=(goptions)
+
+echo " "
+for l in $libraries
+do
+	echo " "Creating $l documentation
+	cd $l
+	doxygen Doxyfile
+	cd ..
+done
+echo " "
