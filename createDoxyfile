@@ -23,7 +23,6 @@ echo " Creating Doxyfile for " $library
 
 cp Doxyfile $library/
 
-
 sed -i '' s/templateGLibrary/$library/g $library/Doxyfile
 
 
