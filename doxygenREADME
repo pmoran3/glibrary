@@ -1,0 +1,40 @@
+
+Doxygen Documentation
+---------------------
+
+c++ http://www.doxygen.nl/manual/docblocks.html
+
+To create doxy file:
+
+doxygen -g
+
+Make script to make these changes automatic?
+
+
+Changes:
+
+- PROJECT_NAME           = "templateGLibrary"
+- PROJECT_NUMBER         =
+- EXTRACT_PRIVATE        = YES (change to NO show just the public interface)
+- OPTIMIZE_OUTPUT_FOR_C  = YES
+- BUILTIN_STL_SUPPORT    = YES
+- PROJECT_BRIEF          = "templateGLibrary Library Framework"
+- QUIET                  = YES
+- RECURSIVE              = YES
+- EXCLUDE                = README.md \
+                          .git \
+                          html \
+						  example.cc
+- EXCLUDE_PATTERNS       = *moc*
+- SOURCE_BROWSER         = YES
+- HTML_COLORSTYLE_SAT    = 50
+- HTML_TIMESTAMP         = YES
+- HTML_DYNAMIC_SECTIONS  = YES
+- GENERATE_LATEX         = NO  
+- HIDE_UNDOC_RELATIONS   = NO
+- HAVE_DOT               = YES
+- UML_LOOK               = YES
+- UML_LIMIT_NUM_FIELDS   = 0
+- DOT_FONTSIZE           = 12
+- CLASS_GRAPH            = YES
+- GENERATE_LEGEND        = NO

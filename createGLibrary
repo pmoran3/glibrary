@@ -1,0 +1,71 @@
+#!/bin/zsh
+
+# needs exactly one argument
+
+if [ "$#" -ne 1 ]; then
+	echo " "       >&2
+	echo " Usage:" >&2
+	echo " "       >&2
+	echo  " $0 libraryName"  >&2
+	echo " "       >&2
+	exit 1
+fi
+
+
+library=$1
+echo " "
+echo " Creating glibrary" $library
+mkdir -p $library
+
+
+echo " "
+for f in SConstruct SConscript example.cc settings.xcconfig README.md
+do
+	echo " "copying $f
+	cp templateLibrary/$f $library/
+done
+
+echo " "
+for f in changelog todo
+do
+	echo " "touching $f
+	touch $library/$f
+done
+
+cheader=$(echo $library"_h" | tr "[:lower:]" "[:upper:]")
+echo " "
+echo " "Creating $library header using $cheader
+
+touch $library/$library".h"
+
+echo "#ifndef " $cheader      >> $library/$library".h"
+echo "#define " $cheader " 1" >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo "class $library"         >> $library/$library".h"
+echo "{"                      >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo  "};"                    >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo                          >> $library/$library".h"
+echo "#endif"                 >> $library/$library".h"
+
+echo " "
+echo " "Creating $library source
+touch $library/$library".cc"
+echo "// $library "             >> $library/$library".cc"
+echo '#include "'$library'.h"'  >> $library/$library".cc"
+
+
+#foreach f(README.md example.cc SConscript SConstruct)
+#	sed -i '' s/textProgressBar/$library/g     $library/$f
+#	sed -i '' s/TextProgressBar/$library/g     $library/$f
+#	sed -i '' s/"Text Progress Bar"/$library/g $library/$f
+#	sed -i '' s/"text progress bar"/$library/g $library/$f
+#end
+#
+
+./createDoxyFile $library
+
+echo " "

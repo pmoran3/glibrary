@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+# needs exactly one argument.
+#
+# 0. not done yet: creates doxyfile
+# 0. not done yet: modify doxyfile according to directives in README
+#
+# 1. replaces the templateGLibrary entry in the Doxyfile
+
+if [ "$#" -ne 1 ]; then
+	echo " "       >&2
+	echo " Usage:" >&2
+	echo " "       >&2
+	echo  " $0 libraryName"  >&2
+	echo " "       >&2
+	exit 1
+fi
+
+
+library=$1
+echo " "
+echo " Creating Doxyfile for " $library
+
+cp Doxyfile $library/
+
+
+sed -i '' s/templateGLibrary/$library/g $library/Doxyfile
+
+
