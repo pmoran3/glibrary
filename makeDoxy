@@ -2,7 +2,7 @@
 
 doxygen --version
 
-libraries=(goptions)
+libraries='goptions gfields'
 
 echo " "
 for l in $libraries
