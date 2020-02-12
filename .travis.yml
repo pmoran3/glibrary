@@ -1,5 +1,6 @@
 language: sh
 
+install: sudo apt-get install -y doxygen
 
 script:
  - ./makeDoxy
