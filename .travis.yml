@@ -25,15 +25,8 @@ script:
 deploy:
 	provider: pages
 	skip_cleanup: true
-	local_dir: goptions/goptions
+	local_dir: doxygen
 	github_token: $GH_REPO_TOKEN
 	on:
 		branch: master
 
- deploy:
-	provider: pages
-	skip_cleanup: true
-	local_dir: gfields/gfields
-	github_token: $GH_REPO_TOKEN
-	on:
-		branch: master

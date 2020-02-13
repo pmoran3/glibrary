@@ -1,8 +1,17 @@
 #!/bin/bash
 
-doxygen --version
+echo " "
+echo " Doxygen version: "$(doxygen --version)
+echo " "
+ddir='doxygen'
 
 libraries='goptions gfields'
+
+if [ -d $ddir ]
+then
+	rm -rf $ddir
+fi
+mkdir -p $ddir
 
 echo " "
 for l in $libraries
@@ -10,7 +19,7 @@ do
 	echo " "Creating $l documentation
 	cd $l
 	doxygen Doxyfile
-	mv $l/html $l/$l
+	mv html ../$ddir/$l
 	cd ..
 done
 echo " "
