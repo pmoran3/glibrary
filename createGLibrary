@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-# needs exactly one argument
+# Purpose: creates a directory with files from the template directory
+#
+# Arguments: exactly one argument, the name of the new library
 
 if [ "$#" -ne 1 ]; then
 	echo " "       >&2
