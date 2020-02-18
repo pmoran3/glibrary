@@ -41,17 +41,20 @@ Changes:
 
 ## Automatic travis push to github
 
-- In GitHub, go to settings and Personal access tokens
-- Click Generate a new token and fill in the description. e.g. <your_repo> Travis CI Documentation
+- In GitHub account, go to settings and Personal access tokens
+- Click Generate a new token and fill in the description. e.g. <organization> Travis CI Documentation
 - If the repository is public select as scope public_repo. If your repository is private select as scope repo
 - Click Generate token
 - Copy the generated token
+- Notice: if we re-generate the token we need to copy to each travis build, see below
 
-- In Travis CI, go to the repository settings
+
+- In Travis CI, go to the repository settings. If setting option is not present, we need to activate the repo:
+  Travis account settings > click on the organization and "manage repositories"
 - In the Environment Variables section write in the Name field GH_REPO_TOKEN
 - Past the copied token in the Value field
 - Make sure that the Display value in build log is switched off
- - Click on Add
+- Click on Add
 
 Create the gh-page branch:
 
@@ -61,3 +64,13 @@ git push origin gh-pages
 git rm -rf .
 git commit -m "Clean start"
 git push origin gh-pages
+git checkout master
+
+
+To add repository to this travis:
+
+Inside https://travis-ci.com:
+
+Organization > Manage Repositories on GitHub
+
+
