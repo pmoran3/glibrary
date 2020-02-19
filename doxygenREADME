@@ -42,8 +42,9 @@ Changes:
 ## Automatic travis push to github
 
 - In GitHub account, go to settings and Personal access tokens
-- Click Generate a new token and fill in the description. e.g. <organization> Travis CI Documentation
-- If the repository is public select as scope public_repo. If your repository is private select as scope repo
+- Click Generate a new token and fill in the description. e.g. <REPO NAME> Travis CI Documentation
+- If the repository is public select as scope public_repo. If your repository is private select as scope repo.
+- Notice: it's better to generate one token per repo otherwise one would have to keep tokens for multiple repos in sync between github and travis.
 - Click Generate token
 - Copy the generated token
 - Notice: if we re-generate the token we need to copy to each travis build, see below
