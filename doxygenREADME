@@ -8,8 +8,6 @@ To create doxy file:
 
 doxygen -g
 
-
-
 Changes:
 
 - PROJECT_NAME           = "templateGLibrary"
