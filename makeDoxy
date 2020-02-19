@@ -21,7 +21,7 @@ mkdir -p $ddir
 echo " "
 for l in $libraries
 do
-	echo " "Creating $l documentation
+	echo " "Creating $l doxygen documentation
 	cd $l
 	doxygen Doxyfile
 	mv html ../$ddir/$l
