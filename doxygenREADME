@@ -4,38 +4,61 @@ Doxygen Documentation
 
 c++ http://www.doxygen.nl/manual/docblocks.html
 
-To create doxy file:
+
+Method 1 to create a Doxyfile
+-----------------------------
+
+To create a brand new doxy file:
 
 doxygen -g
 
 Changes:
 
-- PROJECT_NAME           = "templateGLibrary"
-- PROJECT_NUMBER         =
-- EXTRACT_PRIVATE        = YES (change to NO show just the public interface)
-- OPTIMIZE_OUTPUT_FOR_C  = YES
-- BUILTIN_STL_SUPPORT    = YES
-- PROJECT_BRIEF          = "templateGLibrary Library Framework"
-- QUIET                  = YES
-- RECURSIVE              = YES
-- EXCLUDE                = README.md \
+PROJECT_NAME           = "templateGLibrary"
+PROJECT_NUMBER         =
+OPTIMIZE_OUTPUT_FOR_C  = YES
+BUILTIN_STL_SUPPORT    = YES
+PROJECT_BRIEF          = "templateGLibrary Library Framework"
+QUIET                  = YES
+RECURSIVE              = YES
+EXCLUDE                = README.md \
                           .git \
                           html \
 						  example.cc
-- EXCLUDE_PATTERNS       = *moc*
-- SOURCE_BROWSER         = YES
-- HTML_COLORSTYLE_SAT    = 50
-- HTML_TIMESTAMP         = YES
-- HTML_DYNAMIC_SECTIONS  = YES
-- GENERATE_LATEX         = NO  
-- HIDE_UNDOC_RELATIONS   = NO
-- HAVE_DOT               = YES
-- UML_LOOK               = YES
-- UML_LIMIT_NUM_FIELDS   = 0
-- DOT_FONTSIZE           = 12
-- CLASS_GRAPH            = YES
-- GENERATE_LEGEND        = NO
+EXCLUDE_PATTERNS       = *moc*
+SOURCE_BROWSER         = YES
+HTML_COLORSTYLE_SAT    = 50
+HTML_TIMESTAMP         = YES
+HTML_DYNAMIC_SECTIONS  = YES
+GENERATE_LATEX         = NO
+HIDE_UNDOC_RELATIONS   = NO
+HAVE_DOT               = YES
+UML_LOOK               = YES
+UML_LIMIT_NUM_FIELDS   = 0
+DOT_FONTSIZE           = 12
+CLASS_GRAPH            = YES
+GENERATE_LEGEND        = NO
 
+
+Method 2 to create a Doxyfile
+-----------------------------
+
+Copy the one from https://github.com/nlohmann/json
+
+Changes:
+PROJECT_NAME           = "templateGLibrary"
+OPTIMIZE_OUTPUT_FOR_C  = YES
+PROJECT_BRIEF          = "templateGLibrary Library Framework"
+EXCLUDE                = README.md \
+                          .git \
+                          html \
+						  example.cc
+DOT_FONTSIZE           = 12
+remove
+EXCLUDE_SYMBOLS
+EXAMPLE_PATH
+
+Checkout the input, it supports markdown?
 
 ## Automatic travis push to github
 
