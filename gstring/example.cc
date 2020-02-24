@@ -19,12 +19,6 @@ int main(int argc, char* argv[])
 		vector<string> testResult = getStringVectorFromString(test);
 		
 		for(auto &s : testResult) {
-			cout <<  POINTITEM << s << endl;
-		}
-		for(auto &s : testResult) {
-			cout <<  CIRCLEITEM << s << endl;
-		}
-		for(auto &s : testResult) {
 			cout <<  SQUAREITEM << s << endl;
 		}
 	}

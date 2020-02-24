@@ -19,20 +19,12 @@
 ///
 ///
 /// \section example
-/// An example of defineOptions() that creates two categories is in example.cc: \include example.cc
-/// Running <i>example -h</i> will produce the following log:
+/// An example of using getStringVectorFromString to split a string based on the space separator
 /// ~~~~
 ///
 /// Usage:
 ///
-/// > -h, -help, --help: print this message and exit.
-/// > -help-all:  print all available options and exit.
-/// > -help-html:  print all available options in HTML format (options.html) and exit.
-///
-/// > Available categories
-///   -help-general........:  general related options
-///   -help-process........:  process related options
-///   -help-time...........:  time related options
+/// > /example "strings separated by spaces"
 ///
 /// ~~~~
 
