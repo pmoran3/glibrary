@@ -37,3 +37,41 @@ vector<string> gstring::getStringVectorFromString(string input)
 
 	return pvalues;
 }
+
+//! Replace all occurences of specific chars in string with a string
+string gstring::replaceCharInStringWithChars(string input, string toReplace, string replacement)
+{
+
+	string output = "";
+
+	for(unsigned int k=0; k<input.size(); k++) {
+
+		int replace = 0;
+
+		for(unsigned int j=0; j<toReplace.size(); j++) {
+			// found common char, replacing it with replacement
+			if(input[k] == toReplace[j]) {
+				output.append(replacement);
+				replace = 1;
+			}
+		}
+		if(!replace) output += input[k];
+	}
+
+	return output;
+}
+
+string gstring::fillDigits(string word, string c, int ndigits)
+{
+	string filled;
+
+	int toFill = ndigits - (int) word.size();
+
+	for(int d=0; d<toFill; d++) {
+		filled += c;
+	}
+
+	filled += word;
+
+	return filled;
+}
