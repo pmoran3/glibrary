@@ -7,10 +7,17 @@
 // conventions
 #include "conventions.h"
 
+// c++
+#include <vector>
+#include <string>
+using namespace std;
 
 
 namespace gstring
 {
+	//! Removes leading and trailing spaces
+	string trimSpacesFromString(string);
+
 	//! a vector of strings from a stringstream, space is delimiter
 	vector<string> getStringVectorFromString(string);
 
