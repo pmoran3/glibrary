@@ -3,28 +3,22 @@
 /// \mainpage
 /// \section Overview
 /// The framework provides command line and parsing of user
-/// defined options in JSON or YAML formats.\n\n
+/// defined options in JSON formats.\n\n
 /// The command line options have the format:\n
-/// <pre>	-key={ currency: "USD", value: 42.99 }  </pre>
+/// <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4, 20, 180; }  </pre>
 /// The corresponding <b>JSON</b> syntax is:\n
 /// <pre>
-/// "key": {
-/// 	"currency": "USD",
-/// 	"value": 42.99
+/// "beam": {
+/// 	"vertex": "0, 0, -3, cm",
+/// 	"value": electron, 4, 20, 180
 /// }
 /// </pre>\n
-/// The corresponding <b>YAML</b> syntax is:\n
-/// <pre>
-/// key:
-/// 	currency: "USD"
-/// 	value: 42.99
-/// </pre>
 ///
 /// \section Main Main Features:
 /// \n
 /// * Categories organization
-/// * Command line, JSON, YAML input
-/// * JSON, YAML, HTML output
+/// * Command line, JSON file (.jcard extension)
+/// * JSON, HTML output
 /// * Options can be added from external libraries / executables.
 ///
 /// \n
@@ -41,7 +35,7 @@
 ///
 /// Check the example below to see how to define a few GOptions
 ///
-/// \section Libraries JSON and YAML parser
+/// \section Libraries JSON parser
 ///
 /// The JSON parser used is https://github.com/nlohmann/json (single hpp include)
 ///
