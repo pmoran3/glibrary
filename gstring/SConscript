@@ -5,8 +5,8 @@ from init_env import init_environment
 env = init_environment("glibrary")
 
 sources = Split("""
-	templateGLibrary.cc
+	gstring.cc
 	""")
 
 # destination library is one dir up
-lib = env.Library(source = sources, target = "../lib/templateGLibrary")
+lib = env.Library(source = sources, target = "../lib/gstring")
