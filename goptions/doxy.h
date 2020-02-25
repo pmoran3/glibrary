@@ -10,7 +10,7 @@
 /// <pre>
 /// "beam": {
 /// 	"vertex": "0, 0, -3, cm",
-/// 	"value": electron, 4, 20, 180
+/// 	"value": "electron, 4, 20, 180"
 /// }
 /// </pre>\n
 ///
