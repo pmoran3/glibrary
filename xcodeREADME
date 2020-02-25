@@ -18,7 +18,7 @@ Add Sources and Libraries
     a. remove libraryName directoy
     b. add source libraryName.cc in Compile Sources "Build Phases"
 
- 3. Open Framework and library dir of interest
+ 3. In the shell, open Framework and library dir of interest
 
     Qt:     open $QTDIR/lib/
 	 geant4: open $G4ROOT/$GEANT4_VERSION/lib/

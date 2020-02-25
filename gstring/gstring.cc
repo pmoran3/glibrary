@@ -61,6 +61,7 @@ string gstring::replaceCharInStringWithChars(string input, string toReplace, str
 	return output;
 }
 
+
 string gstring::fillDigits(string word, string c, int ndigits)
 {
 	string filled;
@@ -75,3 +76,74 @@ string gstring::fillDigits(string word, string c, int ndigits)
 
 	return filled;
 }
+
+
+
+
+// Numbers / strings with units / io
+
+// CLHEP units
+#include "CLHEP/Units/PhysicalConstants.h"
+using namespace CLHEP;
+
+// c++
+#include <iostream>
+
+
+
+/// \fn double getG4Number(string v, bool warnIfNotUnit)
+/// \brief Return value of the input string, which may or may not
+/// contain units (warning given if requested)
+/// \param v input string. Ex: 10.2*cm
+/// \return value with correct G4 unit.
+double gstring::getG4Number(string v, bool warnIfNotUnit)
+{
+	string value = trimSpacesFromString(v);
+
+	// no * found
+	if(value.find("*") == string::npos) {
+		// no * found, this should be a number
+		// No unit is still ok if the number is 0
+
+		if(value.length()>0 && warnIfNotUnit && stod(value) != 0) {
+			cout << " ! Warning: value " << v << " does not contain units." << endl;
+		}
+		return stod(value);
+
+	} else {
+		string rootValue = value.substr(0, value.find("*"));
+		string units     = value.substr(value.find("*") + 1);
+
+		double answer = stod(rootValue);
+
+		if( units == "m")         answer *= m;
+		else if( units == "inches")    answer *= 2.54*cm;
+		else if( units == "inch")      answer *= 2.54*cm;
+		else if( units == "cm")        answer *= cm;
+		else if( units == "mm")        answer *= mm;
+		else if( units == "um")        answer *= 1E-6*m;
+		else if( units == "fm")        answer *= 1E-15*m;
+		else if( units == "deg")       answer *= deg;
+		else if( units == "degrees")   answer *= deg;
+		else if( units == "arcmin")    answer = answer/60.0*deg;
+		else if( units == "rad")       answer *= rad;
+		else if( units == "mrad")      answer *= mrad;
+		else if( units == "eV")        answer *= eV;
+		else if( units == "MeV")       answer *= MeV;
+		else if( units == "KeV")       answer *= 0.001*MeV;
+		else if( units == "GeV")       answer *= GeV;
+		else if( units == "T")         answer *= tesla;
+		else if( units == "T/m")       answer *= tesla/m;
+		else if( units == "Tesla")     answer *= tesla;
+		else if( units == "gauss")     answer *= gauss;
+		else if( units == "kilogauss") answer *= gauss*1000;
+		else if( units == "ns")        answer *= ns;
+		else if( units == "na")        answer *= 1;
+		else if( units == "counts")    answer *= 1;
+		else cout << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
+		return answer;
+	}
+
+	return 0;
+}
+
