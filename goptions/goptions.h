@@ -7,6 +7,15 @@
 // conventions
 #include "conventions.h"
 
+// json parser
+#include "json.hpp"
+using namespace nlohmann;
+
+// c++
+#include <string>
+using namespace std;
+
+
 // \class GOption
 /// <b> GOption </b>\n\n
 /// A GOption contains:\n
@@ -18,7 +27,7 @@
 /// \author \n Maurizio Ungaro
 /// \author mail: ungaro@jlab.org\n\n\n
 
-#include "json.hpp"
+
 
 class GOption
 {
@@ -39,13 +48,18 @@ public:
 	GOption ( const GOption & ) = default;
 
 	//! Sets a double type option and description
-	GOption(string t, string d, string d, string cat = "general", bool canRepeat = false) : type(isDouble), valueD(v) {
-		valueS = "na";
-		setUOption(t, cat, canRepeat);
+	GOption(string t, string d, string h, string oneLinerDefinition, string cat = "general") :
+	title(t),
+	description(d),
+	help(h),
+	category(cat) {
+
 	}
 
 
-}
+
+
+};
 
 
 #endif

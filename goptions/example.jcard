@@ -1,14 +1,48 @@
 {
-	"pi": 3.141,
-	"happy": true,
-	"name": "Niels",
-	"nothing": null,
-	"answer": {
-		"everything": 42
+
+	"detectors": {
+
+		# central detector
+		"target": {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
+		"rtpc":   {"path": "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"}
+		"ltcc":   {"path": "experiments/clas12/ltcc",    "factory": "CAD",  "variation": "rgb_spring2019"}
+
+		# forward detector
+		"ec":    {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
+		"dc":    {"path": "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"}
+		"ftof":  {"path": "experiments/clas12/ltcc",    "factory": "CAD",  "variation": "rgb_spring2019"}
+
 	},
-	"list": [1, 0, 2],
-	"object": {
-		"currency": "USD",
-		"value": 42.99
-	}
+
+	# magnetic fields properties
+	"fields": {
+		"TorusSymmetric": {
+			"scale": -1,
+			"max step": "2*mm",
+			"method": "G4ClassicalRK4",
+			"interpolation": "linear",
+		},
+		"clas12-newSolenoid": {
+			"scale": 1,
+			"max step": "1*mm",
+			"method": "G4ClassicalRK4",
+			"interpolation": "linear",
+		}
+
+	},
+
+	# generator
+	"generator": [
+		{ "pid": "e-",
+			"mom": "4*GeV",
+			
+
+	],
+
+
+
+
+
+
+
 }
