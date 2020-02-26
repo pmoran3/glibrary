@@ -1,36 +1,7 @@
 #!/bin/zsh
 
 
-function replaceLineInFileContaining () {
-	filename=$1
-	lineContent=$2
-	lineReplacing=$3
 
-	header=$(grep -v '#' $filename | grep -B1000 $lineContent | grep -v $lineContent | grep -v '\-\-')
-	footer=$(grep -v '#' $filename | grep -A1000 $lineContent | grep -v $lineContent | grep -v '\-\-')
-
-	rm -f tmpFile
-
-#	echo header
-#	echo $header
-#	echo
-#	echo lineReplacing
-#	echo $lineReplacing
-#	echo
-#	echo footer
-#	echo $footer
-#	echo
-
-	echo $header         > tmpFile
-	echo $lineReplacing >> tmpFile
-	echo $footer        >> tmpFile
-
-	echo Filename: $filename
-	echo Content of line to replace: $lineContent
-	echo Line replacing the content: $lineReplacing
-
-	mv tmpFile $filename
-}
 
 
 # Purpose: creates a doxyfile using the doxygen -g command to get the latest doxygen goodies)
@@ -39,23 +10,11 @@ function replaceLineInFileContaining () {
 typeset -A doxyChanges
 
 
-doxyChanges[PROJECT_NAME]='"templateGLibrary"'
-doxyChanges[PROJECT_NUMBER]="1.0"
-doxyChanges[OPTIMIZE_OUTPUT_FOR_C]='YES'
-doxyChanges[BUILTIN_STL_SUPPORT]='YES'
-doxyChanges[PROJECT_BRIEF]='"templateGLibrary Library Framework"'
-doxyChanges[QUIET]='YES'
-doxyChanges[RECURSIVE]='YES'
-doxyChanges[EXCLUDE]='"README.md \ .git \ example.cc \ json.hpp"'
-doxyChanges[EXCLUDE_PATTERNS]='"*moc* \ */html/*"'
+doxyChanges[FILE_PATTERNS]='*.cc *.h'
+
 doxyChanges[SOURCE_BROWSER]='YES'
-doxyChanges[HTML_TIMESTAMP]='YES'
 doxyChanges[HTML_DYNAMIC_SECTIONS]='YES'
-doxyChanges[GENERATE_LATEX]='NO'
-doxyChanges[HIDE_UNDOC_RELATIONS]='NO'
-doxyChanges[HAVE_DOT]='YES'
-doxyChanges[UML_LOOK]='YES'
-doxyChanges[UML_LIMIT_NUM_FIELDS]='0'
+
 doxyChanges[DOT_FONTSIZE]='12'
 doxyChanges[CLASS_GRAPH]='YES'
 doxyChanges[GENERATE_LEGEND]='NO'
@@ -66,23 +25,55 @@ doxyChanges[GENERATE_LEGEND]='NO'
 echo " "
 echo " Creating Doxyfile "
 doxygen -g
-rm -f DoxyfilePure
-grep -v '#' Doxyfile | grep -v '\-\-' | grep -i "\S" > DoxyfilePure
+
+cp Doxyfile DoxyfilePure
+
+# painfully, manually doing these, but we HAVE TO
+sed -i '' 's/PROJECT_NAME           = "My Project"/PROJECT_NAME           = "templateGLibrary"/g' Doxyfile
+sed -i '' 's/OPTIMIZE_OUTPUT_FOR_C  = NO/OPTIMIZE_OUTPUT_FOR_C  = YES/g' Doxyfile
+sed -i '' 's/BUILTIN_STL_SUPPORT    = NO/BUILTIN_STL_SUPPORT    = YES/g' Doxyfile
+sed -i '' 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "templateGLibrary Library Framework"/g' Doxyfile
+sed -i '' 's/GENERATE_LATEX         = YES/GENERATE_LATEX         = NO/g' Doxyfile
+sed -i '' 's/HAVE_DOT               = NO/HAVE_DOT               = YES/g' Doxyfile
+sed -i '' 's/UML_LOOK               = NO/UML_LOOK               = YES/g' Doxyfile
+sed -i '' 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/mylayout.css"/g' Doxyfile
+sed -i '' 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g' Doxyfile
+sed -i '' 's/EXCLUDE                =/EXCLUDE                = README.md .git/g' Doxyfile
+
+# painfully removing the individual patterns
+sed -i ''  '/*.hpp \\/d'  Doxyfile
+sed -i ''  '/*.java \\/d'  Doxyfile
+sed -i ''  '/*.ii \\/d'  Doxyfile
+sed -i ''  '/*.ixx \\/d'  Doxyfile
+sed -i ''  '/*.ipp \\/d'  Doxyfile
+sed -i ''  '/*.i++ \\/d'  Doxyfile
+sed -i ''  '/*.inl \\/d'  Doxyfile
+sed -i ''  '/*.cs \\/d'  Doxyfile
+sed -i ''  '/*.d \\/d'  Doxyfile
+sed -i ''  '/*.m \\/d'  Doxyfile
+sed -i ''  '/*.doc \\/d'  Doxyfile
+sed -i ''  '/*.txt \\/d'  Doxyfile
+sed -i ''  '/*.f \\/d'  Doxyfile
+sed -i ''  '/*.for \\/d'  Doxyfile
+sed -i ''  '/*.vhd \\/d'  Doxyfile
+sed -i ''  '/*.ucf \\/d'  Doxyfile
+sed -i ''  '/*.md \\/d'  Doxyfile
+sed -i ''  '/*.mm \\/d'  Doxyfile
+sed -i ''  '/*.dox \\/d'  Doxyfile
+sed -i ''  '/*.f90 \\/d'  Doxyfile
+sed -i ''  '/*.f95 \\/d'  Doxyfile
+sed -i ''  '/*.f03 \\/d'  Doxyfile
+sed -i ''  '/*.f08 \\/d'  Doxyfile
+sed -i ''  '/*.markdown \\/d'  Doxyfile
+sed -i ''  '/*.tcl \\/d'  Doxyfile
+sed -i ''  '/*.vhdl \\/d'  Doxyfile
+sed -i ''  '/*.qsf \\/d'  Doxyfile
+sed -i ''  '/*.php \\/d'  Doxyfile
+sed -i ''  '/*.php4 \\/d'  Doxyfile
+sed -i ''  '/*.php5 \\/d'  Doxyfile
+sed -i ''  '/*.phtml \\/d'  Doxyfile
+sed -i ''  '/*.idl \\/d'  Doxyfile
+sed -i ''  '/*.ddl \\/d'  Doxyfile
+sed -i ''  '/*.odl \\/d'  Doxyfile
 
 
-for key val in ${(kv)doxyChanges}; do
-	toReplace="$key"
-	replacing="$key \t= $val"
-	file="Doxyfile"
-
-	replaceLineInFileContaining $file $toReplace $replacing
-	echo
-done
-
-grep -i "\S" Doxyfile > tmpFile
-mv tmpFile Doxyfile
-
-echo
-echo Differences:
-
-diff Doxyfile DoxyfilePure
