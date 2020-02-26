@@ -22,7 +22,7 @@ echo " "
 for l in $libraries
 do
 	echo " "Creating Doxyfile
-	./makeDoxy $l
+	./makeDoxyFile $l
 	echo " "
 	echo " "Creating $l doxygen documentation
 	cd $l

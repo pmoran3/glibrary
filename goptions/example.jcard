@@ -35,8 +35,10 @@
 	"generator": [
 		{ "pid": "e-",
 			"mom": "4*GeV",
-			
-
+		},
+		{ "pid": "proton",
+			"mom": "4*GeV",
+		}
 	],
 
 
