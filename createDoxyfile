@@ -1,9 +1,40 @@
 #!/bin/zsh
 
+
+function replaceLineInFileContaining () {
+	filename=$1
+	lineContent=$2
+	lineReplacing=$3
+
+	header=$(grep -v '#' $filename | grep -B1000 $lineContent | grep -v $lineContent | grep -v '\-\-')
+	footer=$(grep -v '#' $filename | grep -A1000 $lineContent | grep -v $lineContent | grep -v '\-\-')
+
+	rm -f tmpFile
+
+#	echo header
+#	echo $header
+#	echo
+#	echo lineReplacing
+#	echo $lineReplacing
+#	echo
+#	echo footer
+#	echo $footer
+#	echo
+
+	echo $header         > tmpFile
+	echo $lineReplacing >> tmpFile
+	echo $footer        >> tmpFile
+
+	echo Filename: $filename
+	echo Content of line to replace: $lineContent
+	echo Line replacing the content: $lineReplacing
+
+	mv tmpFile $filename
+}
+
+
 # Purpose: creates a doxyfile using the doxygen -g command to get the latest doxygen goodies)
 # The replace each line with the ones shown below
-
-
 
 typeset -A doxyChanges
 
@@ -15,10 +46,9 @@ doxyChanges[BUILTIN_STL_SUPPORT]='YES'
 doxyChanges[PROJECT_BRIEF]='"templateGLibrary Library Framework"'
 doxyChanges[QUIET]='YES'
 doxyChanges[RECURSIVE]='YES'
-doxyChanges[EXCLUDE]='"README.md .git \ \ example.cc \ json.hpp"'
+doxyChanges[EXCLUDE]='"README.md \ .git \ example.cc \ json.hpp"'
 doxyChanges[EXCLUDE_PATTERNS]='"*moc* \ */html/*"'
 doxyChanges[SOURCE_BROWSER]='YES'
-doxyChanges[HTML_COLORSTYLE_SAT]='50'
 doxyChanges[HTML_TIMESTAMP]='YES'
 doxyChanges[HTML_DYNAMIC_SECTIONS]='YES'
 doxyChanges[GENERATE_LATEX]='NO'
@@ -35,9 +65,24 @@ doxyChanges[GENERATE_LEGEND]='NO'
 
 echo " "
 echo " Creating Doxyfile "
-# doxygen -g
+doxygen -g
+rm -f DoxyfilePure
+grep -v '#' Doxyfile | grep -v '\-\-' | grep -i "\S" > DoxyfilePure
 
 
 for key val in ${(kv)doxyChanges}; do
-    echo "$key -> $val"
+	toReplace="$key"
+	replacing="$key \t= $val"
+	file="Doxyfile"
+
+	replaceLineInFileContaining $file $toReplace $replacing
+	echo
 done
+
+grep -i "\S" Doxyfile > tmpFile
+mv tmpFile Doxyfile
+
+echo
+echo Differences:
+
+diff Doxyfile DoxyfilePure

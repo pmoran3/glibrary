@@ -1,6 +1,13 @@
 {
 
-	"detectors": {
+	# example of option:
+	# detectors is a "group"
+	#
+	# Corresponding command line:
+	#
+	# -addto-detectors=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+
+	"detectors": [
 
 		# central detector
 		"target": {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
@@ -11,31 +18,20 @@
 		"ec":    {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
 		"dc":    {"path": "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"}
 		"ftof":  {"path": "experiments/clas12/ltcc",    "factory": "CAD",  "variation": "rgb_spring2019"}
+	],
 
-	},
+
+
 
 	# magnetic fields properties
-	"fields": {
-		"TorusSymmetric": {
-			"scale": -1,
-			"max step": "2*mm",
-			"method": "G4ClassicalRK4",
-			"interpolation": "linear",
-		},
-		"clas12-newSolenoid": {
-			"scale": 1,
-			"max step": "1*mm",
-			"method": "G4ClassicalRK4",
-			"interpolation": "linear",
-		}
-
-	},
+	"fields": [
+		"TorusSymmetric":     { "scale": -1, "max step": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
+		"clas12-newSolenoid": { "scale": 1,  "max step": "1*mm", "method": "G4ClassicalRK4", "interpolation": "linear"}
+	],
 
 	# generator
-	"generator": [
-		{ "pid": "e-",
-			"mom": "4*GeV",
-		},
+	"particles": [
+		electron: { px: "4*GeV", py: "4*GeV", py: "4*GeV"},
 		{ "pid": "proton",
 			"mom": "4*GeV",
 		}
