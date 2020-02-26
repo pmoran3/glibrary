@@ -18,14 +18,16 @@ then
 fi
 mkdir -p $ddir
 
+# for documentation purposes
 ls -l
+
 ./createDoxyfile
 
 echo " "
 for l in $libraries
 do
 	echo " "Creating Doxyfile for $l
-	./makeDoxyfileForLibrary $l
+	../makeDoxyfileForLibrary $l
 	echo " "
 	echo " "Creating $l doxygen documentation
 	cd $l

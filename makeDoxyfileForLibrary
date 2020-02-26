@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Purpose: creates a doxyfile the template doxyfile
 # (later: directly from the doxygen -g command to get the latest doxygen goodies)
