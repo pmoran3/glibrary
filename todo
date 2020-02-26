@@ -1,3 +1,17 @@
 - Check github action workflows
 - add PROJECTNUMBER support in makeDoxyfileForLibrary
 
+- create function to return
+
+extraArgument=''
+case `uname` in
+	Darwin)
+		extraArgument=\'\'
+	;;
+	Linux)
+		extraArgument=''
+	;;
+esac
+echo extraArgument $extraArgument
+
+

@@ -22,7 +22,17 @@ echo " Creating Doxyfile for " $library
 cp Doxyfile $library/
 
 # replacing instances of "templateGLibrary"
-sed -i '' s/templateGLibrary/$library/g $library/Doxyfile # name
+extraArgument=''
+case `uname` in
+	Darwin)
+		extraArgument=\'\'
+	;;
+	Linux)
+		extraArgument=''
+	;;
+esac
+
+sed -i $extraArgument s/templateGLibrary/$library/g $library/Doxyfile # name
 echo " "
 
 

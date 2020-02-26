@@ -37,7 +37,6 @@ case `uname` in
 		extraArgument=''
 	;;
 esac
-echo extraArgument $extraArgument
 
 # painfully, manually doing these, but we HAVE TO
 sed -i $extraArgument 's/PROJECT_NAME           = "My Project"/PROJECT_NAME           = "templateGLibrary"/g' Doxyfile
