@@ -1,4 +1,3 @@
 - Check github action workflows
-- Make script to set doxygen options automatically from doxygen -g (see doxyREADME)
-- Make script to remove options not supported by doxy
+- add PROJECTNUMBER support in makeDoxyfileForLibrary
 

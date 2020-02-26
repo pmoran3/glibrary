@@ -1,28 +1,43 @@
 #!/bin/zsh
 
-# Purpose: creates a doxyfile the template doxyfile
-# (later: directly from the doxygen -g command to get the latest doxygen goodies)
-#
-# Arguments: exactly one argument, the name of the new library
-
-if [ "$#" -ne 1 ]; then
-	echo " "       >&2
-	echo " Usage:" >&2
-	echo " "       >&2
-	echo  " $0 libraryName"  >&2
-	echo " "       >&2
-	exit 1
-fi
+# Purpose: creates a doxyfile using the doxygen -g command to get the latest doxygen goodies)
+# The replace each line with the ones shown below
 
 
-library=$1
+
+typeset -A doxyChanges
+
+
+doxyChanges[PROJECT_NAME]='"templateGLibrary"'
+doxyChanges[PROJECT_NUMBER]="1.0"
+doxyChanges[OPTIMIZE_OUTPUT_FOR_C]='YES'
+doxyChanges[BUILTIN_STL_SUPPORT]='YES'
+doxyChanges[PROJECT_BRIEF]='"templateGLibrary Library Framework"'
+doxyChanges[QUIET]='YES'
+doxyChanges[RECURSIVE]='YES'
+doxyChanges[EXCLUDE]='"README.md .git \ \ example.cc \ json.hpp"'
+doxyChanges[EXCLUDE_PATTERNS]='"*moc* \ */html/*"'
+doxyChanges[SOURCE_BROWSER]='YES'
+doxyChanges[HTML_COLORSTYLE_SAT]='50'
+doxyChanges[HTML_TIMESTAMP]='YES'
+doxyChanges[HTML_DYNAMIC_SECTIONS]='YES'
+doxyChanges[GENERATE_LATEX]='NO'
+doxyChanges[HIDE_UNDOC_RELATIONS]='NO'
+doxyChanges[HAVE_DOT]='YES'
+doxyChanges[UML_LOOK]='YES'
+doxyChanges[UML_LIMIT_NUM_FIELDS]='0'
+doxyChanges[DOT_FONTSIZE]='12'
+doxyChanges[CLASS_GRAPH]='YES'
+doxyChanges[GENERATE_LEGEND]='NO'
+
+
+
+
 echo " "
-echo " Creating Doxyfile for " $library
-
-cp Doxyfile $library/
-
-# replacing instances of "templateGLibrary"
-sed -i '' s/templateGLibrary/$library/g $library/Doxyfile # name
-echo " "
+echo " Creating Doxyfile "
+# doxygen -g
 
 
+for key val in ${(kv)doxyChanges}; do
+    echo "$key -> $val"
+done
