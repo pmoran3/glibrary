@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+# Purpose: creates a doxyfile the template doxyfile
+# (later: directly from the doxygen -g command to get the latest doxygen goodies)
+#
+# Arguments: exactly one argument, the name of the new library
+
+if [ "$#" -ne 1 ]; then
+	echo " "       >&2
+	echo " Usage:" >&2
+	echo " "       >&2
+	echo  " $0 libraryName"  >&2
+	echo " "       >&2
+	exit 1
+fi
+
+
+library=$1
+echo " "
+echo " Creating Doxyfile for " $library
+
+cp Doxyfile $library/
+
+# replacing instances of "templateGLibrary"
+sed -i '' s/templateGLibrary/$library/g $library/Doxyfile # name
+echo " "
+
+
