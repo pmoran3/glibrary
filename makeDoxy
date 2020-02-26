@@ -19,7 +19,7 @@ fi
 mkdir -p $ddir
 
 ls -l
-./createDoxyFile
+./createDoxyfile
 
 echo " "
 for l in $libraries
