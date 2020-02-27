@@ -1,0 +1,34 @@
+{
+	# This file is imported from example.jcard
+
+	"particle": [
+		{
+			"name": "electron",
+			"momentum": {
+				"px": "1*GeV",
+				"py": "20*deg",
+				"pz": "90*deg"
+			},
+
+			"spread_p": {
+				"deltaP": "0.1*GeV",
+				"deltaTheta": "5*deg",
+				"delta": "180*deg"
+			},
+
+			"vertex": {
+				"vx": "0.0*cm",
+				"vy": "0.0*cm",
+				"vz": "-3.0*cm"
+			},
+
+			# back to explicit
+			"spread_v": {
+				"dr": "1*cm",
+				"dz": "2*cm"
+			},
+
+			"multiplicity": "100, randomTime"
+		}
+	]
+}

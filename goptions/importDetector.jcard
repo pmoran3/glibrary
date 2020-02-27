@@ -1,0 +1,34 @@
+{
+	# This file is imported from example.jcard
+	#
+	# example of option:
+	# detectors is a "group"
+	# since the -add-detector was not used, this entry define "detector"
+	# (replacing all previous occurences of it, if any)
+	#
+	# Corresponding command line:
+	#
+	# -detector=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	#
+	
+	"detector": [
+		
+		# central detector
+		{ "target": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"},
+		{ "rtpc":   "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"},
+		
+		# forward detector
+		# as an example we use carriage return to organize the fields
+		{
+			"dc": "experiments/clas12/rtpc",
+			"factory": "TEXT",
+			"variation": "default"
+		},
+		
+		{
+			"ftof": "experiments/clas12/ltcc",
+			"factory": "CAD",
+			"variation": "rgb_spring2019"
+		}
+	]
+}

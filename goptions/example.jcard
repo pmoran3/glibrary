@@ -1,46 +1,82 @@
 {
+	# import other jcard:
+	"importJcards": [
+		"importDetector",
+		"importParticle"
+	],
 
 	# example of option:
 	# detectors is a "group"
+	# since the -add-detector is used and detector is a group, this entry will add to the detector group
 	#
 	# Corresponding command line:
 	#
-	# -addto-detectors=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	# -add-detector=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
 
-	"detectors": [
-
-		# central detector
-		"target": {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
-		"rtpc":   {"path": "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"}
-		"ltcc":   {"path": "experiments/clas12/ltcc",    "factory": "CAD",  "variation": "rgb_spring2019"}
-
-		# forward detector
-		"ec":    {"path": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"}
-		"dc":    {"path": "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"}
-		"ftof":  {"path": "experiments/clas12/ltcc",    "factory": "CAD",  "variation": "rgb_spring2019"}
-	],
-
-
-
-
-	# magnetic fields properties
-	"fields": [
-		"TorusSymmetric":     { "scale": -1, "max step": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
-		"clas12-newSolenoid": { "scale": 1,  "max step": "1*mm", "method": "G4ClassicalRK4", "interpolation": "linear"}
-	],
-
-	# generator
-	"particles": [
-		electron: { px: "4*GeV", py: "4*GeV", py: "4*GeV"},
-		{ "pid": "proton",
-			"mom": "4*GeV",
+	"add-detector": [
+		{
+			"ec": "experiments/clas12/targets",
+			"factory": "TEXT",
+			"variation": "bonus"
 		}
 	],
 
+	# example of option:
+	# fieldProperty is a "group"
+	#
+	# Corresponding command line:
+	#
+	# -add-fieldProperty=TorusSymmetric:{scale: -1; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
 
+	"mapProperty": [
+		{ "fieldmap": "TorusSymmetric", "scale": -1, "maxStep": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
 
+		# as an example we use carriage return to organize the fields
+		{
+			"fieldmap": "clas12-newSolenoid",
+			"scale": 1,
+			"maxStep": "1*mm",
+			"method": "G4ClassicalRK4",
+			"interpolation": "linear"
+		}
+	],
 
+	# example of option:
+	# particle is a "group"
+	#
+	# Corresponding command line:
+	#
+	# -add-particle=electron:{momentum: "1*GeV, 20*deg, 90*deg"; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
 
+	# generator
+	"add-particle": [
+		{
+			"name": "proton",
+			"momentum": {
+				"px": "1*GeV",
+				"py": "20*deg",
+				"pz": "90*deg"
+			},
 
+			"spread_p": {
+				"deltaP": "0.1*GeV",
+				"deltaTheta": "5*deg",
+				"delta": "180*deg"
+			},
+
+			# as an example, this field is implicit
+			# vertex is vx, vy, vz, unit
+			
+			"vertex": "0, 0, -3 cm",
+
+			# back to explicit
+			"spread_v": {
+				"dr": "1*cm",
+				"dz": "2*cm"
+			},
+
+			"multiplicity": "100, randomTime"
+		}
+	]
 
 }
