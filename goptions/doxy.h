@@ -35,9 +35,11 @@
 ///
 /// Check the example below to see how to define a few GOptions
 ///
-/// \section Libraries JSON parser
+/// \section Libraries JSON
 ///
-/// The JSON parser used is https://github.com/nlohmann/json (single hpp include)
+/// The JSON parser used is https://github.com/nlohmann/json (single hpp include)\n
+///
+/// A json validator can be found here: https://codebeautify.org/jsonvalidator
 ///
 /// \section example
 /// An example of defineOptions() that creates two categories is in example.cc: \include example.cc

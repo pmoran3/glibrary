@@ -1,15 +1,16 @@
 {
 	# This file is imported from example.jcard
 	#
-	# example of option:
 	# detectors is a "group"
-	# since the -add-detector was not used, this entry define "detector"
+	# since "detector" and not "-add-detector" was used, this entry defines "detector"
 	# (replacing all previous occurences of it, if any)
 	#
 	# Corresponding command line:
 	#
-	# -detector=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	# -detector={target: experiments/clas12/targets; factory: TEXT; variation: bonus;}
 	#
+	# Notice how some options have default values and could be omitted
+
 	
 	"detector": [
 		

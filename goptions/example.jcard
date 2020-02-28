@@ -1,5 +1,6 @@
 {
 	# import other jcard:
+	# this can be useful to import standard gcard for a specific experiment
 	"importJcards": [
 		"importDetector",
 		"importParticle"
@@ -11,11 +12,11 @@
 	#
 	# Corresponding command line:
 	#
-	# -add-detector=target:{path: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	# -add-detector={ec: experiments/clas12/ec; factory: TEXT; variation: bonus;}
 
 	"add-detector": [
 		{
-			"ec": "experiments/clas12/targets",
+			"ec": "experiments/clas12/ec",
 			"factory": "TEXT",
 			"variation": "bonus"
 		}
@@ -26,7 +27,7 @@
 	#
 	# Corresponding command line:
 	#
-	# -add-fieldProperty=TorusSymmetric:{scale: -1; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
+	# -add-mapProperty={ fieldmap: TorusSymmetric; scale: -1; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
 
 	"mapProperty": [
 		{ "fieldmap": "TorusSymmetric", "scale": -1, "maxStep": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
@@ -46,36 +47,21 @@
 	#
 	# Corresponding command line:
 	#
-	# -add-particle=electron:{momentum: "1*GeV, 20*deg, 90*deg"; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
+	# -add-particle={pid: proton; p: 2*GeV; theta: 10*deg; phi: 280*deg; deltaTheta: 5*deg, deltaPhi: 180*deg; multiplicity: 2;}
 
 	# generator
 	"add-particle": [
 		{
-			"name": "proton",
-			"momentum": {
-				"px": "1*GeV",
-				"py": "20*deg",
-				"pz": "90*deg"
-			},
+			"pid": "proton",
 
-			"spread_p": {
-				"deltaP": "0.1*GeV",
-				"deltaTheta": "5*deg",
-				"delta": "180*deg"
-			},
+			"p": "2*GeV",
+			"theta": "10*deg",
+			"phi": "280*deg",
 
-			# as an example, this field is implicit
-			# vertex is vx, vy, vz, unit
-			
-			"vertex": "0, 0, -3 cm",
+			"deltaTheta": "5*deg",
+			"deltaPhi": "180*deg",
 
-			# back to explicit
-			"spread_v": {
-				"dr": "1*cm",
-				"dz": "2*cm"
-			},
-
-			"multiplicity": "100, randomTime"
+			"multiplicity": "2"
 		}
 	]
 

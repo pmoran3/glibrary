@@ -1,34 +1,45 @@
 {
 	# This file is imported from example.jcard
+	# particle is a "group"
+	# since "particle" and not "-add-particle" was used, this entry defines "particle"
+	# (replacing all previous occurences of it, if any)
+
+	# Corresponding command lines:
+	#
+	# particle={pid: electron; p: 1*GeV; theta: 20*deg; phi: 90*deg; deltaP: 0.1*deg; deltaTheta: 5*deg, deltaPhi: 180*deg; dvr: 1*cm; dvz: 2*cm; multiplicity: 2;}
+	# -add-particle={pid: pi+; p: 2*GeV; theta: 10*deg; phi: 280*deg; deltaTheta: 5*deg, deltaPhi: 180*deg; multiplicity: 2;}
+	#
+	# Notice how some options have default values and could be omitted
 
 	"particle": [
 		{
-			"name": "electron",
-			"momentum": {
-				"px": "1*GeV",
-				"py": "20*deg",
-				"pz": "90*deg"
-			},
+			"pid": "electron",
 
-			"spread_p": {
-				"deltaP": "0.1*GeV",
-				"deltaTheta": "5*deg",
-				"delta": "180*deg"
-			},
+			"p": "1*GeV",
+			"theta": "20*deg",
+			"phi": "90*deg",
 
-			"vertex": {
-				"vx": "0.0*cm",
-				"vy": "0.0*cm",
-				"vz": "-3.0*cm"
-			},
+			"deltaP": "0.1*GeV",
+			"deltaTheta": "5*deg",
+			"deltaPhi": "180*deg",
 
 			# back to explicit
-			"spread_v": {
-				"dr": "1*cm",
-				"dz": "2*cm"
-			},
+			"dvr": "1*cm",
+			"dvz": "2*cm",
 
-			"multiplicity": "100, randomTime"
+			"multiplicity": "1"
+		},
+		{
+			"pid": "pi+",
+
+			"p": "2*GeV",
+			"theta": "10*deg",
+			"phi": "280*deg",
+
+			"deltaTheta": "5*deg",
+			"deltaPhi": "180*deg",
+
+			"multiplicity": "2"
 		}
 	]
 }
