@@ -15,6 +15,42 @@ using namespace nlohmann;
 #include <string>
 using namespace std;
 
+//! a GOption can be int, double, or string
+enum GOptionType {
+	isInt,
+	isDouble,
+	isString
+};  // option type
+
+
+/// \class GOVariable
+/// <b> GOVariable (GOption Variable) </b>\n\n
+/// A GOVariable is a single tuple containing a value (double, int or string), a description (string):\n
+class GOVariable
+{
+private:
+	GOptionType gtype;
+
+	int valueI;       ///< double value
+	double valueD;    ///< double value
+	string valueS;    ///< string value
+
+	string description;
+
+
+public:
+
+	double value() {
+		if ( gtype == isDouble ) {
+			return valueD;
+		} else {
+			// throw error here
+			return 0;
+		}
+	}
+
+};
+
 
 // \class GOption
 /// <b> GOption </b>\n\n
@@ -27,15 +63,15 @@ using namespace std;
 
 
 
-class GOption
+template <typename T> class GOption
 {
 private:
 
-	string description;    ///< summary description
-	string help;           ///< a long description (help) that can span multiple lines
-	string category;       ///< help category -help will group all categories together
-	bool   groupable;      ///< false (default): option is unique. Command line overwrite gcard.
-								  ///< true: the options in the command line can be repeated. The options are grouped in the json file
+	vector<GOVariable> gvariables; ///<
+
+	string description;               ///< summary description
+	string help;                      ///< a long description (help) that can span multiple lines
+	string category;                  ///< help category -help will group all categories together
 
 public:
 	//! default constructor
@@ -45,7 +81,9 @@ public:
 	GOption ( const GOption & ) = default;
 
 	//! Sets a double type option and description
-	GOption(string t, string d, string h, string oneLinerDefinition, string cat = "general", string group = "na") :
+	GOption(string d,
+			  string h,
+			  string cat = "general") :
 	description(d),
 	help(h),
 	category(cat) {
