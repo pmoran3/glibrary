@@ -60,7 +60,7 @@ echo "#endif"                 >> $library/$library".h"
 rm -f $library/"doxy.h" ;  touch $library/"doxy.h"
 echo "#ifndef " $cheader"_DOXY"   >> $library/"doxy.h"
 echo "#define " $cheader"_DOXY 1" >> $library/"doxy.h"
-cat doxy.h                        >> $library/"doxy.h"
+cat docs/doxy.h                   >> $library/"doxy.h"
 echo "#endif"                     >> $library/"doxy.h"
 
 # convention file

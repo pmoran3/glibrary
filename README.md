@@ -5,6 +5,7 @@ A collection of various utility libraries for gemc
 ---
 
 * goptions: command line and JSON options handler
+* string: namespace for string manipulations
 
 
 ---

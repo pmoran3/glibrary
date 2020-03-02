@@ -46,7 +46,7 @@ sed -i $extraArgument 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "temp
 sed -i $extraArgument 's/GENERATE_LATEX         = YES/GENERATE_LATEX         = NO/g' Doxyfile
 sed -i $extraArgument 's/HAVE_DOT               = NO/HAVE_DOT               = YES/g' Doxyfile
 sed -i $extraArgument 's/UML_LOOK               = NO/UML_LOOK               = YES/g' Doxyfile
-sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/mylayout.css"/g' Doxyfile
+sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/docs\/mylayout.css"/g' Doxyfile
 sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g' Doxyfile
 sed -i $extraArgument 's/EXCLUDE                =/EXCLUDE                = README.md .git/g' Doxyfile
 

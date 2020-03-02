@@ -61,7 +61,7 @@
 			"deltaTheta": "5*deg",
 			"deltaPhi": "180*deg",
 
-			"multiplicity": "2"
+			"multiplicity": 2
 		}
 	]
 
