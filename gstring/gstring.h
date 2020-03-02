@@ -37,6 +37,9 @@ vector<double> getG4NumbersFromStringVector(vector<string> vstring, bool warnIfN
 //! gets a vector of g4numbers from a strings containing units
 vector<double> getG4NumbersFromString(string vstring, bool warnIfNotUnit = false);
 
+//! parse a file, remove comments (starting with commentChars) and return the pure JSON string
+string parseFileAndRemoveComments(string filename, string commentChars = "#");
+
 };
 
 
