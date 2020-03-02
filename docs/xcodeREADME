@@ -14,7 +14,7 @@ Add Sources and Libraries
 
  1. On the general tab add "settings.xcconfig" configuration for both debug and release
 
- 2. Add macos Library target "libraryName". Static STLC++ to archive the executable. Organization Identifier: mlibrary
+ 2. Add macos Library target "libraryName". Static STLC++ to archive the executable. Organization Identifier: gemc
     a. remove libraryName directoy
     b. add source libraryName.cc in Compile Sources "Build Phases"
 
@@ -31,11 +31,13 @@ Add Sources and Libraries
  4. Add macos command line tool exampleName, C++, Organization Identifier:  libraryName.
     a. remove exampleName dir
     b  drag source exampleName.cc in Compile Sources build phase
-    c. add libraryName link Binary with Libraries on Build Phases
-    d. copy manually do not do this: drag frameworks to Copy files, products location must match CONFIGURATION_BUILD_DIR
- 	    - no subpath
-	    - uncheck Copy only when installing
-	    - executables
+    c. add libraryName on "link Binary with Libraries" on Build Phases
+    d. dragg additional libraries needed on "link Binary with Libraries" on Build Phases
+
+#    d. copy manually do not do this: drag frameworks to Copy files, products location must match CONFIGURATION_BUILD_DIR
+# 	    - no subpath
+#	    - uncheck Copy only when installing
+#	    - executables
 
  5. Build Settings: Code Signing: do not code sign
 

@@ -1,4 +1,4 @@
-# This compiles the example and the goptions (if it's not built already)
+# This compiles the example and the goptions library (if it's not built already)
 
 from init_env import init_environment
 
@@ -10,9 +10,10 @@ env = init_environment("glibrary")
 env.Append(LIBS = 'goptions')
 
 # calling SConscript here to build just the library as in the hierarchy build
-lib = SConscript('SConscript')
+lib = SConscript('SConscript', exports='env')
 
 # builds the example
-example = env.Program(source = "example.cc", target = "example")
+example  = env.Program(source = "example.cc",     target = "example")
+exampleJ = env.Program(source = "jsonExample.cc", target = "jsonExample")
 
 Depends(example,  lib);

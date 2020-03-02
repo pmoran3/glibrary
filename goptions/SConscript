@@ -1,12 +1,9 @@
-# This can be called from the local SConstruct or
-# the glibrary SConstruct one dir up
-from init_env import init_environment
+# Importing env from calling script
+Import('env')
 
 sources = Split("""
 	goptions.cc
 	""")
-
-env = init_environment("")
 
 # destination library is one dir up
 lib = env.Library(source = sources, target = "../lib/goptions")

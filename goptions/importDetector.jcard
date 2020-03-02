@@ -15,19 +15,19 @@
 	"detector": [
 		
 		# central detector
-		{ "target": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"},
-		{ "rtpc":   "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"},
+		{ "detector": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"},
+		{ "detector":   "experiments/clas12/rtpc",    "factory": "TEXT", "variation": "default"},
 		
 		# forward detector
 		# as an example we use carriage return to organize the fields
 		{
-			"dc": "experiments/clas12/rtpc",
+			"detector": "experiments/clas12/rtpc",
 			"factory": "TEXT",
 			"variation": "default"
 		},
 		
 		{
-			"ftof": "experiments/clas12/ltcc",
+			"detector": "experiments/clas12/ltcc",
 			"factory": "CAD",
 			"variation": "rgb_spring2019"
 		}

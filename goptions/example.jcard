@@ -16,7 +16,7 @@
 
 	"add-detector": [
 		{
-			"ec": "experiments/clas12/ec",
+			"detector": "experiments/clas12/ec/ec",
 			"factory": "TEXT",
 			"variation": "bonus"
 		}
