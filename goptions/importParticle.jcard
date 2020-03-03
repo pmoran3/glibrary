@@ -27,7 +27,7 @@
 			"dvr": "1*cm",
 			"dvz": "2*cm",
 
-			"multiplicity": "1"
+			"multiplicity": 1
 		},
 		{
 			"pid": "pi+",

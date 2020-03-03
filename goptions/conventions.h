@@ -4,8 +4,8 @@
 #define NOTFOUNDWARNING  " ⚠️ "
 #define CANTPARSEERROR  " ❌ "
 #define IMPORTSTRING "importJcards"
-#define FILENOTFOUND "fileNotFound"
 
+#define FILENOTFOUND "fileNotFound"
 #define NOGROUP "noGroup"
 #define NODEFAULT "noDefault"
 #define DEFAULTVARIATION "defaultVariation"

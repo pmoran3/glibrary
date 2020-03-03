@@ -21,8 +21,8 @@ class GOption
 {
 private:
 
+	const string name;         // option name
 	const string description;  // summary description. This is used in the search.
-	const string group;        // if an option belongs to a group, it can be repeated.
 
 	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
 	// { "tag": "tagname", "description": "tag description", "default": default value}
@@ -41,10 +41,10 @@ public:
 	GOption ( const GOption & ) = default;
 
 	// constructor using the definitions
-	GOption(string d, json j, string g = "general"): description(d), group(g), joptionDefinition(j) { }
+	GOption(string n, string d, json j, bool g = false): name(n), description(d), joptionDefinition(j), isGroup(g) { }
 
-	// group getter
-	string getGroup() const { return group;}
+	bool isGroup;        // if an option belongs to a group, options can be collected by using -add-<name>
+	string getName() const {return name;}
 };
 
 
@@ -59,6 +59,8 @@ private:
 	// GOptions group map
 	map<string, vector<GOption>> optionsMap;
 
+
+
 	// build the optionsMap based on the vector<GOption> goptionDefinitions
 	void buildOptionsMap(vector<GOption> goptionDefinitions);
 
@@ -67,6 +69,9 @@ private:
 	vector<json> buildAllJsons(string jcardFilename);  // returns all jsons objects pointed by the base and imported jcards
 	int parseJCards(vector<json> jsons);               // parse the jcard in the GOptions map
 
+
+	// utilities
+	pair<bool, long int> findSingleOption(string name);  // find single goption from the map. bool false if not found
 
 };
 

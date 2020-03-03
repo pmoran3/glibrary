@@ -15,21 +15,20 @@ namespace goptions {
 		string variation;
 	};
 
-	// JSON I/O functions for easy conversion
-	void to_json(json& j, const sdet& det) {
-
-		j = json{
-			{"detector", det.detector},
-			{"factory", det.factory},
-			{"variation", det.variation}
-		};
-	}
-
 	void from_json(const json& j, sdet& det) {
 		j.at("detector").get_to(det.detector);
 		j.at("factory").get_to(det.factory);
 		j.at("variation").get_to(det.variation);
 	}
+
+	struct run {
+		int runno;
+	};
+
+	void from_json(const json& j, run& r) {
+		j.at("runno").get_to(r.runno);
+	}
+
 }
 
 
@@ -39,6 +38,8 @@ vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
 
+
+	// detector option
 	json jdetectorTag = {
 		{"tag", "detector"},
 		{"description", "detector system name. For TEXT factories, it includes the path to the file."},
@@ -51,13 +52,26 @@ vector<GOption> defineOptions()
 	};
 	json variationTag = {
 		{"tag", "variation"},
-		{"description", "detector variation. "},
+		{"description", "detector variation."},
 		{"default", DEFAULTVARIATION}
 	};
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
-	goptions.push_back(GOption("detector", jDetOptionDefinitions, "detector"));
+	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, true));
+
+
+
+
+	// run option
+	// detector option
+	json runTag = {
+		{"tag", "runno"},
+		{"description", "Run number"},
+		{"default", 0}
+	};
+
+	goptions.push_back(GOption("run", "run option", runTag));
 
 	return goptions;
 }
