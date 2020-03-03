@@ -8,6 +8,7 @@ using namespace std;
 
 // a simple struct to model the detector option
 namespace goptions {
+
 	struct sdet {
 		string detector;
 		string factory;
@@ -16,7 +17,12 @@ namespace goptions {
 
 	// JSON I/O functions for easy conversion
 	void to_json(json& j, const sdet& det) {
-		j = json{{"detector", det.detector}, {"factory", det.factory}, {"variation", det.variation}};
+
+		j = json{
+			{"detector", det.detector},
+			{"factory", det.factory},
+			{"variation", det.variation}
+		};
 	}
 
 	void from_json(const json& j, sdet& det) {
@@ -36,17 +42,17 @@ vector<GOption> defineOptions()
 	json jdetectorTag = {
 		{"tag", "detector"},
 		{"description", "detector system name. For TEXT factories, it includes the path to the file."},
-		{"default", "no"}
+		{"default", NODEFAULT}
 	};
 	json factoryTag = {
-		{"tag", "variation"},
+		{"tag", "factory"},
 		{"description", "detector factory"},
-		{"default", "no"}
+		{"default", NODEFAULT}
 	};
 	json variationTag = {
 		{"tag", "variation"},
-		{"description", "detector variation. if not specified, \"default\" is used."},
-		{"default", "default"}
+		{"description", "detector variation. "},
+		{"default", DEFAULTVARIATION}
 	};
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
