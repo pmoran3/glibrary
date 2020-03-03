@@ -12,7 +12,7 @@ using namespace std;
 
 
 // a simple struct to model the detector option
-namespace detector {
+namespace goptions {
 	struct sdet {
 		string detector;
 		string factory;
@@ -54,10 +54,9 @@ int main(int argc, char* argv[])
 	// careful: this returns an array
 	json jdetectors = pjson["add-detector"];
 
-
 	for (auto det: jdetectors) {
 		cout << " json: " << det << endl;
-		auto d = det.get<detector::sdet>();
+		auto d = det.get<goptions::sdet>();
 		cout << " detector struct variable: " << d.detector << endl;
 	}
 
