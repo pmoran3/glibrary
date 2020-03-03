@@ -81,14 +81,16 @@ class GOption
 {
 private:
 
-	string description;    ///< summary description. This is used in the search.
-	string group;          ///< if an option belongs to a group, it can be repeated.
-	GVerbosity verbosity;  ///< option verbosiry
+	const string description;  ///< summary description. This is used in the search.
+	const string group;        ///< if an option belongs to a group, it can be repeated.
+	GVerbosity verbosity;      ///< option verbosiry
 
-	// the json contains the verbosity (defaulted at silent) and array of these objects:
+	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
 	// { "tag": "tagname", "description": "tag description", "default": default value}
-	// For example:
-	//
+	const json joptionDefinition;
+
+	// the actual option is validated against the definition
+	// if some tags are not set, they will be set to the joptionDefinition default
 	json joption;
 
 public:
@@ -100,8 +102,10 @@ public:
 	GOption ( const GOption & ) = default;
 
 	//! constructor using a json object
-	GOption(string d, json j, string g = "general"): description(d), joption(j), group(g) { }
+	GOption(string d, json j, string g = "general"): description(d), group(g), joptionDefinition(j) { }
 
+	///! get group
+	string getGroup() const { return group;}
 };
 
 
@@ -109,7 +113,7 @@ class GOptions
 {
 public:
 	//! constructor - ignore is optional
-	GOptions(int argc, char *argv[], vector<GOption> goptions);
+	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);
 
 private:
 
@@ -117,8 +121,9 @@ private:
 	map<string, vector<GOption>> optionsMap;
 
 	//! finds jcards
-	string findJCard(int argc, char *argv[]);  ///< finds a configuration file (jcard). Returns "na' if not found.
-	int parseJCard(string file);               ///< parse the jcard in the GOptions map
+	string findBaseJCard(int argc, char *argv[]);  ///< finds a configuration file (jcard). Returns "na' if not found.
+	vector<json> allJsons(string jcard);           ///< returns all jsons objects pointed by the base and imported jcards
+	int parseJCards(vector<json> jsons);           ///< parse the jcard in the GOptions map
 
 
 };

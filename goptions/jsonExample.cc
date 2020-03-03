@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 	// removing '#'
 	string parsedJson = parseFileAndRemoveComments(fileName);
 
-	// building parsed json object
+	// building json object
 	json pjson = json::parse(parsedJson);
 
 	// careful: this returns an array

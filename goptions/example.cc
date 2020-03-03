@@ -28,7 +28,7 @@ namespace goptions {
 
 
 
-// returns array of options
+// returns array of options definitions
 vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
@@ -49,9 +49,9 @@ vector<GOption> defineOptions()
 		{"default", "default"}
 	};
 
-	json jDetOption = { jdetectorTag, factoryTag, variationTag};
+	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
-	goptions.push_back(GOption("detector", jDetOption, "detector"));
+	goptions.push_back(GOption("detector", jDetOptionDefinitions, "detector"));
 
 	return goptions;
 }
