@@ -187,9 +187,7 @@ vector<double>  gstring::getG4NumbersFromString(string vstring, bool warnIfNotUn
 #include <fstream>
 
 // need to add verbosity
-string gstring::parseFileAndRemoveComments(string filename, string commentChars) {
-
-	int verbosity = 0;
+string gstring::parseFileAndRemoveComments(string filename, string commentChars, int verbosity) {
 
 	// reading file
 	stringstream strStream;
@@ -201,9 +199,7 @@ string gstring::parseFileAndRemoveComments(string filename, string commentChars)
 		if(verbosity > 0) {
 			cout << endl << CIRCLEITEM <<  " Loading string from " << filename << endl;
 		}
-
 		strStream << in.rdbuf(); //read the file
-
 	}
 	in.close();
 
@@ -211,8 +207,7 @@ string gstring::parseFileAndRemoveComments(string filename, string commentChars)
 	string parsedString = strStream.str();
 
 	// removing all occurances of commentChars
-	while (parsedString.find(commentChars.c_str()) !=  string::npos )
-	{
+	while (parsedString.find(commentChars.c_str()) !=  string::npos ) {
 		size_t nFPos = parsedString.find(commentChars.c_str());   // locate commentChars in the string
 		size_t secondNL = parsedString.find('\n', nFPos);         // locate the next CR starting from where commentChars was found
 		size_t firstNL = parsedString.rfind('\n', nFPos);         // locate the last CR before where commentChars was found

@@ -4,7 +4,6 @@
 #define IMPORTSTRING "importJcards"
 
 #define FILENOTFOUND "fileNotFound"
-#define NOGROUP "noGroup"
 #define NODEFAULT "noDefault"
 #define DEFAULTVARIATION "defaultVariation"
 

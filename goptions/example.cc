@@ -5,7 +5,6 @@
 #include <iostream>
 using namespace std;
 
-
 // a simple struct to model the detector option
 namespace goptions {
 
@@ -28,7 +27,6 @@ namespace goptions {
 	void from_json(const json& j, run& r) {
 		j.at("runno").get_to(r.runno);
 	}
-
 }
 
 
@@ -38,33 +36,30 @@ vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
 
-
 	// detector option
+	// groupable
 	json jdetectorTag = {
 		{"tag", "detector"},
 		{"description", "detector system name. For TEXT factories, it includes the path to the file."},
-		{"default", NODEFAULT}
+		{"variation", NODEFAULT}
 	};
 	json factoryTag = {
 		{"tag", "factory"},
 		{"description", "detector factory"},
-		{"default", NODEFAULT}
+		{"variation", NODEFAULT}
 	};
 	json variationTag = {
 		{"tag", "variation"},
 		{"description", "detector variation."},
-		{"default", DEFAULTVARIATION}
+		{"variation", DEFAULTVARIATION}
 	};
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
 	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, true));
 
-
-
-
 	// run option
-	// detector option
+	// not groupable
 	json runTag = {
 		{"tag", "runno"},
 		{"description", "Run number"},
@@ -75,7 +70,6 @@ vector<GOption> defineOptions()
 
 	return goptions;
 }
-
 
 
 int main(int argc, char* argv[])

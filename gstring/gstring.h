@@ -41,7 +41,7 @@ namespace gstring {
 	vector<double> getG4NumbersFromString(string vstring, bool warnIfNotUnit = false);
 
 	// parse a file, remove comments (starting with commentChars) and return the pure JSON string
-	string parseFileAndRemoveComments(string filename, string commentChars = "#");
+	string parseFileAndRemoveComments(string filename, string commentChars = "#", int verbosity = 0);
 
 	// retrieve string between two strings
 	string retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter);

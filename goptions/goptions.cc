@@ -13,77 +13,56 @@ using namespace gstring;
 // - parse the base jcard plus all imported jcards
 // - parse the command line options (CLS)
 // - print user settings (variables set by users, not default)
-GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
+GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) : jOptions(goptionDefinitions)
 {
 	cout << endl;
 
-	buildOptionsMap(goptionDefinitions);
+	// set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
+	string jcardFilename = setVerbosityAndFindBaseJCard(argc, argv);
 
-	// parse jcards, including imports
-	string jcardFilename = findBaseJCard(argc, argv);
+	// returns all jsons objects pointed by the base and imported jcards
 	vector<json> allUserJOptions = retrieveUserJsons(jcardFilename);
+
+	// parse the jcard in the GOptions array
 	parseJCards(allUserJOptions);
 
 
 	// parse command line
 
+
 	// clean up if necessary
-	for (const auto& group: gutilities::getKeys(optionsMap)) {
+	for (const auto& jOption: jOptions) {
 		// cleanUpGroupOption()
 	}
 
 	// now print the user settings that differ from the default choices
 	// printUserSettings();
 
-
 	cout << endl;
 
 }
 
-
-// build the optionsMap based on the vector<GOption> goptionDefinitions
-void GOptions::buildOptionsMap(vector<GOption> goptionDefinitions)
-{
-	// define "singles" group
-	optionsMap[NOGROUP] = vector<GOption>();
-
-	// build the group map from the option definitions
-	for (const auto &gopt:goptionDefinitions) {
-		// group option
-		if (  gopt.isGroup ) {
-			optionsMap[gopt.getName()].push_back(gopt);
-		} else {
-			// singles: all under key NOGROUP
-			optionsMap[NOGROUP].push_back(gopt);
-		}
-	}
-}
-
-
 // Finds the configuration file (jcard). Returns "na' if not found.
 // This also sets the verbosity
-string GOptions::findBaseJCard(int argc, char *argv[])
+string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 {
-
 	// check if gverbosity is set
 	for(int i=1; i<argc; i++) {
 		if ( retrieveStringBetweenChars(argv[i], "-", " ") == "gverbosity" ) {
 			gverbosity = true;
 			cout << " > gverbosity option found." << endl;
 		}
-
 	}
 
+	// relooping as this returns
 	// finds gcard file as one of the argument
 	// extension is .gcard
 	for(int i=1; i<argc; i++) {
-
 		string arg = argv[i];
 
 		size_t pos = arg.find(".jcard");
 		if(pos != string::npos) return arg;
 	}
-
 
 	cout << endl << GWARNING << " no jcard." << endl << endl;
 	return "na";
@@ -94,35 +73,41 @@ string GOptions::findBaseJCard(int argc, char *argv[])
 // Outputs a vector of json objects of the base jcard plus all imported jcards
 vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 {
+	vector<json> userJsons;
+
+	// nothing happens if jcard wasn't found
 	if (jcardFilename == "na") {
-		return vector<json>();
-	} else {
+		return userJsons;
+	}
 
-		// base jcard
-		// removing '#' from "base" (command line) jcard
-		string baseParsedJson = parseFileAndRemoveComments(jcardFilename);
+	// base jcard
+	// removing '#' from "base" (command line) jcard
+	string basePureJsonString = parseFileAndRemoveComments(jcardFilename);
 
-		// building json object
-		json basejson = json::parse(baseParsedJson);
+	// building json object from base jcard
+	json baseJson = json::parse(basePureJsonString);
 
-		vector<json> derivedJsons;
+	// now imports imported jcard if any
+	for (auto& [key, value] : baseJson.items()) {
+		if ( key == IMPORTSTRING ) {
+			// value is a vector<string>
+			for ( auto &importedJCardName: value) {
+				// adding extension to set fileName
+				string importJcardFileName = replaceCharInStringWithChars(importedJCardName, "\"", "") + ".jcard";
 
-		// now imports other jcard if they are imported
-		// structured bindings (C++17)
-		for (auto& [key, value] : basejson.items()) {
-			if ( key == IMPORTSTRING ) {
-				for ( auto &importedFile: basejson[IMPORTSTRING]) {
-					string fileName = replaceCharInStringWithChars(importedFile, "\"", "") + ".jcard";
-					string importedParsedJson = parseFileAndRemoveComments(fileName);
-					derivedJsons.push_back(json::parse(importedParsedJson));
-				}
+				// import json (this exit if filename isn't there)
+				string importedParsedJson = parseFileAndRemoveComments(importJcardFileName);
+
+				// add imported json to userJsons vector
+				userJsons.push_back(json::parse(importedParsedJson));
 			}
 		}
-		// putting the base jcard at the end:
-		// all imports should be declared at the top of the jcard thus they come first
-		derivedJsons.push_back(basejson);
-		return derivedJsons;
 	}
+	// appending the base jcard json at the end:
+	// all imports should be declared at the top of the jcard thus they come before the base settings
+	userJsons.push_back(baseJson);
+	return userJsons;
+
 }
 
 // parse base and imported Jsons
@@ -150,10 +135,9 @@ int GOptions::parseJCards(vector<json> allUserJsons)
 
 				// the first option is already in the definition
 
-
 			} else {
 				// not in group, checking single
-				pair<bool, long int> findSingle = findSingleOption(key);
+				pair<bool, long int> findSingle = findOption(key);
 
 				if (findSingle.first == true) {
 					if (gverbosity) {
@@ -173,7 +157,7 @@ int GOptions::parseJCards(vector<json> allUserJsons)
 }
 
 // find single goption index from the map. bool false if not found
-pair<bool, long int> GOptions::findSingleOption(string name)
+pair<bool, long int> GOptions::findOption(string name)
 {
 	pair<bool, long int> result;
 

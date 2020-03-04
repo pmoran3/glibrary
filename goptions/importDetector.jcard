@@ -5,9 +5,11 @@
 	# since "detector" and not "-add-detector" was used, this entry defines "detector"
 	# (replacing all previous occurences of it, if any)
 	#
-	# Corresponding command line:
+	# Corresponding command lines:
 	#
 	# -detector={target: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	# -add-detector={target: experiments/clas12/rtpc; factory: TEXT; variation: default;}
+	# etc
 	#
 	# Notice how some options have default values and could be omitted
 
