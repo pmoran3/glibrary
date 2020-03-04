@@ -36,5 +36,3 @@ goptions            = SConscript('goptions/SConscript', exports='env')
 #gmediaDLLS   = SConscript('gmedia/SConscriptDLL')
 #$Depends(gmediaDLLS, gmedia)
 
-Depends(goptions, gstring)
-#Depends(gstring, goptions)

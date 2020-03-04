@@ -38,7 +38,7 @@ vector<string> gstring::getStringVectorFromString(string input)
 	return pvalues;
 }
 
-//! Replace all occurences of specific chars in string with a string
+//! Replace all occurences of specific chars in a string with a string
 string gstring::replaceCharInStringWithChars(string input, string toReplace, string replacement)
 {
 
@@ -61,6 +61,26 @@ string gstring::replaceCharInStringWithChars(string input, string toReplace, str
 	return output;
 }
 
+// Replace all occurences of a a string with a string
+string gstring::replaceAllStringsWithString(string source, const string from, const string to)
+{
+	string newString;
+
+	size_t lastPos = 0;
+	size_t findPos;
+
+	while((findPos = source.find(from, lastPos) != string::npos))
+	{
+		newString += to;
+		newString.append(source, lastPos + from.length(), findPos - lastPos  );
+		lastPos = findPos + from.length();
+	}
+
+	// Care for the rest after last occurrence
+	newString += source.substr(lastPos);
+
+	return newString;
+}
 
 string gstring::fillDigits(string word, string c, int ndigits)
 {

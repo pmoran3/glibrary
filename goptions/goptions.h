@@ -65,15 +65,16 @@ private:
 	void buildOptionsMap(vector<GOption> goptionDefinitions);
 
 	// jcards parsing utilities
-	string findBaseJCard(int argc, char *argv[]);      // finds a configuration file (jcard). Returns "na' if not found.
-	vector<json> buildAllJsons(string jcardFilename);  // returns all jsons objects pointed by the base and imported jcards
-	int parseJCards(vector<json> jsons);               // parse the jcard in the GOptions map
+	string findBaseJCard(int argc, char *argv[]);          // finds a configuration file (jcard). Returns "na' if not found.
+	vector<json> retrieveUserJsons(string jcardFilename);  // returns all jsons objects pointed by the base and imported jcards
+	int parseJCards(vector<json> allUserJsons);                   // parse the jcard in the GOptions map
 	void parseGrou();
 
 
 	// search utilities
 	pair<bool, long int> findSingleOption(string name);  // find single goption from the map. bool false if not found
-	bool findGroupOption(string name) { return optionsMap.find(name) != optionsMap.end();}
+	// check if group exist based on group name
+	bool findGroupOption(string name) {return optionsMap.find(name) != optionsMap.end();}
 
 	// cleanup groups if a non -add option appears not in first place
 	int cleanUpGroupOption(string groupName);

@@ -71,7 +71,7 @@ vector<GOption> defineOptions()
 		{"default", 0}
 	};
 
-	goptions.push_back(GOption("run", "run option", runTag));
+	goptions.push_back(GOption("runno", "run option", runTag));
 
 	return goptions;
 }

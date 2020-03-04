@@ -21,8 +21,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 
 	// parse jcards, including imports
 	string jcardFilename = findBaseJCard(argc, argv);
-	vector<json> allJOptions = buildAllJsons(jcardFilename);
-	parseJCards(allJOptions);
+	vector<json> allUserJOptions = retrieveUserJsons(jcardFilename);
+	parseJCards(allUserJOptions);
 
 
 	// parse command line
@@ -64,6 +64,16 @@ void GOptions::buildOptionsMap(vector<GOption> goptionDefinitions)
 // This also sets the verbosity
 string GOptions::findBaseJCard(int argc, char *argv[])
 {
+
+	// check if gverbosity is set
+	for(int i=1; i<argc; i++) {
+		if ( retrieveStringBetweenChars(argv[i], "-", " ") == "gverbosity" ) {
+			gverbosity = true;
+			cout << " > gverbosity option found." << endl;
+		}
+
+	}
+
 	// finds gcard file as one of the argument
 	// extension is .gcard
 	for(int i=1; i<argc; i++) {
@@ -74,25 +84,15 @@ string GOptions::findBaseJCard(int argc, char *argv[])
 		if(pos != string::npos) return arg;
 	}
 
-	// sets gverbosity
-	for(int i=1; i<argc; i++) {
 
-		if ( retrieveStringBetweenChars(argv[i], "-", "=") == "gverbosity" ) {
-
-		}
-		
-	}
-
-	cout << endl << NOTFOUNDWARNING << " no jcard." << endl << endl;
+	cout << endl << GWARNING << " no jcard." << endl << endl;
 	return "na";
 }
 
 
 
-
-
 // Outputs a vector of json objects of the base jcard plus all imported jcards
-vector<json> GOptions::buildAllJsons(string jcardFilename)
+vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 {
 	if (jcardFilename == "na") {
 		return vector<json>();
@@ -126,32 +126,42 @@ vector<json> GOptions::buildAllJsons(string jcardFilename)
 }
 
 // parse base and imported Jsons
-int GOptions::parseJCards(vector<json> jsonOptions)
+int GOptions::parseJCards(vector<json> allUserJsons)
 {
-	for (auto& jsonOption: jsonOptions) {
+	for (auto& jsonOption: allUserJsons) {
 		// structured bindings (C++17)
 		for (auto& [key, value] : jsonOption.items()) {
 
 			// option belong to a group
-			cout << key << " : " << value << endl;
-			bool groupFound = findGroupOption(key);
+			if (gverbosity) {
+				cout << key << " :" << value << endl;
+			}
+
+			// match a group to
+			string keyRoot = replaceAllStringsWithString(key, "add-", "");
+			bool groupMatchFound = findGroupOption(keyRoot);
 
 			// option belong to a group
-			if (groupFound) {
-				cout << " Group " << key << " found " << endl;
-				vector<GOption> groupOptions = optionsMap[key];
+			if (groupMatchFound) {
+				if (gverbosity) {
+					cout << " Group " << keyRoot << " found " << endl;
+				}
+				vector<GOption> groupOptions = optionsMap[keyRoot];
 
-				// the first op
+				// the first option is already in the definition
+
 
 			} else {
 				// not in group, checking single
 				pair<bool, long int> findSingle = findSingleOption(key);
 
 				if (findSingle.first == true) {
-					cout << " Single " << key << " found " << endl;
+					if (gverbosity) {
+						cout << " Single " << key << " found " << endl;
+					}
 
 				} else {
-					cout << NOTFOUNDWARNING << key << " option is not known." << endl;
+					cout << GWARNING << key << " option is not known to this system." << endl;
 				}
 			}
 		}
@@ -180,3 +190,4 @@ pair<bool, long int> GOptions::findSingleOption(string name)
 
 	return result;
 }
+
