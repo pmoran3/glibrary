@@ -39,19 +39,19 @@ vector<GOption> defineOptions()
 	// detector option
 	// groupable
 	json jdetectorTag = {
-		{"tag", "detector"},
-		{"description", "detector system name. For TEXT factories, it includes the path to the file."},
-		{"variation", NODEFAULT}
+		{JSONTAGNAME, "detector"},
+		{JSONTAGDESC, "detector system name. For TEXT factories, it includes the path to the file."},
+		{JSONTAGDFLT, NODEFAULT}
 	};
 	json factoryTag = {
-		{"tag", "factory"},
-		{"description", "detector factory"},
-		{"variation", NODEFAULT}
+		{JSONTAGNAME, "factory"},
+		{JSONTAGDESC, "detector factory name"},
+		{JSONTAGDFLT, NODEFAULT}
 	};
 	json variationTag = {
-		{"tag", "variation"},
-		{"description", "detector variation."},
-		{"variation", DEFAULTVARIATION}
+		{JSONTAGNAME, "variation"},
+		{JSONTAGDESC, "detector variation."},
+		{JSONTAGDFLT, "default"}
 	};
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
@@ -61,9 +61,9 @@ vector<GOption> defineOptions()
 	// run option
 	// not groupable
 	json runTag = {
-		{"tag", "runno"},
-		{"description", "Run number"},
-		{"default", 0}
+		{JSONTAGNAME, "runno"},
+		{JSONTAGDESC, "Run number"},
+		{JSONTAGDFLT, 0}
 	};
 
 	goptions.push_back(GOption("runno", "run option", runTag));

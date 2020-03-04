@@ -21,11 +21,10 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	string jcardFilename = setVerbosityAndFindBaseJCard(argc, argv);
 
 	// returns all jsons objects pointed by the base and imported jcards
-	vector<json> allUserJOptions = retrieveUserJsons(jcardFilename);
+	vector<json> allUserJsons = retrieveUserJsons(jcardFilename);
 
 	// parse the jcard in the GOptions array
-	parseJCards(allUserJOptions);
-
+	parseJCards(allUserJsons);
 
 	// parse command line
 
@@ -48,9 +47,10 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 {
 	// check if gverbosity is set
 	for(int i=1; i<argc; i++) {
-		if ( retrieveStringBetweenChars(argv[i], "-", " ") == "gverbosity" ) {
-			gverbosity = true;
-			cout << " > gverbosity option found." << endl;
+		if ( retrieveStringBetweenChars(argv[i], "-", "=") == "gverbosity" ) {
+			//cout << " AAA " << retrieveStringBetweenChars(argv[i], "=", "") << endl;
+				gverbosity = stoi(retrieveStringBetweenChars(argv[i], "=", ""));
+				cout << REDPOINTITEM << "gverbosity option set to " << gverbosity << endl;
 		}
 	}
 
@@ -107,71 +107,152 @@ vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 	// all imports should be declared at the top of the jcard thus they come before the base settings
 	userJsons.push_back(baseJson);
 	return userJsons;
-
 }
 
 // parse base and imported Jsons
 int GOptions::parseJCards(vector<json> allUserJsons)
 {
-	for (auto& jsonOption: allUserJsons) {
-		// structured bindings (C++17)
-		for (auto& [key, value] : jsonOption.items()) {
+	// looping over all parsed jsons
+	for (auto& userJsonOption: allUserJsons) {
+		// looping over all json inside each userJsonOption
+		for (auto& [userJsonKey, userJsonValue] : userJsonOption.items()) {
 
-			// option belong to a group
 			if (gverbosity) {
-				cout << key << " :" << value << endl;
+				cout << endl << GREENPOINTITEM << "User Json Key: " << userJsonKey << ",  User Json content: " << userJsonValue << endl;
 			}
 
-			// match a group to
-			string keyRoot = replaceAllStringsWithString(key, "add-", "");
-			bool groupMatchFound = findGroupOption(keyRoot);
+			// match userJsonKey to a jOptions
+			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
+			long userJsonOptionIndex = findOption(userJsonKeyRoot);
+
+			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
 
 			// option belong to a group
-			if (groupMatchFound) {
+			if (userJsonOptionIndex != -1) {
 				if (gverbosity) {
-					cout << " Group " << keyRoot << " found " << endl;
+					string isAnAdditionString = "";
+					if ( isAnAddition ) {
+						isAnAdditionString = " This is an option addition.";
+					}
+					cout << GREENSQUAREITEM << "Option " << userJsonKeyRoot << " found." << isAnAdditionString << endl;
 				}
-				vector<GOption> groupOptions = optionsMap[keyRoot];
 
-				// the first option is already in the definition
+				jOptions.at(userJsonOptionIndex).parseJsons(userJsonValue, isAnAddition, gverbosity);
+
 
 			} else {
-				// not in group, checking single
-				pair<bool, long int> findSingle = findOption(key);
-
-				if (findSingle.first == true) {
-					if (gverbosity) {
-						cout << " Single " << key << " found " << endl;
-					}
-
-				} else {
-					cout << GWARNING << key << " option is not known to this system." << endl;
-				}
+				cout << GWARNING << "the option >"<< userJsonKey << "< is not known to this system." << endl;
 			}
-		}
 
+		}
 
 	}
 	return 1;
-
 }
 
+
 // find single goption index from the map. bool false if not found
-pair<bool, long int> GOptions::findOption(string name)
+long GOptions::findOption(string name)
 {
-	pair<bool, long int> result;
 
-	vector<GOption> singleOptions = optionsMap[NOGROUP];
-
-	for (auto it = singleOptions.begin(); it != singleOptions.end(); it++) {
-
+	for (auto it = jOptions.begin(); it != jOptions.end(); it++) {
 		if (it->getName() == name) {
-			result.first = true;
-			result.second = distance(singleOptions.begin(), it);
-			return result;
+			return distance(jOptions.begin(), it);
 		}
 	}
 
-	return result;
+	return -1;
 }
 
+bool GOption::parseJsons(json userJsons, bool isAddition, int gverbosity)
+{
+	for(auto &userJson: userJsons) {
+		if (gverbosity) {
+			cout << TGREENPOINTITEM << "Json Option " << userJson << endl;
+		}
+
+		if (!isAddition && jValues.size() > 0 ) {
+			if (gverbosity) {
+				cout << GWARNING << " Resetting Option Content " << endl;
+			}
+			jValues.clear();
+		}
+
+		if (isAddition && !groupable) {
+			cout << GWARNING << " Trying to adding to the non groupable option " << name << ". This will be ignored." << endl;
+			return false;
+		}
+
+
+		json newUserOption;
+
+		// first checking that all user tags are valid entries.
+		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
+
+			if (gverbosity > 1) {
+				cout << TTPOINTITEM << " Single Key: " << userJsonKey << ",  single value: " << userJsonValue << endl;
+			}
+
+			// checking if userJsonKey is defined
+			if ( !isTagDefined(userJsonKey, gverbosity) )  {
+				cout << GWARNING  << userJsonKey << " tag is not known to this system. This will be ignored." << endl;
+				return false;
+			}
+
+			// tag is valid, assigning key and valie to new user option
+			newUserOption[userJsonKey] = userJsonValue;
+
+		}
+
+		// at this point all json keys are valid.
+		// we need to assign default values if they are not present
+
+		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
+		}
+
+		// looping
+
+		// looping over detector definitions
+		//		for (auto& jsonTag: joptionDefinition) {
+		//
+		//			string jsonTagName = jsonTag[JSONTAGNAME];
+		//			string jsonTagDesc = jsonTag[JSONTAGDESC];
+		//			auto jsonTagDflt   = jsonTag[JSONTAGDFLT];
+		//
+		//		}
+
+	}
+
+	return false;
+}
+
+bool GOption::isTagDefined(string key, int gverbosity) {
+
+	bool isDefined = false;
+
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+
+		// if it's a single number
+		if(definitionJsonValue.is_number() || definitionJsonValue.is_string()) {
+
+			return false;
+		}
+
+		// if it's a JSON object
+		string jsonTagName = definitionJsonValue[JSONTAGNAME];
+		if (gverbosity > 1) {
+			cout << GTABTAB << " Checking  " << key << " against " << jsonTagName << endl;
+		}
+
+		if (key == jsonTagName) {
+			if (gverbosity > 1) {
+				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
+			}
+			return true;
+		}
+
+	}
+
+
+	return isDefined;
+}

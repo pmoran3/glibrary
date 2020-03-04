@@ -225,14 +225,14 @@ string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, 
 {
 	string out;
 
-	size_t leapos = input.find_first_not_of(firstDelimiter); // Find the first character position after excluding leading blank spaces
-	size_t endpos = input.find_last_not_of(secondDelimiter);  // Find the first character position from reverse af
+	size_t firstpos  = input.find(firstDelimiter);  // Find the first character position after excluding leading blank spaces
+	size_t secondpos = input.find(secondDelimiter); // Find the second character position after excluding leading blank spaces
 
 	// if all spaces or empty return an empty string
-	if(( leapos == string::npos) || ( endpos == string::npos))
+	if(( firstpos == string::npos) || ( secondpos == string::npos))
 		out = "";
 	else
-		out = input.substr( leapos, endpos-leapos+1 );
+		out = input.substr( firstpos + 1, secondpos - firstpos - 1 );
 
 	return out;
 

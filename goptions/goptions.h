@@ -27,9 +27,19 @@ private:
 	// { "tag": "tagname", "description": "tag description", "default": default value}
 	const json joptionDefinition;
 
+	bool groupable;           // if an option belongs to a group, options can be collected by using -add-<name>
+
 	// the option, validated against the definition
 	// if some tags are not set, they will be set to the joptionDefinition default
 	vector<json> jValues;
+
+
+	// conditions for a valid option:
+	// 1. each key must match a defined tag
+	// 2. if the definition does not provide a default, the option must provide one
+
+	// check if a tag is defined
+	bool isTagDefined(string key, int verbosity);
 
 public:
 
@@ -42,8 +52,9 @@ public:
 	// constructor using the definitions
 	GOption(string n, string d, json j, bool g = false): name(n), description(d), joptionDefinition(j), groupable(g) { }
 
-	bool groupable;        // if an option belongs to a group, options can be collected by using -add-<name>
 	string getName() const {return name;}
+
+	bool parseJsons(json userJson, bool isAddition, int verbosity);
 };
 
 
@@ -54,8 +65,9 @@ public:
 	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);
 
 private:
-	// a special command line option -gverbosity=1 will set this to true
-	bool gverbosity = false;
+
+	// a special command line option -gverbosity=# will set this
+	int gverbosity = 0;
 
 	// GOptions array
 	vector<GOption> jOptions;
@@ -66,7 +78,7 @@ private:
 	int parseJCards(vector<json> allUserJsons);                   // parse the jcard in the GOptions array
 
 	// search utilities
-	pair<bool, long int> findOption(string name);  // find goption from the array. return isItFound and the array index of the option
+	long findOption(string name);  // find goption from the array. return jOptions array index or -1 if not found
 
 	// cleanup groups if a non -add option appears not in first place
 	int cleanUpGroupOption(string groupName);

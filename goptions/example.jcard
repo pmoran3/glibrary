@@ -13,11 +13,10 @@
 	#
 	# -add-detector={detector: experiments/clas12/ec; factory: TEXT; variation: bonus;}
 
-	"add-detector": [
+	"detector": [
 		{
 			"detector": "experiments/clas12/ec/ec",
-			"factory": "TEXT",
-			"variation": "bonus"
+			"factory": "TEXT"
 		}
 	],
 

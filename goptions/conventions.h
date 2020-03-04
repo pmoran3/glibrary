@@ -1,11 +1,16 @@
 #ifndef  GOPTIONS_CONVENTIONS_H
 #define  GOPTIONS_CONVENTIONS_H  1
 
+// JSON TAGS
+#define JSONTAGNAME "jsonTagName"
+#define JSONTAGDESC "jsonTagDescription"
+#define JSONTAGDFLT "jsonTagDefault"
+
+
 #define IMPORTSTRING "importJcards"
 
 #define FILENOTFOUND "fileNotFound"
-#define NODEFAULT "noDefault"
-#define DEFAULTVARIATION "defaultVariation"
+#define NODEFAULT    "noDefault"
 
 #define SILENTVERBOSITY  0
 #define SUMMARYVERBOSITY 1
@@ -16,7 +21,6 @@
 namespace goptions {
 
 }
-
 
 // gutilities namespace:
 #include <vector>
