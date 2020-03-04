@@ -27,8 +27,8 @@
 #define BOLD(x) "\x1B[1m" x RST
 #define UNDL(x) "\x1B[4m" x RST
 
-#define FATALERRORL BOLD(FRED(" ☢️ "))
-#define GWARNING   " ⚠️ "
+#define FATALERRORL BOLD(FRED(" ☢️ error "))
+#define GWARNING   BOLD(FYEL(" ⚠️ warning "))
 #define POINTITEM  " ・ "
 #define CIRCLEITEM " ◦ "
 #define SQUAREITEM " ◻︎ "

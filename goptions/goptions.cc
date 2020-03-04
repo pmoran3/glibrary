@@ -4,6 +4,10 @@
 // c++
 #include <iostream>
 
+// gstrings
+#include "gstring.h"
+using namespace gstring;
+
 // constructor:
 // - buildOptionsMap using the option definitions
 // - parse the base jcard plus all imported jcards
@@ -22,6 +26,11 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 
 
 	// parse command line
+
+	// clean up if necessary
+	for (const auto& group: gutilities::getKeys(optionsMap)) {
+		// cleanUpGroupOption()
+	}
 
 	// now print the user settings that differ from the default choices
 	// printUserSettings();
@@ -52,6 +61,7 @@ void GOptions::buildOptionsMap(vector<GOption> goptionDefinitions)
 
 
 // Finds the configuration file (jcard). Returns "na' if not found.
+// This also sets the verbosity
 string GOptions::findBaseJCard(int argc, char *argv[])
 {
 	// finds gcard file as one of the argument
@@ -64,15 +74,21 @@ string GOptions::findBaseJCard(int argc, char *argv[])
 		if(pos != string::npos) return arg;
 	}
 
+	// sets gverbosity
+	for(int i=1; i<argc; i++) {
+
+		if ( retrieveStringBetweenChars(argv[i], "-", "=") == "gverbosity" ) {
+
+		}
+		
+	}
+
 	cout << endl << NOTFOUNDWARNING << " no jcard." << endl << endl;
 	return "na";
 }
 
 
 
-// gstrings
-#include "gstring.h"
-using namespace gstring;
 
 
 // Outputs a vector of json objects of the base jcard plus all imported jcards
@@ -112,31 +128,33 @@ vector<json> GOptions::buildAllJsons(string jcardFilename)
 // parse base and imported Jsons
 int GOptions::parseJCards(vector<json> jsonOptions)
 {
-
 	for (auto& jsonOption: jsonOptions) {
 		// structured bindings (C++17)
 		for (auto& [key, value] : jsonOption.items()) {
 
 			// option belong to a group
 			cout << key << " : " << value << endl;
+			bool groupFound = findGroupOption(key);
 
 			// option belong to a group
-			if (optionsMap.find(key) != optionsMap.end()) {
+			if (groupFound) {
 				cout << " Group " << key << " found " << endl;
-				//			} else if (find(optionsMap[NOGROUP].begin(), optionsMap[NOGROUP].end(), value.getName()) != optionsMap[NOGROUP].end()) {
-				//
-				//
-				//			}
+				vector<GOption> groupOptions = optionsMap[key];
+
+				// the first op
 
 			} else {
+				// not in group, checking single
 				pair<bool, long int> findSingle = findSingleOption(key);
 
 				if (findSingle.first == true) {
 					cout << " Single " << key << " found " << endl;
 
+				} else {
+					cout << NOTFOUNDWARNING << key << " option is not known." << endl;
 				}
 			}
-	}
+		}
 
 
 	}
@@ -144,8 +162,7 @@ int GOptions::parseJCards(vector<json> jsonOptions)
 
 }
 
-// find single goption from the map. bool false if not found
-
+// find single goption index from the map. bool false if not found
 pair<bool, long int> GOptions::findSingleOption(string name)
 {
 	pair<bool, long int> result;
@@ -162,5 +179,4 @@ pair<bool, long int> GOptions::findSingleOption(string name)
 	}
 
 	return result;
-
 }

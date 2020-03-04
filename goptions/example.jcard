@@ -6,13 +6,12 @@
 		"importParticle"
 	],
 
-	# example of option:
-	# detectors is a "group"
-	# since the -add-detector is used and detector is a group, this entry will add to the detector group
+	# detector is a "group"
+	# since the -add is used, this entry will add a detector option to the detector group
 	#
 	# Corresponding command line:
 	#
-	# -add-detector={ec: experiments/clas12/ec; factory: TEXT; variation: bonus;}
+	# -add-detector={detector: experiments/clas12/ec; factory: TEXT; variation: bonus;}
 
 	"add-detector": [
 		{
@@ -22,12 +21,13 @@
 		}
 	],
 
-	# example of option:
-	# fieldProperty is a "group"
+	# mapProperty is a "group"
+	# since the -add is not used, this entry will define mapProperty (and reset previous entries if present)
 	#
-	# Corresponding command line:
+	# Corresponding command lines:
 	#
-	# -add-mapProperty={ fieldmap: TorusSymmetric; scale: -1; maxStep: -1; method: G4ClassicalRK4; interpolation: linear}
+	# -mapProperty={fieldmap: TorusSymmetric; scale: -1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear}
+	# -add-mapProperty={fieldmap: clas12-newSolenoid; scale: 1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear;}
 
 	"mapProperty": [
 		{ "fieldmap": "TorusSymmetric", "scale": -1, "maxStep": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
@@ -42,14 +42,13 @@
 		}
 	],
 
-	# example of option:
 	# particle is a "group"
+	# since the -add is used, this entry will add a particle option to the particle group
 	#
 	# Corresponding command line:
 	#
 	# -add-particle={pid: proton; p: 2*GeV; theta: 10*deg; phi: 280*deg; deltaTheta: 5*deg, deltaPhi: 180*deg; multiplicity: 2;}
 
-	# generator
 	"add-particle": [
 		{
 			"pid": "proton",
@@ -66,8 +65,12 @@
 	],
 
 
-	# run number
-	"run": { "runno": 11 }
+	# run is not a group. -add cannot be used here
+	#
+	# Corresponding command line:
+	#
+	# -runno=11
+	"runno":  11
 
 
 }

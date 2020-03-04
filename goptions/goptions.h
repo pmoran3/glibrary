@@ -55,11 +55,11 @@ public:
 	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);
 
 private:
+	// a special command line option -gverbosity=1 will set this to true
+	bool gverbosity = false;
 
 	// GOptions group map
 	map<string, vector<GOption>> optionsMap;
-
-
 
 	// build the optionsMap based on the vector<GOption> goptionDefinitions
 	void buildOptionsMap(vector<GOption> goptionDefinitions);
@@ -68,11 +68,15 @@ private:
 	string findBaseJCard(int argc, char *argv[]);      // finds a configuration file (jcard). Returns "na' if not found.
 	vector<json> buildAllJsons(string jcardFilename);  // returns all jsons objects pointed by the base and imported jcards
 	int parseJCards(vector<json> jsons);               // parse the jcard in the GOptions map
+	void parseGrou();
 
 
-	// utilities
+	// search utilities
 	pair<bool, long int> findSingleOption(string name);  // find single goption from the map. bool false if not found
+	bool findGroupOption(string name) { return optionsMap.find(name) != optionsMap.end();}
 
+	// cleanup groups if a non -add option appears not in first place
+	int cleanUpGroupOption(string groupName);
 };
 
 

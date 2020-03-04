@@ -21,6 +21,22 @@ namespace goptions {
 }
 
 
+// gutilities namespace:
+#include <vector>
+#include <map>
+using namespace std;
+
+namespace gutilities {
+	template<class KEY, class VALUE>
+	vector<KEY> getKeys(const map<KEY, VALUE>& map)
+	{
+		vector<KEY> keys(map.size());
+		for (const auto& it : map)
+			keys.push_back(it.first);
+		return keys;
+	}
+}
+
 
 #endif
 
