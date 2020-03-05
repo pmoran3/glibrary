@@ -81,7 +81,7 @@ private:
 	// jcards parsing utilities
 	string setVerbosityAndFindBaseJCard(int argc, char *argv[]);  // set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
 	vector<json> retrieveUserJsons(string jcardFilename);         // returns all jsons objects pointed by the base and imported jcards
-	int parseJCards(vector<json> allUserJsons);                   // parse the jcard in the GOptions array
+	void parseJCards(vector<json> allUserJsons);                   // parse the jcard in the GOptions array
 
 	// search utilities
 	long findOption(string name);  // find goption from the array. return jOptions array index or -1 if not found

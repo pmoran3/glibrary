@@ -28,6 +28,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 
 }
 
+
 // Finds the configuration file (jcard). Returns "na' if not found.
 // This also sets the verbosity
 string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
@@ -35,9 +36,10 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 	// check if gverbosity is set
 	for(int i=1; i<argc; i++) {
 		if ( retrieveStringBetweenChars(argv[i], "-", "=") == "gverbosity" ) {
-			//cout << " AAA " << retrieveStringBetweenChars(argv[i], "=", "") << endl;
-				gverbosity = stoi(retrieveStringBetweenChars(argv[i], "=", ""));
+			gverbosity = stoi(retrieveStringBetweenChars(argv[i], "=", ""));
+			if (gverbosity > 0) {
 				cout << REDPOINTITEM << "gverbosity option set to " << gverbosity << endl;
+			}
 		}
 	}
 
@@ -54,7 +56,6 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 	cout << endl << GWARNING << " no jcard." << endl << endl;
 	return "na";
 }
-
 
 
 // Outputs a vector of json objects of the base jcard plus all imported jcards
@@ -96,11 +97,13 @@ vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 	return userJsons;
 }
 
+
 // parse base and imported Jsons
-int GOptions::parseJCards(vector<json> allUserJsons)
+void GOptions::parseJCards(vector<json> allUserJsons)
 {
 	// looping over all parsed jsons
 	for (auto& userJsonOption: allUserJsons) {
+
 		// looping over all json inside each userJsonOption
 		for (auto& [userJsonKey, userJsonValue] : userJsonOption.items()) {
 
@@ -110,36 +113,37 @@ int GOptions::parseJCards(vector<json> allUserJsons)
 
 			// match userJsonKey to a jOptions
 			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
-			long userJsonOptionIndex = findOption(userJsonKeyRoot);
 
-			// if add- was found
+			// true if add- was found
 			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
 
-			// option belong to a group
+			// GOption index, -1 if not found
+			long userJsonOptionIndex = findOption(userJsonKeyRoot);
+
+			// if GOption was found
 			if (userJsonOptionIndex != -1) {
+
 				if (gverbosity) {
 					string isAnAdditionString = "";
 					if ( isAnAddition ) {
 						isAnAdditionString = " This is an option addition.";
 					}
-					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " found." << isAnAdditionString << endl;
+					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
 				}
 
 				jOptions.at(userJsonOptionIndex).parseJsons(userJsonKey, userJsonValue, isAnAddition, gverbosity);
 
-
+				// if GOption was not found
 			} else {
 				cout << GWARNING << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system." << endl;
 			}
-
 		}
-
 	}
-	return 1;
 }
 
 
-// find single goption index from the map. bool false if not found
+// find GOption index from the vector<GOption>
+// return -1 if GOption is not found
 long GOptions::findOption(string name)
 {
 

@@ -15,7 +15,7 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 	if (! joptionDefinition.begin().value().is_structured()) {
 
 		json jValue;
-		string jKey = joptionDefinition[JSONTAGNAME];
+		string jKey  = joptionDefinition[JSONTAGNAME];
 		jValue[jKey] = joptionDefinition[JSONTAGDFLT];
 
 		jValues.push_back(jValue);
@@ -32,43 +32,42 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 
 void GOption::printOption(bool withDefaults)
 {
-	if (jValues.size() ) {
-		if (! jValues.front().begin().value().is_structured()) {
-			cout << ARROWITEM << jValues.front().begin().key() << ": " << jValues.front().begin().value() << endl;
-		}
-	}
-}
 
+	for (auto& jValue: jValues) {
 
+		// non structured, this is a single option, jValue has size 1
+		if (! jValue.begin().value().is_structured()) {
+			string isDefault = "";
 
-// checking if the key is the json object is defined
-bool GOption::isTagDefined(string key, int gverbosity) {
-
-	bool isDefined = false;
-
-	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-
-		// if it's a JSON object
-		string jsonTagName = definitionJsonValue[JSONTAGNAME];
-		if (gverbosity > 1) {
-			cout << GTABTAB << " Checking  " << key << " against " << jsonTagName << endl;
-		}
-
-		if (key == jsonTagName) {
-			if (gverbosity > 1) {
-				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
+			// pointing out this is a default option
+			if (jValue.begin().value() == joptionDefinition[JSONTAGDFLT]) {
+				isDefault = " (default)";
 			}
-			return true;
+
+			cout << ARROWITEM << jValue.begin().key() << ": " << jValue.begin().value() << isDefault << "." <<  endl;
+			return;
 		}
 
+		// structured option
+		cout << ARROWITEM << name << ":" << endl;
+
+		for (auto& [jValueKey, jValueValue] : jValue.items()) {
+			cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
+		}
 	}
-
-
-	return isDefined;
 }
 
 
-bool GOption::parseJsons(string key, json userJsons, bool isAddition, int gverbosity)
+
+
+// parse user jsons options and assign jValues accordingly
+// this returns false if:
+// - a tag was not defined
+// - add- was used for a non groupable option
+//
+// These options come ordered
+// if a groupable option didn't have the add directive, jValues is cleared
+bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, int gverbosity)
 {
 
 	// looping over all user jsons
@@ -79,26 +78,21 @@ bool GOption::parseJsons(string key, json userJsons, bool isAddition, int gverbo
 
 		// if a simple key/value option (not is_structured) then assigning the new user value and return true
 		if (! userJson.is_structured() ) {
-			newUserValue[key] = userJson.items().begin().value();
+			jValues.clear();
+			newUserValue[userJsonKey] = userJson.items().begin().value();
 			jValues.push_back(newUserValue);
 
 			if (gverbosity) {
-				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << key << RSTHHR << " set with value: " << userJson.items().begin().value() <<  endl;
+				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJson.items().begin().value() <<  endl;
 			}
 
+			// done
 			return true;
 		}
 
-
-
+		// userJsons is structured. Let's proceed
 		if (gverbosity) {
 			cout << TGREENPOINTITEM << "Json Option " << userJson << endl;
-		}
-
-		// reset jValues if add- is not found
-		if (!isAddition && jValues.size() > 0 ) {
-			if (gverbosity) { cout << GWARNING << " Resetting Option Content " << endl; }
-			jValues.clear();
 		}
 
 		// if add- was found but option is not groupable, it's a mistake.
@@ -107,6 +101,11 @@ bool GOption::parseJsons(string key, json userJsons, bool isAddition, int gverbo
 			return false;
 		}
 
+		// clear jValues if add- is not found
+		if (!isAddition && jValues.size() > 0 ) {
+			if (gverbosity) { cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl; }
+			jValues.clear();
+		}
 
 
 		// first checking that all user tags are valid entries.
@@ -125,12 +124,10 @@ bool GOption::parseJsons(string key, json userJsons, bool isAddition, int gverbo
 
 			// tag is valid, assigning key and valie to new user option
 			newUserValue[userJsonKey] = userJsonValue;
-
 		}
 
 		// at this point all json keys are valid.
 		// we need to assign default values if they are not present
-
 		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
 		}
 
@@ -150,3 +147,27 @@ bool GOption::parseJsons(string key, json userJsons, bool isAddition, int gverbo
 	return false;
 }
 
+
+// checking if the key is the json object is defined
+bool GOption::isTagDefined(string key, int gverbosity) {
+
+	bool isDefined = false;
+
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+
+		// if it's a JSON object
+		string jsonTagName = definitionJsonValue[JSONTAGNAME];
+		if (gverbosity > 1) {
+			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << jsonTagName << endl;
+		}
+
+		if (key == jsonTagName) {
+			if (gverbosity > 1) {
+				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
+			}
+			return true;
+		}
+	}
+
+	return isDefined;
+}
