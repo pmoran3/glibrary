@@ -156,21 +156,26 @@ long GOptions::findOption(string name)
 	return -1;
 }
 
-GOption GOptions::getOptionNamed(string name) {
-	long index = findOption(name);
-
-	return jOptions[index];
-}
 
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)
 {
+	cout << endl << " User Settings: " << endl << endl;;
+
 	for(auto& jOption: jOptions) {
 		jOption.printOption(withDefaults);
 	}
 
+	cout << endl;
 }
 
+// get vector of GOption from
+vector<json> GOptions::getOptions(string name)
+{
+	long index = findOption(name);
+
+	return jOptions[index].getOptions();
+}
 
 
 

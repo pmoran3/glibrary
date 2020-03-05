@@ -35,7 +35,6 @@ private:
 	// if an option is defined with default values, it will be passed to jValues
 	vector<json> jValues;
 
-
 	// conditions for a valid option:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
@@ -43,6 +42,7 @@ private:
 	// check if a tag is defined
 	bool isTagDefined(string key, int verbosity);
 	bool isDefaultValue(json jValue);
+
 
 public:
 
@@ -60,6 +60,10 @@ public:
 	bool parseJsons(string key, json userJson, bool isAddition, int verbosity);
 
 	void printOption(bool withDefaults);
+
+	vector<json> getOptions() {
+			return jValues;
+	}
 
 };
 
@@ -90,7 +94,8 @@ private:
 public:
 	void printSettings(bool withDefaults);
 	void writeSettingsToJsonFile();
-	GOption getOptionNamed(string name);
+
+	vector<json> getOptions(string name);
 
 };
 

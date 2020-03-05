@@ -168,13 +168,13 @@ void GOption::printOption(bool withDefaults)
 			isDefault = " (default)";
 		}
 
-		cout << ARROWITEM << onlyOption.begin().key() << ": " << onlyOption.begin().value() << isDefault  <<  endl;
+		cout << ARROWITEM << KBLU << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
 		return;
 	}
 
 	// not the only option
 	// structured option
-	cout << ARROWITEM << name << ":" << endl;
+	cout << ARROWITEM << KRED << name << RST << ":" << endl;
 
 	for (auto& jValue: jValues) {
 		cout << TPOINTITEM ;

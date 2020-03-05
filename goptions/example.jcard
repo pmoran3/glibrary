@@ -9,15 +9,18 @@
 	# detector is a "group"
 	# since the -add is used, this entry will add a detector option to the detector group
 	#
+	# Notice the variation is missing, meaning this will be filled with the default value
+	#
 	# Corresponding command line:
 	#
-	# -add-detector={detector: experiments/clas12/ec; factory: TEXT; variation: bonus;}
+	# -add-detector={detector: experiments/clas12/ec; factory: TEXT;}
 
 	"add-detector": [
 		{
 			"detector": "experiments/clas12/ec/ec",
-			"factory": "TEXT"
-		}
+			"factory": "TEXT",
+				"variation": "TEXT"
+	}
 	],
 
 	# mapProperty is a "group"
