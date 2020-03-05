@@ -34,7 +34,7 @@
 #define POINTITEM  " ・ "
 #define CIRCLEITEM " ◦ "
 #define SQUAREITEM " ◻︎ "
-#define ARROWITEM " → "
+#define ARROWITEM " ➤ "
 #define GREENPOINTITEM  BOLD(FGRN(POINTITEM))
 #define GREENCIRCLEITEM BOLD(FGRN(CIRCLEITEM))
 #define GREENSQUAREITEM BOLD(FGRN(SQUAREITEM))
@@ -75,6 +75,16 @@
 #define TTREDCIRCLEITEM   GTABTAB REDCIRCLEITEM
 #define TTREDSQUAREITEM   GTABTAB REDSQUAREITEM
 #define TTREDARROWITEM    GTABTAB REDARROWITEM
+
+// item highlight
+#define HHL "→"
+#define HHR "←"
+#define RSTHHR          HHR RST // rest color after right arrow
+#define GREENHHL        KGRN HHL  // notice this will highlight the item green
+#define REDHHL          KRED HHL
+#define GREENHHL        KGRN HHL  // notice this will highlight the item green
+#define YELLOWHHL       KYEL HHL
+#define BOLDWHHL        "\x1B[1m" HHL
 
 
 #endif

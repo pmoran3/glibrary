@@ -27,10 +27,12 @@ private:
 	// { "tag": "tagname", "description": "tag description", "default": default value}
 	const json joptionDefinition;
 
-	bool groupable;           // if an option belongs to a group, options can be collected by using -add-<name>
+	 // if an option belongs to a group, options can be collected by using -add-<name>
+	bool groupable;
 
 	// the option, validated against the definition
 	// if some tags are not set, they will be set to the joptionDefinition default
+	// if an option is defined with default values, it will be passed to jValues
 	vector<json> jValues;
 
 
@@ -40,6 +42,7 @@ private:
 
 	// check if a tag is defined
 	bool isTagDefined(string key, int verbosity);
+	bool isDefaultValue(json jValue);
 
 public:
 
@@ -50,11 +53,14 @@ public:
 	GOption ( const GOption & ) = default;
 
 	// constructor using the definitions
-	GOption(string n, string d, json j, bool g = false): name(n), description(d), joptionDefinition(j), groupable(g) { }
+	GOption(string n, string d, json j, bool g = false);
 
 	string getName() const {return name;}
 
-	bool parseJsons(json userJson, bool isAddition, int verbosity);
+	bool parseJsons(string key, json userJson, bool isAddition, int verbosity);
+
+	void printOption(bool withDefaults);
+
 };
 
 
@@ -80,8 +86,11 @@ private:
 	// search utilities
 	long findOption(string name);  // find goption from the array. return jOptions array index or -1 if not found
 
-	// cleanup groups if a non -add option appears not in first place
-	int cleanUpGroupOption(string groupName);
+
+public:
+	void printSettings(bool withDefaults);
+	void writeSettingsToJsonFile();
+
 };
 
 

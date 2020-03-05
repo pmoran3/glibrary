@@ -2,6 +2,7 @@
 Import('env')
 
 sources = Split("""
+	goption.cc
 	goptions.cc
 	""")
 

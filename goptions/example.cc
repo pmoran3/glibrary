@@ -77,7 +77,8 @@ int main(int argc, char* argv[])
 
 	GOptions *gopts = new GOptions(argc, argv, defineOptions());
 
-
+	// print settings w/o defaults
+	gopts->printSettings(false);
 
 	return 1;
 }
