@@ -90,6 +90,7 @@ private:
 public:
 	void printSettings(bool withDefaults);
 	void writeSettingsToJsonFile();
+	GOption getOptionNamed(string name);
 
 };
 

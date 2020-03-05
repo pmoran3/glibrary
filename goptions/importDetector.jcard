@@ -18,7 +18,6 @@
 		
 		# central detector
 		{ "detector": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus"},
-		{ "detector":   "experiments/clas12/rtpc",  "factory": "TEXT", "variation": "default"},
 		
 		# forward detector
 		# as an example we use carriage return to organize the fields

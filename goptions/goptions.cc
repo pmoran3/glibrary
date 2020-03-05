@@ -156,6 +156,11 @@ long GOptions::findOption(string name)
 	return -1;
 }
 
+GOption GOptions::getOptionNamed(string name) {
+	long index = findOption(name);
+
+	return jOptions[index];
+}
 
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)

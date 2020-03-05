@@ -78,7 +78,14 @@ int main(int argc, char* argv[])
 	GOptions *gopts = new GOptions(argc, argv, defineOptions());
 
 	// print settings w/o defaults
+	cout << endl;
 	gopts->printSettings(false);
+	cout << endl;
+
+
+//	cout << " Detector Option: " << endl;
+
+	cout << " Detector Option: " << gopts->getOptionNamed("detector").getName() << endl;
 
 	return 1;
 }

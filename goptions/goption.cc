@@ -30,33 +30,6 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 
 }
 
-void GOption::printOption(bool withDefaults)
-{
-
-	for (auto& jValue: jValues) {
-
-		// non structured, this is a single option, jValue has size 1
-		if (! jValue.begin().value().is_structured()) {
-			string isDefault = "";
-
-			// pointing out this is a default option
-			if (jValue.begin().value() == joptionDefinition[JSONTAGDFLT]) {
-				isDefault = " (default)";
-			}
-
-			cout << ARROWITEM << jValue.begin().key() << ": " << jValue.begin().value() << isDefault << "." <<  endl;
-			return;
-		}
-
-		// structured option
-		cout << ARROWITEM << name << ":" << endl;
-
-		for (auto& [jValueKey, jValueValue] : jValue.items()) {
-			cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
-		}
-	}
-}
-
 
 
 
@@ -64,11 +37,17 @@ void GOption::printOption(bool withDefaults)
 // this returns false if:
 // - a tag was not defined
 // - add- was used for a non groupable option
+// - user did not provide a value that must be set (options w/o default values)
 //
 // These options come ordered
 // if a groupable option didn't have the add directive, jValues is cleared
 bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, int gverbosity)
 {
+	// clear jValues if add- is not found
+	if (!isAddition && jValues.size() > 0 ) {
+		if (gverbosity) { cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl; }
+		jValues.clear();
+	}
 
 	// looping over all user jsons
 	for(auto &userJson: userJsons) {
@@ -101,20 +80,11 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 			return false;
 		}
 
-		// clear jValues if add- is not found
-		if (!isAddition && jValues.size() > 0 ) {
-			if (gverbosity) { cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl; }
-			jValues.clear();
-		}
 
 
 		// first checking that all user tags are valid entries.
 		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
 
-			// verbose search
-			if (gverbosity > 1) {
-				cout << TTPOINTITEM << " Single Key: " << userJsonKey << ",  single value: " << userJsonValue << endl;
-			}
 
 			// checking if userJsonKey is defined
 			if ( !isTagDefined(userJsonKey, gverbosity) )  {
@@ -122,16 +92,27 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 				return false;
 			}
 
-			// tag is valid, assigning key and valie to new user option
+			// tag is defined, can assign value
+			if (gverbosity > 1) {
+				cout << TTPOINTITEM << " Assingning single user key " << userJsonKey << " with single value: " << userJsonValue << endl;
+			}
+
+			// tag is valid, assigning key and value to new user option
 			newUserValue[userJsonKey] = userJsonValue;
+
 		}
+
+
 
 		// at this point all json keys are valid.
-		// we need to assign default values if they are not present
-		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
-		}
+		// we need to assign default values for all the keys the user didn't set
+		// if some of the unset values must provide a default, this routine will return false
+//		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
+//
+//		}
 
-		// looping
+		jValues.push_back(newUserValue);
+
 
 		// looping over detector definitions
 		//		for (auto& jsonTag: joptionDefinition) {
@@ -144,7 +125,7 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 
 	}
 
-	return false;
+	return true;
 }
 
 
@@ -157,7 +138,7 @@ bool GOption::isTagDefined(string key, int gverbosity) {
 
 		// if it's a JSON object
 		string jsonTagName = definitionJsonValue[JSONTAGNAME];
-		if (gverbosity > 1) {
+		if (gverbosity > 3) {
 			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << jsonTagName << endl;
 		}
 
@@ -171,3 +152,38 @@ bool GOption::isTagDefined(string key, int gverbosity) {
 
 	return isDefined;
 }
+
+
+// print option
+void GOption::printOption(bool withDefaults)
+{
+
+	// this is a single option, jValue has size 1
+	if (jValues.front().size() == 1) {
+		json onlyOption = jValues.front();
+		string isDefault = "";
+
+		// pointing out this is a default option
+		if (onlyOption.begin().value() == joptionDefinition[JSONTAGDFLT]) {
+			isDefault = " (default)";
+		}
+
+		cout << ARROWITEM << onlyOption.begin().key() << ": " << onlyOption.begin().value() << isDefault  <<  endl;
+		return;
+	}
+
+	// not the only option
+	// structured option
+	cout << ARROWITEM << name << ":" << endl;
+
+	for (auto& jValue: jValues) {
+		cout << TPOINTITEM ;
+		for (auto& [jValueKey, jValueValue] : jValue.items()) {
+			 cout << jValueKey << ": " << jValueValue << "\t";
+		}
+		cout << endl;
+	}
+
+
+}
+
