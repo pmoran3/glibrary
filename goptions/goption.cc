@@ -25,11 +25,23 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 
 	// assigning structured option with default values
 	// checking that all tags in the definition default values
-	bool tagsAreComplete = false;
-		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-			cout << "A AAAA " << definitionJsonValue << endl;
+	// if one tag has JSONTAGDFLT = NODEFAULT then it will not make it to jValue
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+		if ( definitionJsonValue[JSONTAGDFLT] == NODEFAULT ) {
+			// nothing to do, user will set this option
+			return;
 		}
+	}
 
+	// all tags have a default value. Building the json value
+	json newUserValue;
+
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+		string optionKey    = definitionJsonValue[JSONTAGDFLT];
+		string optionValue  = definitionJsonValue[JSONTAGDFLT];
+		newUserValue[optionKey] = optionValue;
+	}
+	jValues.push_back(newUserValue);
 }
 
 
@@ -104,14 +116,12 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 
 		}
 
-
-
 		// at this point all json keys are valid.
 		// we need to assign default values for all the keys the user didn't set
 		// if some of the unset values must provide a default, this routine will return false
-//		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
-//
-//		}
+		//		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
+		//
+		//		}
 
 		jValues.push_back(newUserValue);
 
@@ -160,18 +170,18 @@ void GOption::printOption(bool withDefaults)
 			isDefault = " (default)";
 		}
 
-		cout << ARROWITEM << KBLU << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
+		cout << KBLU << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
 		return;
 	}
 
 	// not the only option
 	// structured option
-	cout << ARROWITEM << KBLU << name << RST << ":" << endl;
+	cout << KBLU << ARROWITEM << name << RST << ":" << endl;
 
 	for (auto& jValue: jValues) {
 		cout << TPOINTITEM ;
 		for (auto& [jValueKey, jValueValue] : jValue.items()) {
-			 cout << jValueKey << ": " << jValueValue << "\t";
+			cout << jValueKey << ": " << jValueValue << "\t";
 		}
 		cout << endl;
 	}

@@ -19,10 +19,27 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	string jcardFilename = setVerbosityAndFindBaseJCard(argc, argv);
 
 	// returns all jsons objects pointed by the base and imported jcards
-	vector<json> allUserJsons = retrieveUserJsons(jcardFilename);
+
+	try
+	{
+		vector<json> allUserJsons = retrieveUserJsons(jcardFilename);
+		parseJCards(allUserJsons);
+	}
+	catch (exception& e)
+	{
+		string thisException = e.what();
+
+		// parse error
+		if (thisException.find("parse_error") != string::npos) {
+			cout << FATALERRORL << " parsing " << jcardFilename
+			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
+			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
+		}
+
+		exit(0);
+	}
 
 	// parse the jcard in the GOptions array
-	parseJCards(allUserJsons);
 
 	// parse command line
 
@@ -106,6 +123,11 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 
 		// looping over all json inside each userJsonOption
 		for (auto& [userJsonKey, userJsonValue] : userJsonOption.items()) {
+
+			// skipping import directives, the other json files are already here
+			if (userJsonKey == IMPORTSTRING) {
+				continue;
+			}
 
 			if (gverbosity) {
 				cout << endl << GREENSQUAREITEM << "User Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue << endl;

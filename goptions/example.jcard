@@ -18,8 +18,7 @@
 	"add-detector": [
 		{
 			"detector": "experiments/clas12/ec/ec",
-			"factory": "TEXT",
-				"variation": "TEXT"
+			"factory": "TEXT"
 	}
 	],
 
