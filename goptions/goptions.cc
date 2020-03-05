@@ -160,7 +160,7 @@ long GOptions::findOption(string name)
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)
 {
-	cout << endl << " User Settings: " << endl << endl;;
+	cout << endl << KBLU << " User Settings: " << RST << endl << endl;;
 
 	for(auto& jOption: jOptions) {
 		jOption.printOption(withDefaults);

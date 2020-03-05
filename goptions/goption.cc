@@ -174,7 +174,7 @@ void GOption::printOption(bool withDefaults)
 
 	// not the only option
 	// structured option
-	cout << ARROWITEM << KRED << name << RST << ":" << endl;
+	cout << ARROWITEM << KBLU << name << RST << ":" << endl;
 
 	for (auto& jValue: jValues) {
 		cout << TPOINTITEM ;
