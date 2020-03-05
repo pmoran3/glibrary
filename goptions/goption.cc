@@ -23,10 +23,12 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 		return;
 	}
 
-	// checking that
-	//	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-	//		cout << "A AAAA " << name << endl;
-	//	}
+	// assigning structured option with default values
+	// checking that all tags in the definition default values
+	bool tagsAreComplete = false;
+		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+			cout << "A AAAA " << definitionJsonValue << endl;
+		}
 
 }
 
@@ -112,16 +114,6 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 //		}
 
 		jValues.push_back(newUserValue);
-
-
-		// looping over detector definitions
-		//		for (auto& jsonTag: joptionDefinition) {
-		//
-		//			string jsonTagName = jsonTag[JSONTAGNAME];
-		//			string jsonTagDesc = jsonTag[JSONTAGDESC];
-		//			auto jsonTagDflt   = jsonTag[JSONTAGDFLT];
-		//
-		//		}
 
 	}
 
