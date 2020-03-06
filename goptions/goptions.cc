@@ -70,7 +70,7 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 		if(pos != string::npos) return arg;
 	}
 
-	cout << endl << GWARNING << " no jcard." << endl << endl;
+	cout << endl << GWARNING << " no jcard found." << endl << endl;
 	return "na";
 }
 

@@ -22,7 +22,7 @@ Add Sources and Libraries
 
  3. In the shell, open Framework and library dir of interest
 
-    Qt:     open $QTDIR/lib/
+    Qt:     open $QTDIR/lib/   (
 	 geant4: open $G4ROOT/$GEANT4_VERSION/lib/
 	 ccdb:   open $CCDB_HOME/lib/
     clhep:  open $CLHEP_BASE_DIR/lib/
@@ -34,7 +34,7 @@ Add Sources and Libraries
     a. remove exampleName dir
     b  drag source exampleName.cc in Compile Sources build phase
     c. add libraryName on "link Binary with Libraries" on Build Phases
-    d. dragg additional libraries needed on "link Binary with Libraries" on Build Phases
+    d. drag additional libraries needed on "link Binary with Libraries" on Build Phases
 
 #    d. copy manually do not do this: drag frameworks to Copy files, products location must match CONFIGURATION_BUILD_DIR
 # 	    - no subpath
