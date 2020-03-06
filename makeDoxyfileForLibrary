@@ -24,7 +24,7 @@ echo " Creating Doxyfile for " $library
 extraArgument=''
 case `uname` in
 	Darwin)
-		extraArgument=\'\'
+		extraArgument='backup'
 	;;
 	Linux)
 		extraArgument=''
@@ -33,9 +33,10 @@ esac
 
 sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile # name
 
-if [[ $library/ != "gemc"]] ; then
+if [ $library != "gemc" ]; then
 	cp Doxyfile $library/
 fi
 echo " "
 
 
+rm Doxyfilebackup
