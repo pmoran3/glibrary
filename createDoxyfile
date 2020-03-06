@@ -1,26 +1,8 @@
 #!/bin/bash
 
 
-
-
-
 # Purpose: creates a doxyfile using the doxygen -g command to get the latest doxygen goodies)
 # The replace each line with the ones shown below
-
-typeset -A doxyChanges
-
-
-doxyChanges[FILE_PATTERNS]='*.cc *.h'
-
-doxyChanges[SOURCE_BROWSER]='YES'
-doxyChanges[HTML_DYNAMIC_SECTIONS]='YES'
-
-doxyChanges[DOT_FONTSIZE]='12'
-doxyChanges[CLASS_GRAPH]='YES'
-doxyChanges[GENERATE_LEGEND]='NO'
-
-
-
 
 echo " "
 echo " Creating Doxyfile "
@@ -28,10 +10,11 @@ doxygen -g
 
 cp Doxyfile DoxyfilePure
 
+# add "backup" to backup file on Mac. No need on Linux
 extraArgument=''
 case `uname` in
 	Darwin)
-		extraArgument=\'\'
+		extraArgument='backup'
 	;;
 	Linux)
 		extraArgument=''
@@ -39,51 +22,53 @@ case `uname` in
 esac
 
 # painfully, manually doing these, but we HAVE TO
-sed -i $extraArgument 's/PROJECT_NAME           = "My Project"/PROJECT_NAME           = "templateGLibrary"/g' Doxyfile
-sed -i $extraArgument 's/OPTIMIZE_OUTPUT_FOR_C  = NO/OPTIMIZE_OUTPUT_FOR_C  = YES/g' Doxyfile
-sed -i $extraArgument 's/BUILTIN_STL_SUPPORT    = NO/BUILTIN_STL_SUPPORT    = YES/g' Doxyfile
+sed -i $extraArgument 's/PROJECT_NAME           = "My Project"/PROJECT_NAME           = "templateGLibrary"/g'      Doxyfile
+sed -i $extraArgument 's/OPTIMIZE_OUTPUT_FOR_C  = NO/OPTIMIZE_OUTPUT_FOR_C  = YES/g'                               Doxyfile
+sed -i $extraArgument 's/BUILTIN_STL_SUPPORT    = NO/BUILTIN_STL_SUPPORT    = YES/g'                               Doxyfile
 sed -i $extraArgument 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "templateGLibrary Library Framework"/g' Doxyfile
-sed -i $extraArgument 's/GENERATE_LATEX         = YES/GENERATE_LATEX         = NO/g' Doxyfile
-sed -i $extraArgument 's/HAVE_DOT               = NO/HAVE_DOT               = YES/g' Doxyfile
-sed -i $extraArgument 's/UML_LOOK               = NO/UML_LOOK               = YES/g' Doxyfile
-sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/docs\/mylayout.css"/g' Doxyfile
-sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g' Doxyfile
-sed -i $extraArgument 's/EXCLUDE                =/EXCLUDE                = README.md .git/g' Doxyfile
+sed -i $extraArgument 's/GENERATE_LATEX         = YES/GENERATE_LATEX         = NO/g'                               Doxyfile
+sed -i $extraArgument 's/HAVE_DOT               = NO/HAVE_DOT               = YES/g'                               Doxyfile
+sed -i $extraArgument 's/UML_LOOK               = NO/UML_LOOK               = YES/g'                               Doxyfile
+sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/docs\/mylayout.css"/g'             Doxyfile
+sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g'                 Doxyfile
+sed -i $extraArgument 's/EXCLUDE                =/EXCLUDE                = README.md .git/g'                       Doxyfile
 
 # painfully removing the individual patterns
-sed -i $extraArgument  '/*.hpp \\/d'  Doxyfile
-sed -i $extraArgument  '/*.java \\/d'  Doxyfile
-sed -i $extraArgument  '/*.ii \\/d'  Doxyfile
-sed -i $extraArgument  '/*.ixx \\/d'  Doxyfile
-sed -i $extraArgument  '/*.ipp \\/d'  Doxyfile
-sed -i $extraArgument  '/*.i++ \\/d'  Doxyfile
-sed -i $extraArgument  '/*.inl \\/d'  Doxyfile
-sed -i $extraArgument  '/*.cs \\/d'  Doxyfile
-sed -i $extraArgument  '/*.d \\/d'  Doxyfile
-sed -i $extraArgument  '/*.m \\/d'  Doxyfile
-sed -i $extraArgument  '/*.doc \\/d'  Doxyfile
-sed -i $extraArgument  '/*.txt \\/d'  Doxyfile
-sed -i $extraArgument  '/*.f \\/d'  Doxyfile
-sed -i $extraArgument  '/*.for \\/d'  Doxyfile
-sed -i $extraArgument  '/*.vhd \\/d'  Doxyfile
-sed -i $extraArgument  '/*.ucf \\/d'  Doxyfile
-sed -i $extraArgument  '/*.md \\/d'  Doxyfile
-sed -i $extraArgument  '/*.mm \\/d'  Doxyfile
-sed -i $extraArgument  '/*.dox \\/d'  Doxyfile
-sed -i $extraArgument  '/*.f90 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.f95 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.f03 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.f08 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.markdown \\/d'  Doxyfile
-sed -i $extraArgument  '/*.tcl \\/d'  Doxyfile
-sed -i $extraArgument  '/*.vhdl \\/d'  Doxyfile
-sed -i $extraArgument  '/*.qsf \\/d'  Doxyfile
-sed -i $extraArgument  '/*.php \\/d'  Doxyfile
-sed -i $extraArgument  '/*.php4 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.php5 \\/d'  Doxyfile
-sed -i $extraArgument  '/*.phtml \\/d'  Doxyfile
-sed -i $extraArgument  '/*.idl \\/d'  Doxyfile
-sed -i $extraArgument  '/*.ddl \\/d'  Doxyfile
-sed -i $extraArgument  '/*.odl \\/d'  Doxyfile
+sed -i $extraArgument  '/*.hpp \\/d'      Doxyfile
+sed -i $extraArgument  '/*.java \\/d'     Doxyfile
+sed -i $extraArgument  '/*.ii \\/d'       Doxyfile
+sed -i $extraArgument  '/*.ixx \\/d'      Doxyfile
+sed -i $extraArgument  '/*.ipp \\/d'      Doxyfile
+sed -i $extraArgument  '/*.i++ \\/d'      Doxyfile
+sed -i $extraArgument  '/*.inl \\/d'      Doxyfile
+sed -i $extraArgument  '/*.cs \\/d'       Doxyfile
+sed -i $extraArgument  '/*.d \\/d'        Doxyfile
+sed -i $extraArgument  '/*.m \\/d'        Doxyfile
+sed -i $extraArgument  '/*.doc \\/d'      Doxyfile
+sed -i $extraArgument  '/*.txt \\/d'      Doxyfile
+sed -i $extraArgument  '/*.f \\/d'        Doxyfile
+sed -i $extraArgument  '/*.for \\/d'      Doxyfile
+sed -i $extraArgument  '/*.vhd \\/d'      Doxyfile
+sed -i $extraArgument  '/*.ucf \\/d'      Doxyfile
+sed -i $extraArgument  '/*.md \\/d'       Doxyfile
+sed -i $extraArgument  '/*.mm \\/d'       Doxyfile
+sed -i $extraArgument  '/*.dox \\/d'      Doxyfile
+sed -i $extraArgument  '/*.f90 \\/d'      Doxyfile
+sed -i $extraArgument  '/*.f95 \\/d'      Doxyfile
+sed -i $extraArgument  '/*.f03 \\/d'      Doxyfile
+sed -i $extraArgument  '/*.f08 \\/d'      Doxyfile
+sed -i $extraArgument  '/*.markdown \\/d' Doxyfile
+sed -i $extraArgument  '/*.tcl \\/d'      Doxyfile
+sed -i $extraArgument  '/*.vhdl \\/d'     Doxyfile
+sed -i $extraArgument  '/*.qsf \\/d'      Doxyfile
+sed -i $extraArgument  '/*.php \\/d'      Doxyfile
+sed -i $extraArgument  '/*.php4 \\/d'     Doxyfile
+sed -i $extraArgument  '/*.php5 \\/d'     Doxyfile
+sed -i $extraArgument  '/*.phtml \\/d'    Doxyfile
+sed -i $extraArgument  '/*.idl \\/d'      Doxyfile
+sed -i $extraArgument  '/*.ddl \\/d'      Doxyfile
+sed -i $extraArgument  '/*.odl \\/d'      Doxyfile
+
+rm Doxyfilebackup
 
 
