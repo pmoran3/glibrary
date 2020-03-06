@@ -33,8 +33,13 @@ esac
 
 sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile # name
 
+
+
 if [ $library != "gemc" ]; then
+	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "..\/docs\/mylayout.css"/g'         Doxyfile
 	cp Doxyfile $library/
+else
+	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "docs\/mylayout.css"/g'             Doxyfile
 fi
 echo " "
 
