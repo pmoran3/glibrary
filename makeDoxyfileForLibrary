@@ -19,7 +19,6 @@ library=$1
 echo " "
 echo " Creating Doxyfile for " $library
 
-cp Doxyfile $library/
 
 # replacing instances of "templateGLibrary"
 extraArgument=''
@@ -32,7 +31,11 @@ case `uname` in
 	;;
 esac
 
-sed -i $extraArgument s/templateGLibrary/$library/g $library/Doxyfile # name
+sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile # name
+
+if [[ $library/ != "gemc"]] ; then
+	cp Doxyfile $library/
+fi
 echo " "
 
 
