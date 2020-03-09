@@ -18,25 +18,23 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	// set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
 	string jcardFilename = setVerbosityAndFindBaseJCard(argc, argv);
 
+	// parsing json can throw
 	// returns all jsons objects pointed by the base and imported jcards
-
-	try
-	{
+	try {
 		vector<json> allUserJsons = retrieveUserJsons(jcardFilename);
 		parseJCards(allUserJsons);
 	}
-	catch (exception& e)
-	{
+	catch (exception& e) {
 		string thisException = e.what();
 
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
-			cout << FATALERRORL << " parsing " << jcardFilename
+			cerr << FATALERRORL << " parsing " << jcardFilename
 			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
 			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
 		}
 
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	// parse the jcard in the GOptions array
@@ -155,7 +153,7 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 
 				jOptions.at(userJsonOptionIndex).parseJsons(userJsonKey, userJsonValue, isAnAddition, gverbosity);
 
-				// if GOption was not found
+				// if GOption was not found (findOption returned -1)
 			} else {
 				cout << GWARNING << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system." << endl;
 			}
