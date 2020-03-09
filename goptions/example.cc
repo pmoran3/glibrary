@@ -109,14 +109,6 @@ int main(int argc, char* argv[])
 		cout << " detector  " << det.detector << ", factory  " << det.factory << ", variation  " << det.variation << endl;
 	}
 
-
-	// Perhaps there's a better modern way to do this
-	//	vector<json> runOptions = gopts->getOptions("runno");
-	//	goptions::run runno = goptions::getRun(runOptions);
-
-	//	cout << " runno  " << runno.runno  << endl;
-
-
 	return 1;
 }
 
