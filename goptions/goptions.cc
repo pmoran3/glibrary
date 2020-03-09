@@ -191,13 +191,3 @@ void GOptions::printSettings(bool withDefaults)
 	cout << endl;
 }
 
-// get vector of GOption from
-vector<json> GOptions::getOptions(string name)
-{
-	long index = findOption(name);
-
-	return jOptions[index].getOptions();
-}
-
-
-

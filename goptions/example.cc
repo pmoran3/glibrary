@@ -22,7 +22,9 @@ namespace goptions {
 	}
 
 	// groupable: method to return a vector<sdet>
-	vector<sdet> getDetectors(vector<json> jValues) {
+	vector<sdet> getDetectors(GOptions *gopts) {
+        vector<json> jValues = (*gopts)["detector"];
+
 		vector<sdet> detectors;
 
 		for (auto jdet: jValues) {
@@ -101,8 +103,7 @@ int main(int argc, char* argv[])
 
 
 	// Perhaps there's a better modern way to do this
-	vector<json> detOptions = gopts->getOptions("detector");
-	vector<goptions::sdet> detectors = goptions::getDetectors(detOptions);
+	vector<goptions::sdet> detectors = goptions::getDetectors(gopts);
 
 	for (auto& det: detectors) {
 		cout << " detector  " << det.detector << ", factory  " << det.factory << ", variation  " << det.variation << endl;
@@ -110,10 +111,10 @@ int main(int argc, char* argv[])
 
 
 	// Perhaps there's a better modern way to do this
-	vector<json> runOptions = gopts->getOptions("runno");
-	goptions::run runno = goptions::getRun(runOptions);
+//	vector<json> runOptions = gopts->getOptions("runno");
+//	goptions::run runno = goptions::getRun(runOptions);
 
-	cout << " runno  " << runno.runno  << endl;
+//	cout << " runno  " << runno.runno  << endl;
 
 
 	return 1;
