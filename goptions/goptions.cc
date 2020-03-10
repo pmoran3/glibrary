@@ -26,13 +26,16 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	}
 	catch (exception& e) {
 		string thisException = e.what();
+        
 
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
 			cerr << FATALERRORL << " parsing " << jcardFilename
 			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
 			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
-		}
+        } else {
+            cerr << FATALERRORL << " exception: " << thisException << endl;
+        }
 
 		exit(EXIT_FAILURE);
 	}
