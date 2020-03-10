@@ -89,6 +89,30 @@ vector<GOption> defineOptions()
 
 	goptions.push_back(GOption("runno", "run option", runTag));
 
+
+	// activate gui. Default = no (batch mode)
+	json guiTag = {
+		{JSONTAGNAME, "gui"},
+		{JSONTAGDESC, "Graphical User Interface. Possible Values: 0/1. Default: 0"},
+		{JSONTAGDFLT, 0}
+	};
+
+	// number of threads. Default = 1
+	json nthreadsTag = {
+		{JSONTAGNAME, "nthreads"},
+		{JSONTAGDESC, "Number of threads"},
+		{JSONTAGDFLT, 1}
+	};
+
+
+	json jConfTag = { guiTag, nthreadsTag};
+
+
+	goptions.push_back(GOption("gConf", "GEMC Configuration: gui, number of threads", jConfTag));
+
+
+
+
 	return goptions;
 }
 
