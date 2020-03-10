@@ -40,7 +40,7 @@ if [ $library != "gemc" ]; then
 	sed -i $extraArgument 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "templateGLibrary Library Framework"/g' Doxyfile
 	cp Doxyfile $library/
 else
-	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "docs\/mylayout.css"/g'             Doxyfile
+	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "glibrary\/docs\/mylayout.css"/g'             Doxyfile
 	sed -i $extraArgument 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "GEMC: GEant4 Monte-Carlo"/g' Doxyfile
 fi
 echo " "
