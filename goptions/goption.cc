@@ -25,21 +25,22 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 
 	// assigning structured option with default values
 	// checking that all tags in the definition default values
-	// if one tag has JSONTAGDFLT = NODEFAULT then it will not make it to jValue
+	// if one tag has JSONTAGDFLT = NODEFAULT then the constructor will return
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 		if ( definitionJsonValue[JSONTAGDFLT] == NODEFAULT ) {
-			// nothing to do, user will set this option
+			// nothing to do, user will must this option
 			return;
 		}
 	}
 
-	// all tags have a default value. Building the json value
+	// we didn't return from the loop above:
+	// all tags have a default value. Building the json value.
 	json newUserValue;
 
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-		string optionKey    = definitionJsonValue[JSONTAGDFLT];
-		string optionValue  = definitionJsonValue[JSONTAGDFLT];
-		newUserValue[optionKey] = optionValue;
+		string optionKey    = definitionJsonValue[JSONTAGNAME];
+		//		string optionValue  =
+		newUserValue[optionKey] = definitionJsonValue[JSONTAGDFLT];;
 	}
 	jValues.push_back(newUserValue);
 }
@@ -180,7 +181,9 @@ bool GOption::isTagDefined(string key, int gverbosity) {
 // print option
 void GOption::printOption(bool withDefaults)
 {
-
+	if (!jValues.size()) {
+		return;
+	}
 	// this is a single option, jValue has size 1
 	if (jValues.front().size() == 1) {
 		json onlyOption = jValues.front();
@@ -199,14 +202,19 @@ void GOption::printOption(bool withDefaults)
 	// structured option
 	cout << KBLU << ARROWITEM << name << RST << ":" << endl;
 
+	// non groupable options are printed on screen differently
 	for (auto& jValue: jValues) {
-		cout << TPOINTITEM ;
-		for (auto& [jValueKey, jValueValue] : jValue.items()) {
-			cout << jValueKey << ": " << jValueValue << "\t";
+
+		if (groupable) {
+			cout << TPOINTITEM ;
+			for (auto& [jValueKey, jValueValue] : jValue.items()) {
+				cout << jValueKey << ": " << jValueValue << "\t";
+			}
+			cout << endl;
+		} else {
+			for (auto& [jValueKey, jValueValue] : jValue.items()) {
+				cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
+			}
 		}
-		cout << endl;
 	}
-
-
 }
-

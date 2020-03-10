@@ -71,7 +71,9 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 		if(pos != string::npos) return arg;
 	}
 
-	cout << endl << GWARNING << " no jcard found." << endl << endl;
+	if (gverbosity > 0) {
+		cout << endl << GWARNING << " no jcard found." << endl << endl;
+	}
 	return "na";
 }
 
@@ -183,6 +185,10 @@ long GOptions::findOption(string name)
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)
 {
+	if (!jOptions.size()) {
+		return;
+	}
+
 	cout << endl << KBLU << " User Settings: " << RST << endl << endl;;
 
 	for(auto& jOption: jOptions) {
