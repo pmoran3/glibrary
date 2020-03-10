@@ -164,7 +164,7 @@ double gstring::getG4Number(string v, bool warnIfNotUnit)
 		return answer;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 vector<double> gstring::getG4NumbersFromStringVector(vector<string> vstring, bool warnIfNotUnit)

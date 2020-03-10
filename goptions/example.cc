@@ -109,6 +109,6 @@ int main(int argc, char* argv[])
 		cout << " detector  " << det.detector << ", factory  " << det.factory << ", variation  " << det.variation << endl;
 	}
 
-	return 1;
+	return EXIT_SUCCESS;
 }
 

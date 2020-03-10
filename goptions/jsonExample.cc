@@ -60,6 +60,6 @@ int main(int argc, char* argv[])
 		cout << " detector struct variable: " << d.detector << endl;
 	}
 
-	return 1;
+	return EXIT_SUCCESS;
 }
 
