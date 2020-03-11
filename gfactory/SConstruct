@@ -1,0 +1,18 @@
+# This compiles the example and the gfactory (if it's not built already)
+
+from init_env import init_environment
+
+# load glibraries
+env = init_environment("glibrary")
+
+ford_dll  = env.SharedLibrary( source = "factoryExample/FordFactory.cc",  target = "fordFactory")
+dodge_dll = env.SharedLibrary( source = "factoryExample/DodgeFactory.cc", target = "dodgeFactory")
+
+
+example_sources = Split("""
+	factoryExample/example.cc
+	factoryExample/ShapeFactory.cc
+	""")
+
+example = env.Program(source = example_sources, target = "example")
+
