@@ -189,7 +189,7 @@ void GOptions::printSettings(bool withDefaults)
 		return;
 	}
 
-	cout << endl << KBLU << " User Settings: " << RST << endl << endl;;
+	cout << endl << KGRN << " User Settings: " << RST << endl << endl;;
 
 	for(auto& jOption: jOptions) {
 		jOption.printOption(withDefaults);

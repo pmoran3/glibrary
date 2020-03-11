@@ -67,7 +67,7 @@ echo "#endif"                     >> $library/"doxy.h"
 rm -f $library/"conventions.h" ;  touch $library/"conventions.h"
 echo "#ifndef " $cheader"_CONVENTIONS"       >> $library/"conventions.h"
 echo "#define " $cheader"_CONVENTIONS 1"     >> $library/"conventions.h"
-cat doxy.h                                   >> $library/"conventions.h"
+echo ""                                      >> $library/"conventions.h"
 echo "#endif"                                >> $library/"conventions.h"
 
 
@@ -95,7 +95,5 @@ do
 	echo " "$f
 	sed -i '' s/templateGLibrary/$library/g     $library/$f
 done
-
-./createDoxyFile $library
 
 echo " "

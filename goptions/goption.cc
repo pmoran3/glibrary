@@ -194,13 +194,13 @@ void GOption::printOption(bool withDefaults)
 			isDefault = " (default)";
 		}
 
-		cout << KBLU << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
+		cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
 		return;
 	}
 
 	// not the only option
 	// structured option
-	cout << KBLU << ARROWITEM << name << RST << ":" << endl;
+	cout << KGRN << ARROWITEM << name << RST << ":" << endl;
 
 	// non groupable options are printed on screen differently
 	for (auto& jValue: jValues) {
