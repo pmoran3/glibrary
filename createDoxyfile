@@ -84,6 +84,6 @@ sed -i $extraArgument  '/*.idl \\/d'      Doxyfile
 sed -i $extraArgument  '/*.ddl \\/d'      Doxyfile
 sed -i $extraArgument  '/*.odl \\/d'      Doxyfile
 
-rm Doxyfilebackup
+rm -f Doxyfilebackup
 
 

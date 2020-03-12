@@ -44,4 +44,12 @@ cp Doxyfile $library/
 echo " "
 
 
-rm Doxyfilebackup
+echo
+echo
+echo DOXYFILE:
+cat $library/Doxyfile
+echo
+echo
+
+
+rm -f Doxyfilebackup

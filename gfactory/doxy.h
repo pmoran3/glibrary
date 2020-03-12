@@ -20,22 +20,37 @@
  *  // map that will contain the derived classes instances
  * map<string, Shape*> shapes;
  * GManager manager;
+ *
  *  // register class in the manager
  * manager.RegisterObjectFactory<Triangle>("triangle");
- * map["triangle"] = manager.CreateObject<Shape>("triangle");  // retrieve "triangle", instantiate and store new client Triangle class
- * map["triangle"]->Method();  // Method() is pure virtual in Shape. Calling the instance Triangle method here
+
+ * // retrieve "triangle", instantiate and store new client Triangle class
+ * map["triangle"] = manager.CreateObject<Shape>("triangle");
+ *
+ * // Method() is pure virtual in Shape. Calling the instance Triangle method here
+ * map["triangle"]->Method();
+ *
  * </pre>
+ *
  * \section dynamicUse Registering and Instantiating dynamic client factories
  * In this case the client have access to only the base class header.
  * The derived classes are compiled in shared libraries.
  * To register a "ford" class derived from "Car":
  * <pre>
  * \#include "Car.h"
- * map<string, Car*> cars;   // map that will contain the derived classes instances
+ *
+ *  // map that will contain the derived classes instances
+ * map<string, Car*> cars;
  * GManager manager;
- * manager.registerDL("fordFactory");  // register class in the manager
- * map["ford"] = manager.LoadObjectFromLibrary<Car>("fordFactory");  // retrieve "fordFactory", instantiate and store new client fordFactory class
- * map["ford"]->Method();  // Method() is pure virtual in Car. Calling the instance fordFactory method here
+ *
+ * // register class in the manager
+ * manager.registerDL("fordFactory");
+ *
+ * // retrieve "fordFactory", instantiate and store new client fordFactory class
+ * map["ford"] = manager.LoadObjectFromLibrary<Car>("fordFactory");
+ *
+ * // Method() is pure virtual in Car. Calling the instance fordFactory method here
+ * map["ford"]->Method();
  * </pre>
  * \n\n
  * \author \n &copy; Maurizio Ungaro
