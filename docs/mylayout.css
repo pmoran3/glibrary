@@ -60,12 +60,11 @@ caption {
 }
 
 span.legend {
-	font-size: 70%;
 	text-align: center;
 }
 
 h3.version {
-	font-size: 90%;
+	font-size: 110%;
 	text-align: center;
 }
 
@@ -201,11 +200,13 @@ body {
 	background-color: white;
 	color: black;
 	margin: 0;
+	font-size: 14px;
 }
 
 div.contents {
 	width: 950px;
 	margin: 0 auto;
+	font-size: 14px;
 }
 
 td.indexkey {
@@ -318,7 +319,7 @@ blockquote {
 /* @end */
 
 td.tiny {
-	font-size: 75%;
+	font-size: 95%;
 }
 
 .dirtab {
@@ -400,7 +401,7 @@ table.memberdecls {
 .memTemplParams {
 	color: #4665A2;
 	white-space: nowrap;
-	font-size: 80%;
+	font-size: 120%;
 }
 
 /* @end */
@@ -410,7 +411,7 @@ table.memberdecls {
 /* Styles for detailed member documentation */
 
 .memtemplate {
-	font-size: 80%;
+	font-size: 120%;
 	color: #4665A2;
 	font-weight: normal;
 	margin-left: 9px;
@@ -559,7 +560,7 @@ span.mlabel {
 	margin-right: 4px;
 	padding: 2px 3px;
 	border-radius: 3px;
-	font-size: 7pt;
+	font-size: 12pt;
 	white-space: nowrap;
 	vertical-align: middle;
 }
@@ -667,7 +668,7 @@ table.doxtable td, table.doxtable th {
 table.doxtable th {
 	background-color: #374F7F;
 	color: #FFFFFF;
-	font-size: 110%;
+	font-size: 140%;
 	padding-bottom: 4px;
 	padding-top: 5px;
 }
@@ -704,7 +705,7 @@ table.fieldtable {
 
 .fieldtable th {
 	background-color: #E2E8F2;
-	font-size: 90%;
+	font-size: 120%;
 	color: #253555;
 	padding-bottom: 4px;
 	padding-top: 5px;
@@ -725,7 +726,7 @@ table.fieldtable {
 	height: 36px;
 	z-index: 101;
 	overflow: hidden;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 .navpath {
@@ -733,7 +734,7 @@ table.fieldtable {
 }
 
 .navpath ul {
-	font-size: 12px;
+	font-size: 14px;
 	height:30px;
 	line-height:30px;
 	color:#8AA0CC;
@@ -775,12 +776,12 @@ table.fieldtable {
 	background-repeat:no-repeat;
 	background-position:right;
 	color:#364D7C;
-	font-size: 10pt;
+	font-size: 12pt;
 }
 
 
 div.summary {
-	font-size: 10pt;
+	font-size: 14pt;
 	padding-right: 5px;
 }
 
@@ -796,7 +797,7 @@ div.summary a:hover {
 }
 
 div.ingroups {
-	font-size: 8pt;
+	font-size: 12pt;
 	width: 50%;
 	text-align: left;
 }
@@ -1046,10 +1047,10 @@ tr.heading h2 {
 }
 
 .tabs2 {
-	font-size: 10pt;
+	font-size: 14pt;
 }
 .tabs3 {
-	font-size: 9pt;
+	font-size: 12pt;
 }
 
 #navrow1 .tablist, #navrow2 .tablist, #navrow3 .tablist, #navrow4 .tablist {
@@ -1132,7 +1133,7 @@ body {
 	width: 950px;
 	margin: 10px auto;
 	text-align: center;
-	font-size: 10pt;
+	font-size: 14pt;
 	color: #555;
 }
 
@@ -1197,7 +1198,7 @@ div.contents code {
 
 div.contents pre code {
 	font-family: Consolas, "Liberation Mono", Courier, monospace;
-	font-size: 12pt;
+	font-size: 14pt;
 	padding: 0.5em 1em;
 	background-color: #f5f5f5;
 	border: 1px solid #bbb;
@@ -1213,7 +1214,7 @@ div.contents ul li {
 .icon {
 	font-family: Arial, Helvetica;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 14px;
 	height: 14px;
 	width: 16px;
 	display: inline-block;
