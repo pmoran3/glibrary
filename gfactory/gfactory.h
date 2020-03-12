@@ -38,9 +38,6 @@
  * map["ford"] = manager.LoadObjectFromLibrary<Car>("fordFactory");  // retrieve "fordFactory", instantiate and store new client fordFactory class
  * map["ford"]->Method();  // Method() is pure virtual in Car. Calling the instance fordFactory method here
  * </pre>
- * \section platforms Platforms Supported:
- * - Linux (32, 64)
- * - Mac OS X
  * \n\n
  * \author \n &copy; Maurizio Ungaro
  * \author e-mail: ungaro@jlab.org\n\n\n
@@ -56,7 +53,7 @@ using namespace std;
 #include "gdl.h"
 
 
-/**
+/*
  * @class GFactoryBase
  * @brief Base class. Use polymorphism to run Create on the
  * derived classes
@@ -114,7 +111,7 @@ public:
 	template <class Derived> void RegisterObjectFactory(string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << logHeader << " GManager: Registering " << name << " factory. Database size is now: " << factoryMap.size() << endl;
+			cout << logHeader << " GFactory Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " items " << endl;
 		}
 	}
 
@@ -130,6 +127,7 @@ public:
 	template <class Base> Base* CreateObject(string name) const {
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end())
+            // need warning here
 			return nullptr;
 		//		if(verbosity > 0) {
 		//			cout << logHeader << " GManager: Creating factory " << name << endl;
@@ -198,7 +196,8 @@ public:
 
 private:
 	map<string, GFactoryBase*> factoryMap;
-	// the reason to keep this map is to keep the pointers in memory
+	
+    // the reason to keep this map is to keep the (DynamicLib?) pointers in memory
 	// for some reason declaring a dynamic_lib local variable in LoadObjectFromLibrary
 	// scope does not work
 	map<string, DynamicLib*> dlMap;

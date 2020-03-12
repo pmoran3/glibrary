@@ -1,5 +1,5 @@
-#ifndef  GFACTORY_H
-#define  GFACTORY_H  1
+#ifndef  GDYNAMICLIB_H
+#define  GDYNAMICLIB_H  1
 
 
 // this code is based on this tutorial:
