@@ -1,6 +1,8 @@
 
 .DS_Store
 .sconsign.dblite
-*example
 *.o
 lib
+goptions/example
+goptions/jsonExample
+gstring/example
