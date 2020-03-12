@@ -23,9 +23,6 @@ static void close_lib(dlhandle handle);
  * @struct DynamicLib
  * @brief  Structure to load dynamically symbols from a shared library
  */
-// PRAGMA TODO: add verbosity option?
-// add error if DL is not found, with msg
-// add mutex so we can use verbosity cout? see http://en.cppreference.com/w/cpp/memory/shared_ptr
 struct DynamicLib {
 
 	// default constructor
