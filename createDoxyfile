@@ -23,7 +23,7 @@ esac
 
 # painfully, manually doing these, but we HAVE TO
 sed -i $extraArgument 's/PROJECT_NAME           = "My Project"/PROJECT_NAME           = "templateGLibrary"/g'      Doxyfile
-sed -i $extraArgument 's/REPEAT_BRIEF           = YES/REPEAT_BRIEF           = NO/g'      Doxyfile
+sed -i $extraArgument 's/REPEAT_BRIEF           = YES/REPEAT_BRIEF           = NO/g'                               Doxyfile
 sed -i $extraArgument 's/OPTIMIZE_OUTPUT_FOR_C  = NO/OPTIMIZE_OUTPUT_FOR_C  = YES/g'                               Doxyfile
 sed -i $extraArgument 's/BUILTIN_STL_SUPPORT    = NO/BUILTIN_STL_SUPPORT    = YES/g'                               Doxyfile
 sed -i $extraArgument 's/SHOW_INCLUDE_FILES     = YES/SHOW_INCLUDE_FILES     = NO/g'                               Doxyfile
