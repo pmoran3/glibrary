@@ -1,4 +1,5 @@
-# Importing env from calling script
+# This can be called from the local SConstruct or
+# the glibrary SConstruct one dir up
 Import('env')
 
 sources = Split("""

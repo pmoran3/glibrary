@@ -1,0 +1,4 @@
+#ifndef  GTOUCHABLE_H_CONVENTIONS
+#define  GTOUCHABLE_H_CONVENTIONS 1
+
+#endif
