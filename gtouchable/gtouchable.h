@@ -11,8 +11,8 @@ using namespace std;
 // In addition:
 //
 // - readout: electronic Time Window is the discriminating factor
-// flux: track id is the discriminating factor
-// particleCounter: no other discriminating factors
+// - flux: track id is the discriminating factor
+// - particleCounter: no other discriminating factors
 enum GType { readout, flux, particleCounter };
 
 struct GIdentifier {
@@ -27,8 +27,14 @@ private:
 	}
 
 public:
-	// comparing just the values
-	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}  ///< Overloaded "!=" operator for the class 'GIdentifier'
+	// default constructor
+	GIdentifier() = default;
+
+	// constructor
+	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
+
+	//  Overloaded "!=": comparing just the values
+	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
 
 
 };
