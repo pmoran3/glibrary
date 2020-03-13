@@ -27,7 +27,6 @@ do
 	./createDoxyfile 
 	./makeDoxyfileForLibrary $l
 	cd $l
-	ls -l
 	doxygen Doxyfile 
 	mv html ../$ddir/$l
 	cd ..
