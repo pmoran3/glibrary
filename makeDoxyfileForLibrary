@@ -16,7 +16,7 @@ fi
 
 
 library=$1
-echo " Setting Doxyfile for " $library
+echo " Setting Doxyfile for "$library
 
 
 # replacing instances of "templateGLibrary"
@@ -30,26 +30,26 @@ case `uname` in
 	;;
 esac
 
-sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile # name
+# no PROJECT_BRIEF
+sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile
 
+toCheck='PROJECT_NAME OPTIMIZE_OUTPUT_FOR_C BUILTIN_STL_SUPPORT SHOW_FILES HTML_COLORSTYLE_GAMMA QUIET'
+echo
+echo " "Doxyfile Main changes:
+echo
+for l in $toCheck
+do
+	setting=$(grep "$l" Doxyfile | grep -v "#")
+	echo "  - "$setting
+done
 
-
+echo
+echo " Copying mylayout.css to "$library
 if [ $library != "gemc" ]; then
-	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = ..\/..\/docs\/mylayout.css/g'             Doxyfile
+	cp docs/mylayout.css $library/
+	cp Doxyfile $library/
 else
-	sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = "glibrary\/docs\/mylayout.css"/g'    Doxyfile
-	sed -i $extraArgument 's/PROJECT_BRIEF          =/PROJECT_BRIEF          = "GEMC: GEant4 Monte-Carlo"/g'        Doxyfile
+	cp glibrary/docs/mylayout.css .
 fi
-cp Doxyfile $library/
-echo " "
-
-
-echo
-echo
-echo DOXYFILE:
-cat $library/Doxyfile
-echo
-echo
-
 
 rm -f Doxyfilebackup
