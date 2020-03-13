@@ -21,13 +21,13 @@ mkdir -p $ddir
 # for documentation purposes
 ls -l
 
-
 echo " "
 for l in $libraries
 do
 	./createDoxyfile 
 	./makeDoxyfileForLibrary $l
 	cd $l
+	ls -l
 	doxygen Doxyfile 
 	mv html ../$ddir/$l
 	cd ..
