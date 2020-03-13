@@ -3,14 +3,15 @@
 /**
  * \mainpage
  * \section overview Overview
- * This frameworks provides static or dynamic loading of client factories.\n
- * The class GManager registers the client factories and provide methods
- * to instantiate them.
+ * This frameworks provides static or dynamic loading of methods (factories) from shared libraries.\n
+ * The class GManager registers the client factories and provide methods to instantiate them.
+ *
  * \section howto Suggested Use
  * After the gManager registration clients can instantiate
  * the derived class and store them in a map<string, Base>
  * for later use.
- * \section staticUse Registering and Instantiating static client factories
+ *
+ * \section Static client factories
  * In this case the client have access to both the base and the derived class headers.
  * To register a "Triangle" class derived from "Shape":
  * <pre>
@@ -32,7 +33,7 @@
  *
  * </pre>
  *
- * \section dynamicUse Registering and Instantiating dynamic client factories
+ * \section dynamicUse Dynamic client factories
  * In this case the client have access to only the base class header.
  * The derived classes are compiled in shared libraries.
  * To register a "ford" class derived from "Car":
@@ -43,10 +44,10 @@
  * map<string, Car*> cars;
  * GManager manager;
  *
- * // register class in the manager
+ * // register the dynamic library (shared object file) in the manager
  * manager.registerDL("fordFactory");
  *
- * // retrieve "fordFactory", instantiate and store new client fordFactory class
+ * // retrieve "fordFactory" from the shared object, instantiate and store new client fordFactory class
  * map["ford"] = manager.LoadObjectFromLibrary<Car>("fordFactory");
  *
  * // Method() is pure virtual in Car. Calling the instance fordFactory method here

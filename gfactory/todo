@@ -1,3 +1,9 @@
+Notice: to run the examples we need to link the dynamic libraries to the glibrary naming convention: the extension is .gplugin
+
+ln -s libfordFactory.dylib fordFactory.gplugin
+ln -s libdodgeFactory.dylib dodgeFactory.gplugin
+
+
 
 provide time spent by each plugin?
 
