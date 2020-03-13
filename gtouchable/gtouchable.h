@@ -72,6 +72,8 @@ private:
 	
 	bool verbosity;
 
+	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
+
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
 	void placeInTimeWindow(double time, double timeWindow) {gridTimeIndex = time/timeWindow;}

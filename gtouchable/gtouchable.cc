@@ -45,3 +45,9 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	return false;
 }
+
+ostream &operator<<(ostream &stream, GTouchable gtouchable) {
+
+
+	return stream;
+}
