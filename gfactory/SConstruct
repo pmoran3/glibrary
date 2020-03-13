@@ -4,6 +4,7 @@ from init_env import init_environment
 
 # load glibraries
 env = init_environment("glibrary")
+env.Append(CXXFLAGS=['-std=c++17'])
 
 ford_dll  = env.SharedLibrary( source = "factoryExample/FordFactory.cc",  target = "fordFactory")
 dodge_dll = env.SharedLibrary( source = "factoryExample/DodgeFactory.cc", target = "dodgeFactory")
