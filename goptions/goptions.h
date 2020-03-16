@@ -27,13 +27,20 @@ private:
     // { "tag": "tagname", "description": "tag description", "default": default value}
     const json joptionDefinition;
     
+    // help: here we can put the full description of the option.
+    // multiple lines are defined by using "\n"
+    string help;
+    
+    // verbosity as defined in conventions. Defaulted at 1.
+    int verbosity;
+    
     // if an option belongs to a group, options can be collected by using -add-<name>
     bool groupable;
     
     // the option, validated against the definition
     // if some tags are not set, they will be set to the joptionDefinition default
     // if an option is defined with default values, it will be passed to jValues
-    vector<json> jValues;
+    vector<json> jUserValues;
     
     // conditions for a valid option:
     // 1. each key must match a defined tag
@@ -62,7 +69,7 @@ public:
     void printOption(bool withDefaults);
     
     vector<json> getOptions() {
-        return jValues;
+        return jUserValues;
     }
     
 };

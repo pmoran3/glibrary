@@ -5,6 +5,7 @@
 #define JSONTAGNAME "jsonTagName"
 #define JSONTAGDESC "jsonTagDescription"
 #define JSONTAGDFLT "jsonTagDefault"
+#define JSONTAGHELP "jsonTagHelp"
 
 
 #define IMPORTSTRING "importJcards"

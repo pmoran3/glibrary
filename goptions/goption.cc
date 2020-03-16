@@ -8,8 +8,9 @@
 #include "gstring.h"
 using namespace gstring;
 
-// if an option is defined with default values, it will be passed to jValues
-GOption::GOption(string n, string d, json j, bool g): name(n), description(d), joptionDefinition(j), groupable(g)
+// if an option is defined with default values, it will be passed to jUserValues
+// users "reset" default values in the jcard or command lines
+GOption::GOption(string n, string d, json j, bool g): name{n}, description{d}, joptionDefinition{j}, groupable{g}, help{""}, verbosity{1}
 {
 	// assigning non structured option with default values
 	if (! joptionDefinition.begin().value().is_structured()) {
@@ -18,7 +19,7 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 		string jKey  = joptionDefinition[JSONTAGNAME];
 		jValue[jKey] = joptionDefinition[JSONTAGDFLT];
 
-		jValues.push_back(jValue);
+		jUserValues.push_back(jValue);
 
 		return;
 	}
@@ -28,7 +29,7 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 	// if one tag has JSONTAGDFLT = NODEFAULT then the constructor will return
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 		if ( definitionJsonValue[JSONTAGDFLT] == NODEFAULT ) {
-			// nothing to do, user will must this option
+			// nothing to do, user will have to define this option
 			return;
 		}
 	}
@@ -39,10 +40,10 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 		string optionKey    = definitionJsonValue[JSONTAGNAME];
-		//		string optionValue  =
 		newUserValue[optionKey] = definitionJsonValue[JSONTAGDFLT];;
 	}
-	jValues.push_back(newUserValue);
+	jUserValues.push_back(newUserValue);
+    
 }
 
 
@@ -59,9 +60,9 @@ GOption::GOption(string n, string d, json j, bool g): name(n), description(d), j
 bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, int gverbosity)
 {
 	// clear jValues if add- is not found
-	if (!isAddition && jValues.size() > 0 ) {
+	if (!isAddition && jUserValues.size() > 0 ) {
 		if (gverbosity) { cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl; }
-		jValues.clear();
+		jUserValues.clear();
 	}
 
 	// looping over all user jsons
@@ -72,9 +73,9 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 
 		// if a simple key/value option (not is_structured) then assigning the new user value and return true
 		if (! userJson.is_structured() ) {
-			jValues.clear();
+			jUserValues.clear();
 			newUserValue[userJsonKey] = userJson.items().begin().value();
-			jValues.push_back(newUserValue);
+			jUserValues.push_back(newUserValue);
 
 			if (gverbosity) {
 				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJson.items().begin().value() <<  endl;
@@ -145,7 +146,7 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 
 
 		}
-		jValues.push_back(newUserValue);
+		jUserValues.push_back(newUserValue);
 	}
 
 
@@ -181,12 +182,12 @@ bool GOption::isTagDefined(string key, int gverbosity) {
 // print option
 void GOption::printOption(bool withDefaults)
 {
-	if (!jValues.size()) {
+	if (!jUserValues.size()) {
 		return;
 	}
 	// this is a single option, jValue has size 1
-	if (jValues.front().size() == 1) {
-		json onlyOption = jValues.front();
+	if (jUserValues.front().size() == 1) {
+		json onlyOption = jUserValues.front();
 		string isDefault = "";
 
 		// pointing out this is a default option
@@ -203,7 +204,7 @@ void GOption::printOption(bool withDefaults)
 	cout << KGRN << ARROWITEM << name << RST << ":" << endl;
 
 	// non groupable options are printed on screen differently
-	for (auto& jValue: jValues) {
+	for (auto& jValue: jUserValues) {
 
 		if (groupable) {
 			cout << TPOINTITEM ;
