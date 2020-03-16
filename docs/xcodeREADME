@@ -23,8 +23,8 @@ Add Sources and Libraries
  3. In the shell, open Framework and library dir of interest
 
     Qt:     open $QTDIR/lib/   (
-	 geant4: open $G4ROOT/$GEANT4_VERSION/lib/
-	 ccdb:   open $CCDB_HOME/lib/
+    geant4: open $G4ROOT/$GEANT4_VERSION/lib/
+    ccdb:   open $CCDB_HOME/lib/
     clhep:  open $CLHEP_BASE_DIR/lib/
     root:   open $ROOTSYS/lib/
 

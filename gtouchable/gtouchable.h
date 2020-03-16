@@ -44,8 +44,8 @@ class GTouchable
 	
 public:
 	GTouchable(GType t, vector<GIdentifier> identity, bool v = 0) :
+    gIdentity{identity},
 	gType{t},
-	gIdentity{identity},
 	trackId{0},
 	eMultiplier{1},
 	gridTimeIndex{0},
