@@ -40,8 +40,6 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 		exit(EXIT_FAILURE);
 	}
 
-	// parse the jcard in the GOptions array
-
 	// parse command line
 
 }

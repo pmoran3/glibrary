@@ -41,6 +41,11 @@ using namespace nlohmann;
 // example of parsing one jcard and reading a variable
 int main(int argc, char* argv[])
 {
+
+	if(argc != 2) {
+		cout << " Error: you must provide a jcard." << endl;
+	}
+
 	string fileName = argv[1];
 
 	cout << " Opening jcard: " << fileName << endl;

@@ -5,12 +5,9 @@
 #define JSONTAGNAME "jsonTagName"
 #define JSONTAGDESC "jsonTagDescription"
 #define JSONTAGDFLT "jsonTagDefault"
-#define JSONTAGHELP "jsonTagHelp"
-#define JSONTAGVERB "jsonTagVerbosity"
-
-
 #define IMPORTSTRING "importJcards"
 
+// Standard string throughout goptions
 #define FILENOTFOUND "fileNotFound"
 #define NODEFAULT    "noDefault"
 

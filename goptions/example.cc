@@ -77,7 +77,9 @@ vector<GOption> defineOptions()
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
-	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, true));
+    string help = "help example";
+    
+	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, help, true));
 
 	// run option
 	// not groupable
@@ -103,7 +105,6 @@ vector<GOption> defineOptions()
 		{JSONTAGDESC, "Number of threads"},
 		{JSONTAGDFLT, 1}
 	};
-
 
 	json jConfTag = { guiTag, nthreadsTag};
 

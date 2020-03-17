@@ -27,15 +27,15 @@ private:
     // { "tag": "tagname", "description": "tag description", "default": default value}
     const json joptionDefinition;
     
+    // if an option belongs to a group, options can be collected by using -add-<name>
+    const bool groupable;
+    
     // help: here we can put the full description of the option.
     // multiple lines are defined by using "\n"
-    string help;
+    const string help;
     
     // verbosity as defined in conventions. Defaulted at 1.
     int verbosity;
-    
-    // if an option belongs to a group, options can be collected by using -add-<name>
-    bool groupable;
     
     // the option, validated against the definition
     // if some tags are not set, they will be set to the joptionDefinition default
@@ -53,14 +53,11 @@ private:
     
 public:
     
-    // default constructor
-    GOption() = default;
-    
     // default copy constructor
     GOption ( const GOption & ) = default;
     
     // constructor using the definitions
-    GOption(string n, string d, json j, bool g = false);
+    GOption(string n, string d, json j, string h = "na", bool g = false);
     
     string getName() const {return name;}
     
@@ -68,7 +65,7 @@ public:
     
     void printOption(bool withDefaults);
     
-    vector<json> getOptions() {
+    vector<json> getOptions() const {
         return jUserValues;
     }
     
@@ -102,7 +99,7 @@ public:
     void printSettings(bool withDefaults);
     void writeSettingsToJsonFile();
     vector<json> operator[](string name) {return jOptions[findOption(name)].getOptions();}
-
+    
 };
 
 
