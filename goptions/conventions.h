@@ -11,7 +11,6 @@
 #define FILENOTFOUND "fileNotFound"
 #define NODEFAULT    "noDefault"
 
-
 // standardizing verbosity
 #define GVERBOSITY_SILENT  0
 #define GVERBOSITY_SUMMARY 1

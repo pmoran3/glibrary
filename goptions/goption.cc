@@ -4,9 +4,6 @@
 // c++
 #include <iostream>
 
-// gstrings
-#include "gstring.h"
-using namespace gstring;
 
 // if an option is defined with default values, it will be passed to jUserValues
 // users "reset" default values in the jcard or command lines

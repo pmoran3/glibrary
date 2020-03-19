@@ -1,6 +1,10 @@
 #ifndef  GOPTIONS_H
 #define  GOPTIONS_H  1
 
+// gstrings
+#include "gstring.h"
+using namespace gstring;
+
 // doxygen
 #include "doxy.h"
 
@@ -12,6 +16,7 @@
 using namespace nlohmann;
 
 // c++
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -98,7 +103,16 @@ private:
 public:
     void printSettings(bool withDefaults);
     void writeSettingsToJsonFile();
-    vector<json> operator[](string name) {return jOptions[findOption(name)].getOptions();}
+    vector<json> operator[](string name) {
+		 long optionIndex = findOption(name);
+		 if ( optionIndex != -1 ) {
+			 return jOptions[optionIndex].getOptions();
+		 } else {
+			 cerr << FATALERRORL << " Option " << name << " not found. Exiting. " << endl;
+			 exit(EXIT_FAILURE);
+
+		 }
+	 }
     
 };
 
