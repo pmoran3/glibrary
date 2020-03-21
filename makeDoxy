@@ -10,7 +10,7 @@ echo " Doxygen version: "$(doxygen --version)
 echo " "
 ddir='doxygen'
 
-libraries='goptions gstring gfactory gtouchable'
+libraries='goptions gstring gfactory gtouchable ghit'
 
 if [ -d $ddir ]
 then

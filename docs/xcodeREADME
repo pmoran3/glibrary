@@ -107,12 +107,14 @@ Order of projects
 
 1. gstring
 2. goptions
+3. gfactory
+4. gtouchable
+5. ghit
+
+
 3. textProgressBar
 4. translationTable
 4. gdata
-5. gtouchable
-6. ghit
-7. gFactory
 8. gDynamic
 9. gSplash
 10. gvolume

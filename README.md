@@ -8,6 +8,7 @@ A collection of various utility libraries for gemc
 * goptions: command line and JSON options handler
 * gfactory: dynamically loader of classes from shared object
 * gtouchable: definition of an abstract touchable
+* ghit: definition of the gemc hit
 
 ---
 
