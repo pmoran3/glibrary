@@ -19,37 +19,37 @@ struct GIdentifier {
 private:
 	string idName;
 	int idValue;
-
+	
 	///< Logs GIdentifier on screen
 	friend ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
 		stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
 		return stream;
 	}
-
+	
 public:
 	// default constructor
 	GIdentifier() = default;
-
+	
 	// constructor
 	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
-
+	
 	//  Overloaded "!=": comparing just the values
 	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
-
-
+	
+	
 };
 
 class GTouchable
 {
 	
 public:
-	GTouchable(GType t, vector<GIdentifier> identity, bool v = 0) :
-    gIdentity{identity},
+	GTouchable(GType t, vector<GIdentifier> identity, bool verb = 0) :
+	gIdentity{identity},
 	gType{t},
 	trackId{0},
 	eMultiplier{1},
 	gridTimeIndex{0},
-	verbosity{v} {}
+	verbosity{verb} {}
 	
 public:
 	double getEnergyMultiplier() {return eMultiplier;}
@@ -77,9 +77,9 @@ private:
 	vector<double> userInformations;
 	
 	bool verbosity;
-
+	
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
-
+	
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
 	void placeInTimeWindow(double time, double timeWindow) {gridTimeIndex = time/timeWindow;}
