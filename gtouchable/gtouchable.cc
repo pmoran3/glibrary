@@ -1,9 +1,3 @@
-// doxygen
-#include "doxy.h"
-
-// conventions
-#include "conventions.h"
-
 // gtouchable
 #include "gtouchable.h"
 

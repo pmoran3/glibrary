@@ -1,9 +1,3 @@
-// doxygen
-#include "doxy.h"
-
-// conventions
-#include "conventions.h"
-
 // ghit
 #include "ghit.h"
 

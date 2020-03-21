@@ -1,6 +1,13 @@
 #ifndef  GTOUCHABLE_H
 #define  GTOUCHABLE_H 1
 
+// doxygen
+#include "doxy.h"
+
+// conventions
+#include "conventions.h"
+
+
 // c++
 #include <vector>
 #include <string>
@@ -19,24 +26,24 @@ struct GIdentifier {
 private:
 	string idName;
 	int idValue;
-	
+
 	///< Logs GIdentifier on screen
 	friend ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
 		stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
 		return stream;
 	}
-	
+
 public:
 	// default constructor
 	GIdentifier() = default;
-	
+
 	// constructor
 	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
-	
+
 	//  Overloaded "!=": comparing just the values
 	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
-	
-	
+
+
 };
 
 class GTouchable
@@ -77,9 +84,9 @@ private:
 	vector<double> userInformations;
 	
 	bool verbosity;
-	
+
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
-	
+
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
 	void placeInTimeWindow(double time, double timeWindow) {gridTimeIndex = time/timeWindow;}

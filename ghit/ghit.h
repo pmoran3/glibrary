@@ -3,6 +3,13 @@
 
 // This example is based on B4cCalorHit in  basic/B4/B4c
 
+// doxygen
+#include "doxy.h"
+
+// conventions
+#include "conventions.h"
+
+
 // geant4
 #include "G4VHit.hh"
 #include "G4THitsCollection.hh"
