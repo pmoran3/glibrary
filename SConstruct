@@ -7,7 +7,7 @@ from init_env import init_environment
 
 # each library has also an SConstruct to build the example
 
-env = init_environment("glibrary clhep")
+env = init_environment("glibrary clhep geant4")
 
 env.Append(CXXFLAGS=['-std=c++17'])
 

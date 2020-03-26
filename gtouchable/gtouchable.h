@@ -2,10 +2,10 @@
 #define  GTOUCHABLE_H 1
 
 // doxygen
-#include "doxy.h"
+#include "gtouchableDoxy.h"
 
 // conventions
-#include "conventions.h"
+#include "gtouchableConventions.h"
 
 
 // c++

@@ -6,10 +6,10 @@
 using namespace gstring;
 
 // doxygen
-#include "doxy.h"
+#include "goptionsDoxy.h"
 
 // conventions
-#include "conventions.h"
+#include "goptionsConventions.h"
 
 // json parser
 #include "json.hpp"

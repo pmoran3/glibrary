@@ -2,7 +2,7 @@
 #define  GOBSERVABLES_H  1
 
 // gdata
-#include "conventions.h"
+#include "gdataConventions.h"
 
 // c++
 #include <vector>

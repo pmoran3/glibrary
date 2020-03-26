@@ -4,7 +4,7 @@ Import('env')
 
 sources = Split("""
 	gdata.cc
-	observables/gobservables.cc
+	gobservables/gobservables.cc
 	""")
 
 # destination library is one dir up

@@ -5,12 +5,9 @@ ln -s libdodgeFactory.dylib dodgeFactory.gplugin
 
 
 
-provide time spent by each plugin?
 
-provide message is symbol cannot be loaded
-
-
-
-// GDL: add verbosity option?
-// add error if DL is not found, with msg
-// add mutex so we can use verbosity cout? see http://en.cppreference.com/w/cpp/memory/shared_ptr
+- provide time spent by each plugin?
+- provide message is symbol cannot be loaded
+- GDL: add verbosity option?
+- add error if DL is not found, with msg
+- add mutex so we can use verbosity cout? see http://en.cppreference.com/w/cpp/memory/shared_ptr

@@ -2,10 +2,10 @@
 #define  GDATA_H  1
 
 // doxygen
-#include "doxy.h"
+#include "gdataDoxy.h"
 
 // conventions
-#include "conventions.h"
+#include "gdataConventions.h"
 
 
 // gdata

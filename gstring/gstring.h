@@ -2,10 +2,10 @@
 #define  GSTRING_H  1
 
 // doxygen
-#include "doxy.h"
+#include "gstringDoxy.h"
 
 // conventions
-#include "conventions.h"
+#include "gstringConventions.h"
 
 // c++
 #include <vector>
