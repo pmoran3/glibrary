@@ -8,12 +8,12 @@
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
 G4ThreadLocal G4Allocator<GHit>* GHitAllocator = 0;
 
-GHit::GHit(GTouchable *gt, const G4Step* thisStep, bitset<NHITBITS> hbs, string cScheme) : G4VHit(),
+GHit::GHit(GTouchable *gt, const G4Step* thisStep, HitBitSet hbs, string cScheme) : G4VHit(),
 gTouchable{gt}, hitBitSet{hbs}, colorSchema{cScheme}
 {
-	// build hit information based on the hit
+	// build hit information based on the hitBitSet
 	for(size_t hbIndex = 0; hbIndex < hitBitSet.size(); hbIndex++) {
-		buildHitInfos(hbIndex, hitBitSet.test(hbIndex), thisStep);
+		buildHitInfosForBit(hbIndex, hitBitSet.test(hbIndex), thisStep);
 	}
 }
 

@@ -1,7 +1,7 @@
 // ghit
 #include "ghit.h"
 
-bool GHit::buildHitInfos(size_t bitIndex, bool test, const G4Step* thisStep)
+bool GHit::buildHitInfosForBit(size_t bitIndex, bool test, const G4Step* thisStep)
 {
     // nothing to do
     if(!test) return false;

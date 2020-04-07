@@ -20,14 +20,9 @@
 // glibrary
 #include "gtouchable.h"
 
-// c++
-#include <bitset>
 
-// number of bits to define a hit.
-// it is defined here because both gdynamic and ghit requires it
-#define NHITBITS 6
-
-// GHIT Bitset:
+// GHIT Bitset.
+// Setting a bit will call the corresponding code in buildHitInfos
 //
 // 1st bit: energy deposited, time
 // 2nd bit: global position, step length
@@ -40,7 +35,7 @@
 class GHit : public G4VHit
 {
 public:
-	GHit(GTouchable *gt, const G4Step* thisStep, bitset<NHITBITS> hbs, string colorSchema = "default");
+	GHit(GTouchable *gt, const G4Step* thisStep, HitBitSet hbs, string colorSchema = "default");
 
 	virtual ~GHit();
 
@@ -57,14 +52,14 @@ private:
 
 	GTouchable *gTouchable;
 
-	bitset<NHITBITS> hitBitSet;
+	HitBitSet hitBitSet;
 
 	// only used if pVVisManager exist (interactive mode)
 	string colorSchema;
 
 private:
 	bool setColorSchema();
-	bool buildHitInfos(size_t bitIndex, bool test, const G4Step* thisStep); // build hit information based on the hit
+	bool buildHitInfosForBit(size_t bitIndex, bool test, const G4Step* thisStep); // build hit information based on the hit
 
 	// hit data is collected for every step
 	vector<double> stepEdep, stepTime;   // bit 1
