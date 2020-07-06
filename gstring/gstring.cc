@@ -4,7 +4,7 @@
 // c++
 #include <sstream>
 
-//! Trims Both leading and trailing spaces
+//! Trim Both leading and trailing spaces
 string gstring::trimSpacesFromString(string in)
 {
 	string out;
@@ -21,8 +21,13 @@ string gstring::trimSpacesFromString(string in)
 	return out;
 }
 
+//! Get the filename from the path (currently only posix)
+string gstring::getFileFromPath(string path)
+{
+	return path.substr(path.find_last_of("/") + 1);
+}
 
-//! returns a vector of strings from a stringstream, space is delimeter
+//! Return a vector of strings from a stringstream, space is delimeter
 vector<string> gstring::getStringVectorFromString(string input)
 {
 	vector<string> pvalues;
@@ -61,7 +66,7 @@ string gstring::replaceCharInStringWithChars(string input, string toReplace, str
 	return output;
 }
 
-// Replace all occurences of a a string with a string
+//! Replace all occurences of a a string with a string
 string gstring::replaceAllStringsWithString(string source, const string from, const string to)
 {
 	string newString;
@@ -82,6 +87,8 @@ string gstring::replaceAllStringsWithString(string source, const string from, co
 	return newString;
 }
 
+
+//! Fill a string with the string c to be ndigits long
 string gstring::fillDigits(string word, string c, int ndigits)
 {
 	string filled;
