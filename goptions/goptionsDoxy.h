@@ -5,12 +5,12 @@
 /// The framework provides command line and parsing of user
 /// defined options in JSON formats.\n\n
 /// The command line options have the format:\n
-/// <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4, 20, 180; }  </pre>
+/// <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4*GeV, 20*deg, 180*deg; }  </pre>
 /// The corresponding <b>JSON</b> syntax is:\n
 /// <pre>
 /// "beam": {
 /// 	"vertex": "0, 0, -3, cm",
-/// 	"value": "electron, 4, 20, 180"
+/// 	"value": "electron, 4*GeV, 20*deg, 180*deg"
 /// }
 /// </pre>\n
 ///
