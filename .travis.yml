@@ -1,8 +1,8 @@
 language: sh
 
-# latest ubuntu
+# latest distribution
 # https://docs.travis-ci.com/user/reference/overview/
-dist: bionic
+dist: focal
 
 # just main branch
 branches:
@@ -18,7 +18,8 @@ addons:
 
 # script to execute
 script:
- - ./makeDoxy
+ - ./makeDoxy.sh
+ - ./testLibraries.sh
 
 # Generate and deploy documentation
 #

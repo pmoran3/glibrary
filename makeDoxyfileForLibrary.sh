@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Purpose: creates a doxyfile the template doxyfile
-# (later: directly from the doxygen -g command to get the latest doxygen goodies)
+# Purpose: creates a doxyfile for a specific library, based on the template doxyfile
+# (later: directly from the doxygen -g command to get the latest doxygen goodies?)
 #
-# Arguments: exactly one argument, the name of the new library
+# Arguments: exactly one argument, the name of the library
 
 if [ "$#" -ne 1 ]; then
 	echo " "       >&2
@@ -46,6 +46,7 @@ done
 echo
 echo " Copying mylayout.css to "$library
 if [ $library != "gemc" ]; then
+	# adding moc, html to exclde patters
 	sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g'    Doxyfile
 	cp docs/mylayout.css $library/
 	cp Doxyfile $library/

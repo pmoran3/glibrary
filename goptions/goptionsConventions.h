@@ -24,7 +24,7 @@
 #define GVERBOSITY_ALL_D     " ・ 3: max verbosity\n"
 
 
-// to be filled by libraries utilizing goptions
+// template to be filled by libraries utilizing goptions
 namespace goptions {
 
 }

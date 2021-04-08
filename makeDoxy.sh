@@ -24,8 +24,8 @@ ls -l
 echo " "
 for l in $libraries
 do
-	./createDoxyfile 
-	./makeDoxyfileForLibrary $l
+	./createDoxyfile.sh
+	./makeDoxyfileForLibrary.sh $l
 	cd $l
 	doxygen Doxyfile 
 	mv html ../$ddir/$l
