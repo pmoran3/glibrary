@@ -37,7 +37,6 @@ namespace goptions {
 #include "json.hpp"
 using namespace nlohmann;
 
-
 // example of parsing one jcard and reading a variable
 int main(int argc, char* argv[])
 {

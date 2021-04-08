@@ -27,10 +27,20 @@
 /// <pre> map<string, GOption></pre>
 /// by calling the GOptions constructor:
 /// <pre> GOptions(argc, argv, defineOptions(), <ignore>)</pre>
-///
-/// \param defineOptions() is a function returning a map<string, GOption>
-/// \param ignore (int, optional): set to 1 to ignore options not found.
-///
+
+
+/**
+ * @details Constructor
+ * \param name option title
+ * \param description summary description. This is used in the search.
+ * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
+ * \param groupable if an option belongs to a group, options can be collected by using -add-<name>
+ * \param help here we can put the full description of the option.
+ * Example: { "tag": "tagname", "description": "tag description", "default": default value}
+ */
+
+
+
 /// Check the example below to see how to define a few GOptions
 ///
 /// \section Libraries JSON parser

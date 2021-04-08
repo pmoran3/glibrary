@@ -4,7 +4,7 @@
 /// \section Overview
 /// The framework provides command line and parsing of user
 /// defined options in JSON formats.\n\n
-/// The <b>command line</b> options have the format:\n
+/// and the <b>command line</b> options look like:\n
 /// <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4*GeV, 20*deg, 180*deg; }  </pre>
 /// The corresponding <b>JSON</b> syntax is:\n
 /// <pre>
@@ -16,10 +16,10 @@
 ///
 /// \section Main Main Features:
 /// \n
-/// * Command line, JSON file (.jcard extension)
+/// * Interchangeable options command line /steering card (JSON file with .jcard extension).
 /// * JSON, HTML output for documentation
-/// * Can import a JSON file within another JSON file
-/// * Options can be added from external libraries / executables.
+/// * Can import a steering card within another one
+/// * Options can be added to an existing framework / executable from an external libraries / executables.
 ///
 /// \n
 ///
@@ -32,12 +32,6 @@
 /// \param ignore (int, optional): set to 1 to ignore options not found.
 ///
 /// Check the example below to see how to define a few GOptions.
-///
-/// \section Libraries JSON
-///
-/// The JSON parser used is https://github.com/nlohmann/json. It's included as a single hpp.\n
-///
-/// A json validator can be found here: https://codebeautify.org/jsonvalidator
 ///
 /// \section example
 /// An example of defineOptions() that creates two categories is in example.cc: \include example.cc
@@ -56,5 +50,11 @@
 ///   -help-time...........:  time related options
 ///
 /// ~~~~
+/// \section Libraries JSON
+///
+/// The JSON parser used is https://github.com/nlohmann/json. It's included as a single hpp.\n
+///
+/// A json validator can be found here: https://codebeautify.org/jsonvalidator
+///
 #endif
 

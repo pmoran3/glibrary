@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Purpose: creates a doxyfile for a specific library, based on the template doxyfile
-# (later: directly from the doxygen -g command to get the latest doxygen goodies?)
+# Purpose: creates a doxyfile for a specific library, based on a doxyfile created with doxygen -g
 #
 # Arguments: exactly one argument, the name of the library
 

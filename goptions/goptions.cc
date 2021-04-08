@@ -169,7 +169,6 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 // return -1 if GOption is not found
 long GOptions::findOption(string name)
 {
-
 	for (auto it = jOptions.begin(); it != jOptions.end(); it++) {
 		if (it->getName() == name) {
 			return distance(jOptions.begin(), it);

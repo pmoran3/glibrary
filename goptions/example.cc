@@ -72,13 +72,13 @@ vector<GOption> defineOptions()
 	json variationTag = {
 		{JSONTAGNAME, "variation"},
 		{JSONTAGDESC, "detector variation."},
-		{JSONTAGDFLT, "default"}
+		{JSONTAGDFLT, "spring2019"}
 	};
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
-    string help = "help example";
-    
+	string help = "help example";
+
 	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, help, true));
 
 	// run option

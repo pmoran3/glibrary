@@ -6,13 +6,19 @@
 
 
 // if an option is defined with default values, it will be passed to jUserValues
-// users "reset" default values in the jcard or command lines
-// be default, the verbosity is set to 1
-GOption::GOption(string n, string d, json j, string h, bool g): name{n}, description{d}, joptionDefinition{j}, groupable{g}, help{h}, verbosity{1}
+// users reset default values in the jcard or command lines
+GOption::GOption(string n, string d, json j, bool g, string h):
+name{n},
+description{d},
+joptionDefinition{j},
+groupable{g},
+help{h},
+verbosity{1}
 {
 	// assigning non structured option with default values
 	if (! joptionDefinition.begin().value().is_structured()) {
 		json jValue;
+		// what if joptionDefinition[JSONTAGNAME] does not exist?
 		string jKey  = joptionDefinition[JSONTAGNAME];
 		jValue[jKey] = joptionDefinition[JSONTAGDFLT];
 		jUserValues.push_back(jValue);
@@ -39,6 +45,7 @@ GOption::GOption(string n, string d, json j, string h, bool g): name{n}, descrip
 		string optionKey        = definitionJsonValue[JSONTAGNAME];
 		newUserValue[optionKey] = definitionJsonValue[JSONTAGDFLT];
 	}
+	
 	jUserValues.push_back(newUserValue);
 }
 
@@ -57,7 +64,9 @@ bool GOption::parseJsons(string userJsonKey, json userJsons, bool isAddition, in
 {
 	// clear jValues if add- is not found
 	if (!isAddition && jUserValues.size() > 0 ) {
-		if (gverbosity) { cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl; }
+		if (gverbosity) {
+			cout << GWARNING << " No add directive for a groupable option. Resetting option: clearing jValues. " << endl;
+		}
 		jUserValues.clear();
 	}
 	

@@ -7,6 +7,7 @@
 echo " "
 echo " Creating Doxyfile "
 doxygen -g &> /dev/null
+echo " "
 
 cp Doxyfile DoxyfilePure
 
@@ -34,7 +35,7 @@ sed -i $extraArgument 's/RECURSIVE              = NO/RECURSIVE              = YE
 sed -i $extraArgument 's/HTML_COLORSTYLE_HUE    = 220/HTML_COLORSTYLE_HUE    = 200/g'                              Doxyfile
 sed -i $extraArgument 's/HTML_COLORSTYLE_SAT    = 100/HTML_COLORSTYLE_SAT    = 240/g'                              Doxyfile
 sed -i $extraArgument 's/HTML_COLORSTYLE_GAMMA  = 80/HTML_COLORSTYLE_GAMMA  = 190/g'                               Doxyfile
-sed -i $extraArgument 's/HTML_DYNAMIC_MENUS     = YES/HTML_DYNAMIC_MENUS     = NO/g'                               Doxyfile
+sed -i $extraArgument 's/HTML_DYNAMIC_MENUS     = YES/HTML_DYNAMIC_MENUS     = YES/g'                               Doxyfile
 sed -i $extraArgument 's/HTML_EXTRA_STYLESHEET  =/HTML_EXTRA_STYLESHEET  = mylayout.css/g'                         Doxyfile
 sed -i $extraArgument 's/GENERATE_TREEVIEW      = NO/GENERATE_TREEVIEW      = YES/g'                               Doxyfile
 sed -i $extraArgument 's/FORMULA_FONTSIZE       = 10/FORMULA_FONTSIZE       = 14/g'                                Doxyfile

@@ -1,5 +1,6 @@
 - help mechanism
-- verbosity mechanism
+- verbosity mechanism: add default in the constructor? Seems confusing right now
 - search mechanism, through names and descriptions
+- add EXIT codes
 
 
