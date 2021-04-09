@@ -9,9 +9,20 @@ echo " "
 echo " >> GLIBRARY Tests"
 echo " "
 
-libraries='goptions'
+# installing modules, scons and glibrary
+git clone https://github.com/gemc/gmodules.git
+cd gmodules
+./installModules.sh scons
+./installModules.sh glibrary
 
-for l in $libraries
+# compile glibrary
+
+
+
+# run additional tests
+librariesWithTests='goptions'
+
+for l in $librariesWithTests
 do
 	cd $l
 	./runTests.sh
