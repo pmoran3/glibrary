@@ -16,10 +16,11 @@ addons:
       - doxygen
       - graphviz
       - zsh
+      - environment-modules
 
-# script to execute
+# scripts to execute
 script:
- - ./makeDoxy.sh
+ #- ./makeDoxy.sh
  - ./testLibraries.sh
 
 # Generate and deploy documentation
