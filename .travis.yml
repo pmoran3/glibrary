@@ -15,6 +15,7 @@ addons:
     packages:
       - doxygen
       - graphviz
+      - zsh
 
 # script to execute
 script:
