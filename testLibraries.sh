@@ -9,6 +9,9 @@ echo " "
 echo " >> GLIBRARY Tests"
 echo " "
 
+export JLAB_ROOT=.
+export JLAB_VERSION=2.4
+
 # installing modules, scons and glibrary
 git clone https://github.com/gemc/gmodules.git
 cd gmodules
