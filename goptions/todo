@@ -1,3 +1,4 @@
+- command line parsing is missing
 - help mechanism
 - verbosity mechanism: add default in the constructor? Seems confusing right now
 - search mechanism, through names and descriptions

@@ -21,13 +21,12 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	// parsing json can throw
 	// returns all jsons objects pointed by the base and imported jcards
 	try {
-		vector<json> allUserJsons = retrieveUserJsons(jcardFilename);
+		vector<json> allUserJsons = retrieveUserJsonsFromJCard(jcardFilename);
 		parseJCards(allUserJsons);
 	}
 	catch (exception& e) {
 		string thisException = e.what();
         
-
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
 			cerr << FATALERRORL << " parsing " << jcardFilename
@@ -60,8 +59,8 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 	}
 
 	// relooping as this returns
-	// finds gcard file as one of the argument
-	// extension is .gcard
+	// finds jcard file as one of the argument
+	// extension is .jcard
 	for(int i=1; i<argc; i++) {
 		string arg = argv[i];
 
@@ -72,12 +71,13 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 	if (gverbosity > 0) {
 		cout << endl << GWARNING << " no jcard found." << endl << endl;
 	}
+
 	return "na";
 }
 
 
-// Outputs a vector of json objects of the base jcard plus all imported jcards
-vector<json> GOptions::retrieveUserJsons(string jcardFilename)
+// returns a vector of json objects of the base jcard plus all imported jcards
+vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
 {
 	vector<json> userJsons;
 
@@ -88,6 +88,7 @@ vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 
 	// base jcard
 	// removing '#' from "base" (command line) jcard
+	// function is defined in gstrings
 	string basePureJsonString = parseFileAndRemoveComments(jcardFilename);
 
 	// building json object from base jcard
@@ -109,6 +110,7 @@ vector<json> GOptions::retrieveUserJsons(string jcardFilename)
 			}
 		}
 	}
+
 	// appending the base jcard json at the end:
 	// all imports should be declared at the top of the jcard thus they come before the base settings
 	userJsons.push_back(baseJson);
@@ -137,14 +139,14 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 			// match userJsonKey to a jOptions
 			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
 
-			// true if add- was found
+			// true if add- was found (no replacement in string)S
 			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
 
 			// GOption index, -1 if not found
-			long userJsonOptionIndex = findOption(userJsonKeyRoot);
+			long userJsonOptionDefinitionIndex = findOption(userJsonKeyRoot);
 
 			// if GOption was found
-			if (userJsonOptionIndex != -1) {
+			if (userJsonOptionDefinitionIndex != -1) {
 
 				if (gverbosity) {
 					string isAnAdditionString = "";
@@ -154,11 +156,12 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
 				}
 
-				jOptions.at(userJsonOptionIndex).parseJsons(userJsonKey, userJsonValue, isAnAddition, gverbosity);
+				jOptions.at(userJsonOptionDefinitionIndex).parseJsons(userJsonKey, userJsonValue, isAnAddition, gverbosity);
 
 				// if GOption was not found (findOption returned -1)
 			} else {
-				cout << GWARNING << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system." << endl;
+				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. Exiting" << endl;
+				exit(NOOPTIONFOUND);
 			}
 		}
 	}

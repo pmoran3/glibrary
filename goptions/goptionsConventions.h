@@ -1,15 +1,12 @@
 #ifndef  GOPTIONS_CONVENTIONS_H
 #define  GOPTIONS_CONVENTIONS_H  1
 
-// JSON TAGS
-#define JSONTAGNAME  "jsonTagName"
-#define JSONTAGDESC  "jsonTagDescription"
-#define JSONTAGDFLT  "jsonTagDefault"
+//  TAGS
+#define GNAME  "JsonTagGNAME"
+#define GDESC  "JsonTagGDESCription"
+#define GDFLT  "jsonTagDefault"
 #define IMPORTSTRING "importJcards"
-
-// Standard string throughout goptions
-#define NODEFAULT    "noDefault"
-//#define FILENOTFOUND "fileNotFound"
+#define NODFLT "NODFLT"
 
 //// standardizing verbosity
 //#define GVERBOSITY_SILENT  0
@@ -23,7 +20,9 @@
 //#define GVERBOSITY_DETAILS_D " ・ 2: detailed information\n"
 //#define GVERBOSITY_ALL_D     " ・ 3: max verbosity\n"
 
-// exit codes
+// exit codes: 100s
+#define NOOPTIONFOUND            101
+#define MANDATORYOPTIONNOTFOUND  102
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {

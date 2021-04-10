@@ -19,7 +19,7 @@
 /// * Goptions can be dynamically added to an executable by a framework or plugin
 /// * Superposition of  command line / steering card (JSON file with .jcard extension)
 /// * JSON, HTML output for documentation
-/// * Can import a steering card within another one
+/// * Can import a jcard within another one (imports should be declared at the top of the jcard)
 ///
 /// \n
 ///

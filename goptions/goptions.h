@@ -41,9 +41,6 @@ private:
 	// multiple lines are defined by using "\n"
 	const string help;
 
-	// verbosity as defined in conventions. Defaulted at 1.
-	int verbosity;
-
 	// the option instance, validated against the definition
 	// if some tags are not set, they will be set to the joptionDefinition default
 	// if an option is defined with default values, it will be passed to jValues
@@ -93,7 +90,7 @@ public:
 class GOptions
 {
 public:
-	// constructor using the definitions
+	// constructor using the GOption array vector<GOption>
 	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);
 
 private:
@@ -107,7 +104,7 @@ private:
 	// jcards parsing utilities
 	string setVerbosityAndFindBaseJCard(int argc, char *argv[]);  // set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
 
-	vector<json> retrieveUserJsons(string jcardFilename);         // returns all jsons objects pointed by the base and imported jcards
+	vector<json> retrieveUserJsonsFromJCard(string jcardFilename);         // returns all jsons objects pointed by the base and imported jcards
 
 	void parseJCards(vector<json> allUserJsons);                  // parse the jcard in the GOptions array
 
