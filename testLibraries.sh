@@ -20,6 +20,10 @@ cd gmodules
 cd ..
 
 # compile glibrary
+moduleFile=$(./gmodules/modulefilelocation.py)
+echo aaa $moduleFile
+ls $moduleFile
+source $moduleFile
 module use $JLAB_ROOT/$JLAB_VERSION/modules
 module load glibrary
 
