@@ -1,0 +1,19 @@
+{
+	# simple example with 3 options:
+	#
+	# runno and useGui are non structured options
+	# particle is a structured option with
+
+	"runno":  11,
+	"useGui": 0,
+	"particle": [
+		{
+			"pid": "proton",
+
+			"p": "2*GeV",
+			"theta": "10*deg",
+			"phi": "280*deg",
+		}
+	]
+
+}

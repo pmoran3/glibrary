@@ -25,7 +25,7 @@ help{h}
 		return;
 	}
 	
-	// skipping structured options if the tag has GDFLT = NODFLT (constructor will return w/o push_back
+	// skipping structured options if the tag has GDFLT = NODFLT (constructor will return w/o push_back)
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 		
 		if ( definitionJsonValue[GDFLT] == NODFLT ) {
@@ -35,7 +35,7 @@ help{h}
 	}
 	
 	// we didn't return from the loop above:
-	// all tags have a default value. Building the json value.
+	// all tags have a default value. Building the default json value.
 	// assigning structured option with default values
 	json newUserValue;
 	

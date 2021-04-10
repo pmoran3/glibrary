@@ -14,7 +14,6 @@ env.Append(LIBS = 'goptions')
 lib = SConscript('SConscript', exports='env')
 
 # builds the example
-example  = env.Program(source = "example.cc",     target = "example")
-exampleJ = env.Program(source = "jsonExample.cc", target = "jsonExample")
+example1  = env.Program(source = "examples/simpleExample.cc",     target = "simpleExample")
 
 Depends(example,  lib);

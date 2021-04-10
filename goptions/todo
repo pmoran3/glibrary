@@ -1,3 +1,4 @@
+- remove name, description from constructor, use the json definition instead for the non structured option (overload function)
 - command line parsing is missing
 - help mechanism
 - verbosity mechanism: add default in the constructor? Seems confusing right now
