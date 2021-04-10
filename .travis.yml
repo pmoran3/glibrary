@@ -1,3 +1,5 @@
+# Token reminder: github > settings > developer > generate > copy on clipoard
+# On travis: assign the clipboard to GH_REPO_TOKEN
 language: sh
 
 # latest distribution
@@ -20,7 +22,7 @@ addons:
 
 # scripts to execute
 script:
- #- ./makeDoxy.sh
+ - ./makeDoxy.sh
  - ./testLibraries.sh
 
 # Generate and deploy documentation

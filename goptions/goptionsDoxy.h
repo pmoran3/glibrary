@@ -16,10 +16,10 @@
 ///
 /// \section Main Main Features:
 /// \n
-/// * Interchangeable options command line /steering card (JSON file with .jcard extension).
+/// * Goptions can be dynamically added to an executable by a framework or plugin
+/// * Superposition of  command line / steering card (JSON file with .jcard extension)
 /// * JSON, HTML output for documentation
 /// * Can import a steering card within another one
-/// * Options can be added to an existing framework / executable from an external libraries / executables.
 ///
 /// \n
 ///

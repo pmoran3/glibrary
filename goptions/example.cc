@@ -58,7 +58,7 @@ vector<GOption> defineOptions()
 	vector<GOption> goptions;
 
 	// detector option
-	// groupable
+	// groupable: can use -add
 	json jdetectorTag = {
 		{JSONTAGNAME, "detector"},
 		{JSONTAGDESC, "detector system name. For TEXT factories, it includes the path to the file."},
@@ -77,9 +77,7 @@ vector<GOption> defineOptions()
 
 	json jDetOptionDefinitions = { jdetectorTag, factoryTag, variationTag};
 
-	string help = "help example";
-
-	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, help, true));
+	goptions.push_back(GOption("detector", "detector option", jDetOptionDefinitions, true, "help example"));
 
 	// run option
 	// not groupable
