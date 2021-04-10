@@ -24,7 +24,10 @@ cd gmodules
 
 # run additional tests
 librariesWithTests='goptions'
-
+echo aaa
+pwd
+ls -alp
+echo aaa
 for l in $librariesWithTests
 do
 	cd $l
