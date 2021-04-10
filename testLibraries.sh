@@ -9,7 +9,7 @@ echo " "
 echo " >> GLIBRARY Tests"
 echo " "
 
-export JLAB_ROOT=.
+export JLAB_ROOT=/home/travis
 export JLAB_VERSION=2.4
 
 # installing modules, scons and glibrary
@@ -20,15 +20,12 @@ cd gmodules
 cd ..
 
 # compile glibrary
-
+module use $JLAB_ROOT/$JLAB_VERSION/modules
+module load glibrary
 
 
 # run additional tests
 librariesWithTests='goptions'
-echo aaa
-pwd
-ls -alp
-echo aaa
 for l in $librariesWithTests
 do
 	cd $l
