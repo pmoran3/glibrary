@@ -17,6 +17,7 @@ git clone https://github.com/gemc/gmodules.git
 cd gmodules
 ./installModules.sh scons
 ./installModules.sh glibrary
+cd ..
 
 # compile glibrary
 
