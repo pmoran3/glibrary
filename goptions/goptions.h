@@ -21,7 +21,10 @@ using namespace nlohmann;
 using namespace std;
 
 /**
- * The class is used to translate a command line an entry in a JSON file into a vector<json> jUserValues
+ * The class is used to:
+ * * define an option
+ * * assig option values from entry in a JSON file
+ * * assig option values from an entry in a command line
  */
 class GOption
 {
@@ -31,15 +34,15 @@ private:
 	const string description;  // summary description. This is used in the search.
 
 	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
-	// { "tag": "tagname", "description": "tag description", "default": default value}
+	// Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
 	const json joptionDefinition;
-
-	// if an option belongs to a group, options can be collected by using -add-<name>
-	const bool groupable;
 
 	// help: here we can put the full description of the option.
 	// multiple lines are defined by using "\n"
 	const string help;
+
+	// if an option belongs to a group, options can be collected by using -add-<name>
+	const bool groupable;
 
 	// the option instance, validated against the definition
 	// if some tags are not set, they will be set to the joptionDefinition default
@@ -48,7 +51,7 @@ private:
 	// conditions for a valid option:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
-	vector<json> jUserValues;
+	vector<json> jOptionValues;
 
 	// check if a tag is defined
 	bool isTagDefined(string key, int verbosity);
@@ -60,25 +63,34 @@ public:
 	GOption ( const GOption & ) = default;
 
 	/**
-	 * @details Constructor
+	 * @details Constructor for simple option
+	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
+	 * \param groupable if an option belongs to a group, options can be collected by using -add-<name>
+	 * \param help here we can put the full description of the option.
+	 * Example: { GNAME: "runno", GDESC: "run number", GDFLT: 11 }
+	 */
+	GOption(json joptionDefinition, string help = "na", bool groupable = false);
+
+	/**
+	 * @details Constructor for structured option
 	 * \param name option title
 	 * \param description summary description. This is used in the search.
 	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
 	 * \param groupable if an option belongs to a group, options can be collected by using -add-<name>
 	 * \param help here we can put the full description of the option.
-	 * Example: { "tag": "tagname", "description": "tag description", "default": default value}
+	 * Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
 	 */
-	GOption(string name, string description, json joptionDefinition, bool groupable = false, string help = "na");
+	GOption(string name, string description, json joptionDefinition, string help = "na", bool groupable = false);
 
 	/// returns option name
 	string getName() const {return name;}
 
-	bool parseJsons(string key, json userJson, bool isAddition, int verbosity);
+	bool assignValuesFromJson(string key, json userJson, bool isAddition, int verbosity);
 
 	void printOption(bool withDefaults);
 
-	vector<json> getOptions() const {
-		return jUserValues;
+	vector<json> getOptionValues() const {
+		return jOptionValues;
 	}
 
 };
@@ -95,14 +107,14 @@ public:
 
 private:
 
-	// a special command line option -gverbosity=# will set this
-	int gverbosity = 0;
+	// return verbosity from options
+	int getVerbosity();
 
 	// GOption array
 	vector<GOption> jOptions;
 
 	// jcards parsing utilities
-	string setVerbosityAndFindBaseJCard(int argc, char *argv[]);  // set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
+	string findBaseJCard(int argc, char *argv[]);  // set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
 
 	vector<json> retrieveUserJsonsFromJCard(string jcardFilename);         // returns all jsons objects pointed by the base and imported jcards
 
@@ -111,6 +123,8 @@ private:
 	// search utilities
 	long findOption(string name);  // find goption from the array. return jOptions array index or -1 if not found
 
+	// options for GOptions
+	vector<GOption>  defineGOptionsOptions();
 
 public:
 
@@ -118,13 +132,14 @@ public:
 
 	void writeSettingsToJsonFile();
 
+	// retrieve option with name
 	vector<json> operator[](string name) {
 		long optionIndex = findOption(name);
 		if ( optionIndex != -1 ) {
-			return jOptions[optionIndex].getOptions();
+			return jOptions[optionIndex].getOptionValues();
 		} else {
-			cerr << FATALERRORL << " Option " << name << " not found. Exiting. " << endl;
-			exit(EXIT_FAILURE);
+			cerr << FATALERRORL << " Option " << name << " not found in jOptions vector. Exiting with (OPTIONNOTFOUNDINVECTOR). " << endl;
+			exit(OPTIONNOTFOUNDINVECTOR);
 
 		}
 	}

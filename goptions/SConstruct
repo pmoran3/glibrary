@@ -16,4 +16,4 @@ lib = SConscript('SConscript', exports='env')
 # builds the example
 example1  = env.Program(source = "examples/simpleExample.cc",     target = "simpleExample")
 
-Depends(example,  lib);
+Depends(example1,  lib);

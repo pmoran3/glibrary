@@ -5,14 +5,15 @@
 	# particle is a structured option with
 
 	"runno":  11,
-	"useGui": 0,
+	"useGui": 1,
+	"gverbosity": 2,
 	"particle": [
 		{
 			"pid": "proton",
 
 			"p": "2*GeV",
 			"theta": "10*deg",
-			"phi": "280*deg",
+			"phi": "280*deg"
 		}
 	]
 

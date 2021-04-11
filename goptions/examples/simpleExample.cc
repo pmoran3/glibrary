@@ -14,22 +14,25 @@ vector<GOption> defineOptions()
 
 	// run option
 	// not groupable
+	// no help, just description
 	json runTag = {
 		{GNAME, "runno"},
 		{GDESC, "Run number"},
 		{GDFLT, 0}
 	};
 
-	goptions.push_back(GOption("runno", "run option", runTag));
+	goptions.push_back(GOption(runTag));
 
-	// activate gui. Default = no (batch mode)
+	// useGui option
+	// not groupable
+	// no help, just description
 	json guiTag = {
 		{GNAME, "useGui"},
 		{GDESC, "Graphical User Interface. Possible Values: 0/1. Default: 0"},
 		{GDFLT, 0}
 	};
 
-	goptions.push_back(GOption("useGui", "gui option", guiTag));
+	goptions.push_back(GOption(guiTag));
 
 	return goptions;
 }
@@ -39,8 +42,12 @@ int main(int argc, char* argv[])
 {
 	GOptions *gopts = new GOptions(argc, argv, defineOptions());
 
-	// print settings w/o defaults
-	gopts->printSettings(false);
+	// print settings wiwth defaults
+	gopts->printSettings(true);
+
+
+	// get option and print it from here
+	
 
 	return EXIT_SUCCESS;
 }

@@ -1,8 +1,11 @@
-- remove name, description from constructor, use the json definition instead for the non structured option (overload function)
+- printing defaults should be part of a goption option
+- gverbosity should be part of a goption option
+
+the two aboves can be fixed
+
 - command line parsing is missing
 - help mechanism
 - verbosity mechanism: add default in the constructor? Seems confusing right now
 - search mechanism, through names and descriptions
-- add EXIT codes
 
 

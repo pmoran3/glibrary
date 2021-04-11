@@ -9,14 +9,20 @@
 using namespace gstring;
 
 // constructor:
-// - buildOptionsMap using the option definitions
+// - load user defined options, add our options
+// - assign internal option
 // - parse the base jcard plus all imported jcards
-// - parse the command line options (CLS)
-// - print user settings (variables set by users, not default)
+// - parse the command line options
+// - get our own option
 GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) : jOptions(goptionDefinitions)
 {
+	// adding our options
+	for(auto &ourOption: defineGOptionsOptions()) {
+		jOptions.push_back(ourOption);
+	}
+
 	// set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
-	string jcardFilename = setVerbosityAndFindBaseJCard(argc, argv);
+	string jcardFilename = findBaseJCard(argc, argv);
 
 	// parsing json can throw
 	// returns all jsons objects pointed by the base and imported jcards
@@ -33,10 +39,10 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
 			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
         } else {
-            cerr << FATALERRORL << " exception: " << thisException << endl;
+            cerr << FATALERRORL << " exception: " << thisException << ", exiting with (JSONPARSEERROR). " << endl;
         }
 
-		exit(EXIT_FAILURE);
+		exit(JSONPARSEERROR);
 	}
 
 	// parse command line
@@ -46,19 +52,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 
 // Finds the configuration file (jcard). Returns "na' if not found.
 // This also sets the verbosity
-string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
+string GOptions::findBaseJCard(int argc, char *argv[])
 {
-	// check if gverbosity is set
-	for(int i=1; i<argc; i++) {
-		if ( retrieveStringBetweenChars(argv[i], "-", "=") == "gverbosity" ) {
-			gverbosity = stoi(retrieveStringBetweenChars(argv[i], "=", ""));
-			if (gverbosity > 0) {
-				cout << REDPOINTITEM << "gverbosity option set to " << gverbosity << endl;
-			}
-		}
-	}
-
-	// relooping as this returns
 	// finds jcard file as one of the argument
 	// extension is .jcard
 	for(int i=1; i<argc; i++) {
@@ -67,11 +62,6 @@ string GOptions::setVerbosityAndFindBaseJCard(int argc, char *argv[])
 		size_t pos = arg.find(".jcard");
 		if(pos != string::npos) return arg;
 	}
-
-	if (gverbosity > 0) {
-		cout << endl << GWARNING << " no jcard found." << endl << endl;
-	}
-
 	return "na";
 }
 
@@ -121,6 +111,8 @@ vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
 // parse base and imported Jsons
 void GOptions::parseJCards(vector<json> allUserJsons)
 {
+	int gverbosity = getVerbosity();
+
 	// looping over all parsed jsons
 	for (auto& userJsonOption: allUserJsons) {
 
@@ -156,11 +148,11 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
 				}
 
-				jOptions.at(userJsonOptionDefinitionIndex).parseJsons(userJsonKey, userJsonValue, isAnAddition, gverbosity);
+				jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gverbosity);
 
 				// if GOption was not found (findOption returned -1)
 			} else {
-				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. Exiting" << endl;
+				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. Exiting with (NOOPTIONFOUND)." << endl;
 				exit(NOOPTIONFOUND);
 			}
 		}
@@ -185,16 +177,55 @@ long GOptions::findOption(string name)
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)
 {
-	if (!jOptions.size()) {
+	// making sure at least one option has value
+	bool canPrint = false;
+	for(auto& jOption: jOptions) {
+		if ( jOption.getOptionValues().size() ) {
+			canPrint = true;
+		}
+	}
+
+	// nothing to do.
+	if (!canPrint) {
+		cout << KGRN << " No Settings. " << RST << endl;
 		return;
 	}
 
-	cout << endl << KGRN << " User Settings: " << RST << endl << endl;;
+	cout << endl << KGRN << " User Settings: " << RST << endl << endl;
 
 	for(auto& jOption: jOptions) {
 		jOption.printOption(withDefaults);
 	}
 
 	cout << endl;
+}
+
+// options for GOption
+vector<GOption> GOptions::defineGOptionsOptions()
+{
+	vector<GOption> goptions;
+
+	// GOptions verbosity
+	json gv = {
+		{GNAME, GVERBOSITY},
+		{GDESC, "GOptions verbosity"},
+		{GDFLT, 0}
+	};
+
+	goptions.push_back(GOption(gv));
+
+
+	return goptions;
+
+}
+
+// return verbosity from options
+int GOptions::getVerbosity()
+{
+	long optionIndex = findOption(GVERBOSITY);
+	auto gvOptions = jOptions[optionIndex].getOptionValues();
+
+
+	return 1;
 }
 

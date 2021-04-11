@@ -7,6 +7,7 @@
 #define GDFLT  "jsonTagDefault"
 #define IMPORTSTRING "importJcards"
 #define NODFLT "NODFLT"
+#define GVERBOSITY "gverbosity"
 
 //// standardizing verbosity
 //#define GVERBOSITY_SILENT  0
@@ -23,6 +24,8 @@
 // exit codes: 100s
 #define NOOPTIONFOUND            101
 #define MANDATORYOPTIONNOTFOUND  102
+#define OPTIONNOTFOUNDINVECTOR   103
+#define JSONPARSEERROR           104
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {
