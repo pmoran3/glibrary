@@ -7,6 +7,7 @@
 // taken from:
 // https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal
 
+#define KBOLD  "\x1B[1m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"
 #define KYEL  "\x1B[33m"

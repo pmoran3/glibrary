@@ -20,6 +20,7 @@
 /// * Superposition of  command line / steering card (JSON file with .jcard extension)
 /// * JSON, HTML output for documentation
 /// * Can import a jcard within another one (imports should be declared at the top of the jcard)
+/// * Mechanism to project options onto user defined structure/class
 ///
 /// \n
 ///

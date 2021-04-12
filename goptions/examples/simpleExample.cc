@@ -18,7 +18,7 @@ vector<GOption> defineOptions()
 	json runTag = {
 		{GNAME, "runno"},
 		{GDESC, "Run number"},
-		{GDFLT, 0}
+		{GDFLT, 11}
 	};
 
 	goptions.push_back(GOption(runTag));
@@ -47,7 +47,9 @@ int main(int argc, char* argv[])
 
 
 	// get option and print it from here
-	
+	int runno = gopts->getInt("runno");
+
+	cout << " simpleExample runno: " << runno << endl;
 
 	return EXIT_SUCCESS;
 }

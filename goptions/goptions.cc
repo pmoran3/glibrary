@@ -21,7 +21,18 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 		jOptions.push_back(ourOption);
 	}
 
-	// set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
+	// check if gdebug is set on the command line
+	for(int i=1; i<argc; i++) {
+		if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
+			gdebug = true;
+			if (gdebug) {
+				cout << endl << REDPOINTITEM << "gdebug option set is set. " << endl;
+			}
+		}
+	}
+
+
+	// finds a configuration file (jcard). Returns "na' if not found.
 	string jcardFilename = findBaseJCard(argc, argv);
 
 	// parsing json can throw
@@ -32,17 +43,17 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	}
 	catch (exception& e) {
 		string thisException = e.what();
-        
+
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
 			cerr << FATALERRORL << " parsing " << jcardFilename
 			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
 			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
-        } else {
-            cerr << FATALERRORL << " exception: " << thisException << ", exiting with (JSONPARSEERROR). " << endl;
-        }
+		} else {
+			cerr << FATALERRORL << " exception: " << thisException << endl;
+		}
 
-		exit(JSONPARSEERROR);
+		gexit(JSONPARSEERROR);
 	}
 
 	// parse command line
@@ -111,8 +122,6 @@ vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
 // parse base and imported Jsons
 void GOptions::parseJCards(vector<json> allUserJsons)
 {
-	int gverbosity = getVerbosity();
-
 	// looping over all parsed jsons
 	for (auto& userJsonOption: allUserJsons) {
 
@@ -124,7 +133,7 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 				continue;
 			}
 
-			if (gverbosity) {
+			if (gdebug) {
 				cout << endl << GREENSQUAREITEM << "User Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue << endl;
 			}
 
@@ -135,12 +144,12 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
 
 			// GOption index, -1 if not found
-			long userJsonOptionDefinitionIndex = findOption(userJsonKeyRoot);
+			long userJsonOptionDefinitionIndex = findOptionIndex(userJsonKeyRoot);
 
 			// if GOption was found
 			if (userJsonOptionDefinitionIndex != -1) {
 
-				if (gverbosity) {
+				if (gdebug) {
 					string isAnAdditionString = "";
 					if ( isAnAddition ) {
 						isAnAdditionString = " This is an option addition.";
@@ -148,12 +157,12 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
 				}
 
-				jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gverbosity);
+				jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gdebug);
 
 				// if GOption was not found (findOption returned -1)
 			} else {
-				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. Exiting with (NOOPTIONFOUND)." << endl;
-				exit(NOOPTIONFOUND);
+				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. " << endl;
+				gexit(NOOPTIONFOUND);
 			}
 		}
 	}
@@ -161,16 +170,34 @@ void GOptions::parseJCards(vector<json> allUserJsons)
 
 
 // find GOption index from the vector<GOption>
-// return -1 if GOption is not found
-long GOptions::findOption(string name)
-{
+// error if GOption is not found
+long GOptions::findOptionIndex(string name) {
+
+	bool optionFound = false;
+
 	for (auto it = jOptions.begin(); it != jOptions.end(); it++) {
 		if (it->getName() == name) {
+			optionFound = true;
 			return distance(jOptions.begin(), it);
 		}
 	}
 
+	if ( ! optionFound ) {
+		cerr << FATALERRORL << " Option " << name << " not found in jOptions vector. ";
+		cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
+		gexit(OPTIONNOTFOUNDINVECTOR);
+	}
+
 	return -1;
+}
+
+vector<json> GOptions::getOption(string tag) {
+
+	// this will exit if no option is found
+	long optionIndex = findOptionIndex(tag);
+
+	return jOptions[optionIndex].getOptionValues();
+
 }
 
 
@@ -200,32 +227,65 @@ void GOptions::printSettings(bool withDefaults)
 	cout << endl;
 }
 
+
+
+// same as above, but look for specifically a non structured option
+// exit if the tag refers to a non structured option
+json GOptions::getNonStructuredOption(string tag) {
+
+	// will exit if not found
+	json jn = getOption(tag).front();
+
+	if ( jn.begin().value().is_structured() ) {
+		cerr << FATALERRORL << " The tag " << tag << " is part of the structured option " << jn << endl;
+		cerr << " Use structure projection to retrieve this option (see documentation at " << GOPTIONDOCUMENTATION << ")" << endl;
+		gexit(OPTIONISSTRUCTURED);
+	}
+
+	return jn;
+}
+
+
+int GOptions::getInt(string tag) {
+	// will exit if not found
+	json jn = getNonStructuredOption(tag);
+	return jn[tag].get<int>();
+}
+
+float GOptions::getFloat(string tag) {
+	// will exit if not found
+	json jn = getNonStructuredOption(tag);
+	return jn[tag].get<float>();
+}
+
+double GOptions::getDouble(string tag) {
+	// will exit if not found
+	json jn = getNonStructuredOption(tag);
+	return jn[tag].get<double>();
+}
+
+bool GOptions::getBool(string tag) {
+	// will exit if not found
+	json jn = getNonStructuredOption(tag);
+	return jn[tag].get<bool>();
+}
+
+
+
 // options for GOption
 vector<GOption> GOptions::defineGOptionsOptions()
 {
 	vector<GOption> goptions;
 
-	// GOptions verbosity
-	json gv = {
-		{GNAME, GVERBOSITY},
-		{GDESC, "GOptions verbosity"},
+	json optionsTag = {
+		{GNAME, PRINTALLOPTIONS},
+		{GDESC, "Print all available options."},
 		{GDFLT, 0}
 	};
 
-	goptions.push_back(GOption(gv));
-
+	goptions.push_back(GOption(optionsTag));
 
 	return goptions;
 
-}
-
-// return verbosity from options
-int GOptions::getVerbosity()
-{
-	long optionIndex = findOption(GVERBOSITY);
-	auto gvOptions = jOptions[optionIndex].getOptionValues();
-
-
-	return 1;
 }
 

@@ -20,6 +20,10 @@ using namespace nlohmann;
 #include <string>
 using namespace std;
 
+// exiting with error, print error on screen.
+// should this be part of a namespace ?
+void gexit(int error);
+
 /**
  * The class is used to:
  * * define an option
@@ -85,10 +89,12 @@ public:
 	/// returns option name
 	string getName() const {return name;}
 
+	/// parse user jsons options and assign jValues accordingly
 	bool assignValuesFromJson(string key, json userJson, bool isAddition, int verbosity);
 
 	void printOption(bool withDefaults);
 
+	// return the json values for this option
 	vector<json> getOptionValues() const {
 		return jOptionValues;
 	}
@@ -107,42 +113,46 @@ public:
 
 private:
 
-	// return verbosity from options
-	int getVerbosity();
+	// read directly in the command line to control option debugging
+	// an option cannot be used because the parsing is part of the debug
+	bool gdebug;
 
 	// GOption array
 	vector<GOption> jOptions;
 
 	// jcards parsing utilities
-	string findBaseJCard(int argc, char *argv[]);  // set gverbosity; finds a configuration file (jcard). Returns "na' if not found.
+	string findBaseJCard(int argc, char *argv[]);  // finds a configuration file (jcard). Returns "na' if not found.
 
-	vector<json> retrieveUserJsonsFromJCard(string jcardFilename);         // returns all jsons objects pointed by the base and imported jcards
+	vector<json> retrieveUserJsonsFromJCard(string jcardFilename);    // returns all jsons objects pointed by the base and imported jcards
 
-	void parseJCards(vector<json> allUserJsons);                  // parse the jcard in the GOptions array
+	void parseJCards(vector<json> allUserJsons);                      // parse the jcard in the GOptions array
 
 	// search utilities
-	long findOption(string name);  // find goption from the array. return jOptions array index or -1 if not found
+	long findOptionIndex(string name);  // find goption from the array. return jOptions array index or -1 if not found
 
 	// options for GOptions
 	vector<GOption>  defineGOptionsOptions();
 
+	// get option is private because the public only uses getType, or projection onto structures
+	vector<json> getOption(string tag);
+
+	// same as above, but look for specifically a non structured option
+	// exit if the tag refers to a non structured option
+	json getNonStructuredOption(string tag);
+
+
 public:
 
+	// print the settings
+	// withDefaults = true prints the options not assigned by the user
 	void printSettings(bool withDefaults);
 
-	void writeSettingsToJsonFile();
+	// return values for non structured option
+	int getInt(string tag);
+	float getFloat(string tag);
+	double getDouble(string tag);
+	bool getBool(string tag);
 
-	// retrieve option with name
-	vector<json> operator[](string name) {
-		long optionIndex = findOption(name);
-		if ( optionIndex != -1 ) {
-			return jOptions[optionIndex].getOptionValues();
-		} else {
-			cerr << FATALERRORL << " Option " << name << " not found in jOptions vector. Exiting with (OPTIONNOTFOUNDINVECTOR). " << endl;
-			exit(OPTIONNOTFOUNDINVECTOR);
-
-		}
-	}
 
 };
 

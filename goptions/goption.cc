@@ -5,6 +5,13 @@
 #include <iostream>
 
 
+// exiting with error, print error on screen.
+void gexit(int error) {
+	cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
+	exit(error);
+}
+
+
 // constructor for simple option
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
@@ -67,12 +74,12 @@ groupable{g}
 //
 // These options come ordered
 // if a groupable option didn't have the add directive, jValues is cleared
-bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAddition, int gverbosity)
+bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAddition, int gdebug)
 {
 	// clear jValues if add- is not found
 	// and the option is groupable (jUserValues.size())
 	if (!isAddition && jOptionValues.size() > 0 ) {
-		if (gverbosity) {
+		if (gdebug) {
 			cout << GWARNING << " No add directive for groupable. Resetting option: clearing jValues. " << endl;
 		}
 		jOptionValues.clear();
@@ -91,7 +98,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 			newUserValue[userJsonKey] = userJson.items().begin().value();
 			jOptionValues.push_back(newUserValue);
 			
-			if (gverbosity) {
+			if (gdebug) {
 				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJson.items().begin().value() <<  endl;
 			}
 			
@@ -100,7 +107,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 		}
 		
 		// userJsons is structured.
-		if (gverbosity) {
+		if (gdebug) {
 			cout << TGREENPOINTITEM << "Json Option " << userJson << endl;
 		}
 		
@@ -115,13 +122,13 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 
 			// checking if userJsonKey is defined
 			// exiting if the tag is not defined
-			if ( !isTagDefined(userJsonKey, gverbosity) )  {
-				cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is not known to this system. Exiting with (NOOPTIONFOUND)." << endl;
-				exit(NOOPTIONFOUND);
+			if ( !isTagDefined(userJsonKey, gdebug) )  {
+				cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is not known to this system. " << endl;
+				gexit(NOOPTIONFOUND);
 			}
 			
 			// tag is defined, can assign value
-			if (gverbosity > 1) {
+			if (gdebug > 1) {
 				cout << TTPOINTITEM << " Assingning single user key " << userJsonKey << " with single value: " << userJsonValue << endl;
 			}
 			
@@ -153,8 +160,8 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 			if(!thisTagWasFoundAndAssigned) {
 				
 				if (definitionJsonValue[GDFLT] == NODFLT) {
-					cerr << FATALERRORL << tagToCheck <<  " in " << userJson << " is marked mandatory but it's not set. Exiting. " << endl;
-					exit(MANDATORYOPTIONNOTFOUND);
+					cerr << FATALERRORL << tagToCheck <<  " in " << userJson << " is marked mandatory but it's not set." << endl;
+					gexit(MANDATORYOPTIONNOTFOUND);
 				}
 				// assigning its default value
 				newUserValue[tagToCheck] = definitionJsonValue[GDFLT];
@@ -173,7 +180,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 
 
 // checking if the key is the json object is defined
-bool GOption::isTagDefined(string key, int gverbosity) {
+bool GOption::isTagDefined(string key, int gdebug) {
 	
 	bool isDefined = false;
 	
@@ -181,12 +188,12 @@ bool GOption::isTagDefined(string key, int gverbosity) {
 		
 		// if it's a JSON object
 		string jsonTagName = definitionJsonValue[GNAME];
-		if (gverbosity > 3) {
+		if (gdebug > 3) {
 			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << GNAME << endl;
 		}
 		
 		if (key == GNAME) {
-			if (gverbosity > 1) {
+			if (gdebug > 1) {
 				cout << TTGREENARROWITEM << key << " matches " << GNAME << endl;
 			}
 			return true;
@@ -204,7 +211,7 @@ void GOption::printOption(bool withDefaults)
 		return;
 	}
 
-	// this is a single option, jValue has size 1
+	// non structured option (jValue has size 1)
 	if (jOptionValues.front().size() == 1) {
 		json onlyOption = jOptionValues.front();
 		string isDefault = "";

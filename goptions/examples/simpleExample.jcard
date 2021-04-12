@@ -4,17 +4,7 @@
 	# runno and useGui are non structured options
 	# particle is a structured option with
 
-	"runno":  11,
-	"useGui": 1,
-	"gverbosity": 2,
-	"particle": [
-		{
-			"pid": "proton",
-
-			"p": "2*GeV",
-			"theta": "10*deg",
-			"phi": "280*deg"
-		}
-	]
+	"runno":  12,
+	"useGui": 1
 
 }
