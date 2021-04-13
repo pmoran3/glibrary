@@ -264,12 +264,6 @@ double GOptions::getDouble(string tag) {
 	return jn[tag].get<double>();
 }
 
-bool GOptions::getBool(string tag) {
-	// will exit if not found
-	json jn = getNonStructuredOption(tag);
-	return jn[tag].get<bool>();
-}
-
 
 
 // options for GOption

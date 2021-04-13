@@ -32,6 +32,32 @@ void gexit(int error);
  */
 class GOption
 {
+public:
+
+	/// default copy constructor
+	GOption ( const GOption & ) = default;
+
+	/**
+	 * @details Constructor for simple option
+	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
+	 * \param help here we can put the full description of the option.
+	 * \param groupable if an option belongs to a group, options can be collected by using -add-\<name\>\n
+	 * Example: { GNAME: "runno", GDESC: "run number", GDFLT: 11 }
+	 */
+	GOption(json joptionDefinition, string help = "na", bool groupable = false);
+
+	/**
+	 * @details Constructor for structured option
+	 * \param name option title
+	 * \param description summary description. This is used in the search.
+	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
+	 * \param groupable if an option belongs to a group, options can be collected by using -add-\<name\>\n
+	 * \param help here we can put the full description of the option.
+	 * Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
+	 */
+	GOption(string name, string description, json joptionDefinition, string help = "na", bool groupable = false);
+
+
 private:
 
 	const string name;         // option name
@@ -61,36 +87,11 @@ private:
 	bool isTagDefined(string key, int verbosity);
 	bool isDefaultValue(json jValue);
 
-public:
-
-	// default copy constructor
-	GOption ( const GOption & ) = default;
-
-	/**
-	 * @details Constructor for simple option
-	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param groupable if an option belongs to a group, options can be collected by using -add-<name>
-	 * \param help here we can put the full description of the option.
-	 * Example: { GNAME: "runno", GDESC: "run number", GDFLT: 11 }
-	 */
-	GOption(json joptionDefinition, string help = "na", bool groupable = false);
-
-	/**
-	 * @details Constructor for structured option
-	 * \param name option title
-	 * \param description summary description. This is used in the search.
-	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param groupable if an option belongs to a group, options can be collected by using -add-<name>
-	 * \param help here we can put the full description of the option.
-	 * Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
-	 */
-	GOption(string name, string description, json joptionDefinition, string help = "na", bool groupable = false);
-
-	/// returns option name
+	// returns option name
 	string getName() const {return name;}
 
-	/// parse user jsons options and assign jValues accordingly
-	bool assignValuesFromJson(string key, json userJson, bool isAddition, int verbosity);
+	// parse user jsons options and assign jValues accordingly
+	bool assignValuesFromJson(string keyAssigned, json userJsonValue, bool isAddition, int verbosity);
 
 	void printOption(bool withDefaults);
 
@@ -98,6 +99,9 @@ public:
 	vector<json> getOptionValues() const {
 		return jOptionValues;
 	}
+	
+	// making goptions friend to it can access the private functions
+	friend class GOptions;
 
 };
 
@@ -108,7 +112,12 @@ public:
 class GOptions
 {
 public:
-	// constructor using the GOption array vector<GOption>
+
+	/**
+	 * @details User Constructor
+	 * \param "argc, argv" passed from "main"
+	 * \param goptionDefinitions vector of user options, usually returned by a defineOptions() function
+	 */
 	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);
 
 private:
@@ -143,15 +152,15 @@ private:
 
 public:
 
-	// print the settings
-	// withDefaults = true prints the options not assigned by the user
+	/**
+	 * @details Print Settings
+	 * \param withDefaults if true prints the options not assigned by the user
+	 */
 	void printSettings(bool withDefaults);
 
-	// return values for non structured option
-	int getInt(string tag);
-	float getFloat(string tag);
-	double getDouble(string tag);
-	bool getBool(string tag);
+	int getInt(string tag);       ///< gets the integer value associated with non structured option \"tag\"
+	float getFloat(string tag);   ///< gets the float value associated with non structured option \"tag\"
+	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
 
 
 };

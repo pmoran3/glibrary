@@ -1,5 +1,11 @@
-- printing defaults should be part of a goption option. printAllOptions?
+bool mechanism is not JSON but command line
 
+- printing defaults should be part of a goption option. printAllOptions?
+> -h, -help, --help: print this message and exit.
+> -helpToHtml:  print all available options in HTML format (options.html) and exit.
+
+
+- general debug option -debug=string
 - command line parsing is missing
 - helpa nd search mechanism, through names and descriptions
 

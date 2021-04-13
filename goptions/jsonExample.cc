@@ -1,3 +1,4 @@
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 // goptions
 #include "goptions.h"
 
@@ -67,3 +68,4 @@ int main(int argc, char* argv[])
 	return EXIT_SUCCESS;
 }
 
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */

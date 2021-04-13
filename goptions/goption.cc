@@ -74,7 +74,7 @@ groupable{g}
 //
 // These options come ordered
 // if a groupable option didn't have the add directive, jValues is cleared
-bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAddition, int gdebug)
+bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool isAddition, int gdebug)
 {
 	// clear jValues if add- is not found
 	// and the option is groupable (jUserValues.size())
@@ -86,20 +86,21 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 	}
 	
 	// looping over all user jsons
-	for(auto &userJson: userJsons) {
+	for(auto &
+		 userJsonValue: userJsonValue) {
 		
 		// building new value to add to jValues
 		json newUserValue;
 		
 		// if a simple key/value option (not is_structured) then assigning the new user value and return true
 		// the last appereance of the option is the valid one
-		if (! userJson.is_structured() ) {
+		if (! userJsonValue.is_structured() ) {
 			jOptionValues.clear();
-			newUserValue[userJsonKey] = userJson.items().begin().value();
+			newUserValue[userJsonKey] = userJsonValue.items().begin().value();
 			jOptionValues.push_back(newUserValue);
 			
 			if (gdebug) {
-				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJson.items().begin().value() <<  endl;
+				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJsonValue.items().begin().value() <<  endl;
 			}
 			
 			// done, return
@@ -108,7 +109,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 		
 		// userJsons is structured.
 		if (gdebug) {
-			cout << TGREENPOINTITEM << "Json Option " << userJson << endl;
+			cout << TGREENPOINTITEM << "Json Option Value: " << userJsonValue << endl;
 		}
 		
 		// if add- was found but option is not groupable, it's a mistake.
@@ -118,7 +119,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 		}
 		
 		// first checking that all user tags are valid entries.
-		for (auto& [userJsonKey, userJsonValue] : userJson.items()) {
+		for (auto& [userJsonKey, userJsonValue] : userJsonValue.items()) {
 
 			// checking if userJsonKey is defined
 			// exiting if the tag is not defined
@@ -160,7 +161,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsons, bool isAd
 			if(!thisTagWasFoundAndAssigned) {
 				
 				if (definitionJsonValue[GDFLT] == NODFLT) {
-					cerr << FATALERRORL << tagToCheck <<  " in " << userJson << " is marked mandatory but it's not set." << endl;
+					cerr << FATALERRORL << tagToCheck <<  " in " << userJsonValue << " is marked mandatory but it's not set." << endl;
 					gexit(MANDATORYOPTIONNOTFOUND);
 				}
 				// assigning its default value
