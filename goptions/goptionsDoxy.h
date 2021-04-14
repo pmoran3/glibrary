@@ -3,7 +3,6 @@
 
 // Make sure that the next strig after subsubsection or subsection is indexed correctly
 
-
 /**
  * \mainpage
  * \section main Overview
@@ -67,7 +66,8 @@
  *
  * \n\n
  * \author \n &copy; Maurizio Ungaro
- * \author e-mail: ungaro@jlab.org\n\n\n
+ * \author e-mail: ungaro@jlab.org
+ * \n\n\n
 */
 #endif
 
