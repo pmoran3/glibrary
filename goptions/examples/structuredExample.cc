@@ -48,30 +48,31 @@ vector<GOption> defineOptions()
 // a simple struct to model the detector option
 namespace goptions {
 	
-	struct gdetector {
+	struct GDetector {
 		string detector;
 		string factory;
 		string variation;
 	};
 
-	void from_json(const json& j, gdetector& det) {
+	void from_json(const json& j, GDetector& det) {
 		j.at("detector").get_to(det.detector);
 		j.at("factory").get_to(det.factory);
 		j.at("variation").get_to(det.variation);
 	}
 
-	// groupable: method to return a vector<sdet>
-	vector<gdetector> getDetectors(GOptions *gopts) {
+	// method to return a vector of GDetectors from a structured option
+	vector<GDetector> getDetectors(GOptions *gopts) {
 
-		vector<gdetector> detectors;
+		vector<GDetector> detectors;
 
 		// looking over each of the vector<json> items
 		for (const auto& gdet: gopts->getOption("gdetector")) {
-			detectors.push_back(gdet.get<gdetector>());
+			detectors.push_back(gdet.get<GDetector>());
 		}
 
 		return detectors;
 	}
+	
 
 }
 
@@ -85,7 +86,7 @@ int main(int argc, char* argv[])
 	gopts->printSettings(true);
 
 	// Perhaps there's a better modern way to do this
-	vector<goptions::gdetector> detectors = goptions::getDetectors(gopts);
+	vector<goptions::GDetector> detectors = goptions::getDetectors(gopts);
 
 	cout << " Accessing projected structure: " << endl << endl;
 	for (auto& det: detectors) {
