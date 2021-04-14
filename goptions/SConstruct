@@ -14,6 +14,8 @@ env.Append(LIBS = 'goptions')
 lib = SConscript('SConscript', exports='env')
 
 # builds the example
-example1  = env.Program(source = "examples/simpleExample.cc",     target = "simpleExample")
+simpleExample     = env.Program(source = "examples/simpleExample.cc",     target = "simpleExample")
+structuredExample = env.Program(source = "examples/structuredExample.cc", target = "structuredExample")
 
-Depends(example1,  lib);
+Depends(simpleExample,     lib);
+Depends(structuredExample, simpleExample);

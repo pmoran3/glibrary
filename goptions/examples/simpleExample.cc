@@ -1,3 +1,5 @@
+#ifndef DOXYGEN_SHOULD_SKIP_THIS /* DOXYGEN_SHOULD_SKIP_THIS */
+
 // goptions
 #include "goptions.h"
 
@@ -11,28 +13,27 @@ vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
 
-
 	// run option
 	// not groupable
 	// no help, just description
-	json runTag = {
+	json jsonRunOption = {
 		{GNAME, "runno"},
 		{GDESC, "Run number"},
 		{GDFLT, 11}
 	};
 
-	goptions.push_back(GOption(runTag));
+	goptions.push_back(GOption(jsonRunOption));
 
 	// useGui option
 	// not groupable
 	// no help, just description
-	json guiTag = {
+	json jsonGuiOption = {
 		{GNAME, "useGui"},
 		{GDESC, "Graphical User Interface. Possible Values: 0/1. Default: 0"},
 		{GDFLT, 0}
 	};
 
-	goptions.push_back(GOption(guiTag));
+	goptions.push_back(GOption(jsonGuiOption));
 
 	return goptions;
 }
@@ -54,3 +55,4 @@ int main(int argc, char* argv[])
 	return EXIT_SUCCESS;
 }
 
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */

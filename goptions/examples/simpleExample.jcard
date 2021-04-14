@@ -1,8 +1,7 @@
 {
-	# simple example with 3 options:
+	# simple example with 2 options
 	#
 	# runno and useGui are non structured options
-	# particle is a structured option with
 
 	"runno":  12,
 	"useGui": 1

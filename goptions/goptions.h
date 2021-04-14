@@ -38,13 +38,11 @@ public:
 	GOption ( const GOption & ) = default;
 
 	/**
-	 * @details Constructor for simple option
-	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param help here we can put the full description of the option.
-	 * \param groupable if an option belongs to a group, options can be collected by using -add-\<name\>\n
+	 * @details Constructor for simple option. Non groupable. Help is the goption description
+	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of
 	 * Example: { GNAME: "runno", GDESC: "run number", GDFLT: 11 }
 	 */
-	GOption(json joptionDefinition, string help = "na", bool groupable = false);
+	GOption(json joptionDefinition);
 
 	/**
 	 * @details Constructor for structured option
@@ -81,7 +79,7 @@ private:
 	// conditions for a valid option:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
-	vector<json> jOptionValues;
+	vector<json> jOptionAssignedValues;
 
 	// check if a tag is defined
 	bool isTagDefined(string key, int verbosity);
@@ -97,7 +95,7 @@ private:
 
 	// return the json values for this option
 	vector<json> getOptionValues() const {
-		return jOptionValues;
+		return jOptionAssignedValues;
 	}
 	
 	// making goptions friend to it can access the private functions
@@ -143,8 +141,6 @@ private:
 	// options for GOptions
 	vector<GOption>  defineGOptionsOptions();
 
-	// get option is private because the public only uses getType, or projection onto structures
-	vector<json> getOption(string tag);
 
 	// same as above, but look for specifically a non structured option
 	// exit if the tag refers to a non structured option
@@ -163,6 +159,20 @@ public:
 	float getFloat(string tag);   ///< gets the float value associated with non structured option \"tag\"
 	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
 
+	// get option is private because the public only uses getType, or projection onto structures
+	vector<json> getOption(string tag);
+
+//	// overwriting 
+//	vector<json> operator[](string name) {
+//		long optionIndex = findOption(name);
+//		if ( optionIndex != -1 ) {
+//			return jOptions[optionIndex].getOptions();
+//		} else {
+//			cerr << FATALERRORL << " Option " << name << " not found. Exiting. " << endl;
+//			exit(EXIT_FAILURE);
+//
+//		}
+//	}
 
 };
 

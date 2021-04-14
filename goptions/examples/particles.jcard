@@ -1,5 +1,5 @@
 {
-    # This file is imported from example.jcard
+    # This file is imported from advancedExample.jcard
     # particle is a "group"
     # since "particle" and not "-add-particle" was used, this entry defines "particle"
     # (replacing all previous occurences of it, if any)

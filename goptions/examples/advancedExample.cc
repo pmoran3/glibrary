@@ -1,4 +1,5 @@
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifndef DOXYGEN_SHOULD_SKIP_THIS /* DOXYGEN_SHOULD_SKIP_THIS */
+
 // goptions
 #include "goptions.h"
 

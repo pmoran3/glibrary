@@ -183,7 +183,7 @@ long GOptions::findOptionIndex(string name) {
 	}
 
 	if ( ! optionFound ) {
-		cerr << FATALERRORL << " Option " << name << " not found in jOptions vector. ";
+		cerr << FATALERRORL << " Option >" << name << "< not found in jOptions vector. ";
 		cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
 		gexit(OPTIONNOTFOUNDINVECTOR);
 	}
@@ -270,14 +270,6 @@ double GOptions::getDouble(string tag) {
 vector<GOption> GOptions::defineGOptionsOptions()
 {
 	vector<GOption> goptions;
-
-	json optionsTag = {
-		{GNAME, PRINTALLOPTIONS},
-		{GDESC, "Print all available options."},
-		{GDFLT, 0}
-	};
-
-	goptions.push_back(GOption(optionsTag));
 
 	return goptions;
 

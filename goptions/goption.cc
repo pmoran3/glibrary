@@ -15,19 +15,20 @@ void gexit(int error) {
 // constructor for simple option
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
-GOption::GOption(json j, string h, bool g):
+GOption::GOption(json j):
 name{j[GNAME]},
 description{j[GDESC]},
 joptionDefinition{j},
-help{h},
-groupable{g}
+help{j[GDESC]},
+groupable{false}
 {
 	// assigning defaults values 
 	json jValue;
+
 	// by constructon the keys will be there
 	string jKey  = joptionDefinition[GNAME];
 	jValue[jKey] = joptionDefinition[GDFLT];
-	jOptionValues.push_back(jValue);
+	jOptionAssignedValues.push_back(jValue);
 
 	return;
 }
@@ -41,26 +42,25 @@ joptionDefinition{j},
 help{h},
 groupable{g}
 {
-//	// skipping structured options if the tag has GDFLT = NODFLT (constructor will return w/o push_back)
-//	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-//		
-//		if ( definitionJsonValue[GDFLT] == NODFLT ) {
-//			// nothing to do, user will have to define this option
-//			return;
-//		}
-//	}
-//	
-//	// we didn't return from the loop above:
-//	// all tags have a default value. Building the default json value.
-//	// assigning structured option with default values
-//	json newUserValue;
-//	
-//	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-//		string optionKey        = definitionJsonValue[GNAME];
-//		newUserValue[optionKey] = definitionJsonValue[GDFLT];
-//	}
-//	
-//	jOptionValues.push_back(newUserValue);
+	// skipping assigning value if the any tag has GDFLT = NODFLT (constructor will return w/o push_back)
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+
+		if ( definitionJsonValue[GDFLT] == NODFLT ) {
+			// nothing to do, user will have to define this option
+			return;
+		}
+	}
+
+	// assigning structured option  default values
+	json newUserValue;
+
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
+		string optionKey        = definitionJsonValue[GNAME];
+		newUserValue[optionKey] = definitionJsonValue[GDFLT];
+	}
+
+	jOptionAssignedValues.push_back(newUserValue);
+
 }
 
 
@@ -77,12 +77,12 @@ groupable{g}
 bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool isAddition, int gdebug)
 {
 	// clear jValues if add- is not found
-	// and the option is groupable (jUserValues.size())
-	if (!isAddition && jOptionValues.size() > 0 ) {
+	// and the option is groupable
+	if (!isAddition && groupable ) {
 		if (gdebug) {
 			cout << GWARNING << " No add directive for groupable. Resetting option: clearing jValues. " << endl;
 		}
-		jOptionValues.clear();
+		jOptionAssignedValues.clear();
 	}
 	
 	// looping over all user jsons
@@ -95,9 +95,9 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool 
 		// if a simple key/value option (not is_structured) then assigning the new user value and return true
 		// the last appereance of the option is the valid one
 		if (! userJsonValue.is_structured() ) {
-			jOptionValues.clear();
+			jOptionAssignedValues.clear();
 			newUserValue[userJsonKey] = userJsonValue.items().begin().value();
-			jOptionValues.push_back(newUserValue);
+			jOptionAssignedValues.push_back(newUserValue);
 			
 			if (gdebug) {
 				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJsonValue.items().begin().value() <<  endl;
@@ -171,7 +171,7 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool 
 		}
 		
 		// no unset key found at this point
-		jOptionValues.push_back(newUserValue);
+		jOptionAssignedValues.push_back(newUserValue);
 		
 	}
 	
@@ -189,13 +189,13 @@ bool GOption::isTagDefined(string key, int gdebug) {
 		
 		// if it's a JSON object
 		string jsonTagName = definitionJsonValue[GNAME];
-		if (gdebug > 3) {
-			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << GNAME << endl;
+		if (gdebug) {
+			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << jsonTagName << endl;
 		}
 		
-		if (key == GNAME) {
-			if (gdebug > 1) {
-				cout << TTGREENARROWITEM << key << " matches " << GNAME << endl;
+		if (key == jsonTagName) {
+			if (gdebug) {
+				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
 			}
 			return true;
 		}
@@ -204,17 +204,18 @@ bool GOption::isTagDefined(string key, int gdebug) {
 	return isDefined;
 }
 
+//#include <iomanip>
 
 // print option
 void GOption::printOption(bool withDefaults)
 {
-	if (!jOptionValues.size()) {
+	if (!jOptionAssignedValues.size()) {
 		return;
 	}
 
 	// non structured option (jValue has size 1)
-	if (jOptionValues.front().size() == 1) {
-		json onlyOption = jOptionValues.front();
+	if (jOptionAssignedValues.front().size() == 1) {
+		json onlyOption = jOptionAssignedValues.front();
 		string isDefault = "";
 		
 		// pointing out this is a default option
@@ -222,18 +223,15 @@ void GOption::printOption(bool withDefaults)
 			isDefault = " (default)";
 		}
 		
-		cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault  <<  endl;
+		cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault << endl;
 		return;
 	}
 
-	// not the only option
 	// structured option
-	cout << KGRN << ARROWITEM << name << RST << ":" << endl;
-	cout << TPOINTITEM << "help: " << help << endl;
-	//cout << TPOINTITEM << "verbosity: " << verbosity << endl;
+	cout << KGRN << ARROWITEM << name << RST << ":" << endl << endl;
 
 	// non groupable options are printed on screen differently
-	for (auto& jValue: jOptionValues) {
+	for (auto& jValue: jOptionAssignedValues) {
 		
 		if (groupable) {
 			cout << TPOINTITEM ;
@@ -245,6 +243,7 @@ void GOption::printOption(bool withDefaults)
 			for (auto& [jValueKey, jValueValue] : jValue.items()) {
 				cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
 			}
+			cout << endl;
 		}
 	}
 }

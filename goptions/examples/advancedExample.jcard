@@ -2,8 +2,8 @@
     # import other jcard:
     # this can be useful to import standard gcard for a specific experiment
     "importJcards": [
-        "importDetector",
-        "importParticle"
+        "detectors",
+        "particles"
     ],
     
     # detector is a "group"

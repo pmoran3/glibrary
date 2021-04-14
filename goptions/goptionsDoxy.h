@@ -45,9 +45,13 @@
  * \param "argc, argv" passed from "main"
  * \param defineOptions() is a function returning a map<string, GOption>
  *
- * Check the example below to see how to define a few GOptions.
+ * Check the examples below to see how to define a few GOptions.
  *
- * \subsection subsection5 example
+ * \subsubsection subsubsection1 Projections Onto Structures
+ * A JSON structure can be projected onto a user structure 
+ *
+ *
+ * \subsection subsection5 examples
  * An example of defineOptions() that creates two categories is in simpleExample.cc:
  * Running <i>example -h</i> will produce the following log:
  * ~~~

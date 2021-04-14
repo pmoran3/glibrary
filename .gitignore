@@ -4,3 +4,4 @@
 *.o
 lib
 goptions/simpleExample
+goptions/structuredExample

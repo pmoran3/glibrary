@@ -1,5 +1,5 @@
 {
-	# This file is imported from example.jcard
+	# This file is imported from advancedExample.jcard
 	#
 	# detectors is a "group"
 	# since "detector" and not "-add-detector" was used, this entry defines "detector"
