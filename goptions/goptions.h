@@ -115,7 +115,8 @@ public:
 
 	/**
 	 * @details User Constructor
-	 * \param "argc, argv" passed from "main"
+	 * \param argc number of arguments, passed from "main"
+	 * \param argv argument arrays of *chars, passed from main
 	 * \param goptionDefinitions vector of user options, usually returned by a defineOptions() function
 	 */
 	GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions);

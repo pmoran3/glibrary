@@ -65,6 +65,9 @@
  *
  * A json validator can be found here: https://codebeautify.org/jsonvalidator
  *
+ * \n\n
+ * \author \n &copy; Maurizio Ungaro
+ * \author e-mail: ungaro@jlab.org\n\n\n
 */
 #endif
 

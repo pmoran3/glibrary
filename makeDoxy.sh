@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Purpose: creates the doxygen documentation for all the glibraries
 # This script is used by TRAVIS
@@ -10,7 +10,7 @@ echo " Doxygen version: "$(doxygen --version)
 echo " "
 ddir='doxygen'
 
-libraries='goptions gstring gfactory gtouchable ghit gdata gdigitization'
+libraries=(goptions gstring gfactory gtouchable ghit gdata gdigitization)
 
 if [ -d $ddir ]
 then
@@ -27,8 +27,10 @@ do
 	./createDoxyfile.sh
 	./makeDoxyfileForLibrary.sh $l
 	cd $l
+	echo " Running Doxygen for "$l
 	doxygen Doxyfile 
 	mv html ../$ddir/$l
 	cd ..
+	echo " --------------------------------  "
+	echo
 done
-echo " "

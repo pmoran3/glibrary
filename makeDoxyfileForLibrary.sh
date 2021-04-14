@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Purpose: creates a doxyfile for a specific library, based on a doxyfile created with doxygen -g
 #
@@ -32,8 +32,7 @@ esac
 # no PROJECT_BRIEF
 sed -i $extraArgument s/templateGLibrary/$library/g Doxyfile
 
-toCheck='PROJECT_NAME OPTIMIZE_OUTPUT_FOR_C BUILTIN_STL_SUPPORT SHOW_FILES HTML_COLORSTYLE_GAMMA QUIET'
-echo
+toCheck=(PROJECT_NAME OPTIMIZE_OUTPUT_FOR_C BUILTIN_STL_SUPPORT SHOW_FILES HTML_COLORSTYLE_GAMMA QUIET)
 echo " "Doxyfile Main changes:
 echo
 for l in $toCheck
@@ -50,9 +49,17 @@ if [ $library != "gemc" ]; then
 	cp docs/mylayout.css $library/
 	cp Doxyfile $library/
 else
-	# Note: EXCLUDE_PATTERNS includes glibrary because we're using this script for "gemc" as well, and in there we clone glibrary
-	sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*glibrary\* \*\/html\/\*/g'    Doxyfile
-	cp glibrary/docs/mylayout.css .
+	if [[ -v TRAVISENVIRONMENT ]]; then
+		echo " Travis Build" >&2
+		# Note: EXCLUDE_PATTERNS includes glibrary because we're using this script for "gemc" on travis as well, and in there we clone glibrary
+		sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*glibrary\* \*\/html\/\*/g'    Doxyfile
+		cp glibrary/docs/mylayout.css .
+	else
+		echo " Non travis Build" >&2
+		# Note: normal EXCLUDE_PATTERNS, glibrary is not here
+		sed -i $extraArgument 's/EXCLUDE_PATTERNS       =/EXCLUDE_PATTERNS       = \*moc\* \*\/html\/\*/g'    Doxyfile
+		cp ../glibrary/docs/mylayout.css .
+	fi
 fi
 
 rm -f Doxyfilebackup

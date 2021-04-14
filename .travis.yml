@@ -6,12 +6,12 @@ language: sh
 # https://docs.travis-ci.com/user/reference/overview/
 dist: focal
 
-# just main branch
+# just master branch (verify branch name)
 branches:
   only:
     - master
 
-# Install dependencies
+# install dependencies
 addons:
   apt:
     packages:
@@ -20,13 +20,17 @@ addons:
       - zsh
       - environment-modules
 
+# environment must be defined
+# one build will be triggered for each line in the env array.
+env:
+  - TRAVISENVIRONMENT=yes
+
 # scripts to execute
 script:
  - ./makeDoxy.sh
  - ./testLibraries.sh
 
-# Generate and deploy documentation
-#
+# generate and deploy documentation
 deploy:
   provider: pages
   skip_cleanup: true

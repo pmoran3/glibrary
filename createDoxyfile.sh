@@ -1,13 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
 
 
 # Purpose: creates a doxyfile using the doxygen -g command to get the latest doxygen goodies)
 # The replace each line with the ones shown below
 
-echo " "
-echo " Creating Doxyfile "
+echo " Creating System Doxyfile "
 doxygen -g &> /dev/null
-echo " "
 
 cp Doxyfile DoxyfilePure
 
