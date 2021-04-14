@@ -88,12 +88,14 @@ int main(int argc, char* argv[])
 	// Perhaps there's a better modern way to do this
 	vector<goptions::GDetector> detectors = goptions::getDetectors(gopts);
 
-	cout << " Accessing projected structure: " << endl << endl;
-	for (auto& det: detectors) {
-		cout << " detector: " << det.detector << ",\t factory: " << det.factory << ",\t variation: " << det.variation << endl;
+	if (detectors.size()) {
+		cout << " Accessing projected structure: " << endl << endl;
+		for (auto& det: detectors) {
+			cout << " detector: " << det.detector << ",\t factory: " << det.factory << ",\t variation: " << det.variation << endl;
+		}
+		cout << endl;
 	}
-	cout << endl;
-
+	
 	return EXIT_SUCCESS;
 }
 

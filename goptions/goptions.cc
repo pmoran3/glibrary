@@ -206,6 +206,7 @@ void GOptions::printSettings(bool withDefaults)
 {
 	// making sure at least one option has value
 	bool canPrint = false;
+
 	for(auto& jOption: jOptions) {
 		if ( jOption.getOptionValues().size() ) {
 			canPrint = true;

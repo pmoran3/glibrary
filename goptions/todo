@@ -1,4 +1,10 @@
-bool mechanism is not JSON but command line
+- bool mechanism is not JSON but command line
+
+- groupable: should be "multiple", structuredExample should have one item not multiple
+  in this case last item wins, and a warning should be given if the option was found (-strict should return error instead)
+
+- add multipledStructured example
+
 
 > -h, -help, --help: print this message and exit.
 > -helpToHtml:  print all available options in HTML format (options.html) and exit.

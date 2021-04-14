@@ -25,6 +25,12 @@
 		{
 			"detector": "experiments/clas12/ltcc",
 			"factory": "CAD"
+		},
+		
+		# forward detector
+		{
+			"detector": "experiments/clas12/ltcc",
+			"factory": "CAD"
 		}
 	]
 }

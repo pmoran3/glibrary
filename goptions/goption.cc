@@ -20,7 +20,7 @@ name{j[GNAME]},
 description{j[GDESC]},
 joptionDefinition{j},
 help{j[GDESC]},
-groupable{false}
+multiple{false}
 {
 	// assigning defaults values 
 	json jValue;
@@ -35,12 +35,12 @@ groupable{false}
 
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
-GOption::GOption(string n, string d, json j, string h, bool g):
+GOption::GOption(string n, string d, json j, string h, bool m):
 name{n},
 description{d},
 joptionDefinition{j},
 help{h},
-groupable{g}
+multiple{m}
 {
 	// skipping assigning value if the any tag has GDFLT = NODFLT (constructor will return w/o push_back)
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
@@ -204,14 +204,17 @@ bool GOption::isTagDefined(string key, int gdebug) {
 	return isDefined;
 }
 
-//#include <iomanip>
-
 // print option
 void GOption::printOption(bool withDefaults)
 {
 	if (!jOptionAssignedValues.size()) {
 		return;
 	}
+
+	//if (gdebug) {
+		cout << TTGREENARROWITEM << "jOptionAssignedValues size: " <<  jOptionAssignedValues.size() << endl;
+	//}
+
 
 	// non structured option (jValue has size 1)
 	if (jOptionAssignedValues.front().size() == 1) {

@@ -49,11 +49,11 @@ public:
 	 * \param name option title
 	 * \param description summary description. This is used in the search.
 	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param groupable if an option belongs to a group, options can be collected by using -add-\<name\>\n
-	 * \param help here we can put the full description of the option.
+	 * \param help the full description of the option. Multiple lines are 
+	 * \param multiple if an option belongs to a group, options can be collected by using -add-\<name\>\n
 	 * Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
 	 */
-	GOption(string name, string description, json joptionDefinition, string help = "na", bool groupable = false);
+	GOption(string name, string description, json joptionDefinition, string help = "na", bool multiple = false);
 
 
 private:
@@ -62,15 +62,20 @@ private:
 	const string description;  // summary description. This is used in the search.
 
 	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
-	// Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
+	// Example: {
+	//    { GNAME: "runno",    GDESC: "run number",       GDFLT: 11},
+	//    { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
+	// }
 	const json joptionDefinition;
 
 	// help: here we can put the full description of the option.
 	// multiple lines are defined by using "\n"
 	const string help;
 
-	// if an option belongs to a group, options can be collected by using -add-<name>
-	const bool groupable;
+	// if an option is multiple, options can be collected by using -add-<name>
+	// jOptionAssignedValues can have multiple entries
+	// if an option is not multiple, jOptionAssignedValues must be size 1
+	const bool multiple;
 
 	// the option instance, validated against the definition
 	// if some tags are not set, they will be set to the joptionDefinition default
@@ -161,18 +166,6 @@ public:
 
 	// get option is private because the public only uses getType, or projection onto structures
 	vector<json> getOption(string tag);
-
-//	// overwriting 
-//	vector<json> operator[](string name) {
-//		long optionIndex = findOption(name);
-//		if ( optionIndex != -1 ) {
-//			return jOptions[optionIndex].getOptions();
-//		} else {
-//			cerr << FATALERRORL << " Option " << name << " not found. Exiting. " << endl;
-//			exit(EXIT_FAILURE);
-//
-//		}
-//	}
 
 };
 
