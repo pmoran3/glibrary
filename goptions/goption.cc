@@ -117,14 +117,16 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 				}
 			}
 
+
+			if ( gdebug ) {
+				cout << TGREENPOINTITEM << " Assigning Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJsonValue.items().begin().value() <<  endl;
+			}
+
 			// valid, assigning it
 			newUserValue[userJsonKey] = userJsonValue.items().begin().value();
 			jOptionAssignedValues.push_back(newUserValue);
 			
-			if ( gdebug ) {
-				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJsonValue.items().begin().value() <<  endl;
-			}
-			
+
 			// done, return
 			return;
 		}
@@ -196,23 +198,29 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 void GOption::checkTagIsValid(string key, bool gdebug) {
 	
 	bool isDefined = false;
-	
+
+	// joptionDefinition is a json
+	// Example: {
+	//    { GNAME: "runno",    GDESC: "run number",       GDFLT: 11},
+	//    { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
+	// }
+	// matching key to GNAME definition
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
-		
-		// if it's a JSON object
-		string jsonTagName = definitionJsonValue[GNAME];
-		if ( gdebug ) {
-			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << jsonTagName << endl;
-		}
-		
-		if (key == jsonTagName) {
+
+		if ( definitionJsonKey == GNAME) {
+
 			if ( gdebug ) {
-				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
+				cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << definitionJsonValue << endl;
 			}
-			isDefined = true;
+
+			if (key == definitionJsonValue) {
+				if ( gdebug ) {
+					cout << TTPOINTITEM << key << " matches " << definitionJsonValue << endl;
+				}
+				isDefined = true;
+			}
 		}
 	}
-
 	if ( !isDefined )  {
 		cout << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
 		gexit(NOOPTIONFOUND);

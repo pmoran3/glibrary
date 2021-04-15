@@ -97,6 +97,10 @@ vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 	// removing '#' from "base" (command line) jcard
 	// function is defined in gstrings
 	string basePureJsonString = parseFileAndRemoveComments(jcardFilename);
+	if ( gdebug ) {
+		cout << endl << GREENSQUAREITEM << " Parsing base jcard content: " << endl << basePureJsonString << endl;
+
+	}
 
 	// building json object from base jcard
 	json baseJson = json::parse(basePureJsonString);
