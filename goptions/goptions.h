@@ -72,12 +72,9 @@ private:
 	// multiple lines are defined by using "\n"
 	const string help;
 
-	// if an option is multiple, options can be collected by using -add-<name>
-	// jOptionAssignedValues can have multiple entries
-	// if an option is not multiple, jOptionAssignedValues must be size 1
-	const bool multiple;
-
-	// the option instance, validated against the definition
+	// the option assigned values, validated against the definition
+	// this is a vector of size 1 if the option is not multple
+	//
 	// if some tags are not set, they will be set to the joptionDefinition default
 	// if an option is defined with default values, it will be passed to jValues
 	//
@@ -86,24 +83,24 @@ private:
 	// 2. if the definition does not provide a default, the option must provide one
 	vector<json> jOptionAssignedValues;
 
-	// check if a tag is defined
-	bool isTagDefined(string key, int verbosity);
-	bool isDefaultValue(json jValue);
 
-	// returns option name
-	string getName() const {return name;}
+	// utilities to characterize the option
+	void checkTagIsValid(string key, bool gdebug); // check if a tag is defined. Exit if it's not
+	bool isDefaultValue(json jValue);              // check if the default value is assigned
+	bool isSimpleption();                          // check if it's a simple option
 
-	// parse user jsons options and assign jValues accordingly
-	bool assignValuesFromJson(string keyAssigned, json userJsonValue, bool isAddition, int verbosity);
+	// if an option is multiple, options must be collected by using -add-<name>
+	// jOptionAssignedValues can have multiple entries
+	const bool multiple;
 
+	// parse user jsons options and assign jOptionAssignedValues accordingly
+	void assignValuesFromJson(string keyAssigned, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);
+
+	// print the options different from defaults
+	// if withDefaults is true also print the defaults
 	void printOption(bool withDefaults);
 
-	// return the json values for this option
-	vector<json> getOptionValues() const {
-		return jOptionAssignedValues;
-	}
-	
-	// making goptions friend to it can access the private functions
+	// making goptions friend to it can access the private variables and functions
 	friend class GOptions;
 
 };
@@ -128,7 +125,14 @@ private:
 
 	// read directly in the command line to control option debugging
 	// an option cannot be used because the parsing is part of the debug
+	// activate debug logging
 	bool gdebug;
+
+	// read directly in the command line to control option debugging
+	// an option cannot be used because the parsing is part of the debug
+	// activate exit on:
+	// - duplicate options
+	bool gstrict;
 
 	// GOption array
 	vector<GOption> jOptions;
@@ -136,20 +140,19 @@ private:
 	// jcards parsing utilities
 	string findBaseJCard(int argc, char *argv[]);  // finds a configuration file (jcard). Returns "na' if not found.
 
-	vector<json> retrieveUserJsonsFromJCard(string jcardFilename);    // returns all jsons objects pointed by the base and imported jcards
+	vector<json> getUserJsonsFromJCard(string jcardFilename);    // returns all jsons objects pointed by the base and imported jcards
 
-	void parseJCards(vector<json> allUserJsons);                      // parse the jcard in the GOptions array
+	void parseJSONSIntoGOption(vector<json> allUserJsons);       // parse all the jsons from the jcards / command line in the GOptions array
 
 	// search utilities
 	long findOptionIndex(string name);  // find goption from the array. return jOptions array index or -1 if not found
 
-	// options for GOptions
-	vector<GOption>  defineGOptionsOptions();
-
-
 	// same as above, but look for specifically a non structured option
 	// exit if the tag refers to a non structured option
-	json getNonStructuredOption(string tag);
+	json getNonStructuredOptionSingleValue(string tag);
+
+	// options for GOptions
+	vector<GOption>  defineGOptionsOptions();
 
 
 public:
@@ -165,7 +168,7 @@ public:
 	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
 
 	// get option is private because the public only uses getType, or projection onto structures
-	vector<json> getOption(string tag);
+	vector<json> getOptionAssignedValues(string tag);
 
 };
 

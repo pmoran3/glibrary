@@ -33,6 +33,7 @@ multiple{false}
 	return;
 }
 
+// constructor for structured option
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
 GOption::GOption(string n, string d, json j, string h, bool m):
@@ -42,7 +43,7 @@ joptionDefinition{j},
 help{h},
 multiple{m}
 {
-	// skipping assigning value if the any tag has GDFLT = NODFLT (constructor will return w/o push_back)
+	// don't do anything if any tag has GDFLT = NODFLT
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 
 		if ( definitionJsonValue[GDFLT] == NODFLT ) {
@@ -51,7 +52,8 @@ multiple{m}
 		}
 	}
 
-	// assigning structured option  default values
+	// all tags in this option have default values
+	// assigning structured option default values
 	json newUserValue;
 
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
@@ -60,84 +62,95 @@ multiple{m}
 	}
 
 	jOptionAssignedValues.push_back(newUserValue);
-
 }
 
 
 
 
 // parse user jsons options and assign jValues accordingly
-// this returns false if:
-// - a tag was not defined
-// - add- was used for a non groupable option
+// this exits if:
+//
+// - a tag is not defined
+// - add- was not used for a multiple option
+// - add- was used for a non multiple option
 // - user did not provide a value that must be set (options w/o default values)
 //
 // These options come ordered
 // if a groupable option didn't have the add directive, jValues is cleared
-bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool isAddition, int gdebug)
+void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict)
 {
+
 	// clear jValues if add- is not found
-	// and the option is groupable
-	if (!isAddition && groupable ) {
-		if (gdebug) {
-			cout << GWARNING << " No add directive for groupable. Resetting option: clearing jValues. " << endl;
-		}
-		jOptionAssignedValues.clear();
+	// and the option is multiple
+	if (!isAddition && multiple ) {
+		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is multiple. Mandatory \"add-\" directive was not given. " << endl;
+		gexit(NOADDFORMULTIPLE);
 	}
-	
+
+	// if add- was found but option is not multiple, it's a mistake.
+	if (isAddition && !multiple) {
+		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple but \"add-\" was given. " << endl;
+		gexit(ADDFORNONMULTIPLE);
+	}
+
 	// looping over all user jsons
-	for(auto &
-		 userJsonValue: userJsonValue) {
+	for(auto &userJsonValue: userJsonValues) {
 		
-		// building new value to add to jValues
+		// building new value to add to jOptionAssignedValues
 		json newUserValue;
 		
-		// if a simple key/value option (not is_structured) then assigning the new user value and return true
-		// the last appereance of the option is the valid one
-		if (! userJsonValue.is_structured() ) {
-			jOptionAssignedValues.clear();
+		// non structured option
+		if ( ! userJsonValue.is_structured() ) {
+
+			checkTagIsValid(userJsonKey, gdebug);
+
+			if ( jOptionAssignedValues.size() ) {
+				// strict: error
+				if ( gstrict ) {
+					cout << FATALERRORL " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple and is already present." << endl;
+					gexit(NONMULTIPLEFOUND);
+					// non strict: warning and clear
+					// the last appereance of the option is the valid one
+				} else {
+					cout << GWARNING " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple but \"add-\" was given. " << endl;
+					jOptionAssignedValues.clear();
+				}
+			}
+
+			// valid, assigning it
 			newUserValue[userJsonKey] = userJsonValue.items().begin().value();
 			jOptionAssignedValues.push_back(newUserValue);
 			
-			if (gdebug) {
+			if ( gdebug ) {
 				cout << TGREENPOINTITEM << "Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << userJsonValue.items().begin().value() <<  endl;
 			}
 			
 			// done, return
-			return true;
+			return;
 		}
 		
 		// userJsons is structured.
-		if (gdebug) {
+		if ( gdebug ) {
 			cout << TGREENPOINTITEM << "Json Option Value: " << userJsonValue << endl;
 		}
 		
-		// if add- was found but option is not groupable, it's a mistake.
-		if (isAddition && !groupable) {
-			cout << GWARNING << " Trying to adding to the non groupable option " << YELLOWHHL << name << RSTHHR". This will be ignored." << endl;
-			return false;
-		}
-		
-		// first checking that all user tags are valid entries.
-		for (auto& [userJsonKey, userJsonValue] : userJsonValue.items()) {
 
-			// checking if userJsonKey is defined
-			// exiting if the tag is not defined
-			if ( !isTagDefined(userJsonKey, gdebug) )  {
-				cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is not known to this system. " << endl;
-				gexit(NOOPTIONFOUND);
-			}
-			
+		// first checking that all user tags are valid entries.
+		// if it's valid, assigning the value
+		for (auto& [userJsonKeyInValues, userJsonValueInValues] : userJsonValues.items()) {
+
+			checkTagIsValid(userJsonKeyInValues, gdebug);
+
 			// tag is defined, can assign value
-			if (gdebug > 1) {
-				cout << TTPOINTITEM << " Assingning single user key " << userJsonKey << " with single value: " << userJsonValue << endl;
+			if ( gdebug ) {
+				cout << TTPOINTITEM << " Assingning single user key " << userJsonKeyInValues << " with single value: " << userJsonValue << endl;
 			}
 			
 			// tag is valid, assigning key and value to new user option
-			newUserValue[userJsonKey] = userJsonValue;
+			newUserValue[userJsonKeyInValues] = userJsonValueInValues;
 		}
 		
-		// at this point all json keys are valid.
+		// at this point all json keys are valid, and the user json keys are assigned properly
 		// we need to assign default values for all the keys the user didn't set
 		// if some of the unset values option must provide a default, this routine will exit
 		
@@ -171,17 +184,16 @@ bool GOption::assignValuesFromJson(string userJsonKey, json userJsonValue, bool 
 		}
 		
 		// no unset key found at this point
+		// adding the newUserValue
 		jOptionAssignedValues.push_back(newUserValue);
 		
 	}
-	
-	
-	return true;
+
 }
 
 
 // checking if the key is the json object is defined
-bool GOption::isTagDefined(string key, int gdebug) {
+void GOption::checkTagIsValid(string key, bool gdebug) {
 	
 	bool isDefined = false;
 	
@@ -189,20 +201,40 @@ bool GOption::isTagDefined(string key, int gdebug) {
 		
 		// if it's a JSON object
 		string jsonTagName = definitionJsonValue[GNAME];
-		if (gdebug) {
+		if ( gdebug ) {
 			cout << TTPOINTITEM << " Checking user key " << key << " against definition item tag " << jsonTagName << endl;
 		}
 		
 		if (key == jsonTagName) {
-			if (gdebug) {
+			if ( gdebug ) {
 				cout << TTGREENARROWITEM << key << " matches " << jsonTagName << endl;
 			}
-			return true;
+			isDefined = true;
 		}
 	}
-	
-	return isDefined;
+
+	if ( !isDefined )  {
+		cout << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
+		gexit(NOOPTIONFOUND);
+	}
+
 }
+
+// true if the option is a simple option
+bool GOption::isSimpleption() {
+
+	bool isSimple = false;
+
+	if ( jOptionAssignedValues.size() == 1 ) {
+		if ( jOptionAssignedValues.front().size() == 1 ) {
+			isSimple = true;
+		}
+
+	}
+
+	return isSimple;
+}
+
 
 // print option
 void GOption::printOption(bool withDefaults)
@@ -211,8 +243,8 @@ void GOption::printOption(bool withDefaults)
 		return;
 	}
 
-	//if (gdebug) {
-		cout << TTGREENARROWITEM << "jOptionAssignedValues size: " <<  jOptionAssignedValues.size() << endl;
+	//if ( gdebug ) {
+//		cout << TTGREENARROWITEM << "jOptionAssignedValues size: " <<  jOptionAssignedValues.size() << endl;
 	//}
 
 
@@ -236,7 +268,7 @@ void GOption::printOption(bool withDefaults)
 	// non groupable options are printed on screen differently
 	for (auto& jValue: jOptionAssignedValues) {
 		
-		if (groupable) {
+		if (multiple) {
 			cout << TPOINTITEM ;
 			for (auto& [jValueKey, jValueValue] : jValue.items()) {
 				cout << jValueKey << ": " << jValueValue << "\t";

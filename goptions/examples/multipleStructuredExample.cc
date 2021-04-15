@@ -66,7 +66,7 @@ namespace goptions {
 		vector<GDetector> detectors;
 
 		// looking over each of the vector<json> items
-		for (const auto& gdet: gopts->getOptionAssignedValues("gdetector")) {
+		for (const auto& gdet: gopts->getOption("gdetector")) {
 			detectors.push_back(gdet.get<GDetector>());
 		}
 

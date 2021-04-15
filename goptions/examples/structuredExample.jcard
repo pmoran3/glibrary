@@ -1,36 +1,17 @@
 {
-	# detectors is a structured option
+	# detectors is a non multiple structured option.
+	#
+	# -strict non passed: the last instance of this option will overwrite any previous instances
+	# -strict passed: exit if a duplicate option is found
 	#
 	# Corresponding command line example:
 	#
-	# -detector={target: experiments/clas12/targets; factory: TEXT; variation: bonus;}
+	# -detector={target: experiments/clas12/rtpc; factory: TEXT; variation: experiments/clas12/rtpc;}
 	#
-	# Notice how some options have default values and could be omitted
-
-	"gdetector": [
-		
-		# central detector
-		# as an example we define it in-line
-		{ "detector": "experiments/clas12/targets", "factory": "TEXT", "variation": "bonus" },
-		
-		# forward detector
-		# as an example we use carriage return to organize the fields
-		{
-			"detector": "experiments/clas12/rtpc",
-			"factory": "TEXT",
-			"variation": "rgb_spring2019"
-		},
-		
-		# forward detector
-		{
-			"detector": "experiments/clas12/ltcc",
-			"factory": "CAD"
-		},
-		
-		# forward detector
-		{
-			"detector": "experiments/clas12/ltcc",
-			"factory": "CAD"
-		}
-	]
+	# as an example we use carriage return to organize the fields
+	"gdetector": {
+		"detector": "experiments/clas12/rtpc",
+		"factory": "TEXT",
+		"variation": "rgb_spring2019"
+	}
 }

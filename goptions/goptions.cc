@@ -9,8 +9,8 @@
 using namespace gstring;
 
 // constructor:
-// - load user defined options, add our options
-// - assign internal option
+// - load user defined options, add goptions options
+// - assign internal options (gdebug, gstrict)
 // - parse the base jcard plus all imported jcards
 // - parse the command line options
 // - get our own option
@@ -21,12 +21,18 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 		jOptions.push_back(ourOption);
 	}
 
-	// check if gdebug is set on the command line
+	// check if gdebug, gstrict are set on the command line
 	for(int i=1; i<argc; i++) {
+		if ( strcmp(argv[i], GSTRICTSTRING) == 0 ) {
+			gstrict = true;
+		}
 		if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
 			gdebug = true;
-			if (gdebug) {
+			if ( gdebug ) {
 				cout << endl << REDPOINTITEM << "gdebug option set is set. " << endl;
+				if (gstrict) {
+					cout << endl << REDPOINTITEM << "gstrict option set is set. " << endl;
+				}
 			}
 		}
 	}
@@ -38,8 +44,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 	// parsing json can throw
 	// returns all jsons objects pointed by the base and imported jcards
 	try {
-		vector<json> allUserJsons = retrieveUserJsonsFromJCard(jcardFilename);
-		parseJCards(allUserJsons);
+		vector<json> userJsonAssignments = getUserJsonsFromJCard(jcardFilename);
+		parseJSONSIntoGOption(userJsonAssignments);
 	}
 	catch (exception& e) {
 		string thisException = e.what();
@@ -78,7 +84,7 @@ string GOptions::findBaseJCard(int argc, char *argv[])
 
 
 // returns a vector of json objects of the base jcard plus all imported jcards
-vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
+vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 {
 	vector<json> userJsons;
 
@@ -95,9 +101,10 @@ vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
 	// building json object from base jcard
 	json baseJson = json::parse(basePureJsonString);
 
-	// now imports imported jcard if any
+	// now imports imported jcards, if any
 	for (auto& [key, value] : baseJson.items()) {
-		if ( key == IMPORTSTRING ) {
+		if ( key == IMPORTJCARD ) {
+
 			// value is a vector<string>
 			for ( auto &importedJCardName: value) {
 				// adding extension to set fileName
@@ -119,51 +126,42 @@ vector<json> GOptions::retrieveUserJsonsFromJCard(string jcardFilename)
 }
 
 
-// parse base and imported Jsons
-void GOptions::parseJCards(vector<json> allUserJsons)
+// parse all the jsons from the jcards / command line in the GOptions array
+void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 {
-	// looping over all parsed jsons
+	// looping over all jsons
 	for (auto& userJsonOption: allUserJsons) {
 
 		// looping over all json inside each userJsonOption
 		for (auto& [userJsonKey, userJsonValue] : userJsonOption.items()) {
 
-			// skipping import directives, the other json files are already here
-			if (userJsonKey == IMPORTSTRING) {
+			// skipping import directives, the imported json are already here
+			if (userJsonKey == IMPORTJCARD) {
 				continue;
 			}
 
-			if (gdebug) {
-				cout << endl << GREENSQUAREITEM << "User Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue << endl;
+			if ( gdebug ) {
+				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue << endl;
 			}
 
-			// match userJsonKey to a jOptions
+			// remove add- string from key. This does nothing unless the option is an addition
 			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
 
-			// true if add- was found (no replacement in string)S
+			// true if add- was found (no replacement in string)
 			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
 
 			// GOption index, -1 if not found
 			long userJsonOptionDefinitionIndex = findOptionIndex(userJsonKeyRoot);
 
-			// if GOption was found
-			if (userJsonOptionDefinitionIndex != -1) {
-
-				if (gdebug) {
-					string isAnAdditionString = "";
-					if ( isAnAddition ) {
-						isAnAdditionString = " This is an option addition.";
-					}
-					cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
+			if ( gdebug ) {
+				string isAnAdditionString = "";
+				if ( isAnAddition ) {
+					isAnAdditionString = " This is an option addition.";
 				}
-
-				jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gdebug);
-
-				// if GOption was not found (findOption returned -1)
-			} else {
-				cout << FATALERRORL << "the option " << YELLOWHHL << userJsonKey << RSTHHR << " is not known to this system. " << endl;
-				gexit(NOOPTIONFOUND);
+				cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
 			}
+
+			jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gdebug, gstrict);
 		}
 	}
 }
@@ -176,27 +174,27 @@ long GOptions::findOptionIndex(string name) {
 	bool optionFound = false;
 
 	for (auto it = jOptions.begin(); it != jOptions.end(); it++) {
-		if (it->getName() == name) {
+		if (it->name == name) {
 			optionFound = true;
 			return distance(jOptions.begin(), it);
 		}
 	}
 
 	if ( ! optionFound ) {
-		cerr << FATALERRORL << " Option >" << name << "< not found in jOptions vector. ";
+		cout << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
 		cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
-		gexit(OPTIONNOTFOUNDINVECTOR);
+		gexit(NOOPTIONFOUND);
 	}
 
 	return -1;
 }
 
-vector<json> GOptions::getOption(string tag) {
+vector<json> GOptions::getOptionAssignedValues(string tag) {
 
 	// this will exit if no option is found
 	long optionIndex = findOptionIndex(tag);
 
-	return jOptions[optionIndex].getOptionValues();
+	return jOptions[optionIndex].jOptionAssignedValues;
 
 }
 
@@ -208,7 +206,7 @@ void GOptions::printSettings(bool withDefaults)
 	bool canPrint = false;
 
 	for(auto& jOption: jOptions) {
-		if ( jOption.getOptionValues().size() ) {
+		if ( jOption.jOptionAssignedValues.size() ) {
 			canPrint = true;
 		}
 	}
@@ -232,15 +230,15 @@ void GOptions::printSettings(bool withDefaults)
 
 // same as above, but look for specifically a non structured option
 // exit if the tag refers to a non structured option
-json GOptions::getNonStructuredOption(string tag) {
+json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 	// will exit if not found
-	json jn = getOption(tag).front();
+	json jn = getOptionAssignedValues(tag).front();
 
 	if ( jn.begin().value().is_structured() ) {
 		cerr << FATALERRORL << " The tag " << tag << " is part of the structured option " << jn << endl;
 		cerr << " Use structure projection to retrieve this option (see documentation at " << GOPTIONDOCUMENTATION << ")" << endl;
-		gexit(OPTIONISSTRUCTURED);
+		gexit(OPTIONSHOULDNOTBESTRUCTURED);
 	}
 
 	return jn;
@@ -249,19 +247,19 @@ json GOptions::getNonStructuredOption(string tag) {
 
 int GOptions::getInt(string tag) {
 	// will exit if not found
-	json jn = getNonStructuredOption(tag);
+	json jn = getNonStructuredOptionSingleValue(tag);
 	return jn[tag].get<int>();
 }
 
 float GOptions::getFloat(string tag) {
 	// will exit if not found
-	json jn = getNonStructuredOption(tag);
+	json jn = getNonStructuredOptionSingleValue(tag);
 	return jn[tag].get<float>();
 }
 
 double GOptions::getDouble(string tag) {
 	// will exit if not found
-	json jn = getNonStructuredOption(tag);
+	json jn = getNonStructuredOptionSingleValue(tag);
 	return jn[tag].get<double>();
 }
 

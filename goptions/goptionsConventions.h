@@ -5,9 +5,13 @@
 #define GNAME  "JsonTagGNAME"
 #define GDESC  "JsonTagGDESCription"
 #define GDFLT  "jsonTagDefault"
-#define IMPORTSTRING "importJcards"
 #define NODFLT "NODFLT"
-#define GDEBUGSTRING "-gdebug"
+
+#define IMPORTJCARD "import jcard"
+
+#define GDEBUGSTRING  "-gdebug"
+#define GSTRICTSTRING "-gstrict"
+
 #define PRINTALLOPTIONS "printAllOptions"
 #define GOPTIONDOCUMENTATION "https://gemc.github.io/glibrary/goptions/"
 
@@ -24,11 +28,13 @@
 //#define GVERBOSITY_ALL_D     " ・ 3: max verbosity\n"
 
 // exit codes: 100s
-#define NOOPTIONFOUND            101
-#define MANDATORYOPTIONNOTFOUND  102
-#define OPTIONNOTFOUNDINVECTOR   103
-#define JSONPARSEERROR           104
-#define OPTIONISSTRUCTURED       105
+#define NOOPTIONFOUND               101
+#define MANDATORYOPTIONNOTFOUND     102
+#define NOADDFORMULTIPLE            103
+#define ADDFORNONMULTIPLE           104
+#define JSONPARSEERROR              105
+#define OPTIONSHOULDNOTBESTRUCTURED 106
+#define NONMULTIPLEFOUND            107
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {

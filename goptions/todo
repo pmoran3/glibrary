@@ -1,19 +1,19 @@
-- bool mechanism is not JSON but command line
+- common bool mechanism from command line
+- jcard string should be variable?
 
-- groupable: should be "multiple", structuredExample should have one item not multiple
-  in this case last item wins, and a warning should be given if the option was found (-strict should return error instead)
+- non-multiple: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
+- multiple options must be added ONLY with -add-
 
 - add multipledStructured example
+- add function to shift each line of help by correct formatting spaces
 
 
 > -h, -help, --help: print this message and exit.
 > -helpToHtml:  print all available options in HTML format (options.html) and exit.
 
-print default mechanism missing
-
+- print defaults mechanism missing
 - general debug option -debug=string
 - command line parsing is missing
-- helpa nd search mechanism, through names and descriptions
+- help and search mechanism, through names and descriptions
 
 
-- check structured example: looks like it's automatically groupable
