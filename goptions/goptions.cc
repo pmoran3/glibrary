@@ -14,11 +14,11 @@ using namespace gstring;
 // - parse the base jcard plus all imported jcards
 // - parse the command line options
 // - get our own option
-GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) : jOptions(goptionDefinitions)
+GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) : goptions(goptionDefinitions)
 {
 	// adding our options
 	for(auto &ourOption: defineGOptionsOptions()) {
-		jOptions.push_back(ourOption);
+		goptions.push_back(ourOption);
 	}
 
 	// check if gdebug, gstrict are set on the command line
@@ -145,53 +145,49 @@ void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 				continue;
 			}
 
-			// remove add- string from key. This does nothing unless the option is an addition.
-			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
+			// if the first character is "+", this is an addition
+			bool isAnAddition = ( userJsonKey.front() == '+' );
 
-			// true if add- was found (no replacement in string)
-			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
+			string userJsonKeyRoot = userJsonKey;
 
-			if ( gdebug ) {
-				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue ;
-				cout << " userJsonKeyRoot: " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " is an addition: " << isAnAddition << endl;
+			// if it's an addition, remove first char
+			if ( isAnAddition ) {
+				userJsonKeyRoot = userJsonKey.substr(1, userJsonKey.size() - 2);
 			}
 
+			if ( gdebug ) {
+				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << endl;
+				cout << GTAB << "Content: " << userJsonValue << endl;
+				cout << GTAB << "userJsonKeyRoot: " << BOLDWHHL << userJsonKeyRoot << RSTHHR << endl;
+				cout << GTAB << "Is an addition: " << isAnAddition << endl;
+			}
 
 			// GOption index, -1 if not found
 			long userJsonOptionDefinitionIndex = findOptionIndex(userJsonKeyRoot);
 
 			if ( gdebug ) {
-				string isAnAdditionString = "";
-				if ( isAnAddition ) {
-					isAnAdditionString = " This is an option addition.";
-				}
-				cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << isAnAdditionString << endl;
+				cout << GREENSQUAREITEM << "Option " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " definition found." << endl;
 			}
 
-			jOptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gdebug, gstrict);
+			goptions.at(userJsonOptionDefinitionIndex).assignValuesFromJson(userJsonKey, userJsonValue, isAnAddition, gdebug, gstrict);
 		}
 	}
 }
-
 
 // find GOption index from the vector<GOption>
 // error if GOption is not found
 long GOptions::findOptionIndex(string name) {
 
-	bool optionFound = false;
-
-	for (auto it = jOptions.begin(); it != jOptions.end(); it++) {
+	for (auto it = goptions.begin(); it != goptions.end(); it++) {
 		if (it->name == name) {
-			optionFound = true;
-			return distance(jOptions.begin(), it);
+			return distance(goptions.begin(), it);
 		}
 	}
 
-	if ( ! optionFound ) {
-		cout << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
-		cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
-		gexit(NOOPTIONFOUND);
-	}
+	// not found, error
+	cout << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
+	cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
+	gexit(NOOPTIONFOUND);
 
 	return -1;
 }
@@ -201,7 +197,7 @@ vector<json> GOptions::getOptionAssignedValues(string tag) {
 	// this will exit if no option is found
 	long optionIndex = findOptionIndex(tag);
 
-	return jOptions[optionIndex].jOptionAssignedValues;
+	return goptions[optionIndex].jOptionAssignedValues;
 
 }
 
@@ -212,7 +208,7 @@ void GOptions::printSettings(bool withDefaults)
 	// making sure at least one option has value
 	bool canPrint = false;
 
-	for(auto& jOption: jOptions) {
+	for(auto& jOption: goptions) {
 		if ( jOption.jOptionAssignedValues.size() ) {
 			canPrint = true;
 		}
@@ -226,7 +222,7 @@ void GOptions::printSettings(bool withDefaults)
 
 	cout << endl << KGRN << " User Settings: " << RST << endl << endl;
 
-	for(auto& jOption: jOptions) {
+	for(auto& jOption: goptions) {
 		jOption.printOption(withDefaults);
 	}
 
@@ -240,6 +236,13 @@ void GOptions::printSettings(bool withDefaults)
 json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 	// will exit if not found
+
+	if(getOptionAssignedValues(tag).size() == 0) {
+		cerr << FATALERRORL << " The tag " << tag << " is not assigned. " << endl;
+		gexit(OPTIONNOTASSIGNED);
+	}
+
+
 	json jn = getOptionAssignedValues(tag).front();
 
 	if ( jn.begin().value().is_structured() ) {

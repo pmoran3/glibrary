@@ -32,10 +32,11 @@
  * \n
  *
  * \subsection subsection3 Goptions  Features
+ * * Options can be read from a JSON file with extension \".jcard", called <i>jcard steering file</i>
  * * Goptions can be dynamically added to an executable by a framework or plugin
- * * Superposition of  command line / steering card (JSON file with .jcard extension)
+ * * Superposition of  command line / jcard.
  * * JSON, HTML outputs for documentation
- * * Can import a jcard within another one (imports should be declared at the top of the jcard)
+ * * Can import child jcards 
  * * Mechanism to project options onto user defined structure/class
  *
  * \subsection subsection4 C++ User Interface

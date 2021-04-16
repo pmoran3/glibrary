@@ -12,6 +12,5 @@
 	"gdetector": {
 		"detector": "experiments/clas12/rtpc",
 		"factory": "TEXT",
-		"variation": "rgb_spring2019"
 	}
 }

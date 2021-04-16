@@ -91,7 +91,6 @@ private:
 	// utilities to characterize the option
 	void checkTagIsValid(string key, bool gdebug);    // check if a tag is defined. Exit if it's not
 	bool isDefaultValue(string key, json userValue);  // check if userValue matches the default value
-	bool isSimpleption();                             // check if it's a simple option
 
 	// if an option is cumulative, options must be collected by using -add-<name>
 	// jOptionAssignedValues can have multiple entries
@@ -99,8 +98,8 @@ private:
 
 	// parse user jsons options and assign jOptionAssignedValues accordingly
 	void assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);
-	void assignSingleValueFromSimpleJson(string userJsonKey, json userJsonValues, bool gdebug, bool gstrict);
-	void assignSingleValueFromStructuredJson(string userJsonKey, json userJsonValues, bool gdebug, bool gstrict);
+	void assignSingleValueFromSimpleJson(string userJsonKey, json userJsonValue, bool gdebug, bool gstrict);
+	json assignSingleValueFromStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict);
 
 	// print the options different from defaults
 	// if withDefaults is true also print the defaults
@@ -141,7 +140,7 @@ private:
 	bool gstrict;
 
 	// GOption array
-	vector<GOption> jOptions;
+	vector<GOption> goptions;
 
 	// jcards parsing utilities
 	string findBaseJCard(int argc, char *argv[]);  // finds a configuration file (jcard). Returns "na' if not found.

@@ -35,6 +35,7 @@
 #define JSONPARSEERROR              105
 #define OPTIONSHOULDNOTBESTRUCTURED 106
 #define NONCUMULATIVEALREADYPRESENT 107
+#define OPTIONNOTASSIGNED           108
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {

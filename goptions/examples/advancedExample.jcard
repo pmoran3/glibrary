@@ -13,9 +13,9 @@
     #
     # Corresponding command line:
     #
-    # -add-detector={detector: experiments/clas12/ec; factory: TEXT;}
+    # +detector={detector: experiments/clas12/ec; factory: TEXT;}
     
-    "add-detector": [
+    "+detector": [
         {
             "detector": "experiments/clas12/ec/ec",
             "factory": "TEXT"
@@ -27,10 +27,10 @@
     #
     # Corresponding command lines:
     #
-    # -mapProperty={fieldmap: TorusSymmetric; scale: -1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear}
-    # -add-mapProperty={fieldmap: clas12-newSolenoid; scale: 1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear;}
+    # +mapProperty={fieldmap: TorusSymmetric; scale: -1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear}
+    # +mapProperty={fieldmap: clas12-newSolenoid; scale: 1; maxStep: -1*mm; method: G4ClassicalRK4; interpolation: linear;}
     
-    "mapProperty": [
+    "+mapProperty": [
         { "fieldmap": "TorusSymmetric", "scale": -1, "maxStep": "2*mm", "method": "G4ClassicalRK4", "interpolation": "linear"},
         
         # as an example we use carriage return to organize the fields
@@ -50,7 +50,7 @@
     #
     # -add-particle={pid: proton; p: 2*GeV; theta: 10*deg; phi: 280*deg; deltaTheta: 5*deg, deltaPhi: 180*deg; multiplicity: 2;}
     
-    "add-particle": [
+    "+particle": [
         {
             "pid": "proton",
             
