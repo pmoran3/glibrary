@@ -96,7 +96,8 @@ vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 	// base jcard
 	// removing '#' from "base" (command line) jcard
 	// function is defined in gstrings
-	string basePureJsonString = parseFileAndRemoveComments(jcardFilename);
+	string basePureJsonString = parseFileAndRemoveComments(jcardFilename, "#");
+
 	if ( gdebug ) {
 		cout << endl << GREENSQUAREITEM << " Parsing base jcard content: " << endl << basePureJsonString << endl;
 
@@ -144,15 +145,17 @@ void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 				continue;
 			}
 
-			if ( gdebug ) {
-				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue << endl;
-			}
-
-			// remove add- string from key. This does nothing unless the option is an addition
+			// remove add- string from key. This does nothing unless the option is an addition.
 			string userJsonKeyRoot = replaceAllStringsWithString(userJsonKey, "add-", "");
 
 			// true if add- was found (no replacement in string)
 			bool isAnAddition = (userJsonKey != userJsonKeyRoot);
+
+			if ( gdebug ) {
+				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << " -  Content: " << userJsonValue ;
+				cout << " userJsonKeyRoot: " << BOLDWHHL << userJsonKeyRoot << RSTHHR << " is an addition: " << isAnAddition << endl;
+			}
+
 
 			// GOption index, -1 if not found
 			long userJsonOptionDefinitionIndex = findOptionIndex(userJsonKeyRoot);

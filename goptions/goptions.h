@@ -51,7 +51,10 @@ public:
 	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
 	 * \param help the full description of the option. Multiple lines are 
 	 * \param multiple if an option belongs to a group, options can be collected by using -add-\<name\>\n
-	 * Example: { { GNAME: "runno", GDESC: "run number", GDFLT: 11}, { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4} }
+	 * Example: {
+	 *    {  GNAME: "runno",      GDESC: "run number",          GDFLT: 11},
+	 *    {  GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
+	 *	 }
 	 */
 	GOption(string name, string description, json joptionDefinition, string help = "na", bool multiple = false);
 
@@ -82,19 +85,22 @@ private:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
 	vector<json> jOptionAssignedValues;
+	bool isDefault = false;    // true if jOptionAssignedValues is default
 
 
 	// utilities to characterize the option
-	void checkTagIsValid(string key, bool gdebug); // check if a tag is defined. Exit if it's not
-	bool isDefaultValue(json jValue);              // check if the default value is assigned
-	bool isSimpleption();                          // check if it's a simple option
+	void checkTagIsValid(string key, bool gdebug);    // check if a tag is defined. Exit if it's not
+	bool isDefaultValue(string key, json userValue);  // check if userValue matches the default value
+	bool isSimpleption();                             // check if it's a simple option
 
 	// if an option is multiple, options must be collected by using -add-<name>
 	// jOptionAssignedValues can have multiple entries
 	const bool multiple;
 
 	// parse user jsons options and assign jOptionAssignedValues accordingly
-	void assignValuesFromJson(string keyAssigned, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);
+	void assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);
+	void assignSingleValueFromSimpleJson(string userJsonKey, json userJsonValues, bool gdebug, bool gstrict);
+	void assignSingleValueFromStructuredJson(string userJsonKey, json userJsonValues, bool gdebug, bool gstrict);
 
 	// print the options different from defaults
 	// if withDefaults is true also print the defaults
