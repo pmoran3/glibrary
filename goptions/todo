@@ -1,10 +1,10 @@
 - common bool mechanism from command line
 - jcard string should be variable?
 
-- non-multiple: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
-- multiple options must be added ONLY with -add-
+- non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
+- cumulative options must be added ONLY with -add-
 
-- add multipledStructured example
+- add cumulativeStructured example
 - add function to shift each line of help by correct formatting spaces
 
 

@@ -1,5 +1,5 @@
 {
-	# detectors is a non multiple structured option.
+	# detectors is a non cumulative structured option.
 	#
 	# -strict non passed: the last instance of this option will overwrite any previous instances
 	# -strict passed: exit if a duplicate option is found

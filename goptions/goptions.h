@@ -49,14 +49,14 @@ public:
 	 * \param name option title
 	 * \param description summary description. This is used in the search.
 	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param help the full description of the option. Multiple lines are 
-	 * \param multiple if an option belongs to a group, options can be collected by using -add-\<name\>\n
+	 * \param help the full description of the option. Multiple lines are separated by \"\n\".
+	 * \param cumulative if an option belongs to a group, options can be collected by using -add-\<name\>.\n
 	 * Example: {
 	 *    {  GNAME: "runno",      GDESC: "run number",          GDFLT: 11},
 	 *    {  GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
 	 *	 }
 	 */
-	GOption(string name, string description, json joptionDefinition, string help = "na", bool multiple = false);
+	GOption(string name, string description, json joptionDefinition, string help = "na", bool cumulative = false);
 
 
 private:
@@ -93,9 +93,9 @@ private:
 	bool isDefaultValue(string key, json userValue);  // check if userValue matches the default value
 	bool isSimpleption();                             // check if it's a simple option
 
-	// if an option is multiple, options must be collected by using -add-<name>
+	// if an option is cumulative, options must be collected by using -add-<name>
 	// jOptionAssignedValues can have multiple entries
-	const bool multiple;
+	const bool cumulative;
 
 	// parse user jsons options and assign jOptionAssignedValues accordingly
 	void assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);

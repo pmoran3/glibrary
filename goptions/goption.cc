@@ -20,7 +20,7 @@ name{j[GNAME]},
 description{j[GDESC]},
 joptionDefinition{j},
 help{j[GDESC]},
-multiple{false}
+cumulative{false}
 {
 	// assigning defaults values 
 	json jValue;
@@ -45,7 +45,7 @@ name{n},
 description{d},
 joptionDefinition{j},
 help{h},
-multiple{m}
+cumulative{m}
 {
 	// don't do anything if any tag has GDFLT = NODFLT
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
@@ -76,8 +76,8 @@ multiple{m}
 // this exits if:
 //
 // - a tag is not defined
-// - add- was not used for a multiple option
-// - add- was used for a non multiple option
+// - add- was not used for a cumulative option
+// - add- was used for a non cumulative option
 // - user did not provide a value that must be set (options w/o default values)
 //
 // These options come ordered
@@ -85,16 +85,16 @@ multiple{m}
 void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict)
 {
 	// clear jValues if add- is not found
-	// and the option is multiple
-	if ( !isAddition && multiple ) {
-		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is multiple. Mandatory \"add-\" directive was not given. " << endl;
-		gexit(NOADDFORMULTIPLE);
+	// and the option is cumulative
+	if ( !isAddition && cumulative ) {
+		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
+		gexit(NOADDFORCUMULATIVE);
 	}
 
-	// if add- was found but option is not multiple, it's a mistake.
-	if ( isAddition && !multiple ) {
-		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple but \"add-\" was given. " << endl;
-		gexit(ADDFORNONMULTIPLE);
+	// if add- was found but option is not cumulative, it's a mistake.
+	if ( isAddition && !cumulative ) {
+		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
+		gexit(ADDFORNONCUMULATIVE);
 	}
 
 	// looping over all user jsons
@@ -137,12 +137,12 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 	if ( jOptionAssignedValues.size() && !isDefault ) {
 		// strict: error
 		if ( gstrict ) {
-			cout << FATALERRORL " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple, is already present, and it's not the default. " << endl;
-			gexit(NONMULTIPLEFOUND);
+			cout << FATALERRORL " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative, is already present, and it's not the default. " << endl;
+			gexit(NONCUMULATIVEALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
 		} else {
-			cout << GWARNING " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple and is already present, and it's not the default." << endl;
+			cout << GWARNING " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative and is already present, and it's not the default." << endl;
 		}
 	}
 
@@ -229,8 +229,10 @@ void GOption::assignSingleValueFromStructuredJson(string userJsonKey, json userJ
 // check if userValue matches the default value
 bool GOption::isDefaultValue(string key, json userValue) {
 
-	bool isUserDefault = false;
+	// false if there is no default
+	if ( ! isDefault ) return false;
 
+	bool isUserDefault = false;
 
 	// simple option
 	if ( ! userValue.is_structured() ) {
@@ -341,7 +343,7 @@ void GOption::printOption(bool withDefaults)
 	// non groupable options are printed on screen differently
 	for (auto& jValue: jOptionAssignedValues) {
 		
-		if (multiple) {
+		if (cumulative) {
 			cout << TPOINTITEM ;
 			for (auto& [jValueKey, jValueValue] : jValue.items()) {
 				cout << jValueKey << ": " << jValueValue << "\t";

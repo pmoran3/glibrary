@@ -30,11 +30,11 @@
 // exit codes: 100s
 #define NOOPTIONFOUND               101
 #define MANDATORYOPTIONNOTFOUND     102
-#define NOADDFORMULTIPLE            103
-#define ADDFORNONMULTIPLE           104
+#define NOADDFORCUMULATIVE          103
+#define ADDFORNONCUMULATIVE         104
 #define JSONPARSEERROR              105
 #define OPTIONSHOULDNOTBESTRUCTURED 106
-#define NONMULTIPLEFOUND            107
+#define NONCUMULATIVEALREADYPRESENT 107
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {
