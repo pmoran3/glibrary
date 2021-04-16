@@ -143,20 +143,19 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 			// the last appereance of the option is the valid one
 		} else {
 			cout << GWARNING " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non multiple and is already present, and it's not the default." << endl;
-			jOptionAssignedValues.clear();
 		}
 	}
 
 
+	newUserValue[userJsonKey] = assignedValue;
 	if ( gdebug ) {
 		cout << TGREENPOINTITEM << " Assigning Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << assignedValue <<  endl;
 	}
 
 	// valid, non default assigning it
-	newUserValue[userJsonKey] = assignedValue;
+	jOptionAssignedValues.clear();
 	jOptionAssignedValues.push_back(newUserValue);
 	isDefault = false;
-
 }
 
 
@@ -220,7 +219,10 @@ void GOption::assignSingleValueFromStructuredJson(string userJsonKey, json userJ
 
 	// no unset key found at this point
 	// adding the newUserValue
+	// valid, non default assigning it
+	jOptionAssignedValues.clear();
 	jOptionAssignedValues.push_back(newUserValue);
+	isDefault = false;
 }
 
 

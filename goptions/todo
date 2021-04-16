@@ -17,3 +17,10 @@
 - help and search mechanism, through names and descriptions
 
 
+- unit testing:
+
+simple w/o jcard
+simple with jcard with one default
+simple with jcard with no default
+simple with jcard with no default with gdebug
+
