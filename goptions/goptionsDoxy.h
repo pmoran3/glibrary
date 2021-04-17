@@ -7,19 +7,19 @@
  * \mainpage
  * \section main Overview
  *
- * The goptions framework provides command line and JSON file parsing of user
- * defined options. The JSON files, or steering cards, have <i>.jcard</i> extension and are referred to as <i>jcards</i>.\n\n
+ * The goptions framework provides command line and JSON file parsing of user defined options.\n
+ * The JSON files (steering cards) have the extension "<i>.jcard</i>" and are referred to as <i>jcards</i>.\n\n
  *
  * \subsection subsection1 Simple Option
- * A simple command line option looks like:\n
- * <pre>	-runno=11  </pre>
- *
- * while the corresponding jcard syntax is:\n
+ * A simple option looks like this in the jcard:\n
  * ~~~
  *	"runno":  12
  * ~~~
+ * and the corresponding command line option is:\n
+ * <pre>	-runno=11  </pre>
+ *
  * \subsection subsection2 Structured Option
- * A structured option has this jcard syntax:\n
+ * A structured option has more multiple tag/value entries associated with a tag. In the jcard:\n
  * ~~~
  * "beam": {
  * 	"vertex": "0, 0, -3, cm",
@@ -28,28 +28,28 @@
  * ~~~
  * and the corresponding  command line option is:\n
  * <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4*GeV, 20*deg, 180*deg; }  </pre>
- * Notice the absence of quotes from the command line: the semi-colon delimits the option value.
+ * Notice the absence of quotes from the command line: the semi-colons delimit the values.
  * \n
  *
- * \subsection subsection3 Goptions  Features
- * * Goptions can be dynamically added to an executable by a framework or plugin
- * * Superposition of  command line / jcards.
+ * \subsection subsection3 Goptions  Main Features
+ * * Goptions are dynamically added to an executable by a framework or plugin
+ * * Superposition of  command line / jcards option values.
+ * * Mechanism to project options onto user defined structure/class
+ * * Mechanism to import child jcards.
  * * JSON output of user selections.
  * * HTML output of options help.
- * * Mechanism to import child jcards.
- * * Mechanism to project options onto user defined structure/class
  *
  * \subsection subsection4 C++ User Interface
- * The users defines his/her own GOption map by calling the GOptions constructor:
+ * The users build his/her own GOptions class by calling the constructor:
  * <pre> GOptions(argc, argv, defineOptions())</pre>
  *
  * \param "argc, argv" passed from "main"
- * \param defineOptions() is a function returning a map<string, GOption>
+ * \param defineOptions() is the function building the options map.
  *
- * Check the examples below to see how to define a few GOptions.
+ * Check the examples below to see how to define and use a few GOptions.
  *
  * \subsubsection subsubsection1 Projections Onto Structures
- * A JSON structure can be projected onto a user structure 
+ * GOptions can be projected onto a user structures.
  *
  *
  * \subsection subsection5 examples

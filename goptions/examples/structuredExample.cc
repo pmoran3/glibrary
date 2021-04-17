@@ -55,24 +55,21 @@ namespace goptions {
 	};
 
 	void from_json(const json& j, GDetector& det) {
+		//auto jdet = j.at("gdetector");
 		j.at("detector").get_to(det.detector);
 		j.at("factory").get_to(det.factory);
 		j.at("variation").get_to(det.variation);
 	}
 
 	// method to return a vector of GDetectors from a structured option
-	vector<GDetector> getDetectors(GOptions *gopts) {
+	GDetector getDetector(GOptions *gopts) {
 
-		vector<GDetector> detectors;
+		// getting json detector from option
+		auto gdet = gopts->getOptionAssignedValues("gdetector");
 
-		// looking over each of the vector<json> items
-		for (const auto& gdet: gopts->getOptionAssignedValues("gdetector")) {
-			detectors.push_back(gdet.get<GDetector>());
-		}
-
-		return detectors;
+		// projecting it onto GDetector structure
+		return gdet.front().get<GDetector>();
 	}
-	
 
 }
 
@@ -86,15 +83,11 @@ int main(int argc, char* argv[])
 	gopts->printSettings(true);
 
 	// Perhaps there's a better modern way to do this
-	vector<goptions::GDetector> detectors = goptions::getDetectors(gopts);
+	goptions::GDetector gdet = goptions::getDetector(gopts);
 
-	if (detectors.size()) {
-		cout << " Accessing projected structure: " << endl << endl;
-		for (auto& det: detectors) {
-			cout << " detector: " << det.detector << ",\t factory: " << det.factory << ",\t variation: " << det.variation << endl;
-		}
+		cout << " Accessing projected structure GDetector: " << endl << endl;
+		cout << " detector: " << gdet.detector << ", factory: " << gdet.factory << ", variation: " << gdet.variation << endl;
 		cout << endl;
-	}
 	
 	return EXIT_SUCCESS;
 }

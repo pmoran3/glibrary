@@ -22,7 +22,7 @@ joptionDefinition{j},
 help{j[GDESC]},
 cumulative{false}
 {
-	// assigning defaults values 
+	// assigning defaults values
 	json jValue;
 
 	// by constructon the keys will always be there
@@ -118,7 +118,7 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 		// looping over all user jsons
 		for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValues.items()) {
 
-			newUserValue[userJsonKey] = assignSingleValueFromStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
+			newUserValue[userJsonKeyInValues] = assignSingleValueFromStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
 		}
 
 		// at this point all json keys are valid, and the user json keys are assigned properly
@@ -128,55 +128,55 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 		// looking for unset keys in the option definition
 		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
 
-			bool thisTagWasFoundAndAssigned = false;
-
-			// looping over tags inside option
+			// looping over tags inside option definition
 			for ( auto& jsonTagValue : definitionJsonValue.items() )  {
 
+				// main structure option GOption tag
 				if ( jsonTagValue.key() == GNAME ) {
+
+					bool thisTagWasFoundAndAssigned = false;
 					string tagToCheck = jsonTagValue.value() ;
 
 					if ( gdebug ) {
 						cout << TGREENPOINTITEM << "Checking if user key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
 					}
 
+					// structure option, looping over tags
+					// looping over all user jsons
+					for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValues.items()) {
+						if ( tagToCheck == userJsonKeyInValues ) {
+							thisTagWasFoundAndAssigned = true;
+							if ( gdebug ) {
+								cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
+							}
+						}
+					}
+
+					// tag value not assigned.
+					// Assign the default value if it's defined.
+					// Exiting if it was mandatory.
+					if( !thisTagWasFoundAndAssigned ) {
+
+						if (definitionJsonValue[GDFLT] == NODFLT) {
+							cerr << FATALERRORL << tagToCheck <<  " in " << definitionJsonValue << " is marked mandatory but it's not set." << endl;
+							gexit(MANDATORYOPTIONNOTFOUND);
+						}
+
+						// assigning its default value
+						newUserValue[tagToCheck] = definitionJsonValue[GDFLT];
+						if ( gdebug ) {
+							cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR ;
+							cout << " is not assigned. Setting it to " << HHL << definitionJsonValue[GDFLT] << HHR << endl;
+						}
+
+					}
+
 
 				}
 
 
-				//			if ( jsonTagValue.key() == GNAME && key == jsonTagValue.value() ) {
-				//				if ( gdebug ) {
-				//					cout << TTPOINTITEM << key << "key matches " << jsonTagValue.value() << endl;
-				//				}
-				//				isDefined = true;
-				//			}
-
 			}
 
-
-
-
-			//		for (auto& [userJsonKey, userJsonValue] : newUserValue.items()) {
-			//
-			//			// user assigned an option definition
-			//			if (userJsonKey == tagToCheck) {
-			//				thisTagWasFoundAndAssigned = true;
-			//			}
-			//		}
-			//
-			//		// tag value not defined.
-			//		// Exiting if it was mandatory.
-			//		// assign the default value if
-			//		if(!thisTagWasFoundAndAssigned) {
-			//
-			//			if (definitionJsonValue[GDFLT] == NODFLT) {
-			//				cerr << FATALERRORL << tagToCheck <<  " in " << userJsonValue << " is marked mandatory but it's not set." << endl;
-			//				gexit(MANDATORYOPTIONNOTFOUND);
-			//			}
-			//			// assigning its default value
-			//			newUserValue[tagToCheck] = definitionJsonValue[GDFLT];
-			//
-			//		}
 		}
 
 
@@ -198,7 +198,7 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 
 	// userJsons is simple
 	if ( gdebug ) {
-		cout << TGREENPOINTITEM << "Assigning simple option " << BOLDWHHL << userJsonKey << RSTHHR << " with " << userJsonValue << endl;
+		cout << TGREENPOINTITEM << "Assigning simple option " << BOLDWHHL << userJsonKey << RSTHHR << " with value " << HHL << userJsonValue << HHR << endl;
 	}
 
 	checkTagIsValid(userJsonKey, gdebug);
@@ -223,7 +223,7 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 	// tag is valid, assigning it
 	newUserValue[userJsonKey] = assignedValue;
 	if ( gdebug ) {
-		cout << TGREENPOINTITEM << " Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << assignedValue <<  endl;
+		cout << TGREENPOINTITEM << " Json Option " << GREENHHL << userJsonKey << RSTHHR << " set with value: " << HHL << assignedValue << HHR << endl;
 	}
 
 	// valid, non default assigning it
@@ -244,7 +244,7 @@ json GOption::assignSingleValueFromStructuredJson(string userJsonKey, string tag
 
 	// tag is valid, returning it
 	if ( gdebug ) {
-		cout << TTPOINTITEM << "Assigning single user key " << YELLOWHHL << tagInJsonValues << RSTHHR << " with value: " << userJsonValue << endl;
+		cout << TTPOINTITEM << "Assigning single user key " << YELLOWHHL << tagInJsonValues << RSTHHR << " with value: " << HHL << userJsonValue << HHR << endl;
 	}
 
 	return userJsonValue;
@@ -309,7 +309,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 
 				if (key == definitionJsonValue) {
 					if ( gdebug ) {
-						cout << TTPOINTITEM << key << "key matches " << definitionJsonValue << endl;
+						cout << TTPOINTITEM << "key matches " << definitionJsonValue << endl;
 					}
 					isDefined = true;
 				}
@@ -322,7 +322,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 			for ( auto& jsonTagValue : definitionJsonValue.items() )  {
 				if ( jsonTagValue.key() == GNAME && key == jsonTagValue.value() ) {
 					if ( gdebug ) {
-						cout << TTPOINTITEM << key << "key matches " << jsonTagValue.value() << endl;
+						cout << TTPOINTITEM << "key matches " << jsonTagValue.value() << endl;
 					}
 					isDefined = true;
 				}

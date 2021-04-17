@@ -29,7 +29,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 		if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
 			gdebug = true;
 			if ( gdebug ) {
-				cout << endl << REDPOINTITEM << "gdebug option set is set. " << endl;
+				cout << endl << ARROWITEM << "gdebug option set is set. " << endl;
 				if (gstrict) {
 					cout << endl << REDPOINTITEM << "gstrict option set is set. " << endl;
 				}
@@ -158,7 +158,7 @@ void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 			if ( gdebug ) {
 				cout << endl << GREENSQUAREITEM << "Looking to assign Json Key " << BOLDWHHL << userJsonKey << RSTHHR << endl;
 				cout << GTAB << "Content: " << userJsonValue << endl;
-				cout << GTAB << "userJsonKeyRoot: " << BOLDWHHL << userJsonKeyRoot << RSTHHR << endl;
+				cout << GTAB << "userJsonKeyRoot: " << userJsonKeyRoot  << endl;
 				cout << GTAB << "Is an addition: " << isAnAddition << endl;
 			}
 
