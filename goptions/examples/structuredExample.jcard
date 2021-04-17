@@ -11,6 +11,6 @@
 	# as an example we use carriage return to organize the fields
 	"gdetector": {
 		"detector": "experiments/clas12/rtpc",
-		"factory": "TEXT",
+		"factory": "TEXT"
 	}
 }

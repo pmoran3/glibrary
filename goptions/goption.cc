@@ -118,21 +118,12 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 		// looping over all user jsons
 		for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValues.items()) {
 
-//			// if userJsonValue is default, nothing to do
-//			if ( isDefaultValue(userJsonKey, userJsonValue) ) {
-//				if ( gdebug ) {
-//					cout << TGREENPOINTITEM << "Structure option option " << YELLOWHHL << userJsonKey << RSTHHR << " is assigned the default value. " << userJsonValue << ". Nothing to do." << endl;
-//				}
-//				return;
-//			}
-
 			newUserValue[userJsonKey] = assignSingleValueFromStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
 		}
 
 		// at this point all json keys are valid, and the user json keys are assigned properly
 		// we need to assign default values for all the keys the user didn't set
-		// if some of the unset values option must provide a default, this routine will exit
-
+		// if some of the unset values option must provide a default, this routine will exit with error
 
 		// looking for unset keys in the option definition
 		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {

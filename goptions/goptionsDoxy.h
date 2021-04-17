@@ -8,21 +8,21 @@
  * \section main Overview
  *
  * The goptions framework provides command line and JSON file parsing of user
- * defined options.\n\n
+ * defined options. The JSON files, or steering cards, have <i>.jcard</i> extension and are referred to as <i>jcards</i>.\n\n
  *
  * \subsection subsection1 Simple Option
  * A simple command line option looks like:\n
  * <pre>	-runno=11  </pre>
  *
- * while the corresponding JSON syntax is:\n
+ * while the corresponding jcard syntax is:\n
  * ~~~
  *	"runno":  12
  * ~~~
  * \subsection subsection2 Structured Option
- * A structured option has this JSON syntax:\n
+ * A structured option has this jcard syntax:\n
  * ~~~
  * "beam": {
- * 	"vertex": "0, 0, -3, cm",\n
+ * 	"vertex": "0, 0, -3, cm",
  * 	"value": "electron, 4*GeV, 20*deg, 180*deg"
  * }
  * ~~~
@@ -32,11 +32,11 @@
  * \n
  *
  * \subsection subsection3 Goptions  Features
- * * Options can be read from a JSON file with extension \".jcard", called <i>jcard steering file</i>
  * * Goptions can be dynamically added to an executable by a framework or plugin
- * * Superposition of  command line / jcard.
- * * JSON, HTML outputs for documentation
- * * Can import child jcards 
+ * * Superposition of  command line / jcards.
+ * * JSON output of user selections.
+ * * HTML output of options help.
+ * * Mechanism to import child jcards.
  * * Mechanism to project options onto user defined structure/class
  *
  * \subsection subsection4 C++ User Interface
