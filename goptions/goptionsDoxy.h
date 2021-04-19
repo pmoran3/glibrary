@@ -26,15 +26,15 @@
  * 	"value": "electron, 4*GeV, 20*deg, 180*deg"
  * }
  * ~~~
- * and the corresponding  command line option is:\n
+ * The corresponding  command line option is:\n
  * <pre>	-beam={ vertex: 0, 0, -3, cm; mom: electron, 4*GeV, 20*deg, 180*deg; }  </pre>
- * Notice the absence of quotes from the command line: the semi-colons delimit the values.
+ * Notice the absence of quotes in the command line: the colons delimit the values, the semi-colons delimit the fields.
  * \n
  *
  * \subsection subsection3 Goptions  Main Features
- * * Goptions are dynamically added to an executable by a framework or plugin
+ * * Goptions are dynamically added to an executable by a framework or plugin.
  * * Superposition of  command line / jcards option values.
- * * Mechanism to project options onto user defined structure/class
+ * * Mechanism to project options onto user defined structure/class.
  * * Mechanism to import child jcards.
  * * JSON output of user selections.
  * * HTML output of options help.

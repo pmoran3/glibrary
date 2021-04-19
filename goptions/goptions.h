@@ -131,7 +131,7 @@ private:
 	// read directly in the command line to control option debugging
 	// an option cannot be used because the parsing is part of the debug
 	// activate debug logging
-	bool gdebug;
+	bool gdebug = false;
 
 	// read directly in the command line to control option debugging
 	// an option cannot be used because the parsing is part of the debug

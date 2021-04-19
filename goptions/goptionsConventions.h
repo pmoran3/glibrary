@@ -15,17 +15,10 @@
 #define PRINTALLOPTIONS "printAllOptions"
 #define GOPTIONDOCUMENTATION "https://gemc.github.io/glibrary/goptions/"
 
-//// standardizing verbosity
-//#define GVERBOSITY_SILENT  0
-//#define GVERBOSITY_SUMMARY 1
-//#define GVERBOSITY_DETAILS 2
-//#define GVERBOSITY_ALL     3
-//
-//// verbosity description
-//#define GVERBOSITY_SILENT_D  " ・ 0: silent\n"
-//#define GVERBOSITY_SUMMARY_D " ・ 1: summary information\n"
-//#define GVERBOSITY_DETAILS_D " ・ 2: detailed information\n"
-//#define GVERBOSITY_ALL_D     " ・ 3: max verbosity\n"
+// standardizing verbosity
+#define GVERBOSITY_SUMMARY 1 // prints only summary message
+#define GVERBOSITY_DETAILS 2 // print all details
+
 
 // exit codes: 100s
 #define NOOPTIONFOUND               101
