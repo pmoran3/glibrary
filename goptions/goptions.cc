@@ -21,6 +21,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) :
 		goptions.push_back(ourOption);
 	}
 
+	// parse command line options
+
 	// check if gdebug, gstrict are set on the command line
 	for(int i=1; i<argc; i++) {
 		if ( strcmp(argv[i], GSTRICTSTRING) == 0 ) {
@@ -236,7 +238,6 @@ void GOptions::printSettings(bool withDefaults)
 json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 	// will exit if not found
-
 	if(getOptionAssignedValues(tag).size() == 0) {
 		cerr << FATALERRORL << " The tag " << tag << " is not assigned. " << endl;
 		gexit(OPTIONNOTASSIGNED);
@@ -273,6 +274,11 @@ double GOptions::getDouble(string tag) {
 	return jn[tag].get<double>();
 }
 
+double GOptions::getBool(string tag) {
+	// will exit if not found
+	json jn = getNonStructuredOptionSingleValue(tag);
+	return jn[tag].get<bool>();
+}
 
 
 // options for GOption

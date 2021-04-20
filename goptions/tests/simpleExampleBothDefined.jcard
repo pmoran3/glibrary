@@ -4,5 +4,5 @@
 	# runno and useGui are non structured options
 
 	"runno":  12,
-	"useGui": 1
+	"useGui": true
 }

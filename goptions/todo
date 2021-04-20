@@ -1,11 +1,11 @@
-- common bool mechanism from command line
-- jcard string should be variable?
+- parse command line
+- jcard string should be a variable of goptions?
 
 - non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
-- cumulative options must be added ONLY with -add-
+- cumulative options must be added ONLY with +
 
 - add cumulativeStructured example
-- add function to shift each line of help by correct formatting spaces
+- print help (shift each line be TTAB)
 
 
 > -h, -help, --help: print this message and exit.
@@ -13,11 +13,10 @@
 
 - print defaults mechanism missing
 - general debug option -debug=string
-- command line parsing is missing
 - help and search mechanism, through names and descriptions
 
 
-- unit testing:
+- tests:
 
 simple w/o jcard
 simple with jcard with one default

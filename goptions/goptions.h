@@ -171,6 +171,7 @@ public:
 	int getInt(string tag);       ///< gets the integer value associated with non structured option \"tag\"
 	float getFloat(string tag);   ///< gets the float value associated with non structured option \"tag\"
 	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
+	double getBool(string tag);   ///< gets the bool value associated with non structured option \"tag\"
 
 	// get option is private because the public only uses getType, or projection onto structures
 	vector<json> getOptionAssignedValues(string tag);
