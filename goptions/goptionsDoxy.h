@@ -51,7 +51,6 @@
  * \subsubsection subsubsection1 Projections Onto Structures
  * GOptions can be projected onto a user structures.
  *
- *
  * \subsection subsection5 examples
  * An example of defineOptions() that creates two categories is in simpleExample.cc:
  * Running <i>example -h</i> will produce the following log:
@@ -68,6 +67,8 @@
  * The JSON parser used is in this project is https://github.com/nlohmann/json. It's included as a single hpp.\n
  *
  * A json validator can be found here: https://codebeautify.org/jsonvalidator
+ *
+ * \subsection cisubsection Continuous Integration
  *
  * \n\n
  * \author \n &copy; Maurizio Ungaro

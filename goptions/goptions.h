@@ -39,7 +39,7 @@ public:
 
 	/**
 	 * @details Constructor for simple option. Non groupable. Help is the goption description
-	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of
+	 * \param joptionDefinition is the option in JSON format.
 	 * Example: { GNAME: "runno", GDESC: "run number", GDFLT: 11 }
 	 */
 	GOption(json joptionDefinition);
@@ -48,13 +48,13 @@ public:
 	 * @details Constructor for structured option
 	 * \param name option title
 	 * \param description summary description. This is used in the search.
-	 * \param joptionDefinition contains the verbosity (defaulted at silent) and array of these objects.
-	 * \param help the full description of the option. Multiple lines are separated by \"\n\".
-	 * \param cumulative if an option belongs to a group, options can be collected by using -add-\<name\>.\n
+	 * \param joptionDefinition is the option in JSON format.
 	 * Example: {
 	 *    {  GNAME: "runno",      GDESC: "run number",          GDFLT: 11},
 	 *    {  GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
 	 *	 }
+	 * \param help the full description of the option. Multiple lines are separated by \"\n\".
+	 * \param cumulative if an option belongs to a group, options can be collected by using -add-\<name\>.\n
 	 */
 	GOption(string name, string description, json joptionDefinition, string help = "na", bool cumulative = false);
 

@@ -30,7 +30,7 @@ vector<GOption> defineOptions()
 	json jsonGuiOption = {
 		{GNAME, "useGui"},
 		{GDESC, "Graphical User Interface. Possible Values: 0/1. Default: 0"},
-		{GDFLT, 0}
+		{GDFLT, true}
 	};
 
 	goptions.push_back(GOption(jsonGuiOption));
