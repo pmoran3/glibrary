@@ -7,7 +7,7 @@
  * \mainpage
  * \section main Overview
  *
- * The goptions framework provides command line and JSON file parsing of user defined options.\n
+ * The goptions framework provides command line and/or JSON file parsing of user defined options.\n
  * The JSON files (steering cards) have the extension <i>".jcard"</i> and are referred to as <i>jcards</i>.\n\n
  *
  * \subsection subsection1 Simple Option

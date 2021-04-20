@@ -4,5 +4,6 @@
 	# runno and useGui are non structured options
 
 	"runno":  12,
-	"useGui": true
+	"nthreads": 8
+
 }

@@ -65,7 +65,7 @@ namespace goptions {
 	GDetector getDetector(GOptions *gopts) {
 
 		// getting json detector from option
-		auto gdet = gopts->getOptionAssignedValues("gdetector");
+		auto gdet = gopts->getStructuredOptionAssignedValues("gdetector");
 
 		// projecting it onto GDetector structure
 		return gdet.front().get<GDetector>();

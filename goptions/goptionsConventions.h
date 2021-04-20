@@ -2,10 +2,11 @@
 #define  GOPTIONS_CONVENTIONS_H  1
 
 //  TAGS
-#define GNAME  "JsonTagGNAME"
-#define GDESC  "JsonTagGDESCription"
-#define GDFLT  "jsonTagDefault"
-#define NODFLT "NODFLT"
+#define GNAME     "JsonTagGNAME"
+#define GDESC     "JsonTagGDESCription"
+#define GDFLT     "jsonTagDefault"
+#define NODFLT    "NODFLT"
+#define SWTICHOFF "switchOff"
 
 #define IMPORTJCARD "import jcard"
 
@@ -29,6 +30,7 @@
 #define OPTIONSHOULDNOTBESTRUCTURED 106
 #define NONCUMULATIVEALREADYPRESENT 107
 #define OPTIONNOTASSIGNED           108
+#define SWITCHALREADYPRESENT        109
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {

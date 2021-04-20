@@ -24,6 +24,33 @@ using namespace std;
 // should this be part of a namespace ?
 void gexit(int error);
 
+
+/**
+ * The GSwitch contains the switch description and its status
+ */
+class GSwitch {
+public:
+
+	/// empty constructor, needed for the initial empty unordered_map<string, GSwitch> switches;
+	GSwitch() { return ;}
+
+	/**
+	 * @brief Constructor, status is false at construction
+	 * \param d switch description
+	 */
+	GSwitch(string d) : description(d), status(false) { return ;}
+
+	/// @brief turn on switch
+	void turnOn() { status = true;}
+	/// @brief get switch status
+	bool getStatus() { return status;}
+
+private:
+	string description;
+	bool status;
+
+};
+
 /**
  * The class is used to:
  * * define an option
@@ -33,9 +60,12 @@ void gexit(int error);
 class GOption
 {
 public:
-
-	/// default copy constructor
-	GOption ( const GOption & ) = default;
+	/**
+	 * @brief Constructor for switches.
+	 * \param name the switch name
+	 * \param description the switch description
+	 */
+	GOption(string name, string description);
 
 	/**
 	 * @details Constructor for simple option. Non groupable. Help is the goption description
@@ -63,6 +93,7 @@ private:
 
 	const string name;         // option name
 	const string description;  // summary description. This is used in the search.
+	bool isSwitch = false;     // if it's a switch, it will not be added to the vector<GOption> but to the map of switches
 
 	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
 	// Example: {
@@ -111,6 +142,7 @@ private:
 };
 
 
+
 /**
  * Contains STL the (private) GOption array
  */
@@ -119,7 +151,7 @@ class GOptions
 public:
 
 	/**
-	 * @details User Constructor
+	 * @details Users Constructor
 	 * \param argc number of arguments, passed from "main"
 	 * \param argv argument arrays of *chars, passed from main
 	 * \param goptionDefinitions vector of user options, usually returned by a defineOptions() function
@@ -142,6 +174,9 @@ private:
 	// GOption array
 	vector<GOption> goptions;
 
+	// Switches map
+	unordered_map<string, GSwitch> switches;
+
 	// jcards parsing utilities
 	string findBaseJCard(int argc, char *argv[]);  // finds a configuration file (jcard). Returns "na' if not found.
 
@@ -159,6 +194,8 @@ private:
 	// options for GOptions
 	vector<GOption>  defineGOptionsOptions();
 
+	// add a switch to the map of switches
+	void addSwitch(string name, string description);
 
 public:
 
@@ -173,8 +210,13 @@ public:
 	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
 	double getBool(string tag);   ///< gets the bool value associated with non structured option \"tag\"
 
-	// get option is private because the public only uses getType, or projection onto structures
-	vector<json> getOptionAssignedValues(string tag);
+	/**
+	 * @brief Get the (structured) option json values corresponding to a tag
+	 * \param tag the structured option json tag
+	 * Used to project options onto structures (see structuredExample)
+	 */
+	vector<json> getStructuredOptionAssignedValues(string tag);
+
 
 };
 

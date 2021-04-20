@@ -14,31 +14,62 @@ using namespace gstring;
 // - parse the base jcard plus all imported jcards
 // - parse the command line options
 // - get our own option
-GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions) : goptions(goptionDefinitions)
+GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 {
+	// check if gdebug, gstrict are set on the command line
+	// gdebug, gstrict needs to be the very first thing set cause it affects the construction of all objects
+	for(int i=1; i<argc; i++) {
+		if ( strcmp(argv[i], GSTRICTSTRING) == 0 ) {
+			gstrict = true;
+		} else if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
+			gdebug = true;
+		}
+	}
+	cout << endl;
+	if ( gdebug ) {
+		cout << ARROWITEM << BOLDWHHL << "gdebug" << RSTHHR << " is set. " << endl;
+	}
+	if ( gstrict ) {
+		cout << ARROWITEM << BOLDWHHL << "gstrict" << RSTHHR << " is set. " << endl;
+	}
+
+	// adding non switches goptionDefinitions to goptions,
+	// and switches to map
+	for(auto &optiond: goptionDefinitions) {
+		if (  optiond.isSwitch ) {
+			addSwitch(optiond.name, optiond.description);
+		} else {
+			goptions.push_back(optiond);
+		}
+	}
+
 	// adding our options
 	for(auto &ourOption: defineGOptionsOptions()) {
 		goptions.push_back(ourOption);
 	}
 
-	// parse command line options
 
+	// parsing command line to check if any switch is turned on
 	// check if gdebug, gstrict are set on the command line
+	// gdebug, gstrict needs to be the very first thing set cause it affects the construction of all objects
 	for(int i=1; i<argc; i++) {
-		if ( strcmp(argv[i], GSTRICTSTRING) == 0 ) {
-			gstrict = true;
-		}
-		if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
-			gdebug = true;
-			if ( gdebug ) {
-				cout << endl << ARROWITEM << "gdebug option set is set. " << endl;
-				if (gstrict) {
-					cout << endl << REDPOINTITEM << "gstrict option set is set. " << endl;
+		string candidateSwitch = string(argv[i]);
+		if ( candidateSwitch[0] == '-' ) {
+			for (auto& [switchName, swiitchValue] : switches) {
+				string candidateRoot = candidateSwitch.substr(1, candidateSwitch.size() - 1);
+
+				if ( switchName ==  candidateRoot) {
+					swiitchValue.turnOn();
+
+					if ( gdebug ) {
+						cout  << GREENSQUAREITEM << "Switch option " << BOLDWHHL << candidateRoot << RSTHHR << " is set" << endl;
+					}
+
 				}
 			}
 		}
-	}
 
+	}
 
 	// finds a configuration file (jcard). Returns "na' if not found.
 	string jcardFilename = findBaseJCard(argc, argv);
@@ -102,7 +133,6 @@ vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 
 	if ( gdebug ) {
 		cout << endl << GREENSQUAREITEM << " Parsing base jcard content: " << endl << basePureJsonString << endl;
-
 	}
 
 	// building json object from base jcard
@@ -154,7 +184,7 @@ void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 
 			// if it's an addition, remove first char
 			if ( isAnAddition ) {
-				userJsonKeyRoot = userJsonKey.substr(1, userJsonKey.size() - 2);
+				userJsonKeyRoot = userJsonKey.substr(1, userJsonKey.size() - 1);
 			}
 
 			if ( gdebug ) {
@@ -194,7 +224,8 @@ long GOptions::findOptionIndex(string name) {
 	return -1;
 }
 
-vector<json> GOptions::getOptionAssignedValues(string tag) {
+
+vector<json> GOptions::getStructuredOptionAssignedValues(string tag) {
 
 	// this will exit if no option is found
 	long optionIndex = findOptionIndex(tag);
@@ -203,6 +234,21 @@ vector<json> GOptions::getOptionAssignedValues(string tag) {
 
 }
 
+
+void GOptions::addSwitch(string name, string description) {
+	if ( switches.find(name) == switches.end() ) {
+		switches[name] = GSwitch(description);
+	} else {
+		if ( gstrict ) {
+			cout << FATALERRORL " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
+			gexit(SWITCHALREADYPRESENT);
+			// non strict: warning and clear
+			// the last appereance of the option is the valid one
+		} else {
+			cout << GWARNING " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
+		}
+	}
+}
 
 // print only the non default settings set by users
 void GOptions::printSettings(bool withDefaults)
@@ -224,9 +270,14 @@ void GOptions::printSettings(bool withDefaults)
 
 	cout << endl << KGRN << " User Settings: " << RST << endl << endl;
 
+	for (auto& s: switches) {
+		cout << KGRN << ARROWITEM << s.first << RST << ": " << (s.second.getStatus() ? "true" : "false") << endl;
+	}
+
 	for(auto& jOption: goptions) {
 		jOption.printOption(withDefaults);
 	}
+
 
 	cout << endl;
 }
@@ -238,13 +289,13 @@ void GOptions::printSettings(bool withDefaults)
 json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 	// will exit if not found
-	if(getOptionAssignedValues(tag).size() == 0) {
+	if(getStructuredOptionAssignedValues(tag).size() == 0) {
 		cerr << FATALERRORL << " The tag " << tag << " is not assigned. " << endl;
 		gexit(OPTIONNOTASSIGNED);
 	}
 
 
-	json jn = getOptionAssignedValues(tag).front();
+	json jn = getStructuredOptionAssignedValues(tag).front();
 
 	if ( jn.begin().value().is_structured() ) {
 		cerr << FATALERRORL << " The tag " << tag << " is part of the structured option " << jn << endl;

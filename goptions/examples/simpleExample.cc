@@ -13,7 +13,7 @@ vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
 
-	// run option
+	// add a "runno" option
 	// not groupable
 	// no help, just description
 	json jsonRunOption = {
@@ -24,16 +24,20 @@ vector<GOption> defineOptions()
 
 	goptions.push_back(GOption(jsonRunOption));
 
-	// useGui option
+	// add a "nthreads" option
 	// not groupable
 	// no help, just description
-	json jsonGuiOption = {
-		{GNAME, "useGui"},
-		{GDESC, "Use Graphical User Interface. Possible Values: true / false. Default: false"},
-		{GDFLT, false}
+	json jsonNThreadsOption = {
+		{GNAME, "nthreads"},
+		{GDESC, "Number of hreadst"},
+		{GDFLT, 4}
 	};
 
-	goptions.push_back(GOption(jsonGuiOption));
+	goptions.push_back(GOption(jsonNThreadsOption));
+
+
+	// add a switch
+	goptions.push_back(GOption("gui", "Use Graphical User Interface"));
 
 	return goptions;
 }

@@ -1,5 +1,6 @@
 - parse command line
 - jcard string should be a variable of goptions?
+- act if a switch was passed but not recognized
 
 - non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
 - cumulative options must be added ONLY with +
@@ -15,11 +16,4 @@
 - general debug option -debug=string
 - help and search mechanism, through names and descriptions
 
-
-- tests:
-
-simple w/o jcard
-simple with jcard with one default
-simple with jcard with no default
-simple with jcard with no default with gdebug
 

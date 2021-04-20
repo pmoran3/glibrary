@@ -11,6 +11,18 @@ void gexit(int error) {
 	exit(error);
 }
 
+// constructor for switch option
+// if an option is defined with default values, it will be passed to jUserValues
+// users reset default values in the jcard or command lines
+GOption::GOption(string name, string d):
+name{name},
+description{d},
+isSwitch(true),
+cumulative(false)
+{
+	return;
+}
+
 
 // constructor for simple option
 // if an option is defined with default values, it will be passed to jUserValues
