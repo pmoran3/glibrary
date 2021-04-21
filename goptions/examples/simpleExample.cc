@@ -13,6 +13,9 @@ vector<GOption> defineOptions()
 {
 	vector<GOption> goptions;
 
+	// add a "gui" switch
+	goptions.push_back(GOption("gui", "Use Graphical User Interface"));
+
 	// add a "runno" option
 	// not groupable
 	// no help, just description
@@ -35,10 +38,6 @@ vector<GOption> defineOptions()
 
 	goptions.push_back(GOption(jsonNThreadsOption));
 
-
-	// add a switch
-	goptions.push_back(GOption("gui", "Use Graphical User Interface"));
-
 	return goptions;
 }
 
@@ -53,8 +52,9 @@ int main(int argc, char* argv[])
 
 	// get option and print it from here
 	int runno = gopts->getInt("runno");
+	bool gui  = gopts->getSwitch("gui");
 
-	cout << " simpleExample runno: " << runno << endl;
+	cout << " simpleExample runno: " << runno << ", gui: " << gui << endl;
 
 	return EXIT_SUCCESS;
 }

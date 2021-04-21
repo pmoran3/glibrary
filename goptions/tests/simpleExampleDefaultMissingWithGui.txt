@@ -6,4 +6,4 @@
 [32m ➤ runno[0m: 12
 [32m ➤ nthreads[0m: 4 (default)
 
- simpleExample runno: 12
+ simpleExample runno: 12, gui: 1

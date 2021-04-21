@@ -10,8 +10,13 @@
  * The goptions framework provides command line and/or JSON file parsing of user defined options.\n
  * The JSON files (steering cards) have the extension <i>".jcard"</i> and are referred to as <i>jcards</i>.\n\n
  *
- * \subsection subsection1 Simple Option
- * A simple option looks like this in the jcard:\n
+ * \subsection subsection0 Switch Command Line flag
+ * A switch is a variable, initialized to \"false\", that is switched true by command line. \n
+ * For example, the switch \"gui\" is true if the command lne contains:\n
+ * <pre>	-gui</pre>
+ *
+* \subsection subsection1 Simple Option
+ * A simple option has a int, float, double or string value associated with it, and looks like this in the jcard:\n
  * ~~~
  *	"runno":  12
  * ~~~
@@ -19,7 +24,7 @@
  * <pre>	-runno=11  </pre>
  *
  * \subsection subsection2 Structured Option
- * A structured option has more multiple tag/value entries associated with a tag. In the jcard:\n
+ * A structured option has multiple objects associated with a tag. In the jcard:\n
  * ~~~
  * "beam": {
  * 	"vertex": "0, 0, -3, cm",

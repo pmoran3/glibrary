@@ -308,27 +308,31 @@ json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 
 int GOptions::getInt(string tag) {
-	// will exit if not found
-	json jn = getNonStructuredOptionSingleValue(tag);
+	json jn = getNonStructuredOptionSingleValue(tag); // will exit if not found
 	return jn[tag].get<int>();
 }
 
 float GOptions::getFloat(string tag) {
-	// will exit if not found
-	json jn = getNonStructuredOptionSingleValue(tag);
+	json jn = getNonStructuredOptionSingleValue(tag); // will exit if not found
 	return jn[tag].get<float>();
 }
 
 double GOptions::getDouble(string tag) {
-	// will exit if not found
-	json jn = getNonStructuredOptionSingleValue(tag);
+	json jn = getNonStructuredOptionSingleValue(tag); // will exit if not found
 	return jn[tag].get<double>();
 }
 
-double GOptions::getBool(string tag) {
+bool GOptions::getSwitch(string tag) {
 	// will exit if not found
-	json jn = getNonStructuredOptionSingleValue(tag);
-	return jn[tag].get<bool>();
+
+	
+	if ( switches.find(tag) != switches.end()) {
+		return switches[tag].getStatus();
+	} else {
+		cout << FATALERRORL  " the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
+		gexit(NOOPTIONFOUND);
+	}
+	return false;
 }
 
 

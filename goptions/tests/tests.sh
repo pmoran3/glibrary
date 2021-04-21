@@ -38,7 +38,7 @@ else
 	b1=$(cat $check1)
 	b2=$(cat $check2)
 	if [[ "$a1" = "$b1" ]]; then
-		echo " - no jcard: success"
+		echo " - no jcard:          success"
 	else
 		echo " - no jcard: fail"
 		echo ---
@@ -68,7 +68,7 @@ else
 		b1=$(cat $check1)
 		b2=$(cat $check2)
 		if [[ "$a1" = "$b1" ]]; then
-			echo " - "$t": success"
+			echo " - "$t":          success"
 		else
 			echo " - "$t": fail"
 			echo ---

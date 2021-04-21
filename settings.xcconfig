@@ -10,7 +10,7 @@ MYBUILDDIR = /Users/ungaro/builds
 
 
 // QT keeping this for future documentation but seems like it's not needed anymore
-// $QTBASE is needed because some qt headers call that instead of the frameworks headers
+// $QTBASE was needed because some qt headers call that instead of the frameworks headers
 // directory to manually link in subdirs of (need creation?)
 // $QTDIR/include
 // cd $QTDIR/include
@@ -62,7 +62,8 @@ ROOT_HEADS   = $ROOTSYS/include
 // GLIBRARY
 // adding includes here
 GLIB_ROOT    = /opt/projects/gemc/glibrary
-GLIB_HEADS1  = $GLIB_ROOT/gstring $GLIB_ROOT/goptions $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit
+GLIB_HEADS1  = $GLIB_ROOT/gstring $GLIB_ROOT/goptions
+// $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit
 //GLIB_HEADS2  = $GLIB_ROOT/textProgressBar  $GLIB_ROOT/qtButtonsWidget
 //GLIB_HEADS3  = $GLIB_ROOT/gvolume $GLIB_ROOT/g4volume $GLIB_ROOT/g4display  $GLIB_ROOT/gdynamic
 //GLIB_HEADS4  = $GLIB_ROOT/gdata $GLIB_ROOT/gmedia
