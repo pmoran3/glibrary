@@ -1,4 +1,4 @@
-# This compiles the example and the gdata (if it's not built already)
+# This compiles the example(s) and the library
 
 from init_env import init_environment
 

@@ -1,4 +1,4 @@
-# This compiles the example and the gtouchable (if it's not built already)
+# This compiles the example(s) and the library
 
 from init_env import init_environment
 
@@ -11,7 +11,7 @@ env.Append(CXXFLAGS=['-std=c++17'])
 env.Append(LIBS = 'gtouchable')
 
 # calling SConscript here to build just the library as in the hierarchy build
-lib = SConscript('SConscript')
+lib = SConscript('SConscript', exports='env')
 
 # builds the example
 example = env.Program(source = "example.cc", target = "example")

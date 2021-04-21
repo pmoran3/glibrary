@@ -1,8 +1,6 @@
 # This can be called from the local SConstruct or
 # the glibrary SConstruct one dir up
-from init_env import init_environment
-
-env = init_environment("glibrary")
+Import('env')
 
 sources = Split("""
 	gtouchable.cc

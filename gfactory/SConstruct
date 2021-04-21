@@ -1,5 +1,7 @@
-# This compiles the example and the gfactory (if it's not built already)
-
+# This compiles the example(s)
+#
+# Notice: no SConscript here, this library is an header include
+#
 from init_env import init_environment
 
 # load glibraries
