@@ -4,6 +4,7 @@ Import('env')
 
 sources = Split("""
 	gsplash.cc
+	exampleResources.qrc
 	""")
 
 # destination library is one dir up
