@@ -1,21 +1,28 @@
 # This compiles the example(s) and the library
-
 from init_env import init_environment
 
-# load glibraries
-env = init_environment("glibrary")
+# load needed environment for this library
+env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-# manually appending this library so the example can be compiled
-# the environment above will not load goptions if it's not there
-env.Append(LIBS = 'goptions')
+# we build the library in ../lib
+# by default, targets outside the current tree are not selected.
+env.Default('../')
 
-# calling SConscript here to build just the library as in the hierarchy build
+# build the library
 lib = SConscript('SConscript', exports='env')
 
-# builds the example(s)
-simpleExample     = env.Program(source = "examples/simpleExample.cc",     target = "simpleExample")
-structuredExample = env.Program(source = "examples/structuredExample.cc", target = "structuredExample")
+# example(s)
+# ----------
+#
+# manually appending this library so the example can be compiled
+env.Append(LIBS = 'goptions')
 
+
+# builds the example(s)
+simpleExample     = env.Program(source = 'examples/simpleExample.cc',     target = 'simpleExample')
+structuredExample = env.Program(source = 'examples/structuredExample.cc', target = 'structuredExample')
+
+# example(s) depend on the library existance
 Depends(simpleExample,     lib);
 Depends(structuredExample, simpleExample);

@@ -4,18 +4,17 @@
 #
 from init_env import init_environment
 
-# load glibraries
-env = init_environment("glibrary")
+# load needed environment for the example
+env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-ford_dll  = env.SharedLibrary( source = "factoryExample/FordFactory.cc",  target = "fordFactory")
-dodge_dll = env.SharedLibrary( source = "factoryExample/DodgeFactory.cc", target = "dodgeFactory")
+ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory')
+dodge_dll = env.SharedLibrary( source = 'factoryExample/DodgeFactory.cc', target = 'dodgeFactory')
 
+sources = [
+			  'factoryExample/example.cc'
+			  'factoryExample/ShapeFactory.cc'
+			  ]
 
-example_sources = Split("""
-	factoryExample/example.cc
-	factoryExample/ShapeFactory.cc
-	""")
-
-example = env.Program(source = example_sources, target = "example")
+example = env.Program(source = example_sources, target = 'example')
 

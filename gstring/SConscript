@@ -1,10 +1,10 @@
-# This can be called from the local SConstruct or
+# called from the local SConstruct or
 # the glibrary SConstruct one dir up
 Import('env')
 
-sources = Split("""
-	gstring.cc
-	""")
+sources = [
+			  'gstring.cc'
+			  ]
 
-# destination library is one dir up
-lib = env.Library(source = sources, target = "../lib/gstring")
+# destination library is one dir up - relative to this SConscript
+env.Library(source = sources, target = '../lib/gstring')

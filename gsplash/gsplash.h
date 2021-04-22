@@ -1,8 +1,8 @@
 #ifndef GSPLASH_H
 #define GSPLASH_H 1
 
-// glibrary
-// #include "goptions.h"
+// doxygen
+#include "gsplash.h"
 
 // c++
 #include <string>

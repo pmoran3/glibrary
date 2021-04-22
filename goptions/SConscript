@@ -1,11 +1,11 @@
-# This can be called from the local SConstruct or
+# called from the local SConstruct or
 # the glibrary SConstruct one dir up
 Import('env')
 
-sources = Split("""
-	goption.cc
-	goptions.cc
-	""")
+sources = [
+			  'gsplash.cc',
+			  'goptions.cc'
+			  ]
 
-# destination library is one dir up
-lib = env.Library(source = sources, target = "../lib/goptions")
+# destination library is one dir up - relative to this SConscript
+lib = env.Library(source = sources, target = '../lib/goptions')

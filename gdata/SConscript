@@ -1,12 +1,12 @@
-# This can be called from the local SConstruct or
+# called from the local SConstruct or
 # the glibrary SConstruct one dir up
 Import('env')
 
-sources = Split("""
-	gdata.cc
-	gobservables/gobservables.cc
-	""")
+sources = [
+			  'gdata.cc',
+			  'gobservables/gobservables.cc'
+			  ]
 
-# destination library is one dir up
-lib = env.Library(source = sources, target = "../lib/gdata")
+# destination library is one dir up - relative to this SConscript
+lib = env.Library(source = sources, target = '../lib/gdata')
 
