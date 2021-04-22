@@ -5,3 +5,5 @@
 lib
 goptions/simpleExample
 goptions/structuredExample
+gsplash/example
+gsplash/qrc_example.cc

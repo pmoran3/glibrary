@@ -1,3 +1,7 @@
+// c++
+#include <iostream>
+//using namespace std;
+
 // splash
 #include "gsplash.h"
 
@@ -6,21 +10,29 @@
 
 GSplash::GSplash(string imageName) :  splash(nullptr)
 {
+	// no argument, imageName is defaulted at NOSPLASHIMAGESELECTED
 	if ( imageName == NOSPLASHIMAGESELECTED ) {
 
-		string filename = (string) getenv(GSPLASHENVIRONMENT);
+		auto filename = getenv(GSPLASHENVIRONMENT); // char*
 
-		// pixmap is empty if filename doesn't exist.
-		QPixmap pixmap(filename.c_str());
+		if ( filename != nullptr) {
+			// pixmap is empty if filename doesn't exist.
+			QPixmap pixmap(filename);
+			splash = new QSplashScreen(pixmap);
+
+		} else {
+			cerr << " Environment variable " << GSPLASHENVIRONMENT << " must point to an image file. Exiting." << endl;
+			exit(1);
+		}
+
+		cout << " Need to add gstring and goptions but loading image from environment" << endl;
+
+	} else {
+		string resourceImage = ":" + imageName;
+		QPixmap pixmap(":example");
 		splash = new QSplashScreen(pixmap);
-
-
+		cout << " Need to add gstring and goptions but loading image from resource" << endl;
 	}
-
-//	// pixmap is empty if filename doesn't exist.
-//	QPixmap pixmap(filename.c_str());
-//
-//	splash = new QSplashScreen(pixmap);
 
 	if (splash != nullptr) {
 		splash->show();
