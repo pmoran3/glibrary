@@ -3,17 +3,22 @@
 from init_env import init_environment
 
 # load glibraries
-env = init_environment("qt5 mlibrary")
+env = init_environment("qt5 glibrary")
 env.Append(CXXFLAGS=['-std=c++17'])
 
 # manually appending this library so the example can be compiled
 # the environment above will not load goptions if it's not there
-env.Append(LIBS = 'goptions')
+# env.Append(LIBS = 'gsplash')
 
 # calling SConscript here to build just the library as in the hierarchy build
 lib = SConscript('SConscript', exports='env')
 
 # builds the example(s)
-example = env.Program(source = "example.cc", target = "example")
+#exampleSources = Split("""
+#	example.cc
+#	example.qrc
+#	""")
 
-Depends(example,  lib);
+#example = env.Program(source = exampleSources, target = "example")
+
+#Depends(example,  lib);

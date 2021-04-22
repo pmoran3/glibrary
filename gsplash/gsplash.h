@@ -2,34 +2,40 @@
 #define GSPLASH_H 1
 
 // glibrary
-#include "goptions.h"
+// #include "goptions.h"
+
+// c++
+#include <string>
+using namespace std;
 
 // Qt
 #include <QtWidgets>
 
+#define GSPLASHENVIRONMENT    "GSPLASH"
+#define NOSPLASHIMAGESELECTED "NOSPLASHIMAGESELECTED"
+
 class GSplash
 {
-public:
-
-	GSplash(string imageName) {
-		if(splash != nullptr) {
-			delete splash ;
-		}
-	}
-
 private:
 	QSplashScreen *splash;
 
 public:
 
-	~GSplash();
+	GSplash(string imageName = NOSPLASHIMAGESELECTED);
+	
+	~GSplash() {
+		if(splash != nullptr) {
+			delete splash ;
+		}
+	}
 
 	void message(string message);
 
-	// exits and returns focus to window
-	void finish(QWidget *window) {
+	// called in program using GSplash
+	// returns focus to program window
+	void finish(QWidget *callingWindow) {
 		if(splash != nullptr) {
-			splash->finish(window);
+			splash->finish(callingWindow);
 		}
 	}
 

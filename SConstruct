@@ -8,13 +8,13 @@
 from init_env import init_environment
 
 # each library has also an SConstruct to build the example
-env = init_environment("glibrary clhep geant4")
+env = init_environment("glibrary clhep geant4 qt5")
 
 env.Append(CXXFLAGS=['-std=c++17'])
 
 gstring             = SConscript('gstring/SConscript',    exports='env')
 goptions            = SConscript('goptions/SConscript',   exports='env')
-gsplash             = SConscript('gsplasj/SConscript',    exports='env')
+gsplash             = SConscript('gsplash/SConscript',    exports='env')
 
 #gtouchable          = SConscript('gtouchable/SConscript', exports='env')
 #ghit                = SConscript('ghit/SConscript',       exports='env')

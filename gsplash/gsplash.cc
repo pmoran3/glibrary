@@ -6,37 +6,33 @@
 
 GSplash::GSplash(string imageName) :  splash(nullptr)
 {
+	if ( imageName == NOSPLASHIMAGESELECTED ) {
 
-	string picLocation = ".";
-	string picName     = splashInfo[0];
+		string filename = (string) getenv(GSPLASHENVIRONMENT);
 
-	// optional second argument
-	if(splashInfo.size() == 2) {
-		if(getenv(splashInfo[0].c_str()) != nullptr) {
-			picLocation = (string) getenv(splashInfo[0].c_str());
-		}
+		// pixmap is empty if filename doesn't exist.
+		QPixmap pixmap(filename.c_str());
+		splash = new QSplashScreen(pixmap);
+
+
 	}
 
-	string filename = picLocation + "/" + picName;
+//	// pixmap is empty if filename doesn't exist.
+//	QPixmap pixmap(filename.c_str());
+//
+//	splash = new QSplashScreen(pixmap);
 
-	// pixmap is empty if filename doesn't exist.
-	QPixmap pixmap(filename.c_str());
-
-	splash = new QSplashScreen(pixmap);
-	splash->show();
-
-	qApp->processEvents();
-
+	if (splash != nullptr) {
+		splash->show();
+		qApp->processEvents();
+	}
 }
 
 void GSplash::message(string msg)
 {
 	if(splash != nullptr) {
-
 		splash->showMessage(msg.c_str(),  Qt::AlignLeft,  Qt::white );
 		qApp->processEvents();
-
 	}
-
 }
 
