@@ -10,11 +10,37 @@ using namespace std;
 
 int main()
 {
-	GManager managerA;    // no verbosity
+
+	// AV manages Shapes. It's the same as managerA but with verbosity 1
+	// registering 3 shape classes
+	// notice, here we know of them through the header
+	GManager managerAV(1);    // no verbosity
+	managerAV.RegisterObjectFactory<Triangle>("triangle");
+	managerAV.RegisterObjectFactory<Box>("box1");
+	managerAV.RegisterObjectFactory<Box>("box2");
+
+	// putting A factory in map
+	// notice we're putting the base class in the map so we can call its virtual methods
+	map<string, Shape*> fffv;
+	fffv["triangle"] = managerAV.CreateObject<Shape>("triangle");
+	fffv["box1"]     = managerAV.CreateObject<Shape>("box1");
+	fffv["box2"]     = managerAV.CreateObject<Shape>("box2");
+
+	// aShape is same pointer as map element
+	Shape* aShape = fffv["triangle"];
+
+	// calling base and derived methods
+	aShape->Area();
+	fffv["triangle"]->Area();
+	fffv["box1"]->Area();
+
+	managerAV.clearDLMap();
+
 
 	// A manages Shapes
 	// registering 3 shape classes
 	// notice, here we know of them through the header
+	GManager managerA;    // no verbosity
 	managerA.RegisterObjectFactory<Triangle>("triangle");
 	managerA.RegisterObjectFactory<Box>("box1");
 	managerA.RegisterObjectFactory<Box>("box2");
@@ -26,22 +52,23 @@ int main()
 	fff["box2"]     = managerA.CreateObject<Shape>("box2");
 
 	// aShape is same pointer as map element
-	Shape* aShape = fff["triangle"];
+	Shape* avShape = fff["triangle"];
 
 	// calling base and derived methods
-	aShape->Area();
+	avShape->Area();
 	fff["triangle"]->Area();
 	fff["box1"]->Area();
 
 	managerA.clearDLMap();
+
+
+
 
 	// B manages Cars. Notice, we do not need the derived class headers here!
 	// PRAGMA: These two names must match in the registerDL and in the LoadObjectFromLibrary:
 	// tesla
 	// that's ok but need to spit error if that doesn't happen
 	GManager managerB(1); // no verbosity of 1
-	managerB.registerDL("teslaFactory");
-	managerB.registerDL("fordFactory");
 	
 	map<string, Car*> ggg;
 	ggg["tesla"] = managerB.LoadObjectFromLibrary<Car>("teslaFactory");

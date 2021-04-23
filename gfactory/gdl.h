@@ -21,7 +21,8 @@ static void close_lib(dlhandle handle);
 #define DLLOGITEM  " ⁍"
 
 // exit codes: 1000s
-#define DLNOTFOUND  1001
+#define DLNOTFOUND       1001
+#define FACTORYNOTFOUND  1002
 
 
 /**
@@ -34,7 +35,7 @@ private:
 	string   dlFileName;  ///< dynamic library file
 	int verbosity = 0;
 
-	bool FileExists(const std::string& name) {
+	bool doesFileExists(const std::string& name) {
 		struct stat buffer;
 		return (stat (name.c_str(), &buffer) == 0);
 	}
@@ -47,7 +48,7 @@ public:
 
 	DynamicLib(string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 
-		if(FileExists(dlFileName)) {
+		if(doesFileExists(dlFileName)) {
 			if ( verbosity ) {
 				cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << endl;
 			}

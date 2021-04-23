@@ -12,14 +12,14 @@ public:
 
 };
 
-class Triangle : Shape
+class Triangle : public Shape
 {
 public:
 	void Area();
 };
 
 
-class Box : Shape
+class Box : public Shape
 {
 public:
 	void Area();

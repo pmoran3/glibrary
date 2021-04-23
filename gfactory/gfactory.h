@@ -59,6 +59,19 @@ private:
 
 	int verbosity;
 
+	/**
+	 * @fn registerDL
+	 * @param name base name of the dynamic library to be registered
+	 *
+	 * The full filename is OS dependent
+	 */
+	void registerDL(string name) {
+		// PRAGMA TODO: make it OS independent?
+		dlMap[name] = new DynamicLib( name + ".gplugin", verbosity);
+		if(verbosity > 0) {
+			cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << endl;
+		}
+	}
 
 public:
 	/**
@@ -95,28 +108,16 @@ public:
 	 */
 	template <class Base> Base* CreateObject(string name) const {
 		auto factory = factoryMap.find(name);
-		if(factory == factoryMap.end())
-			// need warning or error?
-			return nullptr;
-		//		if(verbosity > 0) {
-		//			cout << GFACTORYLOGITEM << " GManager: Creating factory " << name << endl;
-		//		}
+		if(factory == factoryMap.end()) {
+			cerr << FATALERRORL  " couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << endl;
+			gexit(FACTORYNOTFOUND);
+		}
+		if(verbosity > 0) {
+			cout << GFACTORYLOGITEM << " GFactory Manager: Creating instance of " << name << " factory." << endl;
+		}
 		return static_cast<Base*>(factory->second->Create());
 	}
 
-	/**
-	 * @fn registerDL
-	 * @param name base name of the dynamic library to be registered
-	 *
-	 * The full filename is OS dependent
-	 */
-	void registerDL(string name) {
-		// PRAGMA TODO: make it OS independent?
-		dlMap[name] = new DynamicLib( name + ".gplugin", verbosity);
-		if(verbosity > 0) {
-			cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << endl;
-		}
-	}
 
 	/**
 	 * @fn LoadObjectFromLibrary
@@ -126,6 +127,8 @@ public:
 	 * Notice the base class must have the static method instantiate
 	 */
 	template <class T> T* LoadObjectFromLibrary(string name) {
+
+		registerDL(name);
 
 		// will return nullptr if handle is null
 		DynamicLib* dynamicLib = dlMap[name];
@@ -147,9 +150,9 @@ public:
 	 *
 	 * Delete the instance pointer
 	 */
-//	template <class T> void destroyObject(T* object) {
-//		delete object;
-//	}
+	//	template <class T> void destroyObject(T* object) {
+	//		delete object;
+	//	}
 
 	/**
 	 * @fn clearDLMap
