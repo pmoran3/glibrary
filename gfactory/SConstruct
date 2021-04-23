@@ -1,20 +1,17 @@
-# This compiles the example(s)
-#
-# Notice: no SConscript here, this library is an header include
-#
+# This compiles the example(s). The library is an header include
 from init_env import init_environment
 
 # load needed environment for the example
 env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory')
-dodge_dll = env.SharedLibrary( source = 'factoryExample/DodgeFactory.cc', target = 'dodgeFactory')
+ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory.gplugin')
+dodge_dll = env.SharedLibrary( source = 'factoryExample/DodgeFactory.cc', target = 'dodgeFactory.gplugin')
 
 sources = [
-			  'factoryExample/example.cc'
+			  'factoryExample/example.cc',
 			  'factoryExample/ShapeFactory.cc'
 			  ]
 
-example = env.Program(source = example_sources, target = 'example')
+example = env.Program(source = sources, target = 'example')
 

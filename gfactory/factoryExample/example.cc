@@ -5,10 +5,13 @@
 #include <iostream>
 using namespace std;
 
+// managerA: loads known classes Triangle and Box from the base Shape, in ShapeFactory.h
+// managerB: loads DLL that instantiate derived factories - we only know of the base class, in this case "Car"
+
 int main()
 {
-	GManager managerA;     // loads known classes Triangle and Box from the base Shape
-	GManager managerB(1);  // loads DLL that instantiate derived factories - we only know of the base one in this case "Car"
+	GManager managerA;    // no verbosity
+	GManager managerB(1); // no verbosity of 1
 
 	// A manages Shapes
 	// registering 3 shape classes

@@ -14,6 +14,7 @@ using namespace std;
 // dynamic loading
 #include "gdl.h"
 
+#define GFACTORYLOGITEM  " ❖"
 
 /*
  * @class GFactoryBase
@@ -52,13 +53,25 @@ class GFactory : public GFactoryBase
  */
 class GManager
 {
+
+private:
+	map<string, GFactoryBase*> factoryMap;
+
+	// the reason to keep this map is to keep the (DynamicLib?) pointers in memory
+	// for some reason declaring a dynamic_lib local variable in LoadObjectFromLibrary
+	// scope does not work
+	map<string, DynamicLib*> dlMap;
+
+	int verbosity;
+
+
 public:
 	/**
 	 @param v verbosity.
 	 - 0: no not print any log
 	 - 1: print gmanager registering and instantiating classes
 	 */
-	GManager( int v = 0, string log = " ↑") : verbosity(v), logHeader(log) {}
+	GManager( int v = 0, string log = " ↑") : verbosity(v) {}
 
 public:
 	/**
@@ -73,7 +86,7 @@ public:
 	template <class Derived> void RegisterObjectFactory(string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << logHeader << " GFactory Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " items " << endl;
+			cout << GFACTORYLOGITEM << " GFactory Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " items " << endl;
 		}
 	}
 
@@ -89,10 +102,10 @@ public:
 	template <class Base> Base* CreateObject(string name) const {
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end())
-            // need warning here
+			// need warning here
 			return nullptr;
 		//		if(verbosity > 0) {
-		//			cout << logHeader << " GManager: Creating factory " << name << endl;
+		//			cout << GFACTORYLOGITEM << " GManager: Creating factory " << name << endl;
 		//		}
 		return static_cast<Base*>(factory->second->Create());
 	}
@@ -105,9 +118,9 @@ public:
 	 */
 	void registerDL(string name) {
 		// PRAGMA TODO: make it OS independent?
-		dlMap[name] = new DynamicLib( name + ".gplugin");
+		dlMap[name] = new DynamicLib( name + ".gplugin", verbosity);
 		if(verbosity > 0) {
-			cout  << logHeader << " GManager: Loading DL " << name  << endl;
+			cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << endl;
 		}
 	}
 
@@ -129,7 +142,7 @@ public:
 			}
 		}
 		// warning message already given if plugin not found
-		// cout << logHeader << " GManager: plugin " << name << " could not be loaded " << endl;
+		// cout << GFACTORYLOGITEM << " GManager: plugin " << name << " could not be loaded " << endl;
 		return nullptr;
 	}
 
@@ -140,9 +153,9 @@ public:
 	 *
 	 * Delete the instance pointer
 	 */
-	template <class T> void destroyObject(T* object) {
-		delete object;
-	}
+//	template <class T> void destroyObject(T* object) {
+//		delete object;
+//	}
 
 	/**
 	 * @fn clearDLMap
@@ -156,16 +169,7 @@ public:
 	}
 
 
-private:
-	map<string, GFactoryBase*> factoryMap;
-	
-    // the reason to keep this map is to keep the (DynamicLib?) pointers in memory
-	// for some reason declaring a dynamic_lib local variable in LoadObjectFromLibrary
-	// scope does not work
-	map<string, DynamicLib*> dlMap;
 
-	int verbosity;
-	string logHeader;
 };
 
 #endif

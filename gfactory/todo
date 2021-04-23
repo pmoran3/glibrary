@@ -4,7 +4,7 @@ ln -s libfordFactory.dylib fordFactory.gplugin
 ln -s libdodgeFactory.dylib dodgeFactory.gplugin
 
 
-
+- redo doxygen
 
 - provide time spent by each plugin?
 - provide message is symbol cannot be loaded
