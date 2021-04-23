@@ -28,8 +28,9 @@ GSplash::GSplash(string imageName) :  splash(nullptr)
 		cout << " Need to add gstring and goptions but loading image from environment" << endl;
 
 	} else {
-		string resourceImage = ":" + imageName;
-		QPixmap pixmap(":example");
+		string resourceImage = ":/" + imageName;
+
+		QPixmap pixmap(resourceImage.c_str());
 		splash = new QSplashScreen(pixmap);
 		cout << " Need to add gstring and goptions but loading image from resource" << endl;
 	}

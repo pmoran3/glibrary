@@ -3,6 +3,7 @@
 .sconsign.dblite
 *.o
 lib
+gstring/example
 goptions/simpleExample
 goptions/structuredExample
 gsplash/example

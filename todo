@@ -15,3 +15,7 @@ esac
 echo extraArgument $extraArgument
 
 
+
+
+- for now we need to append on this SConstruct and inside each glibrary SConstruct
+env.Append(CXXFLAGS=['-std=c++17'])
