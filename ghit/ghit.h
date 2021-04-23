@@ -3,9 +3,6 @@
 
 // This example is based on B4cCalorHit in  basic/B4/B4c
 
-// doxygen
-#include "ghitDoxy.h"
-
 // conventions
 #include "ghitConventions.h"
 

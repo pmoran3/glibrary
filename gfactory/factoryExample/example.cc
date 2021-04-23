@@ -11,7 +11,6 @@ using namespace std;
 int main()
 {
 	GManager managerA;    // no verbosity
-	GManager managerB(1); // no verbosity of 1
 
 	// A manages Shapes
 	// registering 3 shape classes
@@ -29,33 +28,34 @@ int main()
 	// aShape is same pointer as map element
 	Shape* aShape = fff["triangle"];
 
+	// calling base and derived methods
+	aShape->Area();
+	fff["triangle"]->Area();
+	fff["box1"]->Area();
+
+	managerA.clearDLMap();
+
 	// B manages Cars. Notice, we do not need the derived class headers here!
 	// PRAGMA: These two names must match in the registerDL and in the LoadObjectFromLibrary:
-	// dodgeFactory
+	// tesla
 	// that's ok but need to spit error if that doesn't happen
-	managerB.registerDL("dodgeFactory");
+	GManager managerB(1); // no verbosity of 1
+	managerB.registerDL("teslaFactory");
 	managerB.registerDL("fordFactory");
 	
 	map<string, Car*> ggg;
-	ggg["dodge"] = managerB.LoadObjectFromLibrary<Car>("dodgeFactory");
+	ggg["tesla"] = managerB.LoadObjectFromLibrary<Car>("teslaFactory");
 	ggg["ford"]  = managerB.LoadObjectFromLibrary<Car>("fordFactory");
 	Car* aCar = ggg["ford"];
 
-	for(int i=0; i<2; i++) {
 
-		aShape->Area();
-		fff["triangle"]->Area();
-		fff["box1"]->Area();
-	
-		if(ggg["dodge"] != nullptr)
-			ggg["dodge"]->go();
-		if(ggg["ford"] != nullptr)
-			ggg["ford"]->go();
+	// calling base and derived method
+	ggg["tesla"]->go();
+	ggg["ford"]->go();
 
-		cout << " Shape pointers: " << fff["triangle"] << " " << aShape << endl;
-		cout << " Car pointers: " << ggg["ford"] << " " << aCar << endl;
+	cout << " Shape pointers: " << fff["triangle"] << " " << aShape << endl;
+	cout << " Car pointers: " << ggg["ford"] << " " << aCar << endl;
 
-	}
 
 	// why this need to be cleared here, and not after the factories are
 	// put in the map?

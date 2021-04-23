@@ -5,9 +5,6 @@
 #include "gstring.h"
 using namespace gstring;
 
-// doxygen
-#include "goptionsDoxy.h"
-
 // conventions
 #include "goptionsConventions.h"
 
@@ -18,11 +15,6 @@ using namespace nlohmann;
 // c++
 #include <string>
 using namespace std;
-
-// exiting with error, print error on screen.
-// should this be part of a namespace ?
-void gexit(int error);
-
 
 /**
  * The GSwitch contains the switch description and its status

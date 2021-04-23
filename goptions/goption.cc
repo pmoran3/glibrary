@@ -5,12 +5,6 @@
 #include <iostream>
 
 
-// exiting with error, print error on screen.
-void gexit(int error) {
-	cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
-	exit(error);
-}
-
 // constructor for switch option
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
@@ -99,13 +93,13 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 	// clear jValues if add- is not found
 	// and the option is cumulative
 	if ( !isAddition && cumulative ) {
-		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
+		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
 		gexit(NOADDFORCUMULATIVE);
 	}
 
 	// if add- was found but option is not cumulative, it's a mistake.
 	if ( isAddition && !cumulative ) {
-		cout << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
+		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
 		gexit(ADDFORNONCUMULATIVE);
 	}
 
@@ -343,7 +337,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 	}
 
 	if ( !isDefined )  {
-		cout << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
+		cerr << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
 		gexit(NOOPTIONFOUND);
 	}
 

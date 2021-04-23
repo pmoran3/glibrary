@@ -3,16 +3,16 @@
 
 #include "Car.h"
 
-class Dodge : public Car
+class Tesla : public Car
 {
 public:
-	Dodge();
+	Tesla();
 	void go();
-	double dodgeVar[2][2];
+	double autopilot[2][2];
 };
 
 extern "C" Car* CarFactory(void) {
-	return static_cast<Car*>(new Dodge);
+	return static_cast<Car*>(new Tesla);
 }
 
 

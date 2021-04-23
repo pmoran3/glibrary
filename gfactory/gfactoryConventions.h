@@ -1,4 +1,0 @@
-#ifndef  GFACTORY_H_CONVENTIONS
-#define  GFACTORY_H_CONVENTIONS 1
-
-#endif

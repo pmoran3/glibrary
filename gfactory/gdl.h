@@ -1,8 +1,8 @@
 #ifndef  GDYNAMICLIB_H
 #define  GDYNAMICLIB_H  1
 
-// this code is based on this tutorial:
-// https://0x00sec.org/t/c-dynamic-loading-of-shared-objects-at-runtime/1498
+// gstring conventions
+#include "gstringConventions.h"
 
 // c++ plugin loading functions
 #include <dlfcn.h>
@@ -19,6 +19,10 @@ static dlhandle load_lib(const string& path);
 static void close_lib(dlhandle handle);
 
 #define DLLOGITEM  " ⁍"
+
+// exit codes: 1000s
+#define DLNOTFOUND  1001
+
 
 /**
  * @struct DynamicLib
@@ -41,27 +45,25 @@ public:
 	DynamicLib() = default;
 	dlhandle handle;   ///< posix handle of the dynamic library
 
-
 	DynamicLib(string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 
-		if ( verbosity ) {
-			cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << endl;
-		}
-
 		if(FileExists(dlFileName)) {
+			if ( verbosity ) {
+				cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << endl;
+			}
 			handle = load_lib(dlFileName);
 		} else {
-			// PRAGMA TODO: no warning here. But give error if digitization is requested but not found
-			// either exception or mutex lock
-			cout << " ⚠︎ Warning: " << dlFileName << " not found." << endl;
+			cerr << FATALERRORL  " couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
+			gexit(DLNOTFOUND);
 		}
 	}
 
 	~DynamicLib() {
-		if (handle != nullptr)
+		if (handle != nullptr) {
 			close_lib(handle);
-		if ( verbosity ) {
-			cout << DLLOGITEM << " Closing DL " << dlFileName << endl;
+			if ( verbosity ) {
+				cout << DLLOGITEM << " Closing DL " << dlFileName << endl;
+			}
 		}
 	}
 

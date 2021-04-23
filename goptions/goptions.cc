@@ -217,7 +217,7 @@ long GOptions::findOptionIndex(string name) {
 	}
 
 	// not found, error
-	cout << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
+	cerr << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
 	cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
 	gexit(NOOPTIONFOUND);
 
@@ -240,7 +240,7 @@ void GOptions::addSwitch(string name, string description) {
 		switches[name] = GSwitch(description);
 	} else {
 		if ( gstrict ) {
-			cout << FATALERRORL " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
+			cerr << FATALERRORL " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
 			gexit(SWITCHALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
@@ -329,7 +329,7 @@ bool GOptions::getSwitch(string tag) {
 	if ( switches.find(tag) != switches.end()) {
 		return switches[tag].getStatus();
 	} else {
-		cout << FATALERRORL  " the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
+		cerr << FATALERRORL  " the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
 		gexit(NOOPTIONFOUND);
 	}
 	return false;

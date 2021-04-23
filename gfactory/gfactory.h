@@ -1,10 +1,6 @@
 #ifndef  GFACTORY_H
 #define  GFACTORY_H 1
 
-// this code is based on TheComet tutorial here:
-// https://www.gamedev.net/topic/683154-c-extend-class-in-dll/
-
-
 // c++
 #include <map>
 #include <string>
@@ -24,14 +20,12 @@ using namespace std;
 class GFactoryBase {
 public:
 	/**
-	 @fn Create
 	 @brief Pure virtual method. Derived classes use this to instantiate themselves
 	 */
 	virtual void* Create() = 0;
 };
 
 /**
- * @class GFactory
  * @brief Derived from GFactoryBase, implements Create to
  * instantiate the derived classes
  */
@@ -48,13 +42,14 @@ class GFactory : public GFactoryBase
 };
 
 /**
- * @class GManager
  * @brief Instantiates derived classes either statically or dynamically
  */
 class GManager
 {
 
 private:
+
+	// the map of GFactoryBase is kept on GManager
 	map<string, GFactoryBase*> factoryMap;
 
 	// the reason to keep this map is to keep the (DynamicLib?) pointers in memory
@@ -71,11 +66,10 @@ public:
 	 - 0: no not print any log
 	 - 1: print gmanager registering and instantiating classes
 	 */
-	GManager( int v = 0, string log = " ↑") : verbosity(v) {}
+	GManager( int v = 0 ) : verbosity(v) {}
 
 public:
 	/**
-	 * @fn RegisterObjectFactory
 	 * @param name name under which the factory is registered
 	 *
 	 * Before instantiating the wanted class we need to register
@@ -102,7 +96,7 @@ public:
 	template <class Base> Base* CreateObject(string name) const {
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end())
-			// need warning here
+			// need warning or error?
 			return nullptr;
 		//		if(verbosity > 0) {
 		//			cout << GFACTORYLOGITEM << " GManager: Creating factory " << name << endl;

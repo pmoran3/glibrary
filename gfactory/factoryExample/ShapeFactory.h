@@ -12,10 +12,8 @@ public:
 
 };
 
-
 class Triangle : Shape
 {
-
 public:
 	void Area();
 };
@@ -23,7 +21,6 @@ public:
 
 class Box : Shape
 {
-
 public:
 	void Area();
 };

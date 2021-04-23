@@ -244,3 +244,10 @@ string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, 
 	return out;
 
 }
+
+// exiting with error, print error on screen.
+void gexit(int error) {
+	cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
+	exit(error);
+}
+

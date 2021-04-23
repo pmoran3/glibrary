@@ -6,7 +6,7 @@ env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
 ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory.gplugin')
-dodge_dll = env.SharedLibrary( source = 'factoryExample/DodgeFactory.cc', target = 'dodgeFactory.gplugin')
+tesla_dll = env.SharedLibrary( source = 'factoryExample/TeslaFactory.cc', target = 'teslaFactory.gplugin')
 
 sources = [
 			  'factoryExample/example.cc',

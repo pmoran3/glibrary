@@ -1,9 +1,6 @@
 #ifndef  GTOUCHABLE_H
 #define  GTOUCHABLE_H 1
 
-// doxygen
-#include "gtouchableDoxy.h"
-
 // conventions
 #include "gtouchableConventions.h"
 

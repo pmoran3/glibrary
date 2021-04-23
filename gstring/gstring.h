@@ -1,9 +1,6 @@
 #ifndef  GSTRING_H
 #define  GSTRING_H  1
 
-// doxygen
-#include "gstringDoxy.h"
-
 // conventions
 #include "gstringConventions.h"
 

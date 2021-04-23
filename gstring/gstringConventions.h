@@ -7,7 +7,7 @@
 // taken from:
 // https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal
 
-#define KBOLD  "\x1B[1m"
+#define KBOLD "\x1B[1m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"
 #define KYEL  "\x1B[33m"
@@ -15,7 +15,7 @@
 #define KMAG  "\x1B[35m"
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
-#define RST  "\x1B[0m" // reset string
+#define RST   "\x1B[0m" // reset string
 
 #define FRED(x) KRED x RST
 #define FGRN(x) KGRN x RST
@@ -87,5 +87,8 @@
 #define YELLOWHHL       KYEL HHL
 #define BOLDWHHL        "\x1B[1m" HHL
 
+// exiting with error, print error on screen.
+// should this be part of a namespace ?
+void gexit(int error);
 
 #endif
