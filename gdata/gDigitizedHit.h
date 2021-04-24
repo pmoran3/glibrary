@@ -1,6 +1,5 @@
-#ifndef GHITOBSERVABLES_H
-#define GHITOBSERVABLES_H 1
-
+#ifndef GDIGITIZEDHIT_H
+#define GDIGITIZEDHIT_H 1
 
 
 // observable types include int, float, double,
@@ -15,27 +14,23 @@ using std::vector;
 
 // in each hit, the digitization can produce single values or vectors of values
 // the only condition is that the variable names must all be different
-class GHitObservables {
-
-
+class GDigitizedHit {
+	
 public:
 
-	void publishObservable(string varName, int var);
-
-	// called by virtual method. Default: does nothing.
-	void initializeVarDescrition();
+	void includeVariable(string varName, int var);
 
 	// called at the beginning of the event
 	inline void prepeareHit() {
-		intObservables = nullptr;
-		fltObservables = nullptr;
-		dblObservables = nullptr;
+		
+		intObservables->clear();
+		fltObservables->clear();
+		dblObservables->clear();
 
 		intVObservables->clear();
 		fltVObservables->clear();
 		dblVObservables->clear();
 	}
-
 
 
 private:
@@ -49,9 +44,7 @@ private:
 	map<string, vector<float>>  *fltVObservables = nullptr;
 	map<string, vector<double>> *dblVObservables = nullptr;
 
-	map<string, string> *varDescriptions;
-
-
 };
+
 
 #endif

@@ -20,7 +20,7 @@ using std::string;
 class GHeader
 {
 public:
-	GHeader(int g4evn, int tid, string rndm) : g4EventNumber(g4evn), threadID(tid) {
+	GHeader(int g4evn, int tid) : g4EventNumber(g4evn), threadID(tid) {
 	}
 	
 	string getTimeStamp() {return timeStamp();}
