@@ -1,6 +1,9 @@
 // goptions
 #include "goptions.h"
 
+// gstring for the conventions and gexit
+#include "gstring.h"
+
 // c++
 #include <iostream>
 

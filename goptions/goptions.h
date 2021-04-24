@@ -1,8 +1,6 @@
 #ifndef  GOPTIONS_H
 #define  GOPTIONS_H  1
 
-// gstrings
-#include "gstring.h"
 
 // conventions
 #include "goptionsConventions.h"
