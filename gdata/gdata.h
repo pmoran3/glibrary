@@ -4,14 +4,14 @@
 // conventions
 #include "gdataConventions.h"
 
-
 // gdata
 #include "gobservables/gdetectorObservables.h"
 
 // c++
 #include <vector>
 #include <string>
-using namespace std;
+using std::vector;
+using std::string;
 
 // glibrary
 //#include "ghit.h"
@@ -20,14 +20,13 @@ using namespace std;
 class GHeader
 {
 public:
-	GHeader(int g4evn, int tid, string rndm) : g4EventNumber(g4evn), threadID(tid), g4randomNumber(rndm) {
+	GHeader(int g4evn, int tid, string rndm) : g4EventNumber(g4evn), threadID(tid) {
 	}
 	
 	string getTimeStamp() {return timeStamp();}
 	int getG4Evn()        {return g4EventNumber;}
 	int getThreadID()     {return threadID;}
-	string getG4Rnd()     {return g4randomNumber;}
-	
+
 private:
 	int g4EventNumber;
 	int threadID;

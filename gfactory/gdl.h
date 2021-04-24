@@ -11,7 +11,9 @@
 #include <sys/stat.h> // to check if file exists
 #include <string>
 #include <iostream>
-using namespace std;
+using std::cout;
+using std::cerr;
+using std::endl;
 
 typedef void* dlhandle;
 

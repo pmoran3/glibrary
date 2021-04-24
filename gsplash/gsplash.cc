@@ -1,12 +1,16 @@
 // c++
 #include <iostream>
-//using namespace std;
+using std::cout;
+using std::cerr;
+using std::endl;
 
 // splash
 #include "gsplash.h"
 
 // qt
 #include <QApplication>
+
+
 
 GSplash::GSplash(string imageName) :  splash(nullptr)
 {

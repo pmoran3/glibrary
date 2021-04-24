@@ -3,6 +3,7 @@
 
 // c++
 #include <sstream>
+using namespace std;
 
 //! Trim Both leading and trailing spaces
 string gstring::trimSpacesFromString(string in)
@@ -116,8 +117,6 @@ using namespace CLHEP;
 // c++
 #include <iostream>
 
-
-
 /// \fn double getG4Number(string v, bool warnIfNotUnit)
 /// \brief Return value of the input string, which may or may not
 /// contain units (warning given if requested)
@@ -167,7 +166,7 @@ double gstring::getG4Number(string v, bool warnIfNotUnit)
 		else if( units == "ns")        answer *= ns;
 		else if( units == "na")        answer *= 1;
 		else if( units == "counts")    answer *= 1;
-		else cout << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
+		else cerr << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
 		return answer;
 	}
 

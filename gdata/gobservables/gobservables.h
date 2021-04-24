@@ -7,7 +7,8 @@
 // c++
 #include <vector>
 #include <string>
-using namespace std;
+using std::vector;
+using std::string;
 
 // types of abservables
 enum GObservableType { gint_t, gfloat_t, gdouble_t, gstring_t};

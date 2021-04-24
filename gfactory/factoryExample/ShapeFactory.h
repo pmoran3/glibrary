@@ -2,7 +2,6 @@
 #define FIRSTFACTORY_H 1
 
 #include <string>
-using namespace std;
 
 class Shape
 {

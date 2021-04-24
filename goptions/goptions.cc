@@ -8,6 +8,11 @@
 #include "gstring.h"
 using namespace gstring;
 
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::exception;
+
 // constructor:
 // - load user defined options, add goptions options
 // - assign internal options (gdebug, gstrict)
@@ -16,6 +21,7 @@ using namespace gstring;
 // - get our own option
 GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 {
+
 	// check if gdebug, gstrict are set on the command line
 	// gdebug, gstrict needs to be the very first thing set cause it affects the construction of all objects
 	for(int i=1; i<argc; i++) {

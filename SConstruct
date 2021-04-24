@@ -13,10 +13,10 @@ env.Append(CXXFLAGS=['-std=c++17'])
 gstring             = SConscript('gstring/SConscript',    exports='env')
 goptions            = SConscript('goptions/SConscript',   exports='env')
 gsplash             = SConscript('gsplash/SConscript',    exports='env')
+gdata               = SConscript('gdata/SConscript',      exports='env')
 
 #gtouchable          = SConscript('gtouchable/SConscript', exports='env')
 #ghit                = SConscript('ghit/SConscript',       exports='env')
-#gdata               = SConscript('gdata/SConscript',      exports='env')
 
 #textProgressBar     = SConscript('textProgressBar/SConscript')
 #translationTable    = SConscript('translationTable/SConscript')

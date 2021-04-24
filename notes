@@ -27,3 +27,7 @@ compiles exampleResources.qrc directly
 
 
 
+## Using Namespace std
+- never in headers
+- can use use std::cout 
+- can be inside scopes

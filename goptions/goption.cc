@@ -4,6 +4,9 @@
 // c++
 #include <iostream>
 
+using std::cout;
+using std::cerr;
+using std::endl;
 
 // constructor for switch option
 // if an option is defined with default values, it will be passed to jUserValues

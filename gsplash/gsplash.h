@@ -6,7 +6,7 @@
 
 // c++
 #include <string>
-using namespace std;
+using std::string;
 
 // Qt
 #include <QtWidgets>

@@ -3,18 +3,19 @@
 
 // gstrings
 #include "gstring.h"
-using namespace gstring;
 
 // conventions
 #include "goptionsConventions.h"
 
 // json parser
 #include "json.hpp"
-using namespace nlohmann;
+using nlohmann::json;
 
 // c++
 #include <string>
-using namespace std;
+using std::string;
+using std::map;
+using std::vector;
 
 /**
  * The GSwitch contains the switch description and its status
@@ -139,6 +140,7 @@ private:
  */
 class GOptions
 {
+
 public:
 
 	/**
@@ -166,7 +168,7 @@ private:
 	vector<GOption> goptions;
 
 	// Switches map
-	unordered_map<string, GSwitch> switches;
+	map<string, GSwitch> switches;
 
 	// jcards parsing utilities
 	string findBaseJCard(int argc, char *argv[]);  // finds a configuration file (jcard). Returns "na' if not found.
