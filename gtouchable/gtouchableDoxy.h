@@ -1,5 +1,3 @@
-#ifndef  GTOUCHABLE_H_DOXY
-#define  GTOUCHABLE_H_DOXY 1
 /// \mainpage
 /// \section Overview
 /// The framework provides the concept of gtouchable, a detector sensitive element, based on its identifiers plus some rules.\n\n
@@ -12,4 +10,3 @@
 ///
 /// \n
 ///
-#endif

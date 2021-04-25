@@ -1,11 +1,9 @@
-#ifndef  GDATA_H
-#define  GDATA_H  1
+#ifndef  GEVENTDATA_H
+#define  GEVENTDATA_H  1
 
 // conventions
 #include "gdataConventions.h"
 
-// gdata
-#include "gobservables/gdetectorObservables.h"
 
 // c++
 #include <vector>
@@ -14,25 +12,8 @@ using std::vector;
 using std::string;
 
 // glibrary
-//#include "ghit.h"
 #include "goptions.h"
 
-class GHeader
-{
-public:
-	GHeader(int g4evn, int tid) : g4EventNumber(g4evn), threadID(tid) {
-	}
-	
-	string getTimeStamp() {return timeStamp();}
-	int getG4Evn()        {return g4EventNumber;}
-	int getThreadID()     {return threadID;}
-
-private:
-	int g4EventNumber;
-	int threadID;
-	string g4randomNumber;  // PRAGMA TODO: not used yet. check feasibility
-	string timeStamp();
-};
 
 class GEventData
 {
@@ -56,7 +37,7 @@ private:
 	// all detectors
 	vector<GDetectorObservables*> detectorsData;
 	
-	GHeader gheader;
+	GEventHeader gHeader;
 	
 	// PRAGMA TODO: headers, generators infos
 };

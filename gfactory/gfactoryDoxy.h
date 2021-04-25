@@ -1,5 +1,3 @@
-#ifndef  GFACTORY_DOXY_H
-#define  GFACTORY_DOXY_H  1
 /**
  * \mainpage
  * \section overview Overview
@@ -57,5 +55,3 @@
  * \author \n &copy; Maurizio Ungaro
  * \author e-mail: ungaro@jlab.org\n\n\n
  */
-
-#endif

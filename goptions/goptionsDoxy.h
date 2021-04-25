@@ -1,8 +1,3 @@
-#ifndef  GOPTIONS_DOXY_H
-#define  GOPTIONS_DOXY_H  1
-
-// Make sure that the next strig after subsubsection or subsection is indexed correctly
-
 /**
  * \mainpage
  * \section main Overview
@@ -80,5 +75,4 @@
  * \author e-mail: ungaro@jlab.org
  * \n\n\n
 */
-#endif
 

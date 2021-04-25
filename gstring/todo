@@ -1,4 +1,4 @@
-document each function (doxygen)
+doxygen
 
 - make sure it's same of upgraded version of gemc3 (it's still there)
 - scanNumber was upgraded, verify?

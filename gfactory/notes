@@ -1,2 +1,12 @@
-# gfactory
+Notice: to run the examples we need to link the dynamic libraries to the glibrary naming convention: the extension is .gplugin
+
+ln -s libfordFactory.dylib  fordFactory.gplugin
+ln -s libteslaFactory.dylib teslaFactory.gplugin
+
+
+// the gdl header is based on this tutorial:
+// https://0x00sec.org/t/c-dynamic-loading-of-shared-objects-at-runtime/1498
+
+// the gfactory code is based on TheComet tutorial here:
+// https://www.gamedev.net/topic/683154-c-extend-class-in-dll/
 

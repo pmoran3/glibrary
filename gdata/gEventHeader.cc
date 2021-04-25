@@ -1,10 +1,10 @@
 // gdata 
-#include "gdata.h"
+#include "gEventHeader.h"
 
 // c time
 #include "ctime"
 
-string GHeader::timeStamp()
+string GHeader::assignTimeStamp()
 {
 	time_t now = time(NULL);
 	struct tm * ptm = localtime(&now);

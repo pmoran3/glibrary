@@ -1,5 +1,3 @@
-#ifndef  GSTRING_DOXY_H
-#define  GSTRING_DOXY_H  1
 /// \mainpage
 /// \section Overview
 /// gstring provides basic string utilities (in a namespace) and conventions for stream i/o:
@@ -27,5 +25,3 @@
 /// > /example "strings separated by spaces"
 ///
 /// ~~~~
-
-#endif
