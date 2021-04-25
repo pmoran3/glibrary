@@ -250,3 +250,11 @@ void gexit(int error) {
 	exit(error);
 }
 
+
+void gLogConstruct(string className) {
+	cout << CONSTRUCTORLOG <<  className << " Constructor" << endl;
+}
+
+void gLogDestruct(string className) {
+	cout << DESTRUCTORLOG <<  className << " Destructor" << endl;
+}

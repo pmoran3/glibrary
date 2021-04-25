@@ -1,5 +1,5 @@
 // gdata
-#include "gdata.h"
+#include "gEventData.h"
 
 // c++
 #include <iostream>
@@ -8,7 +8,12 @@
 int main(int argc, char* argv[])
 {
 
-	GHeader gh(20, 11, "234");
+	GEventData *eventData = new GEventData();
+
+
+	for ( int i=0; i<10; i++) {
+		eventData->setHeader(i, 10);
+	}
 
 	return 1;
 }

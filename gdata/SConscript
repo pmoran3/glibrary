@@ -3,8 +3,12 @@
 Import('env')
 
 sources = [
-			  'gdata.cc',
-			  'gobservables/gobservables.cc'
+			  'gEventData.cc',
+			  'gEventHeader.cc',
+			  'hitTypes/gDigitizedHit.cc',
+			  'hitTypes/gTrueInfoHit.cc',
+			  'hitTypes/gTrueInfoSteps.cc',
+			  'hitTypes/gHitsCollection.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

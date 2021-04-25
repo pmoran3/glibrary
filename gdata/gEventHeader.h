@@ -2,15 +2,17 @@
 #define  GEVENTHEADER_H  1
 
 //// c++
-//#include <vector>
-//using std::vector;
-//using std::string;
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::to_string;
 
 // gdata
 #include "gdataConventions.h"
 
 // glibrary
 #include "goptions.h"
+#include "gstringConventions.h"
 
 class GEventHeader
 {
@@ -19,16 +21,29 @@ public:
 		timeStamp = assignTimeStamp();
 
 		if ( verbosity ) {
-			cout << GDATALOGITEM <<  " Setting header: " << endl;
-			cout << TPOINTITEM <<  " Event Number:  "    << evn << endl;
-			cout << TPOINTITEM <<  " Thread ID:  "       << threadID  << endl;
-			cout << TPOINTITEM <<  " Time Stamp:  "      << timeStamp << endl;
+			string log = "GEventHeader evn " + to_string(evn) + " ";
+			gLogConstruct(log);
+			print();
+		}
+	}
+
+	~GEventHeader() {
+		if ( verbosity ) {
+			string log = "GEventHeader evn " + to_string(evn) + " ";
+			gLogDestruct(log);
 		}
 	}
 	
-	string getTimeStamp() {return timeStamp();}
-	int getEvn()          {return g4EventNumber;}
+	string getTimeStamp() {return timeStamp;}
+	int getEvn()          {return evn;}
 	int getThreadID()     {return threadID;}
+
+	void print() {
+		cout << CONSTRUCTORLOG <<  " Event header: " << endl;
+		cout << TPOINTITEM <<  " Event Number:  "    << evn << endl;
+		cout << TPOINTITEM <<  " Thread ID:  "       << threadID  << endl;
+		cout << TPOINTITEM <<  " Time Stamp:  "      << timeStamp << endl;
+	}
 
 private:
 	int evn;

@@ -31,6 +31,9 @@
 #define FATALERRORL BOLD(FRED(" error: "))
 #define GWARNING    BOLD(FYEL(" warning: "))
 
+#define CONSTRUCTORLOG " ↑ "
+#define DESTRUCTORLOG " ↓ "
+
 // list bullets
 #define POINTITEM  " ・ "
 #define CIRCLEITEM " ◦ "
@@ -89,6 +92,11 @@
 
 // exiting with error, print error on screen.
 // should this be part of a namespace ?
+#include <string>
+using std::string;
+
 void gexit(int error);
+void gLogConstruct(string className);
+void gLogDestruct(string className);
 
 #endif

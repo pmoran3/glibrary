@@ -4,42 +4,43 @@
 // conventions
 #include "gdataConventions.h"
 
-
 // c++
 #include <vector>
-#include <string>
 using std::vector;
-using std::string;
+
+// gdata
+#include "gEventHeader.h"
 
 // glibrary
 #include "goptions.h"
+#include "gstringConventions.h"
 
 
 class GEventData
 {
 public:
-	GEventData(GHeader gh) : gheader(gh) {}
-	
+	// default constructor
+	GEventData() {
+		gLogConstruct("GEventData");
+	}
+
+	~GEventData() {
+		gLogDestruct("GEventData");
+		delete gheader;
+	}
+
 public:
-	void addDetectorData(GDetectorObservables *detectorData) {
-		detectorsData.push_back(detectorData);
+
+	void setHeader(int n, int tid, int v = 0) {
+		if ( gheader != nullptr) {
+			delete gheader;
+		}
+		gheader = new GEventHeader(n, tid, v);
 	}
-	
-	int getDetectorDataSize() {
-		return (int) detectorsData.size();
-	}
-	
-	// access data
-	vector<GDetectorObservables*> getDetectorsData() {return detectorsData;}
-	GHeader getHeader() {return gheader;}
-	
+
 private:
-	// all detectors
-	vector<GDetectorObservables*> detectorsData;
-	
-	GEventHeader gHeader;
-	
-	// PRAGMA TODO: headers, generators infos
+
+	GEventHeader *gheader = nullptr;
 };
 
 

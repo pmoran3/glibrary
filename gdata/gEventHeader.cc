@@ -4,7 +4,7 @@
 // c time
 #include "ctime"
 
-string GHeader::assignTimeStamp()
+string GEventHeader::assignTimeStamp()
 {
 	time_t now = time(NULL);
 	struct tm * ptm = localtime(&now);
