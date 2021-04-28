@@ -19,28 +19,26 @@ using std::vector;
 class GEventData
 {
 public:
-	// default constructor
-	GEventData() {
-		gLogConstruct("GEventData");
+	// construct event data using a GEventHeader
+	GEventData(GEventHeader* header, int v = 0 ) : gheader(header), verbosity(v) {
+		if ( verbosity ) {
+			gLogConstruct("GEventData");
+		}
 	}
 
 	~GEventData() {
-		gLogDestruct("GEventData");
+		if ( verbosity ) {
+			gLogDestruct("GEventData");
+		}
 		delete gheader;
 	}
 
 public:
 
-	void setHeader(int n, int tid, int v = 0) {
-		if ( gheader != nullptr) {
-			delete gheader;
-		}
-		gheader = new GEventHeader(n, tid, v);
-	}
 
 private:
-
 	GEventHeader *gheader = nullptr;
+	int verbosity;
 };
 
 

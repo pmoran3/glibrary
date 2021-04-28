@@ -1,4 +1,7 @@
 doxygen
 
+- constructor and destructor messages are mutex locked. Is that ok?
+- for geant4 related objects maybe we should use geant4 locking mechanism
+
 - make sure it's same of upgraded version of gemc3 (it's still there)
 - scanNumber was upgraded, verify?

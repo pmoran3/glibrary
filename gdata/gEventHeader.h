@@ -18,10 +18,11 @@ class GEventHeader
 {
 public:
 	GEventHeader(int n, int tid, int v = 0) : evn(n), threadID(tid), verbosity(v) {
+
 		timeStamp = assignTimeStamp();
 
 		if ( verbosity ) {
-			string log = "GEventHeader evn " + to_string(evn) + " ";
+			string log = "GEventHeader evn " + to_string(evn);
 			gLogConstruct(log);
 			print();
 		}
@@ -29,7 +30,7 @@ public:
 
 	~GEventHeader() {
 		if ( verbosity ) {
-			string log = "GEventHeader evn " + to_string(evn) + " ";
+			string log = "GEventHeader evn " + to_string(evn);
 			gLogDestruct(log);
 		}
 	}

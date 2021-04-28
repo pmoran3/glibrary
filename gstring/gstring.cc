@@ -250,11 +250,18 @@ void gexit(int error) {
 	exit(error);
 }
 
+#include <mutex>
+
+std::mutex mu;
 
 void gLogConstruct(string className) {
-	cout << CONSTRUCTORLOG <<  className << " Constructor" << endl;
+	mu.lock();
+	cout << KGRN << CONSTRUCTORLOG <<  className << KWHT << " constructor" << RST << endl;
+	mu.unlock();
 }
 
 void gLogDestruct(string className) {
-	cout << DESTRUCTORLOG <<  className << " Destructor" << endl;
+	mu.lock();
+	cout << KRED << DESTRUCTORLOG <<  className << KWHT << " destructor" << RST << endl;
+	mu.unlock();
 }

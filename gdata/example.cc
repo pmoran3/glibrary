@@ -3,18 +3,35 @@
 
 // c++
 #include <iostream>
-
+#include <thread>
+using std::thread;
 
 int main(int argc, char* argv[])
 {
 
-	GEventData *eventData = new GEventData();
+	thread thrds[8];
 
+	// Define a Lambda Expression instantiating and deleting event data
+	auto f = [](int evn) {
 
-	for ( int i=0; i<10; i++) {
-		eventData->setHeader(i, 10);
+		GEventData *eventData = new GEventData(new GEventHeader(evn, evn));
+
+		delete eventData;
+
+	};
+
+	// sending each event to a different thread
+	for ( int evn=0; evn<8; evn++ ) {
+
+		thrds[evn] = thread(f, evn);
+
 	}
 
-	return 1;
+	// Wait for threads to finish
+	for ( int evn=0; evn<8; evn++ ) {
+		thrds[evn].join();
+	}
+
+	return EXIT_SUCCESS;
 }
 
