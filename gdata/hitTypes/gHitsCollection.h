@@ -18,21 +18,37 @@ using std::vector;
 class GHitsCollection {
 
 public:
+	GHitsCollection() {
+		digitizedHits  = new vector<GDigitizedHit*>;
+		trueInfosHits  = new vector<GTrueInfoHit*>;
+		trueInfosSteps = new vector<GTrueInfoSteps*>;
+	}
+
+	~GHitsCollection() {
+		delete digitizedHits;
+		delete trueInfosHits;
+		delete trueInfosSteps;
+	}
+
+
+public:
 	// called by virtual method. Default: does nothing.
-	void initializeVarDescrition();
-	map<string, string> *varDescriptions;
+	//void initializeVarDescrition();
+	
+	//map<string, string> *varDescriptions;
+
+
+	// public interface to add hit
+	void addDigitizedHit(GDigitizedHit *dgtzHit);
 
 private:
 
 	// index is hit number
-	vactor<GTrueInfoHit>   *trueInfosHits;
-	vactor<GTrueInfoSteps> *trueInfosSteps;
-	vactor<GDigitizedHit>  *digitizedHits;
+	vector<GDigitizedHit*>  *digitizedHits  = nullptr;
+	vector<GTrueInfoHit*>   *trueInfosHits  = nullptr;
+	vector<GTrueInfoSteps*> *trueInfosSteps = nullptr;
 
-	
-}
-
-
+};
 
 
 

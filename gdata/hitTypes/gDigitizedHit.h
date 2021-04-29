@@ -18,20 +18,21 @@ class GDigitizedHit {
 	
 public:
 
-	void includeVariable(string varName, int var);
-
 	// called at the beginning of the event
 	inline void prepeareHit() {
-		
-		intObservables->clear();
-		fltObservables->clear();
-		dblObservables->clear();
 
 		intVObservables->clear();
 		fltVObservables->clear();
 		dblVObservables->clear();
+
 	}
 
+	void print();
+
+	// public interface to add data to a hit
+	void includeVariable(string vname, int value);
+	void includeVariable(string vname, float value);
+	void includeVariable(string vname, double value);
 
 private:
 

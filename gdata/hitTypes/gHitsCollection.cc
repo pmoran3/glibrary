@@ -1,6 +1,7 @@
 // gdata
-#include "gDigitizedHit.h"
+#include "gHitsCollection.h"
 
-// gstring for the conventions and gexit
-#include "gstring.h"
-
+// public interface to add hit
+void GHitsCollection::addDigitizedHit(GDigitizedHit *dgtzHit) {
+	digitizedHits->push_back(dgtzHit);
+}

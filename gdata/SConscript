@@ -2,6 +2,9 @@
 # the glibrary SConstruct one dir up
 Import('env')
 
+# local directories include
+env.Append(CPPPATH = [Dir('hitTypes')])
+
 sources = [
 			  'gEventData.cc',
 			  'gEventHeader.cc',
