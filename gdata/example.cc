@@ -6,36 +6,38 @@
 #include <thread>
 using std::thread;
 
+
+// emulation of a run of 10 events
 int main(int argc, char* argv[])
 {
 
-	thread thrds[8];
+	int nevents = 10;
 
-	// Define a Lambda Expression instantiating and deleting event data
-	auto f = [](int evn) {
+	vector<GEventData*> *runData = new vector<GEventData*>;
 
-		GEventData *eventData = new GEventData(new GEventHeader(evn, evn));
+	for (int evn = 1; evn <= nevents ; evn++ ) {
 
-		// each event has evn*10 hits
-		for (int h=0; h<evn*10; h++ ) {
+		GEventHeader *gheader = new GEventHeader(evn, evn, 1);
+		GEventData *eventData = new GEventData(gheader);
 
-		}
+		GDigitizedHit *thisHit = new GDigitizedHit();
+		
+		thisHit->includeVariable("crate",   evn);
+		thisHit->includeVariable("slot",   2*evn);
+		thisHit->includeVariable("channel",  evn);
 
-		delete eventData;
+		eventData->addDetectorDigitizedHit("dc", thisHit);
 
-	};
+		runData->push_back(eventData);
 
-	// sending each event to a different thread
-	for ( int evn=1; evn<=8; evn++ ) {
-
-		thrds[evn] = thread(f, evn);
 
 	}
 
-	// Wait for threads to finish
-	for ( int evn=0; evn<8; evn++ ) {
-		thrds[evn].join();
+	for (auto* data: (*runData) ) {
+		delete data;
 	}
+
+	delete runData;
 
 	return EXIT_SUCCESS;
 }

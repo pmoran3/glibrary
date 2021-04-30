@@ -244,22 +244,42 @@ string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, 
 
 }
 
+
+// thread safe message systems
+
+#include <mutex>
+std::mutex mu;
+
 // exiting with error, print error on screen.
 void gexit(int error) {
+	mu.lock();
 	cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
+	mu.unlock();
 	exit(error);
 }
 
-#include <mutex>
-
-std::mutex mu;
-
-void gLogConstruct(string className) {
+// class constructor
+void gLogClassConstruct(string className) {
 	mu.lock();
-	cout << KGRN << CONSTRUCTORLOG <<  className << KWHT << " constructor" << RST << endl;
+	cout << KGRN << CONSTRUCTORLOG <<  className << KWHT << " class constructor" << RST << endl;
 	mu.unlock();
 }
 
+// copy constructor
+void gLogCopyConstruct(string className) {
+	mu.lock();
+	cout << KGRN << CONSTRUCTORLOG <<  className << KWHT << " copy constructor" << RST << endl;
+	mu.unlock();
+}
+
+// move constructor
+void gLogMoveConstruct(string className) {
+	mu.lock();
+	cout << KBLU << CONSTRUCTORLOG <<  className << KWHT << " move constructor" << RST << endl;
+	mu.unlock();
+}
+
+// destructor
 void gLogDestruct(string className) {
 	mu.lock();
 	cout << KRED << DESTRUCTORLOG <<  className << KWHT << " destructor" << RST << endl;

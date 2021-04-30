@@ -21,9 +21,9 @@ public:
 	// called at the beginning of the event
 	inline void prepeareHit() {
 
-		intVObservables->clear();
-		fltVObservables->clear();
-		dblVObservables->clear();
+		intVObservables.clear();
+		fltVObservables.clear();
+		dblVObservables.clear();
 
 	}
 
@@ -37,13 +37,13 @@ public:
 private:
 
 	// the data map are keyd with the variable name
-	map<string, int>    *intObservables = nullptr;
-	map<string, float>  *fltObservables = nullptr;
-	map<string, double> *dblObservables = nullptr;
+	map<string, int>    intObservables;
+	map<string, float>  fltObservables;
+	map<string, double> dblObservables;
 
-	map<string, vector<int>>    *intVObservables = nullptr;
-	map<string, vector<float>>  *fltVObservables = nullptr;
-	map<string, vector<double>> *dblVObservables = nullptr;
+	map<string, vector<int> >    intVObservables;
+	map<string, vector<float> >  fltVObservables;
+	map<string, vector<double> > dblVObservables;
 
 };
 

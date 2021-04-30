@@ -95,8 +95,11 @@
 #include <string>
 using std::string;
 
+// thread safe message systems
 void gexit(int error);
-void gLogConstruct(string className);
+void gLogClassConstruct(string className);
+void gLogCopyConstruct(string className);
+void gLogMoveConstruct(string className);
 void gLogDestruct(string className);
 
 #endif

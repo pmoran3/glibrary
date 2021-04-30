@@ -25,6 +25,11 @@ public:
 	}
 
 	~GHitsCollection() {
+
+		for ( auto* hit: (*digitizedHits) )  { delete hit; }
+		for ( auto* hit: (*trueInfosHits) )  { delete hit; }
+		for ( auto* hit: (*trueInfosSteps) ) { delete hit; }
+
 		delete digitizedHits;
 		delete trueInfosHits;
 		delete trueInfosSteps;

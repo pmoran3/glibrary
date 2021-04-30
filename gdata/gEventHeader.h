@@ -23,7 +23,7 @@ public:
 
 		if ( verbosity ) {
 			string log = "GEventHeader evn " + to_string(evn);
-			gLogConstruct(log);
+			gLogClassConstruct(log);
 			print();
 		}
 	}

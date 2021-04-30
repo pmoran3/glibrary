@@ -23,7 +23,7 @@ public:
 	// construct event data using a GEventHeader
 	GEventData(GEventHeader* header, int v = 0 ) : gheader(header), verbosity(v) {
 		if ( verbosity ) {
-			gLogConstruct("GEventData");
+			gLogClassConstruct("GEventData");
 		}
 
 		// deleting
@@ -49,6 +49,8 @@ public:
 private:
 	GEventHeader *gheader = nullptr;
 	int verbosity;
+
+
 	map<string, GHitsCollection*> gdata;
 
 
