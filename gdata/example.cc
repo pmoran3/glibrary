@@ -17,14 +17,15 @@ int main(int argc, char* argv[])
 
 	for (int evn = 1; evn <= nevents ; evn++ ) {
 
+		// calling gheader with verbosity 1 for debugging purposes
 		GEventHeader *gheader = new GEventHeader(evn, evn, 1);
-		GEventData *eventData = new GEventData(gheader);
+		GEventData *eventData = new GEventData(gheader, 1);
 
 		GDigitizedHit *thisHit = new GDigitizedHit();
 		
-		thisHit->includeVariable("crate",   evn);
-		thisHit->includeVariable("slot",   2*evn);
-		thisHit->includeVariable("channel",  evn);
+		thisHit->includeVariable("crate",     evn);
+		thisHit->includeVariable("slot",    2*evn);
+		thisHit->includeVariable("channel", 3*evn);
 
 		eventData->addDetectorDigitizedHit("dc", thisHit);
 
@@ -33,8 +34,8 @@ int main(int argc, char* argv[])
 
 	}
 
-	for (auto* data: (*runData) ) {
-		delete data;
+	for (auto* edata: (*runData) ) {
+		delete edata;
 	}
 
 	delete runData;

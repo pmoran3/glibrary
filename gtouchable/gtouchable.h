@@ -11,15 +11,17 @@
 #include <iostream>
 using namespace std;
 
-// GType: always use gIdentity as the discriminating factor.
-// In addition:
-//
 // - readout: electronic Time Window is the discriminating factor
 // - flux: track id is the discriminating factor
 // - particleCounter: no other discriminating factors
 enum GType { readout, flux, particleCounter };
 
 struct GIdentifier {
+
+public:
+	// constructor
+	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
+
 private:
 	string idName;
 	int idValue;
@@ -31,63 +33,58 @@ private:
 	}
 
 public:
-	// default constructor
-	GIdentifier() = default;
 
-	// constructor
-	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
-
-	//  Overloaded "!=": comparing just the values
+	//  Overloaded "!=": comparing idValue
 	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
-
 
 };
 
+// GTouchable: always use the detector identifier (gidentifier) as the discriminating factor.
+// If the identifier is the same gType is used
 class GTouchable
 {
 	
 public:
-	GTouchable(GType t, vector<GIdentifier> identity, bool verb = 0) :
-	gIdentity{identity},
+	// constructor called at gvolume construction
+	GTouchable(GType t, vector<GIdentifier> identifier, bool verb = false) :
 	gType{t},
-	trackId{0},
-	eMultiplier{1},
-	gridTimeIndex{0},
-	verbosity{verb} {}
-	
-public:
-	double getEnergyMultiplier() {return eMultiplier;}
-	
+	gidentifier{identifier},
+	verbosity{verb} {
+		trackId = 0;
+		eMultiplier = 1;
+		gridTimeIndex = 0;
+	}
+
 private:
-	// set by constructor
-	vector<GIdentifier> gIdentity;   ///< Uniquely identify a sensitive element
-	
 	// set by sensitive detector constructor
 	GType  gType;
-	
-	// set in sensitiveDetector::ProcessHit
-	int trackId;   ///< Used to determine if steps belong to the same hit for flux/particle counter detectors
-	
-	// set by processGTouchable in the digitization plugin. Defaulted to 1. Used to share energy / create new hits.
-	double  eMultiplier;   ///< Energy Multiplier. By default it is 1, but energy could be shared (or created) among volumes
-	
-	// used to determine if a hit is within the same detector electronic time window
-	// if the index is 0, this quantity is ignored
-	// if it is > 0 then it is used to distinguish hits in separate time windows
-	int gridTimeIndex;
-	
-	// users may want to define and save information from the processGTouchable function
-	// to be used in the digitization later
-	vector<double> userInformations;
-	
+	vector<GIdentifier> gidentifier;   ///< Uniquely identify a sensitive element
 	bool verbosity;
 
+	// set in sensitiveDetector::ProcessHit
+	// Used to determine if steps belong to the same hit for flux/particle counter detectors
+	int trackId;
+	
+	// set by processGTouchable in the digitization plugin. Defaulted to 1. Used to share energy / create new hits.
+	// Energy Multiplier. By default it is 1, but energy could be shared (or created) among volumes
+	double  eMultiplier;
+	
+	// used to determine if a hit is within the same detector electronic time window for readout electronic
+	// set using placeInTimeWindow in ProcessHits
+	int gridTimeIndex;
+
+
+	// to print it out
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
 
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
-	void placeInTimeWindow(double time, double timeWindow) {gridTimeIndex = time/timeWindow;}
-	
+
+	// called in ProcessHits using track global time and sensitive detector
+	void placeInTimeWindow(double trackGlobalTime, double timeWindow) {gridTimeIndex = trackGlobalTime/timeWindow;}
+
+	double getEnergyMultiplier() {return eMultiplier;}
+
 };
 
 

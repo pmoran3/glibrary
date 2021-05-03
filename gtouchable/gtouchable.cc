@@ -6,8 +6,9 @@
 bool GTouchable::operator == (const GTouchable& that) const
 {
 
-	// first, compare identities (just the int value)
-	if (this->gIdentity.size() != that.gIdentity.size()) {
+	// first, compare size of identity
+	// this should never happen because the same sensitivity should be assigned the same identifier structure
+	if (this->gidentifier.size() != that.gidentifier.size()) {
 		if (verbosity) {
 			cout << " Touchable sizes are different " << endl;
 		}
@@ -16,14 +17,15 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	if (verbosity) {
 		cout << " Touchable comparison:  " << endl;
-		for (int i=0; i<that.gIdentity.size(); i++) {
-			cout << this->gIdentity[i] << " " <<  that.gIdentity[i] << endl;
+		for (int i=0; i<that.gidentifier.size(); i++) {
+			cout << this->gidentifier[i] << " " <<  that.gidentifier[i] << endl;
 		}
 	}
 
 	// now compare that the identity is actuallty the same
-	for (int i=0; i<that.gIdentity.size(); i++) {
-		if (this->gIdentity[i] != that.gIdentity[i]) {
+	// return false if something is different
+	for (int i=0; i<that.gidentifier.size(); i++) {
+		if (this->gidentifier[i] != that.gidentifier[i]) {
 			return false;
 		}
 	}

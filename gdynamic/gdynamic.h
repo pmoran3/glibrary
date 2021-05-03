@@ -1,7 +1,7 @@
 #ifndef  GDYNAMIC_H
 #define  GDYNAMIC_H 1
 
-// mlibrary
+// glibrary
 #include "gdl.h"
 #include "gtouchable.h"
 #include "observables/gobservables.h"
