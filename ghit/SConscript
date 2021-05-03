@@ -3,9 +3,9 @@
 Import('env')
 
 sources = [
-			  'buildHitInfos.cc',
-			  'calculations.cc',
-			  'ghit.cc'
+			  'ghit.cc',
+			  'buildHitInfosForBit.cc',
+			  'calculations.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

@@ -83,7 +83,7 @@ public:
 	// called in ProcessHits using track global time and sensitive detector
 	void placeInTimeWindow(double trackGlobalTime, double timeWindow) {gridTimeIndex = trackGlobalTime/timeWindow;}
 
-	double getEnergyMultiplier() {return eMultiplier;}
+	const float getEnergyMultiplier() {return eMultiplier;}
 
 };
 
