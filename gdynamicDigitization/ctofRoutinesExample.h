@@ -10,6 +10,7 @@ using namespace std;
 
 class CTofRoutineExample : public GDynamic {
 
+	// implementing 
 public:
 	bool loadConstants(int runno, string variation);
 	bool checkPlugin();

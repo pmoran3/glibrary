@@ -44,10 +44,10 @@ private:
 
 	// hit data, selected by HitBitSet, to be collected for each step
 private:
-	vector<float> stepEdep, stepTime;   // bit 1
+	vector<float> stepEdep, stepTime;    // bit 1
 
 	vector<G4ThreeVector> stepGlobalPos; // bit 2
-	vector<float> stepSize;             // bit 2
+	vector<float> stepSize;              // bit 2
 
 	// geant4 touchable hierarchy
 	vector<int> g4TouchableHierarchyID;
@@ -59,7 +59,7 @@ public:
 
 	// public interface: calculated quantities defined in calculationscc
 public:
-	double getTotalEnergyDeposited();
+	float getTotalEnergyDeposited();
 
 };
 

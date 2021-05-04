@@ -8,7 +8,7 @@ class Tesla : public Car
 public:
 	Tesla();
 	void go();
-	double autopilot[2][2];
+	float autopilot[2][2];
 };
 
 extern "C" Car* CarFactory(void) {

@@ -67,12 +67,11 @@ private:
 	
 	// set by processGTouchable in the digitization plugin. Defaulted to 1. Used to share energy / create new hits.
 	// Energy Multiplier. By default it is 1, but energy could be shared (or created) among volumes
-	double  eMultiplier;
+	float  eMultiplier;
 	
 	// used to determine if a hit is within the same detector electronic time window for readout electronic
 	// set using placeInTimeWindow in ProcessHits
 	int gridTimeIndex;
-
 
 	// to print it out
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
@@ -80,8 +79,8 @@ private:
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
 
-	// called in ProcessHits using track global time and sensitive detector
-	void placeInTimeWindow(double trackGlobalTime, double timeWindow) {gridTimeIndex = trackGlobalTime/timeWindow;}
+	// called in ProcessHits
+	void placeInTimeWindow(int twindex) {gridTimeIndex = twindex;}
 
 	const float getEnergyMultiplier() {return eMultiplier;}
 

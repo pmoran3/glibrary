@@ -1,9 +1,9 @@
 // ghit
 #include "ghit.h"
 
-double GHit::getTotalEnergyDeposited()
+float GHit::getTotalEnergyDeposited()
 {
-	double totalEdep = 0;
+	float totalEdep = 0;
 	
 	for(const auto &ei: stepEdep) {
 		totalEdep += ei;
