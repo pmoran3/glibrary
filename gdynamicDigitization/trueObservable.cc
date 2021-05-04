@@ -1,18 +1,20 @@
 // gdynamic
-#include "gdynamic.h"
+#include "gdynamicdigitization.h"
 
 
 
-GObservables* GDynamic::trueInfoHit(GHit *ghit)
+GTrueInfoHit* GDynamic::collectTrueInformation(GHit *ghit)
 {
-	GObservables* gdata = new GObservables();
+	GTrueInfoHit* trueInfoHit = new GTrueInfoHit();
 	
-	gdata->addObservable(ghit->getTotalEnergyDeposited(),  // variable value
-						 "totEDep",                        // variable name
-						 "MeV",         // variable description
-						 "double");                        // save to disk as type
-
-	
+	// edep and stepTime
+	if ( ghit->stepEdep.size() ) {
+		float eTotal = 0;
+		for ( auto& edep: ghit->stepEdep ) {
+			eTotal = eTotal + edep;
+		}
+		trueInfoHit->includeVariable("totEDep", eTotal);
+	}
 	
 	return gdata;
 }

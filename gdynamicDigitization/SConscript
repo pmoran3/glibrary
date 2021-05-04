@@ -3,8 +3,7 @@
 Import('env')
 
 sources =
-	'trueObservable.cc',
-	'truePulse.cc'
+	'trueObservable.cc'
 	]
 
 # destination library is one dir up - relative to this SConscript
