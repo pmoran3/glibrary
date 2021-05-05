@@ -1,5 +1,7 @@
-Notice: to run the examples we need to link the dynamic libraries to the glibrary naming convention to be loaded correctly:
+Notice 1: to run the examples we need to link or mv the dynamic libraries to the glibrary naming convention to be loaded correctly:
 the extension is .gplugin
+
+Notice 2: do not do this through finder! It will keep dylib
 
 ln -s libfordFactory.dylib  fordFactory.gplugin
 ln -s libteslaFactory.dylib teslaFactory.gplugin

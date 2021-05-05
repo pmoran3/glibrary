@@ -1,6 +1,8 @@
 // gtouchable
 #include "gtouchable.h"
 
+using std::cout;
+using std::endl;
 
 // todo: optimize the algorithm
 bool GTouchable::operator == (const GTouchable& that) const

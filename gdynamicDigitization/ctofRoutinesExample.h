@@ -6,7 +6,6 @@
 
 // c++
 #include <string>
-using namespace std;
 
 class CTofRoutineExample : public GDynamicDigitization {
 

@@ -9,7 +9,9 @@
 #include <vector>
 #include <string>
 #include <iostream>
-using namespace std;
+using std::string;
+using std::ostream;
+using std::vector;
 
 // - readout: electronic Time Window is the discriminating factor
 // - flux: track id is the discriminating factor
@@ -17,6 +19,7 @@ using namespace std;
 enum GType { readout, flux, particleCounter };
 
 struct GIdentifier {
+
 
 public:
 	// constructor

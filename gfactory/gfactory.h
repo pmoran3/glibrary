@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 #include <iostream>
-using namespace std;
+using std::string;
 
 // dynamic loading
 #include "gdl.h"

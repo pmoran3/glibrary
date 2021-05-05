@@ -14,7 +14,7 @@
 // c++
 #include <vector>
 #include <bitset>
-using namespace std;
+
 
 // geant4
 #include "G4Step.hh"

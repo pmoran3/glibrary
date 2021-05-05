@@ -9,3 +9,8 @@ goptions/structuredExample
 gsplash/example
 gsplash/qrc_example.cc
 gdata/example
+gdynamicDigitization/ctofRoutinePlugin.gplugin
+gdynamicDigitization/ctofRoutinesExample.os
+gdynamicDigitization/example
+gdynamicDigitization/libctofRoutinesExample.dylib
+
