@@ -5,7 +5,7 @@ from init_env import init_environment
 env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-# we build the library in ../lib
+ we build the library in ../lib
 # by default, targets outside the current tree are not selected.
 env.Default('../')
 

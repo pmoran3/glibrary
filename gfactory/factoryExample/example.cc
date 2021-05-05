@@ -65,14 +65,14 @@ int main()
 
 
 	// B manages Cars. Notice, we do not need the derived class headers here!
-	// PRAGMA: These two names must match in the registerDL and in the LoadObjectFromLibrary:
+	// PRAGMA: These two names must match in the registerDL and in the LoadAndRegisterObjectFromLibrary:
 	// tesla
 	// that's ok but need to spit error if that doesn't happen
 	GManager managerB(1); // no verbosity of 1
 	
 	map<string, Car*> ggg;
-	ggg["tesla"] = managerB.LoadObjectFromLibrary<Car>("teslaFactory");
-	ggg["ford"]  = managerB.LoadObjectFromLibrary<Car>("fordFactory");
+	ggg["tesla"] = managerB.LoadAndRegisterObjectFromLibrary<Car>("teslaFactory");
+	ggg["ford"]  = managerB.LoadAndRegisterObjectFromLibrary<Car>("fordFactory");
 	Car* aCar = ggg["ford"];
 
 

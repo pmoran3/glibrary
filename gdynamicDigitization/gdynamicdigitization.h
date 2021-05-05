@@ -22,6 +22,8 @@ using namespace std;
 class GDynamicDigitization {
 
 public:
+	// abstract destructor
+	virtual ~GDynamicDigitization() = default;
 
 	// change the GTouchable in sensitiveDetector::ProcessHit
 	// by default the touchable is not changed
@@ -40,18 +42,17 @@ public:
 
 	// loads the digitization constants
 	// return false for failure
-	//virtual bool loadConstants(int runno, string variation) { return false; }
+	virtual bool loadConstants(int runno, string variation) { return false; }
 	
 	// logs the constants
 	//virtual vector<string> showConstants() { return  {" Please implement showConstants() in your plugin."}; }
 	//vector<string> showParameters()        { return gSensitiveParameters->showParameters();}
 
-	GReadoutSpecs *readoutSpecs;
+	GReadoutSpecs *readoutSpecs = nullptr;
 
 	// initialize readout specs in GSensitiveDetector constructor if it's a readout electronics
 	// must be implemented in case the detector has readout
-	//virtual void loadReadoutSpecs(int runno, string variation) = 0;
-
+	virtual void defineReadoutSpecs(int runno, string variation) = 0;
 	
 	// method to dynamically load factories
 	static GDynamicDigitization* instantiate(const dlhandle handle) {

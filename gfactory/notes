@@ -1,4 +1,5 @@
-Notice: to run the examples we need to link the dynamic libraries to the glibrary naming convention: the extension is .gplugin
+Notice: to run the examples we need to link the dynamic libraries to the glibrary naming convention to be loaded correctly:
+the extension is .gplugin
 
 ln -s libfordFactory.dylib  fordFactory.gplugin
 ln -s libteslaFactory.dylib teslaFactory.gplugin

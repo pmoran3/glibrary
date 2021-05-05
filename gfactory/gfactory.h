@@ -53,7 +53,7 @@ private:
 	map<string, GFactoryBase*> factoryMap;
 
 	// the reason to keep this map is to keep the (DynamicLib?) pointers in memory
-	// for some reason declaring a dynamic_lib local variable in LoadObjectFromLibrary
+	// for some reason declaring a dynamic_lib local variable in LoadAndRegisterObjectFromLibrary
 	// scope does not work
 	map<string, DynamicLib*> dlMap;
 
@@ -120,13 +120,13 @@ public:
 
 
 	/**
-	 * @fn LoadObjectFromLibrary
+	 * @fn LoadAndRegisterObjectFromLibrary
 	 * @param name name under which the factory is registered
 	 *
 	 * Instantiate client derived class.\n
 	 * Notice the base class must have the static method instantiate
 	 */
-	template <class T> T* LoadObjectFromLibrary(string name) {
+	template <class T> T* LoadAndRegisterObjectFromLibrary(string name) {
 
 		registerDL(name);
 

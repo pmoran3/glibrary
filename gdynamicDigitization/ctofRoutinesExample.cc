@@ -1,5 +1,16 @@
 #include "ctofRoutinesExample.h"
 
+void CTofRoutineExample::defineReadoutSpecs(int runno, string variation) {
+
+	float     timeWindow = 10;                  // electronic readout time-window of the detector
+	float     gridStartTime = 0;                // defines the windows grid
+	HitBitSet hitBitSet = HitBitSet("100000");  // defines what information to be stored in the hit
+	bool      verbosity = true;
+
+	readoutSpecs = new GReadoutSpecs(timeWindow, gridStartTime, hitBitSet, verbosity);
+
+}
+
 
 bool CTofRoutineExample::loadConstants(int runno, string variation)
 {
@@ -19,7 +30,3 @@ bool CTofRoutineExample::loadConstants(int runno, string variation)
 	return true;
 }
 
-bool CTofRoutineExample::checkPlugin()
-{
-	return true;
-}

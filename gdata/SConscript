@@ -3,7 +3,7 @@
 Import('env')
 
 # local directories include
-env.Append(CPPPATH = [Dir('hitTypes')])
+env.Append(CPPPATH = [Dir('dataTypes')])
 
 sources = [
 			  'gEventData.cc',

@@ -12,14 +12,10 @@ env.Default('../')
 # build the library
 lib = SConscript('SConscript', exports='env')
 
-
-ctof_dll  = env.SharedLibrary( source = "ctofRoutinesExample.cc",  target = "ctofRoutinesExample")
+ctof_dll  = env.SharedLibrary( source = 'ctofRoutinesExample.cc',  target = 'ctofRoutinesExample')
 Depends(ctof_dll,  lib);
 
 
-example_sources = Split("""
-	example.cc
-	""")
-example = env.Program(source = example_sources, target = "example")
+example = env.Program(source = 'example.cc', target = "example")
 
 Depends(example,  ctof_dll);

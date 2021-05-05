@@ -16,10 +16,10 @@ private:
 	// GType readoutType;
 
 	// readout specs, set by plugin function loadReadoutSpecs
-	float    timeWindow;       // electronic readout time-window of the detector
-	float    gridStartTime;    // defines the windows grid
+	float     timeWindow;       // electronic readout time-window of the detector
+	float     gridStartTime;    // defines the windows grid
 	HitBitSet hitBitSet;       // defines what information to be stored in the hit
-	bool verbosity;
+	bool      verbosity;
 
 public:
 

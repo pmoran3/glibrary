@@ -3,7 +3,7 @@
 // example on how to use the gdynamic library
 
 // gdynamic
-#include "gdynamic.h"
+#include "gdynamicdigitization.h"
 
 // gfactory
 #include "gfactory.h"
@@ -19,22 +19,20 @@ int main(int argc, char* argv[])
 
 	GManager manager(1);
 
-	// DL is the name of the
-	manager.registerDL("ctofRoutinesExample");
 
-	map<string, GDynamic*> dynamicRoutines;
-	dynamicRoutines["ctof"] = manager.LoadObjectFromLibrary<GDynamic>("ctofRoutinesExample");
+	// using dynamicRoutines map
+	map<string, GDynamicDigitization*> dynamicRoutines;
+	dynamicRoutines["ctof"] = manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin");
 
-
-	shared_ptr<GDynamic> globalCtof1(manager.LoadObjectFromLibrary<GDynamic>("ctofRoutinesExample"));
-	shared_ptr<GDynamic> globalCtof2(manager.LoadObjectFromLibrary<GDynamic>("ctofRoutinesExample"));
+	// using shared_ptr
+	shared_ptr<GDynamicDigitization> globalCtof1(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin"));
+	shared_ptr<GDynamicDigitization> globalCtof2(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin"));
 
 	// increments reference count
 	// to be used in the local thread
 	auto globalCtof3(globalCtof2);
 
 	cout << dynamicRoutines["ctof"] << " " << globalCtof1 << " " << globalCtof2 << " " << globalCtof3 << endl;
-
 
 	dynamicRoutines["ctof"]->loadConstants(1, "original");
 	globalCtof1->loadConstants(1, "original");

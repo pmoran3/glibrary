@@ -46,7 +46,7 @@
  * manager.registerDL("fordFactory");
  *
  * // retrieve "fordFactory" from the shared object, instantiate and store new client fordFactory class
- * map["ford"] = manager.LoadObjectFromLibrary<Car>("fordFactory");
+ * map["ford"] = manager.LoadAndRegisterObjectFromLibrary<Car>("fordFactory");
  *
  * // Method() is pure virtual in Car. Calling the instance fordFactory method here
  * map["ford"]->Method();

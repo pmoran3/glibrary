@@ -13,7 +13,10 @@ class CTofRoutineExample : public GDynamicDigitization {
 	// implementing 
 public:
 	bool loadConstants(int runno, string variation);
-	bool checkPlugin();
+
+	// readout specs definitions
+	// this MUST be defined, and public
+	void defineReadoutSpecs(int runno, string variation);
 
 private:
 
@@ -21,6 +24,7 @@ private:
 	int var2[2];
 	vector<float> var3;
 	string var4;
+
 
 };
 
