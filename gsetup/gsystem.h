@@ -9,7 +9,7 @@
 //#include "goptions.h"
 //#include "gfactory.h"
 
-#define setupLogHeader " ⎚ gvolume ▸"
+#define GSETUPLOGHEADER " ⎚ gvolume ▸"
 #define GWORLDNAME     "world"
 
 // c++
@@ -22,52 +22,63 @@ class GSystem
 {
 	
 public:
+	// constructor, from command line or jcard
 	GSystem(string n, string f, string v, int r, int dr, int verbosity);
 
 private:
-	string      name;     // System name, with path to it
-	string   factory;     // Factory that builds the detector
-	string variation;     // Variation of the detector. Default is "default"
-	int    runNumber;     // Run Number selected for this detector. Default is 1
+	string      name;               // System name, with path to it
+	string   factory;               // Factory that builds the detector
+	string variation = "default";   // Variation of the detector. Default is "default"
+	int    runNumber = 1;           // Run Number selected for this detector. Default is 1
 
 	// map containing the volumes
-	// the key is system + volume name so the names must be unique in each system
-	// PRAGMA TODO:  this should be pointer ?
-	map<string, GVolume*> systems;
+	// the key is system + volume name;
+	// the names must be unique in each system
+	// each system name must be unique
+	map<string, GVolume*> gvolumesMap;
 
-	// system parameters:
-	// - timewindow
-	// - energy threshold
-	map<string, double> systemParameters;
+	string formVolumeKey(string detectorName) {
+		return name + detectorName;
+	}
 
-	// load all names in the directory matching extension. Defined in utilities.cc.
-	vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
 
 
 public:
-	string getFactory() const { return factory; }
-	string getName() const    { return name; }
+//	string getFactory() const { return factory; }
+//	string getName() const    { return name; }
 	
-	// returns the file stream, checking all possible directories. Defined in utilities.cc
-	ifstream* gSystemFile(int which, vector<string> locations, int verbosity);  // 0: material. 1: geometry
+	// returns the file stream, checking all possible directories.
+	// this should be in some general utility library? gstrings?
+	//ifstream* gSystemFile(int which, vector<string> locations, int verbosity);  // 0: material. 1: geometry
 	
-	// returns a vector of import files, checking all possible directories. Defined in utilities.cc
-	vector<string> gImportFiles(vector<string> locations, int verbosity, vector<string> possibleExtensions);
-	
-	void addGVolume(vector<string> pars, int verbosity);
-	void addGImportedVolume(string importType, string filename, int verbosity);
+	// returns a vector of import files, checking all possible directories.
+	// this should be in some general utility library? gstrings?
+	// vector<string> gImportFiles(vector<string> locations, int verbosity, vector<string> possibleExtensions);
 
-	GVolume* getGVolume(string key) {
-		if(systems.find(key) != systems.end()) {
-			return systems[key];
+	// load all names in the directory matching extension
+	// this should be in some general utility library? gstrings?
+	// vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
+
+
+	void addGVolume(vector<string> pars, int verbosity);
+	// void addGImportedVolume(string importType, string filename, int verbosity);
+
+	// need to filter system name from key
+	GVolume* getGVolume(string detectorName) {
+
+		string key = formVolumeKey(detectorName);
+
+		if(gvolumesMap.find(key) != gvolumesMap.end()) {
+			return gvolumesMap[key];
 		} else {
 			return nullptr;
 		}
 	}
 	
-	map<string, GVolume*> getSytems() const {return systems;}
-	vector<string> getAllVolumeNames() const;
-	string getSystemPath();
+	map<string, GVolume*> getGVolumesMap() const {return gvolumesMap;}
+
+//	vector<string> getAllVolumeNames() const;
+//	string getSystemPath();
 	
 };
 

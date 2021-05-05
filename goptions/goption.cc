@@ -100,13 +100,13 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 	// and the option is cumulative
 	if ( !isAddition && cumulative ) {
 		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
-		gexit(NOADDFORCUMULATIVE);
+		gexit(EC__NOADDFORCUMULATIVE);
 	}
 
 	// if add- was found but option is not cumulative, it's a mistake.
 	if ( isAddition && !cumulative ) {
 		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
-		gexit(ADDFORNONCUMULATIVE);
+		gexit(EC__ADDFORNONCUMULATIVE);
 	}
 
 	// simple option
@@ -171,7 +171,7 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 
 						if (definitionJsonValue[GDFLT] == NODFLT) {
 							cerr << FATALERRORL << tagToCheck <<  " in " << definitionJsonValue << " is marked mandatory but it's not set." << endl;
-							gexit(MANDATORYOPTIONNOTFOUND);
+							gexit(EC__MANDATORYOPTIONNOTFOUND);
 						}
 
 						// assigning its default value
@@ -221,7 +221,7 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 		// strict: error
 		if ( gstrict ) {
 			cout << FATALERRORL " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative, is already present, and it's not the default. " << endl;
-			gexit(NONCUMULATIVEALREADYPRESENT);
+			gexit(EC__NONCUMULATIVEALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
 		} else {
@@ -344,7 +344,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 
 	if ( !isDefined )  {
 		cerr << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
-		gexit(NOOPTIONFOUND);
+		gexit(EC__NOOPTIONFOUND);
 	}
 
 }

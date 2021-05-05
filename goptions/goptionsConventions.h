@@ -22,15 +22,15 @@
 
 
 // exit codes: 100s
-#define NOOPTIONFOUND               101
-#define MANDATORYOPTIONNOTFOUND     102
-#define NOADDFORCUMULATIVE          103
-#define ADDFORNONCUMULATIVE         104
-#define JSONPARSEERROR              105
-#define OPTIONSHOULDNOTBESTRUCTURED 106
-#define NONCUMULATIVEALREADYPRESENT 107
-#define OPTIONNOTASSIGNED           108
-#define SWITCHALREADYPRESENT        109
+#define EC__NOOPTIONFOUND               101
+#define EC__MANDATORYOPTIONNOTFOUND     102
+#define EC__NOADDFORCUMULATIVE          103
+#define EC__ADDFORNONCUMULATIVE         104
+#define EC__JSONPARSEERROR              105
+#define EC__OPTIONSHOULDNOTBESTRUCTURED 106
+#define EC__NONCUMULATIVEALREADYPRESENT 107
+#define EC__OPTIONNOTASSIGNED           108
+#define EC__SWITCHALREADYPRESENT        109
 
 // template to be filled by libraries utilizing goptions
 namespace goptions {

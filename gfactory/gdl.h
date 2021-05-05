@@ -23,8 +23,8 @@ static void close_lib(dlhandle handle);
 #define DLLOGITEM  " ⁍"
 
 // exit codes: 1000s
-#define DLNOTFOUND       1001
-#define FACTORYNOTFOUND  1002
+#define EC__DLNOTFOUND       1001
+#define EC__FACTORYNOTFOUND  1002
 
 
 /**
@@ -57,7 +57,7 @@ public:
 			handle = load_lib(dlFileName);
 		} else {
 			cerr << FATALERRORL  " couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
-			gexit(DLNOTFOUND);
+			gexit(EC__DLNOTFOUND);
 		}
 	}
 

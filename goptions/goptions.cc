@@ -98,7 +98,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 			cerr << FATALERRORL << " exception: " << thisException << endl;
 		}
 
-		gexit(JSONPARSEERROR);
+		gexit(EC__JSONPARSEERROR);
 	}
 
 	// parse command line
@@ -225,7 +225,7 @@ long GOptions::findOptionIndex(string name) {
 	// not found, error
 	cerr << FATALERRORL << "the option " << YELLOWHHL << name << RSTHHR << " is not known to this system. " << endl;
 	cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
-	gexit(NOOPTIONFOUND);
+	gexit(EC__NOOPTIONFOUND);
 
 	return -1;
 }
@@ -247,7 +247,7 @@ void GOptions::addSwitch(string name, string description) {
 	} else {
 		if ( gstrict ) {
 			cerr << FATALERRORL " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
-			gexit(SWITCHALREADYPRESENT);
+			gexit(EC__SWITCHALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
 		} else {
@@ -297,7 +297,7 @@ json GOptions::getNonStructuredOptionSingleValue(string tag) {
 	// will exit if not found
 	if(getStructuredOptionAssignedValues(tag).size() == 0) {
 		cerr << FATALERRORL << " The tag " << tag << " is not assigned. " << endl;
-		gexit(OPTIONNOTASSIGNED);
+		gexit(EC__OPTIONNOTASSIGNED);
 	}
 
 
@@ -306,7 +306,7 @@ json GOptions::getNonStructuredOptionSingleValue(string tag) {
 	if ( jn.begin().value().is_structured() ) {
 		cerr << FATALERRORL << " The tag " << tag << " is part of the structured option " << jn << endl;
 		cerr << " Use structure projection to retrieve this option (see documentation at " << GOPTIONDOCUMENTATION << ")" << endl;
-		gexit(OPTIONSHOULDNOTBESTRUCTURED);
+		gexit(EC__OPTIONSHOULDNOTBESTRUCTURED);
 	}
 
 	return jn;
@@ -336,7 +336,7 @@ bool GOptions::getSwitch(string tag) {
 		return switches[tag].getStatus();
 	} else {
 		cerr << FATALERRORL  " the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
-		gexit(NOOPTIONFOUND);
+		gexit(EC__NOOPTIONFOUND);
 	}
 	return false;
 }

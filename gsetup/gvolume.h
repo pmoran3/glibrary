@@ -8,7 +8,7 @@ using std::string;
 using std::ostream;
 using std::vector;
 
-#define gVolumeNumberOfParameters 19
+#define GVOLUMENUMBEROFPARS 19
 #define GVOLUMENOTAPPLICABLEENTRY "na"
 
 class GVolume

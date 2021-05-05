@@ -21,7 +21,7 @@ public:
 		if(e == "no") present = false;
 
 		if( verbosity ) {
-			cout << setupLogHeader <<  " Volume " << name << " modified with:";
+			cout << GSETUPLOGHEADER <<  " Volume " << name << " modified with:";
 			if (  shift != "default") cout << " - shift: "     << shift   ;
 			if (  tilts != "default") cout << " - tilts: "     << tilts   ;
 			if (present != true)      cout << " - existance: " << present ;

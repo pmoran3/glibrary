@@ -110,7 +110,7 @@ public:
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end()) {
 			cerr << FATALERRORL  " couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << endl;
-			gexit(FACTORYNOTFOUND);
+			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
 			cout << GFACTORYLOGITEM << " GFactory Manager: Creating instance of " << name << " factory." << endl;

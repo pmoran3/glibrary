@@ -13,9 +13,9 @@ using gstring::trimSpacesFromString;
 
 GVolume::GVolume(vector<string> pars, string importPath)
 {
-	if( pars.size() != gVolumeNumberOfParameters) {
+	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << " Fatal Error: Incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
-		cerr << " It should be " << gVolumeNumberOfParameters << endl;
+		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
 		exit(0);
 	} else {
 		// size is already checked in addVolume, the only interface to volume
