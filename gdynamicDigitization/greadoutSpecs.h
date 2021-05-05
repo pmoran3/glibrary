@@ -1,6 +1,9 @@
 #ifndef  GREADOUTSPECS_H
 #define  GREADOUTSPECS_H 1
 
+// glibrary
+#include "ghitConventions.h"
+
 
 // properties of the readout electronics, used in GTouchable and GHit.
 // they are defined here so that the plugin can define it

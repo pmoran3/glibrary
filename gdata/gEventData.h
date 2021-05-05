@@ -10,7 +10,7 @@ using std::vector;
 
 // gdata
 #include "gEventHeader.h"
-#include "gHitsCollection.h"
+#include "gDataCollection.h"
 
 // glibrary
 #include "goptions.h"
@@ -27,7 +27,7 @@ public:
 		}
 
 		// deleting
-		for (auto& hitCollection: gdata) {
+		for (auto& hitCollection: gdataCollection) {
 			delete hitCollection.second;
 		}
 	}
@@ -44,14 +44,14 @@ public:
 
 public:
 
-	void addDetectorDigitizedHit(string detector, GDigitizedHit *dgtzHit);
+	void addDetectorDigitizedData(string detector, GDigitizedData *dgtzData);
 
 private:
 	GEventHeader *gheader = nullptr;
 	int verbosity;
 
 
-	map<string, GHitsCollection*> gdata;
+	map<string, GDataCollection*> gdataCollection;
 
 
 };

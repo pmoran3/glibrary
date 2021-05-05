@@ -1,10 +1,15 @@
 #ifndef  GDYNAMICDIGITIZATION_H
 #define  GDYNAMICDIGITIZATION_H 1
 
+// dynamic digitization
+#include "greadoutSpecs.h"
+
 // glibrary
 #include "gdl.h"
 #include "gtouchable.h"
 #include "ghit.h"
+#include "dataTypes/gDigitizedData.h"
+#include "dataTypes/gTrueInfoData.h"
 
 // c++
 #include <vector>
@@ -27,10 +32,10 @@ public:
 
 	// filter true information into GTrueInfoHit
 	// this integrates all available information built in GHit::buildHitInfosForBit
-	GTrueInfoHit *collectTrueInformation(GHit *ghit);
+	GTrueInfoData *collectTrueInformation(GHit *ghit);
 
 	// digitize true information into GDigitizedHit
-	virtual GDigitizedHit *digitizeHit(GHit *ghit) {return nullptr;}
+	virtual GDigitizedData *digitizeData(GHit *ghit) {return nullptr;}
 	
 
 	// loads the digitization constants
@@ -45,11 +50,11 @@ public:
 
 	// initialize readout specs in GSensitiveDetector constructor if it's a readout electronics
 	// must be implemented in case the detector has readout
-	virtual void loadReadoutSpecs(int runno, string variation) = 0;
+	//virtual void loadReadoutSpecs(int runno, string variation) = 0;
 
 	
 	// method to dynamically load factories
-	static GDynamic* instantiate(const dlhandle handle) {
+	static GDynamicDigitization* instantiate(const dlhandle handle) {
 				
 		if (handle == nullptr) return nullptr;
 
@@ -57,7 +62,7 @@ public:
 
 		if (maker == nullptr) return nullptr;
 
-		typedef GDynamic* (*fptr)();
+		typedef GDynamicDigitization* (*fptr)();
 
 		// static_cast not allowed here
 		// see http://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast

@@ -14,7 +14,7 @@ using std::vector;
 
 // in each hit, the digitization can produce single values or vectors of values
 // the only condition is that the variable names must all be different
-class GDigitizedHit {
+class GDigitizedData {
 	
 public:
 

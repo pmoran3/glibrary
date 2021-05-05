@@ -8,10 +8,9 @@ env.Append(CPPPATH = [Dir('hitTypes')])
 sources = [
 			  'gEventData.cc',
 			  'gEventHeader.cc',
-			  'hitTypes/gDigitizedHit.cc',
-			  'hitTypes/gTrueInfoHit.cc',
-			  'hitTypes/gTrueInfoSteps.cc',
-			  'hitTypes/gHitsCollection.cc'
+			  'dataTypes/gDigitizedData.cc',
+			  'dataTypes/gTrueInfoData.cc',
+			  'dataTypes/gDataCollection.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

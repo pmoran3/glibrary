@@ -1,5 +1,6 @@
 #include "ctofRoutinesExample.h"
 
+
 bool CTofRoutineExample::loadConstants(int runno, string variation)
 {
 	var1    = 2.0;

@@ -2,13 +2,13 @@
 #define CTOFROUTINEEXAMPLE 1
 
 // gdynamic
-#include "gdynamic.h"
+#include "gdynamicdigitization.h"
 
 // c++
 #include <string>
 using namespace std;
 
-class CTofRoutineExample : public GDynamic {
+class CTofRoutineExample : public GDynamicDigitization {
 
 	// implementing 
 public:
@@ -19,13 +19,14 @@ private:
 
 	double var1;
 	int var2[2];
-	vector<double> var3;
+	vector<float> var3;
 	string var4;
 
 };
 
-extern "C" GDynamic* GDynamicFactory(void) {
-	return static_cast<GDynamic*>(new CTofRoutineExample);
+// tells the DLL how to create a GDynamicFactory
+extern "C" GDynamicDigitization* GDynamicFactory(void) {
+	return static_cast<GDynamicDigitization*>(new CTofRoutineExample);
 }
 
 

@@ -21,19 +21,20 @@ int main(int argc, char* argv[])
 		GEventHeader *gheader = new GEventHeader(evn, evn, 1);
 		GEventData *eventData = new GEventData(gheader, 1);
 
-		GDigitizedHit *thisHit = new GDigitizedHit();
+		GDigitizedData *thisHit = new GDigitizedData();
 		
 		thisHit->includeVariable("crate",     evn);
 		thisHit->includeVariable("slot",    2*evn);
 		thisHit->includeVariable("channel", 3*evn);
 
-		eventData->addDetectorDigitizedHit("dc", thisHit);
+		eventData->addDetectorDigitizedData("dc", thisHit);
 
 		runData->push_back(eventData);
-
-
 	}
 
+	// we probably want to print events here 
+
+	// now deleting events
 	for (auto* edata: (*runData) ) {
 		delete edata;
 	}

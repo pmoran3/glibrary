@@ -3,18 +3,19 @@
 
 
 
-GTrueInfoHit* GDynamic::collectTrueInformation(GHit *ghit)
+GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 {
-	GTrueInfoHit* trueInfoHit = new GTrueInfoHit();
+	GTrueInfoData* trueInfoData = new GTrueInfoData();
 	
 	// edep and stepTime
-	if ( ghit->stepEdep.size() ) {
+	auto edepSteps = ghit->getStepEdep();
+	if ( edepSteps.size() ) {
 		float eTotal = 0;
-		for ( auto& edep: ghit->stepEdep ) {
+		for ( auto& edep: edepSteps ) {
 			eTotal = eTotal + edep;
 		}
-		trueInfoHit->includeVariable("totEDep", eTotal);
+		trueInfoData->includeVariable("totEDep", eTotal);
 	}
 	
-	return gdata;
+	return trueInfoData;
 }

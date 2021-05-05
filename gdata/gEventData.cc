@@ -1,14 +1,14 @@
 // gdata 
 #include "gEventData.h"
 
-void GEventData::addDetectorDigitizedHit(string detector, GDigitizedHit *dgtzHit) {
+void GEventData::addDetectorDigitizedData(string detector, GDigitizedData *dgtzData) {
 
-	auto detectorHitCollection = gdata.find(detector);
+	auto detectorHitCollection = gdataCollection.find(detector);
 
 	// not found, creating it
-	if ( detectorHitCollection == gdata.end() ) {
-		gdata[detector] = new GHitsCollection();
-		gdata[detector]->addDigitizedHit(dgtzHit);
+	if ( detectorHitCollection == gdataCollection.end() ) {
+		gdataCollection[detector] = new GDataCollection();
+		gdataCollection[detector]->addDigitizedData(dgtzData);
 	}
 
 	

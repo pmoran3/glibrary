@@ -9,7 +9,7 @@ using std::map;
 using std::vector;
 
 
-class GTrueInfoHit {
+class GTrueInfoData {
 	
 public:
 
