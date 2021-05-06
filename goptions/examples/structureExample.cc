@@ -45,8 +45,9 @@ vector<GOption> defineOptions()
 	return goptions;
 }
 
-// a simple struct to model the detector option
-namespace goptions {
+// a simple struct to project the gdetector structured option
+// onto a GDetector C structure
+namespace gdetector {
 	
 	struct GDetector {
 		string detector;
@@ -73,6 +74,9 @@ namespace goptions {
 
 }
 
+using gdetector::getDetector;
+using gdetector::GDetector;
+
 
 // example of parsing one jcard and reading a variable
 int main(int argc, char* argv[])
@@ -83,7 +87,7 @@ int main(int argc, char* argv[])
 	gopts->printSettings(true);
 
 	// projecting option onto GDetector
-	goptions::GDetector gdet = goptions::getDetector(gopts);
+	GDetector gdet = getDetector(gopts);
 
 	cout << " Accessing projected structure GDetector: " << endl << endl;
 	cout << " detector: " << gdet.detector << ", factory: " << gdet.factory << ", variation: " << gdet.variation << endl;
