@@ -2,11 +2,16 @@
 
 # simpleExample
 
-tests=(simpleExampleBothDefined simpleExampleDefaultMissing simpleExampleEmptyJcard simpleExampleOneSameAsDefault simpleExampleEmptyJcard )
+simpleExampleTests=( simpleExampleBothDefined simpleExampleDefaultMissing simpleExampleEmptyJcard simpleExampleOneSameAsDefault simpleExampleEmptyJcard )
+structuredExampleTests=( structureExample )
 
 echo
 
 if [[ $1 = 'reset' ]]; then
+
+	echo simpleExample reset
+	echo -------------------
+	echo
 
 	echo " Resetting no jcard"
 	check1=tests/simpleExampleNoJcard.txt
@@ -14,21 +19,37 @@ if [[ $1 = 'reset' ]]; then
 	$(./simpleExample      > $check1)
 	$(./simpleExample -gui > $check2)
 
-	for t in $tests
+	for t in $simpleExampleTests
 	do
 		echo " Resetting " $t
 		jcard=tests/$t".jcard"
 		check1=tests/$t".txt"
 		check2=tests/$t"WithGui.txt"
-		rm $check1 $check2
+		rm -f $check1 $check2
 		$(./simpleExample $jcard      > $check1)
 		$(./simpleExample $jcard -gui > $check2)
 	done
 
+	echo
+	echo
+	echo structureExample reset
+	echo ----------------------
+	echo
+	for t in $structuredExampleTests
+	do
+		echo " Resetting " $t
+		jcard=tests/$t".jcard"
+		check=tests/$t".txt"
+		rm -f $check
+		$(./structureExample $jcard > $check)
+	done
+
+
 else
 
-	# performing tests
-
+	echo simpleExample tests
+	echo -------------------
+	echo
 
 	# first running w/o jcard
 	check1=tests/simpleExampleNoJcard.txt
@@ -58,7 +79,7 @@ else
 		echo ---
 	fi
 
-	for t in $tests
+	for t in $simpleExampleTests
 	do
 		jcard=tests/$t".jcard"
 		check1=tests/$t".txt"
@@ -91,7 +112,29 @@ else
 
 fi
 
+	echo
+	echo
+	echo structureExample tests
+	echo ----------------------
+	echo
 
+	for t in $structuredExampleTests
+	do
+		jcard=tests/$t".jcard"
+		check=tests/$t".txt"
+		a3=$(./structureExample $jcard)
+		b3=$(cat $check)
+		if [[ "$a3" = "$b3" ]]; then
+			echo " - "$t":          success"
+		else
+			echo " - "$t": fail"
+			echo ---
+			echo $a3
+			echo ---
+			echo $b3
+			echo ---
+		fi
+	done
 
 
 echo

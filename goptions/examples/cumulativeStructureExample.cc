@@ -72,8 +72,6 @@ namespace goptions {
 
 		return detectors;
 	}
-	
-
 }
 
 

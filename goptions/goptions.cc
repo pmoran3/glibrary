@@ -31,6 +31,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 			gdebug = true;
 		}
 	}
+
 	cout << endl;
 	if ( gdebug ) {
 		cout << ARROWITEM << BOLDWHHL << "gdebug" << RSTHHR << " is set. " << endl;
@@ -56,15 +57,13 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 
 
 	// parsing command line to check if any switch is turned on
-	// check if gdebug, gstrict are set on the command line
-	// gdebug, gstrict needs to be the very first thing set cause it affects the construction of all objects
 	for(int i=1; i<argc; i++) {
 		string candidateSwitch = string(argv[i]);
 		if ( candidateSwitch[0] == '-' ) {
 			for (auto& [switchName, swiitchValue] : switches) {
 				string candidateRoot = candidateSwitch.substr(1, candidateSwitch.size() - 1);
 
-				if ( switchName ==  candidateRoot) {
+				if ( switchName ==  candidateRoot ) {
 					swiitchValue.turnOn();
 
 					if ( gdebug ) {
@@ -74,7 +73,6 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 				}
 			}
 		}
-
 	}
 
 	// finds a configuration file (jcard). Returns "na' if not found.

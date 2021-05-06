@@ -5,7 +5,7 @@
 lib
 gstring/example
 goptions/simpleExample
-goptions/structuredExample
+goptions/structureExample
 gsplash/example
 gsplash/qrc_example.cc
 gdata/example

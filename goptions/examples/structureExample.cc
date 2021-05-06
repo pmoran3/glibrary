@@ -85,9 +85,9 @@ int main(int argc, char* argv[])
 	// Perhaps there's a better modern way to do this
 	goptions::GDetector gdet = goptions::getDetector(gopts);
 
-		cout << " Accessing projected structure GDetector: " << endl << endl;
-		cout << " detector: " << gdet.detector << ", factory: " << gdet.factory << ", variation: " << gdet.variation << endl;
-		cout << endl;
+	cout << " Accessing projected structure GDetector: " << endl << endl;
+	cout << " detector: " << gdet.detector << ", factory: " << gdet.factory << ", variation: " << gdet.variation << endl;
+	cout << endl;
 	
 	return EXIT_SUCCESS;
 }

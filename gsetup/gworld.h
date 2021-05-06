@@ -29,8 +29,8 @@ private:
 	void registerFactoriesAndLoadSystems(GOptions* gopts);
 
 public:
-	// GSetup options - defined in utilities.cc
-	static map<string, GOption> defineOptions();
+	// GWorld goptions
+	vector<GOption> defineOptions()
 
 
 	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}

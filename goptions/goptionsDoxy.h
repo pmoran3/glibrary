@@ -5,8 +5,8 @@
  * The goptions framework provides command line and/or JSON file parsing of user defined options.\n
  * The JSON files (steering cards) have the extension <i>".jcard"</i> and are referred to as <i>jcards</i>.\n\n
  *
- * \subsection subsection0 Switch Command Line flag
- * A switch is a variable, initialized to \"false\", that is switched true by command line. \n
+ * \subsection subsection0 Switch
+ * A switch is a boolean variable, initialized to \"false\", that is switched true by command line. \n
  * For example, the switch \"gui\" is true if the command lne contains:\n
  * <pre>	-gui</pre>
  *
