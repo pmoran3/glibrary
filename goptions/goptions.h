@@ -97,7 +97,7 @@ private:
 	const string help;
 
 	// the option assigned values, validated against the definition
-	// this is a vector of size 1 if the option is not multple
+	// this is a vector of size 1 if the option is not cumulative
 	//
 	// if some tags are not set, they will be set to the joptionDefinition default
 	// if an option is defined with default values, it will be passed to jValues
@@ -106,7 +106,7 @@ private:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
 	vector<json> jOptionAssignedValues;
-	bool isDefault = false;    // true if jOptionAssignedValues is default
+	bool isDefault = false;    // true if jOptionAssignedValues is (are) the one coming from the definition
 
 
 	// utilities to characterize the option
@@ -121,6 +121,7 @@ private:
 	void assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict);
 	void assignSingleValueFromSimpleJson(string userJsonKey, json userJsonValue, bool gdebug, bool gstrict);
 	json assignSingleValueFromStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict);
+	json assignSingleValueFromCumulativeStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict); // the only difference with the above is the message
 
 	// print the options different from defaults
 	// if withDefaults is true also print the defaults

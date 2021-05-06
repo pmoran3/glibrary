@@ -40,7 +40,8 @@ vector<GOption> defineOptions()
 	help += "The geometry and variation are mandatory fields\n";
 	help += "The variation is optional, with \"default\" as default\n";
 
-	goptions.push_back(GOption("gdetector", "detector options", jsonDetectorOption, help));
+	// the last argument refers to "cumulative"
+	goptions.push_back(GOption("gsetup", "gsetup cumulative option", jsonDetectorOption, help, true));
 
 	return goptions;
 }
@@ -65,9 +66,12 @@ namespace goptions {
 
 		vector<GDetector> detectors;
 
+		auto gdets = gopts->getStructuredOptionAssignedValues("gsetup");
+
 		// looking over each of the vector<json> items
-		for (const auto& gdet: gopts->getOption("gdetector")) {
-			detectors.push_back(gdet.get<GDetector>());
+		for ( const auto& gdet: gdets ) {
+			cout << "A SD " << gdet << endl;
+		//	detectors.push_back(gdet.get<GDetector>());
 		}
 
 		return detectors;
@@ -83,7 +87,7 @@ int main(int argc, char* argv[])
 	// print settings with defaults
 	gopts->printSettings(true);
 
-	// Perhaps there's a better modern way to do this
+	// projecting option onto vector of GDetectors
 	vector<goptions::GDetector> detectors = goptions::getDetectors(gopts);
 
 	if (detectors.size()) {

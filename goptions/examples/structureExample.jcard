@@ -1,5 +1,5 @@
 {
-	# gdetector is a non cumulative structured option.
+	# gdetector is a (non cumulative) structured option.
 	#
 	# -strict non passed on the command line: the last instance of this option will overwrite any previous instances
 	# -strict passed: exit if a duplicate option is found
@@ -9,6 +9,7 @@
 	# -gdetector={detector: experiments/clas12/rtpc; factory: TEXT; variation: rga_fall2018;}
 	#
 	# as an example we use carriage return to organize the fields
+
 	"gdetector": {
 		"detector": "experiments/clas12/rtpc",
 		"factory": "TEXT"

@@ -96,14 +96,13 @@ cumulative{m}
 // if a groupable option didn't have the add directive, jValues is cleared
 void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool isAddition, bool gdebug, bool gstrict)
 {
-	// clear jValues if add- is not found
-	// and the option is cumulative
+	// if "+" was not found but option is cumulative, it's a mistake.
 	if ( !isAddition && cumulative ) {
 		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
 		gexit(EC__NOADDFORCUMULATIVE);
 	}
 
-	// if add- was found but option is not cumulative, it's a mistake.
+	// if "+" was found but option is not cumulative, it's a mistake.
 	if ( isAddition && !cumulative ) {
 		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
 		gexit(EC__ADDFORNONCUMULATIVE);
@@ -122,16 +121,17 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 
 		assignSingleValueFromSimpleJson(userJsonKey, userJsonValues, gdebug, gstrict);
 
-	} else {
+	} else if ( ! userJsonValues.is_array() ) {
 
+		// non cumulative structured option
 		json newUserValue;
 
-		// structure option, looping over tags
+		// non cumulative structure option, looping over tags
 		// looping over all user jsons
 		for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValues.items()) {
-
 			newUserValue[userJsonKeyInValues] = assignSingleValueFromStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
 		}
+
 
 		// at this point all json keys are valid, and the user json keys are assigned properly
 		// we need to assign default values for all the keys the user didn't set
@@ -180,25 +180,45 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 							cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR ;
 							cout << " is not assigned. Setting it to " << HHL << definitionJsonValue[GDFLT] << HHR << endl;
 						}
-
 					}
-
-
 				}
-
-
 			}
-
 		}
-
-
 
 		// no unset key found at this point
 		// adding the newUserValue
-		// valid, non default assigning it
+		// valid, non default, assigning it
 		jOptionAssignedValues.clear();
 		jOptionAssignedValues.push_back(newUserValue);
 		isDefault = false;
+
+	} else {
+
+		// cumulative structured option
+		vector<json> newUserValues;
+
+		for (auto& userJsonValueItem: userJsonValues) {
+
+			json singleNewUserValue;
+
+			for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValueItem.items()) {
+				singleNewUserValue[userJsonKeyInValues] = assignSingleValueFromCumulativeStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
+
+			}
+			newUserValues.push_back(singleNewUserValue);
+		}
+
+		// no unset key found at this point
+		// adding the newUserValue
+		// valid, non default, assigning it
+		jOptionAssignedValues.clear();
+
+		for ( auto& newUserValue: newUserValues) {
+			jOptionAssignedValues.push_back(newUserValue);
+		}
+		isDefault = false;
+
+
 	}
 
 
@@ -249,7 +269,7 @@ json GOption::assignSingleValueFromStructuredJson(string userJsonKey, string tag
 
 	// userJsons is structured
 	if ( gdebug ) {
-		cout << TGREENPOINTITEM << "Assigning structured option " << BOLDWHHL << userJsonKey << RSTHHR << endl;
+		cout << TGREENPOINTITEM << "Assigning single structured option " << BOLDWHHL << userJsonKey << RSTHHR << endl;
 	}
 
 	checkTagIsValid(tagInJsonValues, gdebug);
@@ -261,6 +281,19 @@ json GOption::assignSingleValueFromStructuredJson(string userJsonKey, string tag
 
 	return userJsonValue;
 }
+
+json GOption::assignSingleValueFromCumulativeStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict) {
+
+	checkTagIsValid(tagInJsonValues, gdebug);
+
+	// tag is valid, returning it
+	if ( gdebug ) {
+		cout << TTPOINTITEM << BOLDWHHL << userJsonKey << RSTHHR << ": assigning single user key " << YELLOWHHL << tagInJsonValues << RSTHHR << " with value: " << HHL << userJsonValue << HHR << endl;
+	}
+
+	return userJsonValue;
+}
+
 
 
 // check if userValue matches the default value
@@ -357,8 +390,8 @@ void GOption::printOption(bool withDefaults)
 		return;
 	}
 
-	// non structured option (jValue has size 1)
-	if (jOptionAssignedValues.front().size() == 1) {
+	// non structured option, the jOptionAssignedValues has only one object, the json size is 1
+	if ( jOptionAssignedValues.size() == 1 && jOptionAssignedValues.front().size() == 1 ) {
 		json onlyOption = jOptionAssignedValues.front();
 		string isDefault = "";
 		

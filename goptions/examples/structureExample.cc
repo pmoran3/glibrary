@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 	// print settings with defaults
 	gopts->printSettings(true);
 
-	// Perhaps there's a better modern way to do this
+	// projecting option onto GDetector
 	goptions::GDetector gdet = goptions::getDetector(gopts);
 
 	cout << " Accessing projected structure GDetector: " << endl << endl;
