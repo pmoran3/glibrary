@@ -194,6 +194,7 @@ private:
 	// add a switch to the map of switches
 	void addSwitch(string name, string description);
 
+
 public:
 
 	/**
@@ -216,6 +217,9 @@ public:
 
 
 };
+
+// overloaded operator to add option vectors
+vector<GOption> &operator += (vector<GOption> &original, vector<GOption> optionsToAdd);
 
 
 #endif

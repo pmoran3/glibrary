@@ -11,39 +11,6 @@ using namespace gstring;
 #include <iostream>
 using namespace std;
 
-// returns array of options definitions
-vector<GOption> defineOptions()
-{
-	vector<GOption> goptions;
-
-	// detector option
-	// groupable: can use -add
-	json jsonDetectorTag = {
-		{GNAME, "detector"},
-		{GDESC, "detector system name. For TEXT factories, it includes the path to the file."},
-		{GDFLT, NODFLT}
-	};
-	json jsonFactoryTag = {
-		{GNAME, "factory"},
-		{GDESC, "detector factory name"},
-		{GDFLT, NODFLT}
-	};
-	json jsonVariationTag = {
-		{GNAME, "variation"},
-		{GDESC, "detector variation."},
-		{GDFLT, "default"}
-	};
-
-	json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag};
-
-	string help = "A detector definition includes the geometry location, factory and variation\n";
-	help += "The geometry and variation are mandatory fields\n";
-	help += "The variation is optional, with \"default\" as default\n";
-
-	goptions.push_back(GOption("gdetector", "detector options", jsonDetectorOption, help));
-
-	return goptions;
-}
 
 // a simple struct to project the gdetector structured option
 // onto a GDetector C structure
@@ -72,6 +39,40 @@ namespace gdetector {
 		return gdet.front().get<GDetector>();
 	}
 
+	// returns array of options definitions
+	vector<GOption> defineOptions()
+	{
+		vector<GOption> goptions;
+
+		// detector option
+		// groupable: can use -add
+		json jsonDetectorTag = {
+			{GNAME, "detector"},
+			{GDESC, "detector system name. For TEXT factories, it includes the path to the file."},
+			{GDFLT, NODFLT}
+		};
+		json jsonFactoryTag = {
+			{GNAME, "factory"},
+			{GDESC, "detector factory name"},
+			{GDFLT, NODFLT}
+		};
+		json jsonVariationTag = {
+			{GNAME, "variation"},
+			{GDESC, "detector variation."},
+			{GDFLT, "default"}
+		};
+
+		json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag};
+
+		string help = "A detector definition includes the geometry location, factory and variation\n";
+		help += "The geometry and variation are mandatory fields\n";
+		help += "The variation is optional, with \"default\" as default\n";
+
+		goptions.push_back(GOption("gdetector", "detector options", jsonDetectorOption, help));
+
+		return goptions;
+	}
+
 }
 
 using gdetector::getDetector;
@@ -81,7 +82,7 @@ using gdetector::GDetector;
 // example of parsing one jcard and reading a variable
 int main(int argc, char* argv[])
 {
-	GOptions *gopts = new GOptions(argc, argv, defineOptions());
+	GOptions *gopts = new GOptions(argc, argv, gdetector::defineOptions());
 
 	// print settings with defaults
 	gopts->printSettings(true);

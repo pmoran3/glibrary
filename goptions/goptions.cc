@@ -55,7 +55,6 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 		goptions.push_back(ourOption);
 	}
 
-
 	// parsing command line to check if any switch is turned on
 	for(int i=1; i<argc; i++) {
 		string candidateSwitch = string(argv[i]);
@@ -349,3 +348,13 @@ vector<GOption> GOptions::defineGOptionsOptions()
 
 }
 
+
+// overloaded operator to add option vectors
+vector<GOption> &operator += (vector<GOption> &original, vector<GOption> optionsToAdd) {
+
+	for(const auto &optionToadd : optionsToAdd) {
+		original.push_back(optionToadd);
+	}
+	
+	return original;
+}

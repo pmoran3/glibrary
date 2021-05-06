@@ -30,7 +30,7 @@ private:
 
 public:
 	// GWorld goptions
-	vector<GOption> defineOptions()
+	vector<GOption> defineOptions();
 
 
 	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}

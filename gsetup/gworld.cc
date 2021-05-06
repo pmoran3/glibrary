@@ -1,42 +1,8 @@
 // gsetup
 #include "gworld.h"
 
-// returns array of options definitions
-vector<GOption> defineOptions()
-{
-	vector<GOption> goptions;
-
-	// detector option
-	// groupable: can use -add
-	json jsonDetectorTag = {
-		{GNAME, "detector"},
-		{GDESC, "detector system name. For TEXT factories, it includes the path to the file."},
-		{GDFLT, NODFLT}
-	};
-	json jsonFactoryTag = {
-		{GNAME, "factory"},
-		{GDESC, "detector factory name"},
-		{GDFLT, NODFLT}
-	};
-	json jsonVariationTag = {
-		{GNAME, "variation"},
-		{GDESC, "detector variation."},
-		{GDFLT, "default"}
-	};
-
-	json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag};
-
-	string help = "A detector definition includes the geometry location, factory and variation\n";
-	help += "The geometry and variation are mandatory fields\n";
-	help += "The variation is optional, with \"default\" as default\n";
-
-	goptions.push_back(GOption("gdetector", "detector options", jsonDetectorOption, help));
-
-	return goptions;
-}
-
 // project goption to a system
-namespace goptions {
+namespace gsetup {
 
 	struct JSystem {
 		string name;
@@ -45,23 +11,63 @@ namespace goptions {
 		int runno;
 	};
 
+
 	void from_json(const json& j, JSystem& det) {
-		j.at("detector").get_to(det.detector);
+		j.at("name").get_to(det.name);
 		j.at("factory").get_to(det.factory);
 		j.at("variation").get_to(det.variation);
-		j.at("variation").get_to(det.variation);
+		j.at("runno").get_to(det.runno);
 	}
 
 	// method to return a vector of GDetectors from a structured option
-	vector<GDetector> getDetectors(GOptions *gopts) {
+	vector<JSystem> getDetectors(GOptions *gopts) {
 
-		vector<GDetector> detectors;
+		vector<JSystem> systems;
+
+		auto gdets = gopts->getStructuredOptionAssignedValues("gsetup");
 
 		// looking over each of the vector<json> items
-		for (const auto& gdet: gopts->getOption("gdetector")) {
-			detectors.push_back(gdet.get<GDetector>());
+		for ( const auto& gdet: gdets ) {
+			systems.push_back(gdet.get<JSystem>());
 		}
 
-		return detectors;
+		return systems;
 	}
+
+	// returns array of options definitions
+	vector<GOption> defineOptions()
+	{
+		vector<GOption> goptions;
+
+		// detector option
+		// groupable: can use -add
+		json jsonDetectorTag = {
+			{GNAME, "system"},
+			{GDESC, "system name. For TEXT factories, it may include the path to the file."},
+			{GDFLT, NODFLT}
+		};
+		json jsonFactoryTag = {
+			{GNAME, "factory"},
+			{GDESC, "system factory name"},
+			{GDFLT, NODFLT}
+		};
+		json jsonVariationTag = {
+			{GNAME, "variation"},
+			{GDESC, "system variation."},
+			{GDFLT, "default"}
+		};
+
+		json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag};
+
+		string help = "A system definition includes the geometry location, factory and variation\n";
+		help += "The geometry and variation are mandatory fields\n";
+		help += "The variation is optional, with \"default\": default\n";
+
+		// the last argument refers to "cumulative"
+		goptions.push_back(GOption("gsetup", "gsetup cumulative option", jsonDetectorOption, help, true));
+
+		return goptions;
+	}
+
+
 }
