@@ -70,8 +70,7 @@ namespace goptions {
 
 		// looking over each of the vector<json> items
 		for ( const auto& gdet: gdets ) {
-			cout << "A SD " << gdet << endl;
-		//	detectors.push_back(gdet.get<GDetector>());
+			detectors.push_back(gdet.get<GDetector>());
 		}
 
 		return detectors;

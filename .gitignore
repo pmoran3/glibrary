@@ -6,6 +6,7 @@ lib
 gstring/example
 goptions/simpleExample
 goptions/structureExample
+goptions/cumulativeStructureExample
 gsplash/example
 gsplash/qrc_example.cc
 gdata/example

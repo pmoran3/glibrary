@@ -132,57 +132,13 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 			newUserValue[userJsonKeyInValues] = assignSingleValueFromStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
 		}
 
-
 		// at this point all json keys are valid, and the user json keys are assigned properly
 		// we need to assign default values for all the keys the user didn't set
 		// if some of the unset values option must provide a default, this routine will exit with error
+		json unassigned = buildDefaultToMissingValuesJson(userJsonValues, gdebug);
 
-		// looking for unset keys in the option definition
-		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
-
-			// looping over tags inside option definition
-			for ( auto& jsonTagValue : definitionJsonValue.items() )  {
-
-				// main structure option GOption tag
-				if ( jsonTagValue.key() == GNAME ) {
-
-					bool thisTagWasFoundAndAssigned = false;
-					string tagToCheck = jsonTagValue.value() ;
-
-					if ( gdebug ) {
-						cout << TGREENPOINTITEM << "Checking if user key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
-					}
-
-					// structure option, looping over tags
-					// looping over all user jsons
-					for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValues.items()) {
-						if ( tagToCheck == userJsonKeyInValues ) {
-							thisTagWasFoundAndAssigned = true;
-							if ( gdebug ) {
-								cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
-							}
-						}
-					}
-
-					// tag value not assigned.
-					// Assign the default value if it's defined.
-					// Exiting if it was mandatory.
-					if( !thisTagWasFoundAndAssigned ) {
-
-						if (definitionJsonValue[GDFLT] == NODFLT) {
-							cerr << FATALERRORL << tagToCheck <<  " in " << definitionJsonValue << " is marked mandatory but it's not set." << endl;
-							gexit(EC__MANDATORYOPTIONNOTFOUND);
-						}
-
-						// assigning its default value
-						newUserValue[tagToCheck] = definitionJsonValue[GDFLT];
-						if ( gdebug ) {
-							cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR ;
-							cout << " is not assigned. Setting it to " << HHL << definitionJsonValue[GDFLT] << HHR << endl;
-						}
-					}
-				}
-			}
+		for (auto& [unassignedKey, unassignedValue] : unassigned.items())  {
+			newUserValue[unassignedKey] = unassignedValue;
 		}
 
 		// no unset key found at this point
@@ -204,6 +160,16 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 			for (auto& [userJsonKeyInValues, userJsonValueInValue] : userJsonValueItem.items()) {
 				singleNewUserValue[userJsonKeyInValues] = assignSingleValueFromCumulativeStructuredJson(userJsonKey, userJsonKeyInValues, userJsonValueInValue, gdebug, gstrict);
 
+				// at this point all json keys are valid, and the user json keys are assigned properly
+				// we need to assign default values for all the keys the user didn't set
+				// if some of the unset values option must provide a default, this routine will exit with error
+				json unassigned = buildDefaultToMissingValuesJson(userJsonValueItem, gdebug);
+
+				for (auto& [unassignedKey, unassignedValue] : unassigned.items())  {
+					singleNewUserValue[unassignedKey] = unassignedValue;
+				}
+
+
 			}
 			newUserValues.push_back(singleNewUserValue);
 		}
@@ -221,8 +187,61 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 
 	}
 
+}
 
 
+json GOption::buildDefaultToMissingValuesJson(json userAssignedValues, bool gdebug) {
+
+	json unassignedJson;
+
+	// looking for unset keys in the option definition
+	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
+
+		// looping over tags inside option definition
+		for ( auto& jsonTagValue : definitionJsonValue.items() )  {
+
+			// main structure option GOption tag
+			if ( jsonTagValue.key() == GNAME ) {
+
+				bool thisTagWasFoundAndAssigned = false;
+				string tagToCheck = jsonTagValue.value() ;
+
+				if ( gdebug ) {
+					cout << TGREENPOINTITEM << "Checking if user key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
+				}
+
+				// structure option, looping over tags
+				// looping over all user jsons
+				for (auto& [userJsonKeyInValues, userJsonValueInValue] : userAssignedValues.items()) {
+					if ( tagToCheck == userJsonKeyInValues ) {
+						thisTagWasFoundAndAssigned = true;
+						if ( gdebug ) {
+							cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR << " is assigned " << endl;
+						}
+					}
+				}
+
+				// tag value not assigned.
+				// Assign the default value if it's defined.
+				// Exiting if it was mandatory.
+				if( !thisTagWasFoundAndAssigned ) {
+
+					if (definitionJsonValue[GDFLT] == NODFLT) {
+						cerr << FATALERRORL << tagToCheck <<  " in " << definitionJsonValue << " is marked mandatory but it's not set." << endl;
+						gexit(EC__MANDATORYOPTIONNOTFOUND);
+					}
+
+					// assigning its default value
+					unassignedJson[tagToCheck] = definitionJsonValue[GDFLT];
+					if ( gdebug ) {
+						cout << TTGREENPOINTITEM << "User key " << YELLOWHHL << tagToCheck << RSTHHR ;
+						cout << " is not assigned. Setting it to " << HHL << definitionJsonValue[GDFLT] << HHR << endl;
+					}
+				}
+			}
+		}
+	}
+	return unassignedJson;
 }
 
 
@@ -407,7 +426,6 @@ void GOption::printOption(bool withDefaults)
 	// structured option
 	cout << KGRN << ARROWITEM << name << RST << ":" << endl << endl;
 
-	// non groupable options are printed on screen differently
 	for (auto& jValue: jOptionAssignedValues) {
 		
 		if (cumulative) {

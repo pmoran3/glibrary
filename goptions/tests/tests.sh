@@ -4,6 +4,7 @@
 
 simpleExampleTests=( simpleExampleBothDefined simpleExampleDefaultMissing simpleExampleEmptyJcard simpleExampleOneSameAsDefault simpleExampleEmptyJcard )
 structuredExampleTests=( structureExample )
+cumulativeStructureExampleTests=( cumulativeStructureExample )
 
 echo
 
@@ -43,6 +44,21 @@ if [[ $1 = 'reset' ]]; then
 		rm -f $check
 		$(./structureExample $jcard > $check)
 	done
+
+	echo
+	echo
+	echo cumulativeExample reset
+	echo -----------------------
+	echo
+	for t in $cumulativeStructureExampleTests
+	do
+		echo " Resetting " $t
+		jcard=tests/$t".jcard"
+		check=tests/$t".txt"
+		rm -f $check
+		$(./cumulativeStructureExample $jcard > $check)
+	done
+
 
 
 else
@@ -110,7 +126,6 @@ else
 		fi
 	done
 
-fi
 
 	echo
 	echo
@@ -136,5 +151,29 @@ fi
 		fi
 	done
 
+	echo
+	echo
+	echo cumulativeStructureExample tests
+	echo --------------------------------
+	echo
 
+	for t in $cumulativeStructureExampleTests
+	do
+		jcard=tests/$t".jcard"
+		check=tests/$t".txt"
+		a3=$(./cumulativeStructureExample $jcard)
+		b3=$(cat $check)
+		if [[ "$a3" = "$b3" ]]; then
+			echo " - "$t":          success"
+		else
+			echo " - "$t": fail"
+			echo ---
+			echo $a3
+			echo ---
+			echo $b3
+			echo ---
+		fi
+	done
+
+fi
 echo

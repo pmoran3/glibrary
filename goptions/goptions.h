@@ -123,6 +123,11 @@ private:
 	json assignSingleValueFromStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict);
 	json assignSingleValueFromCumulativeStructuredJson(string userJsonKey, string tagInJsonValues, json userJsonValue, bool gdebug, bool gstrict); // the only difference with the above is the message
 
+
+	// if a user assignment is missing values, assign the default
+	// if no default was given at definition, exit
+	json buildDefaultToMissingValuesJson(json userAssignedValues, bool gdebug);
+
 	// print the options different from defaults
 	// if withDefaults is true also print the defaults
 	void printOption(bool withDefaults);
