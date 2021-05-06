@@ -2,11 +2,10 @@
 #define  GMODIFIER_H 1
 
 // c++
-#include <string>
+#include <iostream>
 using std::string;
 using std::cout;
 using std::endl;
-
 
 class GModifier
 {
@@ -18,13 +17,13 @@ public:
 	tilts(t),
 	isPresent(true) {
 
-		if(e == "no") present = false;
+		if(e == "no") isPresent = false;
 
 		if( verbosity ) {
 			cout << GSETUPLOGHEADER <<  " Volume " << name << " modified with:";
 			if (  shift != "default") cout << " - shift: "     << shift   ;
 			if (  tilts != "default") cout << " - tilts: "     << tilts   ;
-			if (present != true)      cout << " - existance: " << present ;
+			if ( !isPresent )         cout << " - existance: " << isPresent ;
 			cout << endl;
 		}
 	}

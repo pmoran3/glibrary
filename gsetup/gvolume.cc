@@ -16,7 +16,7 @@ GVolume::GVolume(vector<string> pars, string importPath)
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << " Fatal Error: Incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
-		exit(0);
+		gexit(GVOLUMENUMBEROFPARS);
 	} else {
 		// size is already checked in addVolume, the only interface to volume
 		int i=0;

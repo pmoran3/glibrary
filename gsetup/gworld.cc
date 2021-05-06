@@ -1,0 +1,2 @@
+// gsetup
+#include "gworld.h"

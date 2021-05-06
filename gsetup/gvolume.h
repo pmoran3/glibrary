@@ -1,6 +1,9 @@
 #ifndef  GVOLUME_H
 #define  GVOLUME_H 1
 
+// conventions
+#include "gsetupConventions.h"
+
 // c++
 #include <string>
 #include <vector>
@@ -8,8 +11,6 @@ using std::string;
 using std::ostream;
 using std::vector;
 
-#define GVOLUMENUMBEROFPARS 19
-#define GVOLUMENOTAPPLICABLEENTRY "na"
 
 class GVolume
 {

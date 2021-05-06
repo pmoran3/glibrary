@@ -25,8 +25,8 @@ GSplash::GSplash(string imageName) :  splash(nullptr)
 			splash = new QSplashScreen(pixmap);
 
 		} else {
-			cerr << " Environment variable " << GSPLASHENVIRONMENT << " must point to an image file. Exiting." << endl;
-			exit(1);
+			cerr << " Environment variable " << GSPLASHENVIRONMENT << " must point to an image file." << endl;
+			gexit(EC__NOSPLASHENVFOUND);
 		}
 
 		cout << " Need to add gstring and goptions but loading image from environment" << endl;

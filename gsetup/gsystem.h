@@ -1,16 +1,8 @@
 #ifndef  GSYSTEM_H
 #define  GSYSTEM_H 1
 
-
 // gvolume
 #include "gvolume.h"
-
-// glibrary
-//#include "goptions.h"
-//#include "gfactory.h"
-
-#define GSETUPLOGHEADER " ⎚ gvolume ▸"
-#define GWORLDNAME     "world"
 
 // c++
 #include <map>

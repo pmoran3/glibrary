@@ -1,8 +1,11 @@
 #ifndef GSPLASH_H
 #define GSPLASH_H 1
 
-// doxygen
+// gsplash
 #include "gsplash.h"
+
+// gstring for the exit codes
+#include "gstringConventions.h"
 
 // c++
 #include <string>
@@ -13,6 +16,9 @@ using std::string;
 
 #define GSPLASHENVIRONMENT    "GSPLASH"
 #define NOSPLASHIMAGESELECTED "NOSPLASHIMAGESELECTED"
+
+// exit codes: 190s
+#define EC__NOSPLASHENVFOUND               191
 
 class GSplash
 {

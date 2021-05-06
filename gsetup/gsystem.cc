@@ -33,7 +33,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity)
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << " Fatal Error: Incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
-		exit(0);
+		gexit(EC__GVOLUMENUMBEROFPARS);
 	} else {
 		string nameKey = formVolumeKey(pars[0]);
 		

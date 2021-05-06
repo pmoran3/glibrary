@@ -199,8 +199,8 @@ string gstring::parseFileAndRemoveComments(string filename, string commentChars,
 	stringstream strStream;
 	ifstream in(filename.c_str());
 	if(!in) {
-		cerr << FATALERRORL << " Error: can't open input file " << filename << ". Check your spelling. Exiting. " << endl;
-		exit(EXIT_FAILURE);
+		cerr << FATALERRORL << " Error: can't open input file " << filename << ". Check your spelling. " << endl;
+		gexit(EC__FILENOTFOUND);
 	} else {
 		if(verbosity > 0) {
 			cout << endl << CIRCLEITEM <<  " Loading string from " << filename << endl;
