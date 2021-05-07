@@ -38,7 +38,6 @@
 
 #define CONSTRUCTORLOG " ↑ "
 #define DESTRUCTORLOG " ↓ "
-#define HELPFILLSPACE "                          "
 
 // list bullets
 #define POINTITEM  " ・ "

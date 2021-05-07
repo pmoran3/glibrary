@@ -1,6 +1,9 @@
 #ifndef  GOPTIONS_CONVENTIONS_H
 #define  GOPTIONS_CONVENTIONS_H  1
 
+
+#define HELPFILLSPACE "                              "
+
 //  TAGS
 #define GNAME     "JsonTagGNAME"
 #define GDESC     "JsonTagGDESCription"

@@ -4,6 +4,9 @@
 // project goption to a system
 namespace gsetup {
 
+	// System
+	// ------
+
 	void from_json(const json& j, JSystem& det) {
 		j.at("system").get_to(det.system);
 		j.at("factory").get_to(det.factory);
@@ -12,7 +15,7 @@ namespace gsetup {
 	}
 
 	// method to return a vector of GDetectors from a structured option
-	vector<JSystem> getDetectors(GOptions *gopts) {
+	vector<JSystem> getSystems(GOptions *gopts) {
 
 		vector<JSystem> systems;
 
@@ -26,36 +29,72 @@ namespace gsetup {
 		return systems;
 	}
 
+
+	// Modifier
+	// --------
+
+	void from_json(const json& j, JModifier& mods) {
+		j.at("volume").get_to(mods.volume);
+		j.at("shift").get_to(mods.shift);
+		j.at("tilt").get_to(mods.tilt);
+		j.at("isPresent").get_to(mods.isPresent);
+	}
+
+	// method to return a vector of GDetectors from a structured option
+	vector<JModifier> getModifiers(GOptions *gopts){
+
+		vector<JModifier> gmods;
+
+		auto gmodifiers = gopts->getStructuredOptionAssignedValues("gmodifier");
+
+		// looking over each of the vector<json> items
+		for ( const auto& mod: gmodifiers ) {
+			gmods.push_back(mod.get<JModifier>());
+		}
+
+		return gmods;
+	}
+
+
+
 	// returns array of options definitions
 	vector<GOption> defineOptions()
 	{
 		vector<GOption> goptions;
 
+		// System
+		// ------
+
 		// detector option
 		// groupable: can use -add
-		json jsonDetectorTag = {
+		json jsonSystemNameTag = {
 			{GNAME, "system"},
-			{GDESC, "system name (mandatory). For TEXT factories, it may include the path to the file."},
+			{GDESC, "system name (mandatory). For TEXT factories, it may include the path to the file"},
 			{GDFLT, NODFLT}
 		};
-		json jsonFactoryTag = {
+		json jsonSystemFactoryTag = {
 			{GNAME, "factory"},
 			{GDESC, "factory name (mandatory). Possible choices: TEXT, CAD, GDML"},
 			{GDFLT, NODFLT}
 		};
-		json jsonVariationTag = {
+		json jsonSystemVariationTag = {
 			{GNAME, "variation"},
 			{GDESC, "variation (optional, default is \"default\")"},
 			{GDFLT, "default"}
 		};
 
-		json jsonRunnoTag = {
+		json jsonSystemRunnoTag = {
 			{GNAME, "runno"},
 			{GDESC, "runno (optional, default is 1)"},
 			{GDFLT, 1}
 		};
 
-		json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag, jsonRunnoTag};
+		json jsonDetectorOption = {
+			jsonSystemNameTag,
+			jsonSystemFactoryTag,
+			jsonSystemVariationTag,
+			jsonSystemRunnoTag
+		};
 
 		vector<string> help;
 		help.push_back("A system definition includes the geometry location, factory and variation");
@@ -64,6 +103,49 @@ namespace gsetup {
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gsetup", "defines a group of detectors", jsonDetectorOption, help, true));
+
+
+		// Modifier
+		// --------
+		// detector option
+		// groupable: can use -add
+		json jsonModifierNameTag = {
+			{GNAME, "volume"},
+			{GDESC, "volume name (optional) "},
+			{GDFLT, NOMODIFIER}
+		};
+		json jsonModifierShiftTag = {
+			{GNAME, "shift"},
+			{GDESC, "volume shift added to existing position"},
+			{GDFLT, "0, 0, 0 cm"}
+		};
+		json jsonModifierTiltTag = {
+			{GNAME, "tilt"},
+			{GDESC, "volume tilt added to existing rotation"},
+			{GDFLT, "0, 0, 0 deg"}
+		};
+
+		json jsonModifierPresentTag = {
+			{GNAME, "isPresent"},
+			{GDESC, "remove volume from world if set to false"},
+			{GDFLT, true}
+		};
+
+		json jsonModifierOption = {
+			jsonModifierNameTag,
+			jsonModifierShiftTag,
+			jsonModifierTiltTag,
+			jsonModifierPresentTag
+		};
+
+		help.clear();
+		help.push_back("The volume modifer can shift, tilt, or delete a volume from the gworld");
+		help.push_back("");
+		help.push_back("Example: +gmodifier={volume: targetCell; tilt: 0, 0, -10, cm; }");
+
+		// the last argument refers to "cumulative"
+		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));
+
 
 		return goptions;
 	}

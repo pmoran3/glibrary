@@ -289,9 +289,8 @@ void GOptions::printSettings(bool withDefaults)
 
 	for(auto& jOption: goptions) {
 		jOption.printOption(withDefaults);
+		cout << endl;
 	}
-
-
 	cout << endl;
 }
 
@@ -394,6 +393,7 @@ void GOptions::printOptionsHelp()
 
 	for(auto& jOption: goptions) {
 		jOption.printOptionHelp();
+		cout << endl;
 	}
 
 	cout << RST << endl;
