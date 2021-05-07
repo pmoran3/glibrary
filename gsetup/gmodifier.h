@@ -11,18 +11,16 @@ class GModifier
 {
 	
 public:
-	GModifier(string n, string s, string t, string e, bool verbosity) :
+	GModifier(string n, string s, string t, bool existance, int verbosity) :
 	name(n),
 	shift(s),
 	tilts(t),
-	isPresent(true) {
-
-		if(e == "no") isPresent = false;
+	isPresent(existance) {
 
 		if( verbosity ) {
-			cout << GSETUPLOGHEADER <<  " Volume " << name << " modified with:";
-			if (  shift != "default") cout << " - shift: "     << shift   ;
-			if (  tilts != "default") cout << " - tilts: "     << tilts   ;
+			cout << GSETUPLOGHEADER <<  " volume " << name << " modified with:";
+			if (  shift != NOMODIFIER) cout << " - shift: "     << shift   ;
+			if (  tilts != NOMODIFIER) cout << " - tilts: "     << tilts   ;
 			if ( !isPresent )         cout << " - existance: " << isPresent ;
 			cout << endl;
 		}
@@ -32,7 +30,7 @@ private:
 	string name;  // volume name
 	string shift;
 	string tilts;
-	bool isPresent; // true by default
+	bool   isPresent; // true by default
 
 public:
 	string getShift()     { return shift; }

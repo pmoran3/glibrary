@@ -14,7 +14,7 @@ using std::cerr;
 using std::endl;
 
 // init system based on name, factory, variation and run number
-GSystem::GSystem(string n, string f, string v, int r, int dr, int verbosity) :
+GSystem::GSystem(string n, string f, string v, int r, int verbosity) :
 name(n),
 factory(f),
 variation(v),
@@ -22,7 +22,6 @@ runNumber(r) {
 	if(verbosity >= GVERBOSITY_SUMMARY) {
 		cout << GSETUPLOGHEADER << " loading system " << name << " with factory: " << factory;
 		cout << ", variation: " << variation << ", run number: " << runNumber ;
-		if(dr != r) cout << " (non default) ";
 		cout << endl;
 	}
 }

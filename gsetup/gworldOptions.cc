@@ -117,12 +117,12 @@ namespace gsetup {
 		json jsonModifierShiftTag = {
 			{GNAME, "shift"},
 			{GDESC, "volume shift added to existing position"},
-			{GDFLT, "0, 0, 0 cm"}
+			{GDFLT, NOMODIFIER}
 		};
 		json jsonModifierTiltTag = {
 			{GNAME, "tilt"},
 			{GDESC, "volume tilt added to existing rotation"},
-			{GDFLT, "0, 0, 0 deg"}
+			{GDFLT, NOMODIFIER}
 		};
 
 		json jsonModifierPresentTag = {
@@ -146,6 +146,15 @@ namespace gsetup {
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));
 
+
+		// gsetup verbosiry
+		json jsonVerbosityOption = {
+			{GNAME, "gsetupV"},
+			{GDESC, "Verbosity for gsetup. Default is 0"},
+			{GDFLT, 0}
+		};
+
+		goptions.push_back(GOption(jsonVerbosityOption));
 
 		return goptions;
 	}

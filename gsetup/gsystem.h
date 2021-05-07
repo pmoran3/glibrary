@@ -15,7 +15,7 @@ class GSystem
 	
 public:
 	// constructor, from command line or jcard
-	GSystem(string n, string f, string v, int r, int dr, int verbosity);
+	GSystem(string n, string f, string v, int r, int verbosity);
 
 private:
 	string      name;               // System name, with path to it

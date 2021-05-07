@@ -17,12 +17,12 @@ class GWorld
 public:
 	// constructor from a jcard
 	// by default all systems will have the same run number
-	GWorld(GOptions* gopts, int runNo = 1);
+	GWorld(GOptions* gopts);
 
 
 private:
-	map<string, GSystem*> gsystemsMap;
-	map<string, GModifier*> gmodifiersMap;
+	map<string, GSystem*> gsystemsMap;     // key is system name
+	map<string, GModifier*> gmodifiersMap; // key is volume name
 
 	// manager to register the factories
 	GManager gSystemManager;
