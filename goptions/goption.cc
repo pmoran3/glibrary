@@ -489,7 +489,7 @@ void GOption::printOptionHelp()
 			cout  << HELPFILLSPACE << POINTITEM  ;
 			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GNAME], "\"", "") << ": " ;
 			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GDESC], "\"", "")  << endl;
-
+			
 		}
 	}
 

@@ -5,7 +5,8 @@ Import('env')
 sources = [
 			  'gvolume.cc',
 			  'gsystem.cc',
-			  'gworld.cc'
+			  'gworld.cc',
+			  'gworldOptions.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

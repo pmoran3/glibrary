@@ -6,10 +6,11 @@
 #include "gsystem.h"
 #include "gvolume.h"
 #include "gmodifier.h"
+#include "gworldOptions.h"
 
 // glibrary
-#include "goptions.h"
 #include "gfactory.h"
+
 
 class GWorld
 {
