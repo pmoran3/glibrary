@@ -441,4 +441,48 @@ void GOption::printOption(bool withDefaults)
 			cout << endl;
 		}
 	}
+
+}
+
+#include <iomanip>
+using std::fixed;
+using std::left;
+using std::setw;
+
+// print option
+void GOption::printOptionHelp()
+{
+
+	// non structured option, the jOptionAssignedValues has only one object, the json size is 1
+	if ( jOptionAssignedValues.size() == 1 && jOptionAssignedValues.front().size() == 1 ) {
+
+
+		cout  << KGRN << ARROWITEM << "-" << name << RST << "=<value>" ;
+		cout.width(30);
+		cout.fill('.');
+		cout << left << TREDARROWITEM << RST << description << endl;
+
+	} else {
+		// structured option
+		cout << KGRN << ARROWITEM << name << RST << ": " << description << endl;
+
+//		for (auto& jValue: jOptionAssignedValues) {
+//
+//			if (cumulative) {
+//				cout << TPOINTITEM ;
+//				for (auto& [jValueKey, jValueValue] : jValue.items()) {
+//					cout << jValueKey << ": " << jValueValue << "\t";
+//				}
+//				cout << endl;
+//			} else {
+//				for (auto& [jValueKey, jValueValue] : jValue.items()) {
+//					cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
+//				}
+//				cout << endl;
+//			}
+
+	}
+
+	
+
 }

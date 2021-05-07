@@ -33,7 +33,9 @@ public:
 	/// @brief turn on switch
 	void turnOn() { status = true;}
 	/// @brief get switch status
-	bool getStatus() { return status;}
+	bool getStatus()      { return status;}
+	string getDescription() { return description;}
+
 
 private:
 	string description;
@@ -132,6 +134,9 @@ private:
 	// if withDefaults is true also print the defaults
 	void printOption(bool withDefaults);
 
+
+	void printOptionHelp();
+
 	// making goptions friend to it can access the private variables and functions
 	friend class GOptions;
 
@@ -168,6 +173,10 @@ private:
 	// - duplicate options
 	bool gstrict;
 
+	// print option help and exit if set to true
+	// with any of these flags: -h --h -help --help
+	bool printHelp;
+
 	// GOption array
 	vector<GOption> goptions;
 
@@ -194,6 +203,8 @@ private:
 	// add a switch to the map of switches
 	void addSwitch(string name, string description);
 
+	// loops over all options and print help
+	void printOptionsHelp();
 
 public:
 

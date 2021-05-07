@@ -68,7 +68,7 @@ namespace gdetector {
 		help += "The geometry and variation are mandatory fields\n";
 		help += "The variation is optional, with \"default\" as default\n";
 
-		goptions.push_back(GOption("gdetector", "detector options", jsonDetectorOption, help));
+		goptions.push_back(GOption("gdetector", "Adds a detector", jsonDetectorOption, help));
 
 		return goptions;
 	}

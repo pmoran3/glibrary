@@ -22,13 +22,15 @@ using std::exception;
 GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 {
 
-	// check if gdebug, gstrict are set on the command line
+	// check if gdebug, gstrict, help are set on the command line
 	// gdebug, gstrict needs to be the very first thing set cause it affects the construction of all objects
 	for(int i=1; i<argc; i++) {
 		if ( strcmp(argv[i], GSTRICTSTRING) == 0 ) {
 			gstrict = true;
 		} else if ( strcmp(argv[i], GDEBUGSTRING) == 0 ) {
 			gdebug = true;
+		} else if ( strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--h") == 0  || strcmp(argv[i], "-help") == 0  || strcmp(argv[i], "--help") == 0 ) {
+			printHelp = true;
 		}
 	}
 
@@ -54,6 +56,12 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 	for(auto &ourOption: defineGOptionsOptions()) {
 		goptions.push_back(ourOption);
 	}
+
+	// print help and exit if printHelp
+	if ( printHelp ) {
+		printOptionsHelp();
+	}
+
 
 	// parsing command line to check if any switch is turned on
 	for(int i=1; i<argc; i++) {
@@ -99,6 +107,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 	}
 
 	// parse command line
+
+
 
 }
 
@@ -326,9 +336,6 @@ double GOptions::getDouble(string tag) {
 }
 
 bool GOptions::getSwitch(string tag) {
-	// will exit if not found
-
-	
 	if ( switches.find(tag) != switches.end()) {
 		return switches[tag].getStatus();
 	} else {
@@ -358,3 +365,24 @@ vector<GOption> &operator += (vector<GOption> &original, vector<GOption> options
 	
 	return original;
 }
+
+
+
+// print only the non default settings set by users
+void GOptions::printOptionsHelp()
+{
+
+	cout << endl << KGRN << " Usage: " << RST << endl << endl;
+
+	for (auto& s: switches) {
+		cout << KGRN << ARROWITEM << "-" << s.first << RST << ": " << s.second.getDescription() << endl;
+	}
+
+	for(auto& jOption: goptions) {
+		jOption.printOptionHelp();
+	}
+
+	cout << endl;
+	exit(EXIT_SUCCESS);
+}
+

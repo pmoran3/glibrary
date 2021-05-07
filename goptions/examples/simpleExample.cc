@@ -21,7 +21,7 @@ vector<GOption> defineOptions()
 	// no help, just description
 	json jsonRunOption = {
 		{GNAME, "runno"},
-		{GDESC, "Run number"},
+		{GDESC, "Sets the Run number"},
 		{GDFLT, 11}
 	};
 
@@ -32,7 +32,7 @@ vector<GOption> defineOptions()
 	// no help, just description
 	json jsonNThreadsOption = {
 		{GNAME, "nthreads"},
-		{GDESC, "Number of hreadst"},
+		{GDESC, "Sets the Number of threads"},
 		{GDFLT, 4}
 	};
 

@@ -1,19 +1,18 @@
 - parse command line
-- jcard string should be a variable of goptions?
-- act if a switch was passed but not recognized
+
+- jcard filename string name should be a variable of goptions?
 
 - non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
-- cumulative options must be added ONLY with +
-
-- add cumulativeStructured example
-- print help (shift each line be TTAB)
 
 
-> -h, -help, --help: print this message and exit.
+- print help (shift each line be TTAB) and exit
+
+- if switch is given not recognized (-g) exit
+
 > -helpToHtml:  print all available options in HTML format (options.html) and exit.
 
 - print defaults mechanism missing
 - general debug option -debug=string
-- help and search mechanism, through names and descriptions
+- help search mechanism, through names and descriptions
 
 

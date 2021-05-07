@@ -6,13 +6,13 @@
 #define GDESC     "JsonTagGDESCription"
 #define GDFLT     "jsonTagDefault"
 #define NODFLT    "NODFLT"
-#define SWTICHOFF "switchOff"
 
 #define IMPORTJCARD "import jcard"
 
 #define GDEBUGSTRING  "-gdebug"
 #define GSTRICTSTRING "-gstrict"
 
+#define LISTOPTIONARROW "\t → "
 #define PRINTALLOPTIONS "printAllOptions"
 #define GOPTIONDOCUMENTATION "https://gemc.github.io/glibrary/goptions/"
 
