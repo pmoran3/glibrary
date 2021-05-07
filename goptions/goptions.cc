@@ -396,7 +396,7 @@ void GOptions::printOptionsHelp()
 		jOption.printOptionHelp();
 	}
 
-	cout << endl;
+	cout << RST << endl;
 	exit(EXIT_SUCCESS);
 }
 

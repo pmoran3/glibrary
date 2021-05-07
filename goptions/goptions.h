@@ -89,8 +89,10 @@ private:
 
 	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
 	// Example: {
-	//    { GNAME: "runno",    GDESC: "run number",       GDFLT: 11},
-	//    { GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
+	// 	[
+	//    	{ GNAME: "runno",    GDESC: "run number",       GDFLT: 11},
+	//    	{ GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
+	//		]
 	// }
 	const json joptionDefinition;
 

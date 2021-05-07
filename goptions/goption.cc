@@ -456,44 +456,43 @@ void GOption::printOptionHelp()
 	long int helpSize = string(HELPFILLSPACE).size() + 1;
 	string defaultValue = "";
 
-	string helpString = "-" +  name + RST + "=<value>" ;
+	string helpString = "-" +  name + RST  ;
+	if ( cumulative ) {
+		helpString = "+" +  name + RST  ;
+	}
+
+	if ( joptionDefinition.front().is_structured() ) {
+		helpString += "=<jsonvalue>" ;
+	} else {
+		helpString += "=<value>" ;
+	}
+
 	cout  << KGRN << ARROWITEM  ;
 	cout << left;
 	cout.width(helpSize);
 	cout << helpString;
 	cout  << description  << endl;
 
-	// non structured option, the jOptionAssignedValues has only one object, the json size is 1
-	if ( jOptionAssignedValues.size() == 1 && jOptionAssignedValues.front().size() == 1 ) {
-
-
-	} else {
+	// structured option
+	if ( joptionDefinition.front().is_structured() ) {
 
 		// structured option
 		cout << endl;
 		for ( auto& h: help) {
 			cout << HELPFILLSPACE << h << endl;
 		}
-		cout << endl << HELPFILLSPACE << "<value>:" << endl;
+		
+		cout << endl << HELPFILLSPACE << "<jsonvalue>:" << endl << endl;
 
+		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 
-//		for (auto& jValue: jOptionAssignedValues) {
-//
-//			if (cumulative) {
-//				cout << TPOINTITEM ;
-//				for (auto& [jValueKey, jValueValue] : jValue.items()) {
-//					cout << jValueKey << ": " << jValueValue << "\t";
-//				}
-//				cout << endl;
-//			} else {
-//				for (auto& [jValueKey, jValueValue] : jValue.items()) {
-//					cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
-//				}
-//				cout << endl;
-//			}
+			cout  << HELPFILLSPACE << POINTITEM  ;
+			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GNAME], "\"", "") << ": " ;
+			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GDESC], "\"", "")  << endl;
 
+		}
 	}
 
-	
+	cout << RST ;
 
 }

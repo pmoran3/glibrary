@@ -75,8 +75,7 @@ string gstring::replaceAllStringsWithString(string source, const string from, co
 	size_t lastPos = 0;
 	size_t findPos;
 
-	while((findPos = source.find(from, lastPos) != string::npos))
-	{
+	while((findPos = source.find(from, lastPos) != string::npos)) {
 		newString += to;
 		newString.append(source, lastPos + from.length(), findPos - lastPos  );
 		lastPos = findPos + from.length();

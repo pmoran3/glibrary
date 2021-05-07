@@ -7,3 +7,4 @@ doxygen
 - scanNumber was upgraded, verify?
 
 - add printHelp general?
+- add function to check if it's structured option or not
