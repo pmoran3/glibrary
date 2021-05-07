@@ -14,5 +14,6 @@
 - print defaults mechanism missing
 - general debug option -debug=string
 - help search mechanism, through names and descriptions
+  -h set search for the next string, look in help and description
 
 

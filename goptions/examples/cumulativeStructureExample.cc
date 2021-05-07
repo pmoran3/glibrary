@@ -68,9 +68,11 @@ namespace gdetector {
 
 		json jsonDetectorOption = { jsonDetectorTag, jsonFactoryTag, jsonVariationTag};
 
-		string help = "A detector definition includes the geometry location, factory and variation\n";
-		help += "The geometry and variation are mandatory fields\n";
-		help += "The variation is optional, with \"default\" as default\n";
+		vector<string> help;
+
+		help.push_back("A detector definition includes the geometry location, factory and variation");
+		help.push_back("The geometry and variation are mandatory fields");
+		help.push_back("The variation is optional, with \"default\" as default");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gsetup", "gsetup cumulative option", jsonDetectorOption, help, true));

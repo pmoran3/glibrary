@@ -78,7 +78,7 @@ public:
 	 * \param help the full description of the option. Multiple lines are separated by \"\n\".
 	 * \param cumulative if an option belongs to a group, options can be collected by using -add-\<name\>.\n
 	 */
-	GOption(string name, string description, json joptionDefinition, string help = "na", bool cumulative = false);
+	GOption(string name, string description, json joptionDefinition, vector<string> help = {"na"}, bool cumulative = false);
 
 
 private:
@@ -96,7 +96,7 @@ private:
 
 	// help: here we can put the full description of the option.
 	// multiple lines are defined by using "\n"
-	const string help;
+	const vector<string> help;
 
 	// the option assigned values, validated against the definition
 	// this is a vector of size 1 if the option is not cumulative

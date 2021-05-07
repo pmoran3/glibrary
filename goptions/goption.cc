@@ -52,7 +52,7 @@ cumulative{false}
 // constructor for structured option
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
-GOption::GOption(string n, string d, json j, string h, bool m):
+GOption::GOption(string n, string d, json j, vector<string> h, bool m):
 name{n},
 description{d},
 joptionDefinition{j},
@@ -453,18 +453,29 @@ using std::setw;
 void GOption::printOptionHelp()
 {
 
+	long int helpSize = string(HELPFILLSPACE).size() + 1;
+	string defaultValue = "";
+
+	string helpString = "-" +  name + RST + "=<value>" ;
+	cout  << KGRN << ARROWITEM  ;
+	cout << left;
+	cout.width(helpSize);
+	cout << helpString;
+	cout  << description  << endl;
+
 	// non structured option, the jOptionAssignedValues has only one object, the json size is 1
 	if ( jOptionAssignedValues.size() == 1 && jOptionAssignedValues.front().size() == 1 ) {
 
 
-		cout  << KGRN << ARROWITEM << "-" << name << RST << "=<value>" ;
-		cout.width(30);
-		cout.fill('.');
-		cout << left << TREDARROWITEM << RST << description << endl;
-
 	} else {
+
 		// structured option
-		cout << KGRN << ARROWITEM << name << RST << ": " << description << endl;
+		cout << endl;
+		for ( auto& h: help) {
+			cout << HELPFILLSPACE << h << endl;
+		}
+		cout << endl << HELPFILLSPACE << "<value>:" << endl;
+
 
 //		for (auto& jValue: jOptionAssignedValues) {
 //

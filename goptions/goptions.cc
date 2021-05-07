@@ -367,15 +367,29 @@ vector<GOption> &operator += (vector<GOption> &original, vector<GOption> options
 }
 
 
+#include <iomanip>
+using std::fixed;
+using std::left;
+using std::setw;
 
 // print only the non default settings set by users
 void GOptions::printOptionsHelp()
 {
 
-	cout << endl << KGRN << " Usage: " << RST << endl << endl;
+	long int helpSize = string(HELPFILLSPACE).size() + 1;
+	cout.fill('.');
+
+	cout  << KGRN << " Usage: " << RST << endl << endl;
 
 	for (auto& s: switches) {
-		cout << KGRN << ARROWITEM << "-" << s.first << RST << ": " << s.second.getDescription() << endl;
+
+		string help = "-" +  s.first + RST  ;
+		cout  << KGRN << ARROWITEM  ;
+		cout << left;
+		cout.width(helpSize);
+		cout << help;
+		cout  << s.second.getDescription()  << endl;
+
 	}
 
 	for(auto& jOption: goptions) {
