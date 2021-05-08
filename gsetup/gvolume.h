@@ -80,8 +80,8 @@ public:
 	string getSolidsOpr()  {return solidsOpr;}
 
 	// assign modifier
-	void modifyPos(string s)     {shift = s;}
-	void modifyRot(string t)     {tilt  = t;}
+	void applyShift(string s)    {shift = s;}
+	void applyTilt(string t)     {tilt  = t;}
 	void modifyExistence(bool e) {exist = e;}
 
 	// imported volumes

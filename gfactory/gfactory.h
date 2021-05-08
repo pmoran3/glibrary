@@ -5,7 +5,6 @@
 #include <map>
 #include <string>
 #include <iostream>
-using std::string;
 
 // dynamic loading
 #include "gdl.h"
@@ -46,16 +45,15 @@ class GFactory : public GFactoryBase
  */
 class GManager
 {
-
 private:
 
 	// the map of GFactoryBase is kept on GManager
-	map<string, GFactoryBase*> factoryMap;
+	std::map<string, GFactoryBase*> factoryMap;
 
 	// the reason to keep this map is to keep the (DynamicLib?) pointers in memory
 	// for some reason declaring a dynamic_lib local variable in LoadAndRegisterObjectFromLibrary
 	// scope does not work
-	map<string, DynamicLib*> dlMap;
+	std::map<std::string, DynamicLib*> dlMap;
 
 	int verbosity;
 
@@ -79,7 +77,9 @@ public:
 	 - 0: no not print any log
 	 - 1: print gmanager registering and instantiating classes
 	 */
-	GManager( int v = 0 ) : verbosity(v) {}
+	GManager( int v = 0 ) : verbosity(v) {
+		cout  << GFACTORYLOGITEM << " Instantiating GManager" << endl;
+	}
 
 public:
 	/**

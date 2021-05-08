@@ -1,7 +1,7 @@
 #ifndef  GSYSTEM_H
 #define  GSYSTEM_H 1
 
-// gvolume
+// gsetup
 #include "gvolume.h"
 
 // c++
@@ -34,10 +34,9 @@ private:
 	}
 
 
-
 public:
-//	string getFactory() const { return factory; }
-//	string getName() const    { return name; }
+	string getFactory() const { return factory; }
+	string getName() const    { return name; }
 	
 	// returns the file stream, checking all possible directories.
 	// this should be in some general utility library? gstrings?

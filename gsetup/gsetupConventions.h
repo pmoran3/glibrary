@@ -7,7 +7,7 @@
 
 #define GVOLUMENUMBEROFPARS        19
 #define GVOLUMENOTAPPLICABLEENTRY "na"
-#define GSETUPLOGHEADER           " ⎚ gvolume ▸"
+#define GSETUPLOGHEADER           " ⎚ gsetup ▸"
 #define GWORLDNAME                "world"
 #define NOMODIFIER                "noModifier"
 

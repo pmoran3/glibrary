@@ -8,26 +8,20 @@
 #include "gmodifier.h"
 #include "gworldOptions.h"
 
-// glibrary
-#include "gfactory.h"
-
-
 class GWorld
 {
 public:
-	// constructor from a jcard
-	// by default all systems will have the same run number
+	// constructor from a jcard / command lines
+	// load systems and modifiers map
+	// load factories
+	// run factory load system for each item in gsystemsMap
+	// apply modifiers
 	GWorld(GOptions* gopts);
 
 
 private:
 	map<string, GSystem*> gsystemsMap;     // key is system name
 	map<string, GModifier*> gmodifiersMap; // key is volume name
-
-	// manager to register the factories
-	GManager gSystemManager;
-
-	void registerFactoriesAndLoadSystems(GOptions* gopts);
 
 public:
 	// GWorld goptions
