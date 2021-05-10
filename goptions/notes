@@ -1,0 +1,18 @@
+## Glibrary Options (GOPTIONS)
+
+
+
+## From Scratch:
+
+* Library Target:
+
+Sources:
+ - goption.cc
+ - goptions.cc
+
+* Example Target:
+
+Sources:
+- goptions/examples/simpleExample.cc
+- goptions/examples/structureExample.cc
+- goptions/examples/cumulativeStructureExample.cc
