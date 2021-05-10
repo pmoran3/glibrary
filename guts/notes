@@ -1,0 +1,15 @@
+## Glibrary Utilities (GUTS)
+
+
+
+## From Scratch:
+
+* Library Target:
+
+Sources:
+ - gstring.cc
+
+* Example Target:
+
+Sources:
+ - example.cc

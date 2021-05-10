@@ -6,8 +6,6 @@
 
 // c++
 #include <map>
-#include "dirent.h" // for directory access to DIR object
-using std::ifstream;
 using std::map;
 
 class GSystem
@@ -35,12 +33,10 @@ private:
 
 
 public:
-	string getFactory() const { return factory; }
-	string getName() const    { return name; }
-	
-	// returns the file stream, checking all possible directories.
-	// this should be in some general utility library? gstrings?
-	//ifstream* gSystemFile(int which, vector<string> locations, int verbosity);  // 0: material. 1: geometry
+	string getFactory() const   { return factory; }
+	string getName() const      { return name; }
+	string getVariation() const { return variation; }
+
 	
 	// returns a vector of import files, checking all possible directories.
 	// this should be in some general utility library? gstrings?

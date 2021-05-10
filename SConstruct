@@ -10,7 +10,7 @@ from init_env import init_environment
 env = init_environment('glibrary clhep geant4 qt5')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-gstring             = SConscript('gstring/SConscript',    exports='env')
+guts                = SConscript('guts/SConscript',       exports='env')
 goptions            = SConscript('goptions/SConscript',   exports='env')
 gsplash             = SConscript('gsplash/SConscript',    exports='env')
 gdata               = SConscript('gdata/SConscript',      exports='env')

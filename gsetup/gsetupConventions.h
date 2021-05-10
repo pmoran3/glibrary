@@ -4,9 +4,10 @@
 // exit codes: 200s
 #define EC__GVOLUMEALREADYPRESENT  201
 #define EC__GVOLUMENUMBEROFPARS    202
+#define EC__GSETUPFILENOTOFOUND    203
 
 #define GVOLUMENUMBEROFPARS        19
-#define GVOLUMENOTAPPLICABLEENTRY "na"
+#define GSETUPNOTAPPLICABLEENTRY  "na"
 #define GSETUPLOGHEADER           " ⎚ gsetup ▸"
 #define GWORLDNAME                "world"
 #define NOMODIFIER                "noModifier"

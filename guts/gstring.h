@@ -2,7 +2,7 @@
 #define  GSTRING_H  1
 
 // conventions
-#include "gstringConventions.h"
+#include "gutsConventions.h"
 
 // c++
 #include <vector>

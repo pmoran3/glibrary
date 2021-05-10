@@ -1,5 +1,5 @@
-#ifndef  GSTRINGS_CONVENTIONS_H
-#define  GSTRINGS_CONVENTIONS_H  1
+#ifndef  GUTS_CONVENTIONS_H
+#define  GUTS_CONVENTIONS_H  1
 
 
 // exit codes: 600

@@ -16,7 +16,7 @@ lib = SConscript('SConscript', exports='env')
 # ----------
 #
 # manually appending this library so the example can be compiled
-env.Append(LIBS = 'gstring')
+env.Append(LIBS = 'guts')
 
 # builds the example(s)
 example = env.Program(source = 'example.cc', target = 'example')

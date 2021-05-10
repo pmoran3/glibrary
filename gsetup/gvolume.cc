@@ -50,8 +50,8 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		mirror      = trimSpacesFromString(pars[i++]);
 		
 		// modifiers - accessed through options/jcard
-		shift = GVOLUMENOTAPPLICABLEENTRY;
-		tilt  = GVOLUMENOTAPPLICABLEENTRY;
+		shift = GSETUPNOTAPPLICABLEENTRY;
+		tilt  = GSETUPNOTAPPLICABLEENTRY;
 		exist = true;
 		
 		// set file with path if it's a CAD/GDML import

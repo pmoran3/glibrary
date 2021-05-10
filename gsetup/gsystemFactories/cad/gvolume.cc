@@ -7,7 +7,6 @@ using namespace gstring;
 
 // c++
 #include <iostream>
-#include <fstream>
 using namespace std;
 
 void GSystemCadFactory::loadGeometry(GOptions* gopt, GSystem *s)
