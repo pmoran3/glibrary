@@ -10,10 +10,6 @@
 //#include "gsystemFactories/mysql/systemCadFactory.h"
 
 
-
-
-
-
 GWorld::GWorld(GOptions* gopts) {
 
 	int verbosity = gopts->getInt("gsetupV");
@@ -21,6 +17,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// projecting options onto vector of JSystem
 	vector<gsetup::JSystem> systems = gsetup::getSystems(gopts);
 
+	// loading gsystemsMap
 	for (auto& system: systems) {
 		gsystemsMap[system.system] = new GSystem(system.system, system.factory, system.variation, system.runno, verbosity);
 	}
@@ -28,6 +25,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// projecting options onto vector of GModifiers
 	vector<gsetup::JModifier> jmodifiers = gsetup::getModifiers(gopts);
 
+	// loading gmodifiersMap
 	for (auto& modifier: jmodifiers) {
 		if ( modifier.volume != NOMODIFIER) {
 			gmodifiersMap[modifier.volume] = new GModifier(modifier.volume, modifier.shift, modifier.tilt, modifier.isPresent, verbosity);
@@ -49,16 +47,25 @@ GWorld::GWorld(GOptions* gopts) {
 		// ----
 		if(factory == "text") {
 			if(systemFactory.find(factory) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemTextFactory>("GSystemTextFactory");
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemTextFactory");
+				gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
 			}
 		} else if(factory == "cad") {
 			if(systemFactory.find(factory) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemCadFactory>("GSystemCadFactory");
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemCadFactory");
+				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMCADFACTORY);
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
+			}
+		}  else if(factory == "gdml") {
+			if(systemFactory.find(factory) == systemFactory.end()) {
+				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMGDMFACTORY);
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMFACTORY);
+			}
+		} else if(factory == "mysql") {
+			if(systemFactory.find(factory) == systemFactory.end()) {
+				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMSQLFACTORY);
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMSQLFACTORY);
 			}
 		}
-
 	}
 
 	// now loading detector definitions
@@ -69,14 +76,50 @@ GWorld::GWorld(GOptions* gopts) {
 		if(systemFactory.find(factory) != systemFactory.end()) {
 			systemFactory[factory]->loadSystem(system.second, verbosity);
 		} else {
-			cerr << FATALERRORL << " Fatal Error: systemFactory factory <" << factory << "> not found for " << systemName << endl;
+			cerr << FATALERRORL << "SystemFactory factory <" << factory << "> not found for " << systemName << endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 
-		// PRAGMA TODO: accounting
+		// PRAGMA TODO: log accounting
 		// account number of volume definitions loaded
 	}
 
+	
+	// applying modifiers
+	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {
+
+		// looping over systems, searching for volume
+		GVolume *thisVolume = searchForVolume(volumeNameToModify);
+		if(thisVolume != nullptr) {
+			thisVolume->applyShift(gmodifier->getShift());
+			thisVolume->applyTilt(gmodifier->getTilts());
+			thisVolume->modifyExistence(gmodifier->getExistence());
+		}
+
+	}
+
+
+}
+
+
+// seerch for a volume among systems in gsystemsMap
+GVolume* GWorld::searchForVolume(string volumeName) {
+
+	GVolume* volumeFound = nullptr;
+
+	for (auto& system: gsystemsMap) {
+		GVolume *thisVolume = system.second->getGVolume(volumeName);
+		if(thisVolume != nullptr) {
+			return thisVolume;
+		}
+	}
+
+	// error: volume not found
+	cerr << FATALERRORL << "Volume <" << volumeName << "> not found in gsetup " << endl;
+	gexit(EC__GVOLUMENOTFOUND);
+
+
+	return volumeFound;
 }
 
 
@@ -86,33 +129,6 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 
-
-//	// applying modifiers
-//	for(auto &m : setupModifiers) {
-//		for(auto &s : setup) {
-//			GVolume *thisVolume = s.second->getGVolume(m.first);
-//			if(thisVolume != nullptr) {
-//				thisVolume->modifyPos(m.second->getShift());
-//				thisVolume->modifyRot(m.second->getTilts());
-//				thisVolume->modifyExistence(m.second->getExistence());
-//			}
-//		}
-//	}
-//
-//	// making sure every detector mother is defined
-//	for(auto &s : setup) {
-//		for(auto &vname: s.second->getAllVolumeNames()) {
-//			string mother = s.second->getGVolume(vname)->getMother();
-//			if(mother != WORLDNAME) {
-//				if(s.second->getGVolume(mother) == nullptr) {
-//					cerr << FATALERRORL << " Fatal Error: mother <" << mother << "> not found for <" << vname << ">" << endl;
-//					exit(0);
-//				}
-//			}
-//		}
-//	}
-
-
-// PRAGMA TODO: Loads material
+// PRAGMA TODO: Loads materials
 // PRAGMA TODO: Loads system parameters
 

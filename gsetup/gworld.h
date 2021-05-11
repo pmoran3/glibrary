@@ -24,6 +24,10 @@ private:
 	map<string, GModifier*> gmodifiersMap; // key is volume name
 	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
 
+	// seerch for a volume among systems in gsystemsMap
+	GVolume* searchForVolume(string volumeName) ;
+
+
 public:
 
 
