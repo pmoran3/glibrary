@@ -22,13 +22,11 @@ public:
 private:
 	map<string, GSystem*> gsystemsMap;     // key is system name
 	map<string, GModifier*> gmodifiersMap; // key is volume name
+	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
 
 public:
-	// GWorld goptions
-	vector<GOption> defineOptions();
 
 
-	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
 
 	// key is sensitive name, value is path
 //	map<string, string> getSensitiveVolumes();

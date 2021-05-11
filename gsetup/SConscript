@@ -2,11 +2,18 @@
 # the glibrary SConstruct one dir up
 Import('env')
 
+env.Append(CPPPATH = [Dir('gsystemFactories'), Dir('gsystemFactories/cad'), Dir('gsystemFactories/text'), Dir('gsystemFactories/gdml'), Dir('gsystemFactories/mysql')])
+
 sources = [
 			  'gvolume.cc',
 			  'gsystem.cc',
 			  'gworld.cc',
-			  'gworldOptions.cc'
+			  'gworldOptions.cc',
+			  'gsystemFactories/text/systemTextFactory.cc',
+			  'gsystemFactories/text/gmaterial.cc',
+			  'gsystemFactories/text/gvolume.cc',
+			  'gsystemFactories/cad/gmaterial.cc',
+			  'gsystemFactories/cad/gvolume.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

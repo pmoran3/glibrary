@@ -33,8 +33,8 @@ private:
 
 
 public:
-	string getFactory() const   { return factory; }
 	string getName() const      { return name; }
+	string getFactory() const   { return factory; }
 	string getVariation() const { return variation; }
 
 	

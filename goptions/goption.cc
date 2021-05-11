@@ -485,6 +485,7 @@ void GOption::printOptionHelp()
 			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GDESC], "\"", "")  << endl;
 			
 		}
+		cout << endl;
 	}
 
 	cout << RST ;

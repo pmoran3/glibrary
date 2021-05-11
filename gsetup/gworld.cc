@@ -5,7 +5,7 @@
 #include "gworld.h"
 #include "gsystemFactories/systemFactory.h"
 #include "gsystemFactories/text/systemTextFactory.h"
-//#include "gsystemFactories/cad/systemCadFactory.h"
+#include "gsystemFactories/cad/systemCadFactory.h"
 //#include "gsystemFactories/gdml/systemCadFactory.h"
 //#include "gsystemFactories/mysql/systemCadFactory.h"
 
@@ -37,56 +37,55 @@ GWorld::GWorld(GOptions* gopts) {
 	// instantiating gSystemManager
 	GManager gSystemManager(verbosity);
 
+	map<string, GSystemFactory*> systemFactory;
+
+	// registering factories in the manager
+	// and adding them to systemFactory
+	// if a factory is not found, registering it in the manager and loading it into the map
+	for (auto& system: gsystemsMap) {
+		string factory = system.second->getFactory();
+
+		// text
+		// ----
+		if(factory == "text") {
+			if(systemFactory.find(factory) == systemFactory.end()) {
+				gSystemManager.RegisterObjectFactory<GSystemTextFactory>("GSystemTextFactory");
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemTextFactory");
+			}
+		} else if(factory == "cad") {
+			if(systemFactory.find(factory) == systemFactory.end()) {
+				gSystemManager.RegisterObjectFactory<GSystemCadFactory>("GSystemCadFactory");
+				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemCadFactory");
+			}
+		}
+
+	}
+
+	// now loading detector definitions
+	for (auto& system: gsystemsMap) {
+		string systemName = system.first;
+		string factory = system.second->getFactory();
+
+		if(systemFactory.find(factory) != systemFactory.end()) {
+			systemFactory[factory]->loadSystem(system.second, verbosity);
+		} else {
+			cerr << FATALERRORL << " Fatal Error: systemFactory factory <" << factory << "> not found for " << systemName << endl;
+			gexit(EC__FACTORYNOTFOUND);
+		}
+
+		// PRAGMA TODO: accounting
+		// account number of volume definitions loaded
+	}
 
 }
 
 
 
-// PRAGMA TODO: Add proper log messages
 
 
-//	map<string, GSystemFactory*> systemFactory;
-
-//	// registering factories in the manager
-//	// and adding them to systemFactory
-//	for(auto &s : setup) {
-//		string factory = s.second->getFactory();
-//
-//		// text
-//		// ----
-//		if(factory == "text") {
-//			// if factory not found, registering it in the manager and loading it into the map
-//			if(systemFactory.find(factory) == systemFactory.end()) {
-//				gSystemManager.RegisterObjectFactory<GSystemTextFactory>("GSystemTextFactory");
-//				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemTextFactory");
-//			}
-//		}
-//
-//		if(factory == "cad") {
-//			// if factory not found, registering it in the manager and loading it into the map
-//			if(systemFactory.find(factory) == systemFactory.end()) {
-//				gSystemManager.RegisterObjectFactory<GSystemCadFactory>("GSystemCadFactory");
-//				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>("GSystemCadFactory");
-//			}
-//		}
-//	}
 
 
-//	// now loading detector definitions
-//	for(auto &s : setup) {
-//		string factory    = s.second->getFactory();
-//		string systemName = s.first;
-//
-//		if(systemFactory.find(factory) != systemFactory.end()) {
-//			systemFactory[factory]->loadSystem(gopt, setup[systemName]);
-//		} else {
-//			cerr << FATALERRORL << " Fatal Error: systemFactory factory <" << factory << "> not found for " << systemName << endl;
-//			exit(0);
-//		}
-//
-//		// PRAGMA TODO: accounting
-//		// account number of volume definitions loaded
-//	}
+
 
 //	// applying modifiers
 //	for(auto &m : setupModifiers) {
@@ -114,6 +113,6 @@ GWorld::GWorld(GOptions* gopts) {
 //	}
 
 
-	// PRAGMA TODO: Loads material
-	// PRAGMA TODO: Loads system parameters
+// PRAGMA TODO: Loads material
+// PRAGMA TODO: Loads system parameters
 
