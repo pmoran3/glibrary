@@ -64,9 +64,7 @@ public:
 	
 	map<string, GVolume*> getGVolumesMap() const {return gvolumesMap;}
 
-//	vector<string> getAllVolumeNames() const;
-//	string getSystemPath();
-	
+
 };
 
 

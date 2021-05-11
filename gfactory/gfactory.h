@@ -9,7 +9,7 @@
 // dynamic loading
 #include "gdl.h"
 
-#define GFACTORYLOGITEM  " ❖"
+#define GFACTORYLOGITEM  " ⎆"
 
 /*
  * @class GFactoryBase

@@ -25,7 +25,7 @@ private:
 	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
 
 	// seerch for a volume among systems in gsystemsMap
-	GVolume* searchForVolume(string volumeName) ;
+	GVolume* searchForVolume(string volumeName, string purpose) ;
 
 
 public:

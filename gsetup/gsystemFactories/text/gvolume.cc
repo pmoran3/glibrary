@@ -9,8 +9,6 @@
 
 void GSystemTextFactory::loadGeometry(GSystem *s, int verbosity)
 {
-//	vector<string> possibleLocations = gopt->getStringVectorValue("setupDir");
-//
 //	ifstream *IN = s->gSystemFile(1, possibleLocations, verbosity);
 //
 //	// it could be not found

@@ -5,19 +5,28 @@
 #include "systemFactory.h"
 
 // file types
-#define GTEXTMATSTYPE 0
-#define GTEXTGEOMTYPE 0
-#define GTEXTMIRSTYPE 0
+#define GTEXTMATSTYPE "__materials_"
+#define GTEXTGEOMTYPE "__geometry_"
+#define GTEXTMIRSTYPE "__mirrors_"
 
 // system factory
 class GSystemTextFactory : GSystemFactory
 {
+public:
+
+	// constructor will load the possible location(s) of the geometry and material databases
+	GSystemTextFactory();
+
 private:
+	vector<string> possibleLocationOfTextDatabases;
+
+private:
+
 	virtual void loadMaterial(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
 	// returns the file stream, checking all possible directories.
-	ifstream* gSystemTextFile(GSystem *system, int which, vector<string> locations, int verbosity);  // which: GTEXTMATERIALTYPE or GTEXTGEOMETRYTYPE
+	ifstream* gSystemTextFile(GSystem *system, string SYSTEMTYPE, int verbosity);  // SYTEMTYPE one of file types above
 
 };
 

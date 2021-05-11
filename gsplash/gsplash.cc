@@ -23,7 +23,7 @@ GSplash::GSplash(string imageName) :  splash(nullptr)
 			splash = new QSplashScreen(pixmap);
 
 		} else {
-			cerr << " Environment variable " << GSPLASHENVIRONMENT << " must point to an image file." << endl;
+			cerr << FATALERRORL << " Environment variable " << GSPLASHENVIRONMENT << " must point to an image file." << endl;
 			gexit(EC__NOSPLASHENVFOUND);
 		}
 

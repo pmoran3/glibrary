@@ -68,7 +68,7 @@ GWorld::GWorld(GOptions* gopts) {
 		}
 	}
 
-	// now loading detector definitions
+	// now loading gvolume definitions for all systems
 	for (auto& system: gsystemsMap) {
 		string systemName = system.first;
 		string factory = system.second->getFactory();
@@ -85,25 +85,40 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	
-	// applying modifiers
+	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {
 
 		// looping over systems, searching for volume
-		GVolume *thisVolume = searchForVolume(volumeNameToModify);
+		GVolume *thisVolume = searchForVolume(volumeNameToModify, "Volume Being Modified ");
 		if(thisVolume != nullptr) {
 			thisVolume->applyShift(gmodifier->getShift());
 			thisVolume->applyTilt(gmodifier->getTilts());
 			thisVolume->modifyExistence(gmodifier->getExistence());
 		}
+	}
+
+
+	// making sure every detector mother is defined
+	for (auto system: gsystemsMap) {
+		// first collect all volume names
+		for (auto& [volumeName, gvolume] : system.second->getGVolumesMap() ) {
+			// will exit with error if not found
+			searchForVolume(gvolume->getMother(), "Volume Mother of " + volumeName);
+		}
+
+
 
 	}
+
+	// PRAGMA TODO: Loads material
+	// PRAGMA TODO: Loads system parameters
 
 
 }
 
 
 // seerch for a volume among systems in gsystemsMap
-GVolume* GWorld::searchForVolume(string volumeName) {
+GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 
 	GVolume* volumeFound = nullptr;
 
@@ -115,9 +130,8 @@ GVolume* GWorld::searchForVolume(string volumeName) {
 	}
 
 	// error: volume not found
-	cerr << FATALERRORL << "Volume <" << volumeName << "> not found in gsetup " << endl;
+	cerr << FATALERRORL << purpose << "<" << volumeName << "> not found in gsetup " << endl;
 	gexit(EC__GVOLUMENOTFOUND);
-
 
 	return volumeFound;
 }

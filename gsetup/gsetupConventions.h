@@ -9,10 +9,11 @@
 
 #define GVOLUMENUMBEROFPARS        19
 #define GSETUPNOTAPPLICABLEENTRY  "na"
-#define GSETUPLOGHEADER           " ⎚ gsetup ▸"
+#define GSETUPLOGHEADER           " ❖ gsetup ▸"
 #define GWORLDNAME                "world"
 #define NOMODIFIER                "noModifier"
 
+#define GEMC_TEXTDB       "GEMC_TEXTDB"
 #define GSYSTEMTXTFACTORY "GSystemTEXTFactory"
 #define GSYSTEMCADFACTORY "GSystemCADFactory"
 #define GSYSTEMGDMFACTORY "GSystemGDMLFactory"
