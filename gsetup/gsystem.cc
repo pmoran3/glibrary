@@ -9,9 +9,7 @@
 
 // c++
 #include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
+using namespace std;
 
 // init system based on name, factory, variation and run number
 GSystem::GSystem(string n, string f, string v, int r, int verbosity) :

@@ -1,8 +1,7 @@
 #include "ShapeFactory.h"
 
 #include <iostream>
-using std::cout;
-using std::endl;
+using namespace std;
 
 void Triangle::Area() {
 	cout << " Factory shape triangle it works! " << endl;

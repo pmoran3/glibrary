@@ -12,7 +12,7 @@ using std::to_string;
 
 // glibrary
 #include "goptions.h"
-#include "gstringConventions.h"
+#include "gutsConventions.h"
 
 class GEventHeader
 {

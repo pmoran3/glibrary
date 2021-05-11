@@ -7,9 +7,8 @@
 // glibrary
 #include "gstring.h"
 
-using std::cerr;
-using std::endl;
-using gstring::trimSpacesFromString;
+using namespace std;
+using namespace gstring;
 
 GVolume::GVolume(vector<string> pars, string importPath)
 {

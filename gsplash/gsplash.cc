@@ -1,8 +1,6 @@
 // c++
 #include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
+using namespace std;
 
 // splash
 #include "gsplash.h"

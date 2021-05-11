@@ -2,3 +2,4 @@
 - API name? 
 - gvolumesMap should it be a pointer?
 - GWorld vars should be pointers?
+- add proper log messages

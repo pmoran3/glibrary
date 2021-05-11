@@ -6,10 +6,7 @@
 
 // c++
 #include <iostream>
-
-using std::cout;
-using std::cerr;
-using std::endl;
+using namespace std;
 
 // constructor for switch option
 // if an option is defined with default values, it will be passed to jUserValues
@@ -445,9 +442,6 @@ void GOption::printOption(bool withDefaults)
 }
 
 #include <iomanip>
-using std::fixed;
-using std::left;
-using std::setw;
 
 // print option
 void GOption::printOptionHelp()

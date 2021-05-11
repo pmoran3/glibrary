@@ -14,7 +14,7 @@ using std::vector;
 
 // glibrary
 #include "goptions.h"
-#include "gstringConventions.h"
+#include "gutsConventions.h"
 
 
 class GEventData

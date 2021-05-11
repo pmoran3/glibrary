@@ -7,11 +7,7 @@
 // gstrings
 #include "gstring.h"
 using namespace gstring;
-
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::exception;
+using namespace std;
 
 // constructor:
 // - load user defined options, add goptions options
@@ -367,9 +363,6 @@ vector<GOption> &operator += (vector<GOption> &original, vector<GOption> options
 
 
 #include <iomanip>
-using std::fixed;
-using std::left;
-using std::setw;
 
 // print only the non default settings set by users
 void GOptions::printOptionsHelp()
@@ -393,7 +386,7 @@ void GOptions::printOptionsHelp()
 
 	for(auto& jOption: goptions) {
 		jOption.printOptionHelp();
-		cout << endl;
+	//	cout << endl;
 	}
 
 	cout << RST << endl;

@@ -5,7 +5,7 @@
 #include "gsplash.h"
 
 // gstring for the exit codes
-#include "gstringConventions.h"
+#include "gstring.h"
 
 // c++
 #include <string>
@@ -18,7 +18,7 @@ using std::string;
 #define NOSPLASHIMAGESELECTED "NOSPLASHIMAGESELECTED"
 
 // exit codes: 190s
-#define EC__NOSPLASHENVFOUND               191
+#define EC__NOSPLASHENVFOUND  191
 
 class GSplash
 {

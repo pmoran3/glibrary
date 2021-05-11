@@ -1,4 +1,4 @@
->> For the library:
+## GSplash
 
 qt frameworks needed:
 
@@ -11,3 +11,17 @@ qt frameworks needed:
 
 - QtCore
 - QtWidgets
+
+
+
+## From Scratch:
+
+* Library Target:
+
+Sources:
+ - gsplash.cc
+
+* Example Target:
+
+Sources:
+- gsplashExample.cc

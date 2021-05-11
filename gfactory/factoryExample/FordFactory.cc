@@ -1,8 +1,7 @@
 #include "FordFactory.h"
 
 #include <iostream>
-using std::cout;
-using std::endl;
+using namespace std;
 
 void Ford::go() {
 	cout << " Factory car ford fordVar[1] " << fordVar[1] << std::endl;

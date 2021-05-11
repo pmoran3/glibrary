@@ -7,6 +7,7 @@
 #include "gsystemFactories/text/systemTextFactory.h"
 //#include "gsystemFactories/cad/systemCadFactory.h"
 //#include "gsystemFactories/gdml/systemCadFactory.h"
+//#include "gsystemFactories/mysql/systemCadFactory.h"
 
 
 

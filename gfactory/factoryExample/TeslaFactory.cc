@@ -1,8 +1,7 @@
 #include "TeslaFactory.h"
 
 #include <iostream>
-using std::cout;
-using std::endl;
+using namespace std;
 
 void Tesla::go() {
 	cout << " Instantiating Tesla" << endl;

@@ -2,7 +2,7 @@
 #define  GDYNAMICLIB_H  1
 
 // gstring conventions
-#include "gstringConventions.h"
+#include "gutsConventions.h"
 
 // c++ plugin loading functions
 #include <dlfcn.h>
