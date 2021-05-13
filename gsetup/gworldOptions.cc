@@ -153,8 +153,16 @@ namespace gsetup {
 			{GDESC, "Verbosity for gsetup. Default is 0"},
 			{GDFLT, 0}
 		};
-
 		goptions.push_back(GOption(jsonVerbosityOption));
+
+		// world volume, to be done in g4volume
+		json jsonWorldVolumeOption = {
+			{GNAME, "worldVolume"},
+			{GDESC, "GVolume definition for the world volume <root>."},
+			{GDFLT, "G4Box, 15*m, 15*m, 15*m"}
+		};
+
+		goptions.push_back(GOption(jsonWorldVolumeOption));
 
 		return goptions;
 	}

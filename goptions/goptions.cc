@@ -285,7 +285,12 @@ void GOptions::printSettings(bool withDefaults)
 
 	for(auto& jOption: goptions) {
 		jOption.printOption(withDefaults);
-		cout << endl;
+
+		// non structured option, the jOptionAssignedValues has only one object, the json size is 1
+		if ( jOption.jOptionAssignedValues.size() == 1 && jOption.jOptionAssignedValues.front().size() == 1 ) {
+		} else {
+			cout << endl;
+		}
 	}
 	cout << endl;
 }

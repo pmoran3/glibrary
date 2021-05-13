@@ -22,6 +22,9 @@ namespace gstring {
 	// a vector of strings from a stringstream, space is delimiter
 	vector<string> getStringVectorFromString(string);
 
+	// returns a vector of strings from a stringstream, second string is delimiter
+	vector<string> getStringVectorFromStringWithDelimiter(string, string);
+
 	// Replace all occurences of a char in string with a string
 	string replaceCharInStringWithChars(string input, string toReplace, string replacement);
 

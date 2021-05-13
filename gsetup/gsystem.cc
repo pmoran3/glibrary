@@ -11,15 +11,12 @@
 using namespace std;
 
 // init system based on name, factory, variation and run number
-GSystem::GSystem(string n, string f, string v, int r, int verbosity) :
+GSystem::GSystem(string n, string f, string v, int verbosity) :
 name(n),
 factory(f),
-variation(v),
-runNumber(r) {
+variation(v){
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSETUPLOGHEADER << " loading system " << name << " with factory: " << factory;
-		cout << ", variation: " << variation << ", run number: " << runNumber ;
-		cout << endl;
+		cout << GSETUPLOGHEADER << " Instantiating GSystem " << name  << endl;
 	}
 }
 

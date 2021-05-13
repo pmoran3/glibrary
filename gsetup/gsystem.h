@@ -13,13 +13,12 @@ class GSystem
 	
 public:
 	// constructor, from command line or jcard
-	GSystem(string n, string f, string v, int r, int verbosity);
+	GSystem(string n, string f, string v, int verbosity);
 
 private:
 	string      name;               // System name, with path to it
 	string   factory;               // Factory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
-	int    runNumber = 1;           // Run Number selected for this detector. Default is 1
 
 	// map containing the volumes
 	// the key is system + volume name;

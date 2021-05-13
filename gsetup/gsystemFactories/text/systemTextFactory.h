@@ -5,8 +5,8 @@
 #include "systemFactory.h"
 
 // file types
-#define GTEXTMATSTYPE "__materials_"
 #define GTEXTGEOMTYPE "__geometry_"
+#define GTEXTMATSTYPE "__materials_"
 #define GTEXTMIRSTYPE "__mirrors_"
 
 // system factory

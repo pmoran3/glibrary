@@ -15,11 +15,11 @@ GWorld::GWorld(GOptions* gopts) {
 	int verbosity = gopts->getInt("gsetupV");
 
 	// projecting options onto vector of JSystem
-	vector<gsetup::JSystem> systems = gsetup::getSystems(gopts);
+	vector<gsetup::JSystem> jsystems = gsetup::getSystems(gopts);
 
 	// loading gsystemsMap
-	for (auto& system: systems) {
-		gsystemsMap[system.system] = new GSystem(system.system, system.factory, system.variation, system.runno, verbosity);
+	for (auto& jsystem: jsystems) {
+		gsystemsMap[jsystem.system] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
 	}
 
 	// projecting options onto vector of GModifiers
@@ -68,6 +68,7 @@ GWorld::GWorld(GOptions* gopts) {
 		}
 	}
 
+
 	// now loading gvolume definitions for all systems
 	for (auto& system: gsystemsMap) {
 		string systemName = system.first;
@@ -84,12 +85,16 @@ GWorld::GWorld(GOptions* gopts) {
 		// account number of volume definitions loaded
 	}
 
+
+	// adding root volume to the first gsetup
 	
+
+
 	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {
 
 		// looping over systems, searching for volume
-		GVolume *thisVolume = searchForVolume(volumeNameToModify, "Volume Being Modified ");
+		GVolume *thisVolume = searchForVolume(volumeNameToModify, " is marked for modifications ");
 		if(thisVolume != nullptr) {
 			thisVolume->applyShift(gmodifier->getShift());
 			thisVolume->applyTilt(gmodifier->getTilts());
@@ -103,11 +108,12 @@ GWorld::GWorld(GOptions* gopts) {
 		// first collect all volume names
 		for (auto& [volumeName, gvolume] : system.second->getGVolumesMap() ) {
 			// will exit with error if not found
-			searchForVolume(gvolume->getMother(), "Volume Mother of " + volumeName);
+			// skipping world volume
+			string motherVolumeName = gvolume->getMother();
+			if (motherVolumeName != ROOTWORLDGVOLUMENAME ) {
+				searchForVolume(motherVolumeName, "mother of <" + gvolume->getName() + ">");
+			}
 		}
-
-
-
 	}
 
 	// PRAGMA TODO: Loads material
@@ -130,7 +136,7 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 	}
 
 	// error: volume not found
-	cerr << FATALERRORL << purpose << "<" << volumeName << "> not found in gsetup " << endl;
+	cerr << FATALERRORL << " Gvolume named <" << volumeName << "> (" << purpose << ") not found in gsetup " << endl;
 	gexit(EC__GVOLUMENOTFOUND);
 
 	return volumeFound;

@@ -78,7 +78,7 @@ public:
 	 - 1: print gmanager registering and instantiating classes
 	 */
 	GManager( int v = 0 ) : verbosity(v) {
-		cout  << GFACTORYLOGITEM << " Instantiating GManager" << endl;
+		cout  << GFACTORYLOGITEM << " GPlugin: Instantiating GManager" << endl;
 	}
 
 public:
@@ -93,7 +93,7 @@ public:
 	template <class Derived> void RegisterObjectFactory(string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GFactory Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " items " << endl;
+			cout << GFACTORYLOGITEM << " GPlugin Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " plugin " << endl;
 		}
 	}
 
@@ -113,7 +113,7 @@ public:
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GFactory Manager: Creating instance of " << name << " factory." << endl;
+			cout << GFACTORYLOGITEM << " GPlugin Manager: Creating instance of " << name << " factory." << endl;
 		}
 		return static_cast<Base*>(factory->second->Create());
 	}

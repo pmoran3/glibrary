@@ -38,12 +38,11 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		pos         = trimSpacesFromString(pars[i++]);
 		rot         = trimSpacesFromString(pars[i++]);
 		
-		sensitivity = trimSpacesFromString(pars[i++]);
-		touchableID = trimSpacesFromString(pars[i++]);
+		digitization = trimSpacesFromString(pars[i++]);
+		touchableID  = trimSpacesFromString(pars[i++]);
 		
 		copyOf      = trimSpacesFromString(pars[i++]);
 		replicaOf   = trimSpacesFromString(pars[i++]);
-		pCopyNo     = stoi(trimSpacesFromString(pars[i++]));
 		solidsOpr   = trimSpacesFromString(pars[i++]);
 		
 		mirror      = trimSpacesFromString(pars[i++]);
@@ -77,14 +76,14 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 	stream << "   - Mother:          "    << gVol.mother      << endl;
 	stream << "   - Type:            "    << gVol.type        << endl;
 	stream << "   - Parameters:      "    << gVol.parameters  << endl;
-	stream << "   - Col, Vis, Style: "    << gVol.color   << ", " << visibility << ", "  << style << endl;
 	stream << "   - Material:        "    << gVol.material << endl;
 	stream << "   - E.M. Field:      "    << gVol.emfield << endl;
-	stream << "   - Position (cm):   "    << gVol.pos << endl;
-	stream << "   - Rotation:        "    << gVol.rot << endl;
-	stream << "   - Sensitivity:     "    << gVol.sensitivity << endl;
+	stream << "   - Positions:       "    << gVol.pos << endl;
+	stream << "   - Rotation(s):     "    << gVol.rot << endl;
+	stream << "   - Digitization:    "    << gVol.digitization << endl;
 	stream << "   - Touchable ID:    "    << gVol.touchableID << endl;
-	
+	stream << "   - Col, Vis, Style: "    << gVol.color   << ", " << visibility << ", "  << style << endl;
+
 	return stream;
 }
 

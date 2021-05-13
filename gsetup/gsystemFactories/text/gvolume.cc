@@ -7,32 +7,31 @@
 // c++
 #include <iostream>
 
-void GSystemTextFactory::loadGeometry(GSystem *s, int verbosity)
+void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity)
 {
-//	ifstream *IN = s->gSystemFile(1, possibleLocations, verbosity);
-//
-//	// it could be not found
-//	if(!IN->good()) {
-//		return;
-//	}
-//
-//	if(verbosity > GVERBOSITY_SUMMARY) {
-//		cout << setupLogHeader << " Loading <text> geometry for " <<  s->getName() << endl;
-//	}
-//
-//	// loading volumes
-//	while(!IN->eof()) {
-//
-//		string dbline;
-//		getline(*IN, dbline);
-//
-//		if(!dbline.size())
-//			continue;
-//
-//		s->addGVolume(getStringVectorFromStringWithDelimiter(dbline, "|"), verbosity);
-//	}
-//
-//	IN->close();
+	// will exit if not found
+	ifstream *IN = gSystemTextFile(system, GTEXTGEOMTYPE, verbosity);
+
+
+	if(verbosity > GVERBOSITY_SUMMARY) {
+		cout << GSETUPLOGHEADER << " Loading <text> geometry for " <<  system->getName() << endl;
+	}
+
+	// loading volumes
+	while(!IN->eof()) {
+
+		string dbline;
+		getline(*IN, dbline);
+
+		if(!dbline.size())
+			continue;
+
+		// extract gvolume parameters
+		vector<string> gvolumePars = gstring::getStringVectorFromStringWithDelimiter(dbline, "|");
+		system->addGVolume(gvolumePars, verbosity);
+	}
+
+	IN->close();
 
 }
 

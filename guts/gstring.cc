@@ -243,3 +243,28 @@ string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, 
 
 }
 
+// returns a vector of strings from a stringstream, x (one char) is delimiter
+vector<string> gstring::getStringVectorFromStringWithDelimiter(string input, string x)
+{
+	vector<string> pvalues;
+
+	string tmp = "";
+	for(unsigned int i=0; i<input.size(); i++) {
+
+		if(input[i] != x[0]) {
+			tmp += input[i];
+		} else {
+			if(tmp != "") {
+				pvalues.push_back(trimSpacesFromString(tmp));
+			}
+			tmp = "";
+		}
+
+		// end of line
+		if(i==input.size() - 1 && tmp != "") {
+			pvalues.push_back(trimSpacesFromString(tmp));
+		}
+	}
+
+	return pvalues;
+}

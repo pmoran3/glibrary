@@ -12,6 +12,9 @@ using namespace std;
 
 GSystemTextFactory::GSystemTextFactory() {
 
+	possibleLocationOfTextDatabases.push_back(".");
+	possibleLocationOfTextDatabases.push_back("");
+
 	auto gtextEnv = getenv(GEMC_TEXTDB); // char*
 	if ( gtextEnv != nullptr) {
 		vector<string> dirsDB = getStringVectorFromString(gtextEnv);
@@ -22,10 +25,10 @@ GSystemTextFactory::GSystemTextFactory() {
 			}
 
 		} else {
-			cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\"" << endl;
+			cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
 		}
 	}  else {
-		cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\"" << endl;
+		cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
 	}
 }
 
@@ -36,34 +39,37 @@ ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE
 	string systemName = system->getName();
 	string variation  = system->getVariation();
 
-
 	string fname = systemName +  SYSTEMTYPE + variation + ".txt";
 
 	// default dir is "."
 	ifstream *IN = new ifstream(fname.c_str());
 
-	if( !IN->good() ) {
-		for(auto locs : possibleLocationOfTextDatabases) {
-			if(locs != GSETUPNOTAPPLICABLEENTRY) {
-				string newName = locs + "/" + fname;
-				IN->open(newName.c_str());
-				if( verbosity == GVERBOSITY_DETAILS ) {
-					cout << GSETUPLOGHEADER << " Trying TEXT " << newName << endl;
+	if( IN->good() ) {
+		return IN;
+	} else {
+		// file not good, now trying other locations
+		for(auto trialLocation : possibleLocationOfTextDatabases) {
+
+			string newName = trialLocation + "/" + fname;
+			if( verbosity == GVERBOSITY_DETAILS ) {
+				cout << GSETUPLOGHEADER << " Trying TEXT " << newName << endl;
+			}
+			IN->open(newName.c_str());
+
+			if( IN->good() ) {
+				if(verbosity >= GVERBOSITY_SUMMARY) {
+					cout << GSETUPLOGHEADER << " Opening " << newName << endl;
 				}
-				if( IN->good() ) {
-					if(verbosity >= GVERBOSITY_SUMMARY) {
-						cout << GSETUPLOGHEADER << " Opening " << newName << endl;
-					}
-					// file found, return stream
-					return  IN;
-				}
+				// file found, return stream
+				return  IN;
 			}
 		}
-		// file not found, error
-		cout << GSETUPLOGHEADER << " File " << fname << " not found " << endl;
-		gexit(EC__GSETUPFILENOTOFOUND);
-
 	}
+
+	// at this point file was not found, error
+	cout << GSETUPLOGHEADER << " File " << fname << " not found " << endl;
+	gexit(EC__GSETUPFILENOTOFOUND);
+
 
 	// file was not found
 	return nullptr;

@@ -435,7 +435,7 @@ void GOption::printOption(bool withDefaults)
 			for (auto& [jValueKey, jValueValue] : jValue.items()) {
 				cout << TPOINTITEM << jValueKey << ": " << jValueValue << endl;
 			}
-			cout << endl;
+			//cout << endl;
 		}
 	}
 

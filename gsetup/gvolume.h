@@ -43,7 +43,7 @@ private:
 	string         tilt;   ///< Rotation modifier
 	bool          exist;   ///< Existance modifier
 
-	string  sensitivity;   ///< Assigns digitization type and collection ID
+	string  digitization;   ///< Assigns digitization type and collection ID
 	string  touchableID;   ///< Assigns identifier to single volume
 
 	// special cases
@@ -71,7 +71,7 @@ public:
 	string getShift() {return shift;}
 	string getTilt()  {return tilt;}
 
-	string  getSensitivity(){return sensitivity;}
+	string  getDigitization(){return digitization;}
 	string  getTouchableID(){return touchableID;}
 
 	// special cases
