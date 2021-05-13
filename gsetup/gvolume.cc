@@ -22,36 +22,33 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		
 		name         = trimSpacesFromString(pars[i++]);
 		mother       = trimSpacesFromString(pars[i++]);
-		description  = trimSpacesFromString(pars[i++]);
-
-		type        = trimSpacesFromString(pars[i++]);
-		parameters  = trimSpacesFromString(pars[i++]);
-		
-		string pvis = trimSpacesFromString(pars[i++]);
-		visible     = (pvis == "1") ? true : false;
-		style       = stoi(trimSpacesFromString(pars[i++]));
-		color       = trimSpacesFromString(pars[i++]);
-		
-		material    = trimSpacesFromString(pars[i++]);
-		emfield     = trimSpacesFromString(pars[i++]);
-		
-		pos         = trimSpacesFromString(pars[i++]);
-		rot         = trimSpacesFromString(pars[i++]);
-		
+		type         = trimSpacesFromString(pars[i++]);
+		parameters   = trimSpacesFromString(pars[i++]);
+		material     = trimSpacesFromString(pars[i++]);
+		pos          = trimSpacesFromString(pars[i++]);
+		rot          = trimSpacesFromString(pars[i++]);
+		emfield      = trimSpacesFromString(pars[i++]);
+		string pvis  = trimSpacesFromString(pars[i++]);
+		visible      = (pvis == "1") ? true : false;
+		style        = stoi(trimSpacesFromString(pars[i++]));
+		color        = trimSpacesFromString(pars[i++]);
 		digitization = trimSpacesFromString(pars[i++]);
 		touchableID  = trimSpacesFromString(pars[i++]);
-		
-		copyOf      = trimSpacesFromString(pars[i++]);
-		replicaOf   = trimSpacesFromString(pars[i++]);
-		solidsOpr   = trimSpacesFromString(pars[i++]);
-		
-		mirror      = trimSpacesFromString(pars[i++]);
-		
+		copyOf       = trimSpacesFromString(pars[i++]);
+		replicaOf    = trimSpacesFromString(pars[i++]);
+		solidsOpr    = trimSpacesFromString(pars[i++]);
+		mirror       = trimSpacesFromString(pars[i++]);
+
+		description  = trimSpacesFromString(pars[i++]);
+
+		string pexists = trimSpacesFromString(pars[i++]);
+		exist = (pexists == "1") ? true : false;
+
+
 		// modifiers - accessed through options/jcard
 		shift = GSETUPNOTAPPLICABLEENTRY;
 		tilt  = GSETUPNOTAPPLICABLEENTRY;
-		exist = true;
-		
+
 		// set file with path if it's a CAD/GDML import
 		importFilename = importPath;
 	}
