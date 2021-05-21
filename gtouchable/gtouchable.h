@@ -16,7 +16,7 @@ using std::vector;
 // - readout: electronic Time Window is the discriminating factor
 // - flux: track id is the discriminating factor
 // - particleCounter: no other discriminating factors
-enum GType { readout, flux, particleCounter };
+enum GTouchableType { readout, flux, particleCounter };
 
 struct GIdentifier {
 
@@ -29,7 +29,7 @@ private:
 	string idName;
 	int idValue;
 
-	///< Logs GIdentifier on screen
+	// Logs GIdentifier on screen
 	friend ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
 		stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
 		return stream;
@@ -49,7 +49,7 @@ class GTouchable
 	
 public:
 	// constructor called at gvolume construction
-	GTouchable(GType t, vector<GIdentifier> identifier, bool verb = false) :
+	GTouchable(GTouchableType t, vector<GIdentifier> identifier, bool verb = false) :
 	gType{t},
 	gidentifier{identifier},
 	verbosity{verb} {
@@ -60,7 +60,7 @@ public:
 
 private:
 	// set by sensitive detector constructor
-	GType  gType;
+	GTouchableType  gType;
 	vector<GIdentifier> gidentifier;   ///< Uniquely identify a sensitive element
 	bool verbosity;
 
@@ -77,7 +77,14 @@ private:
 	int gridTimeIndex;
 
 	// to print it out
-	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
+	friend ostream &operator<<(ostream &stream, GTouchable gtouchable) {
+		for ( auto& identity: gtouchable.gidentifier ) {
+			stream << identity << std::endl;
+		}
+
+		return stream;
+
+	}
 
 public:
 	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'

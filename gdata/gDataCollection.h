@@ -1,9 +1,9 @@
 #ifndef GHITSCOLLECTION_H
 #define GHITSCOLLECTION_H 1
 
-// gadata
-#include "gTrueInfoData.h"
-#include "gDigitizedData.h"
+// gdata
+#include "dataTypes/gTrueInfoData.h"
+#include "dataTypes/gDigitizedData.h"
 
 // observable types include int, float, double,
 #include <string>

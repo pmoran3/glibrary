@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 
 	int nevents = 10;
 
+	// a run is a collection of 10 events
 	vector<GEventData*> *runData = new vector<GEventData*>;
 
 	for (int evn = 1; evn <= nevents ; evn++ ) {

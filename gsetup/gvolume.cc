@@ -44,7 +44,6 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		string pexists = trimSpacesFromString(pars[i++]);
 		exist = (pexists == "1") ? true : false;
 
-
 		// modifiers - accessed through options/jcard
 		shift = GSETUPNOTAPPLICABLEENTRY;
 		tilt  = GSETUPNOTAPPLICABLEENTRY;

@@ -21,15 +21,15 @@ class GEventData
 {
 public:
 	// construct event data using a GEventHeader
-	GEventData(GEventHeader* header, int v = 0 ) : gheader(header), verbosity(v) {
+	GEventData(GEventHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
 		if ( verbosity ) {
 			gLogClassConstruct("GEventData");
 		}
 
-		// deleting
-		for (auto& hitCollection: gdataCollection) {
-			delete hitCollection.second;
-		}
+//		// deleting
+//		for (auto& dCollection: gdataCollection) {
+//			delete dCollection.second;
+//		}
 	}
 
 	~GEventData() {
@@ -44,13 +44,14 @@ public:
 
 public:
 
-	void addDetectorDigitizedData(string detector, GDigitizedData *dgtzData);
+	void addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData);
 
 private:
-	GEventHeader *gheader = nullptr;
 	int verbosity;
 
+	GEventHeader *gheader = nullptr;
 
+	// key is sensitive detector name
 	map<string, GDataCollection*> gdataCollection;
 
 
