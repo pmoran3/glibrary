@@ -3,4 +3,5 @@
 - constructor, destructor
 - better example
 - test for timing for complex identifier?
+- todo: optimize gtouchable ==
 

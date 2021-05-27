@@ -15,7 +15,6 @@
 #include <vector>
 #include <bitset>
 
-
 // geant4
 #include "G4Step.hh"
 

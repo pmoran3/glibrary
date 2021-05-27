@@ -87,8 +87,9 @@ private:
 	}
 
 public:
-	bool operator== (const GTouchable& gtouchable) const;  ///< Overloaded "==" operator for the class 'GTouchable'
-
+	// Overloaded "==" operator for the class 'GTouchable'
+	bool operator== (const GTouchable& gtouchable) const;
+	
 	// called in ProcessHits
 	void placeInTimeWindow(int twindex) {gridTimeIndex = twindex;}
 

@@ -10,11 +10,9 @@ G4ThreadLocal G4Allocator<GHit>* GHitAllocator = 0;
 
 //GHit::GHit(GTouchable* gt) : G4VHit() {
 GHit::GHit(GTouchable *gt, const G4Step* thisStep, const HitBitSet hbs, string cScheme) : G4VHit(),
-colorSchema(cScheme) {
-	// build hit information based on the hitBitSet
-	for(size_t hbIndex = 0; hbIndex < hbs.size(); hbIndex++) {
-		buildHitInfosForBit(gt, hbIndex, hbs.test(hbIndex), thisStep);
-	}
+colorSchema(cScheme),
+gtouchable(gt) {
+	addHitInfos(hbs, thisStep);
 }
 
 GHit::~GHit() {
@@ -42,5 +40,12 @@ bool GHit::setColorSchema()
 	return false;
 }
 
-
-
+//bool GHit::operator == (const GHit& that) const
+//{
+//	if ( this->gtouchable == that.gtouchable) {
+//		return true;
+//	}
+//
+//	return false;
+//}
+//

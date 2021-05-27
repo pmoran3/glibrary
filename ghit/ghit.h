@@ -36,11 +36,15 @@ private:
 	// only used if pVVisManager exist (interactive mode)
 	string colorSchema;
 
+	// it is copied here so it can be used in the overloaded == function
+	GTouchable *gtouchable;
+
 private:
 	bool setColorSchema();
-	// build hit information based on the hit and the touchable
-	bool buildHitInfosForBit(GTouchable *gt, size_t bitIndex, const bool test, const G4Step* thisStep);
 
+
+	// build hit information based on the bit index and the touchable
+	bool addHitInfosForBit(size_t bitIndex, const bool test, const G4Step* thisStep);
 
 	// hit data, selected by HitBitSet, to be collected for each step
 private:
@@ -60,12 +64,15 @@ public:
 	// public interface: calculated quantities defined in calculationscc
 public:
 	float getTotalEnergyDeposited();
+	GTouchable* getGTouchable() { return gtouchable;}
+
+public:
+	// Overloaded "==" operator for the class 'GHit'
+	// bool operator== (const GHit& that) const;
+	// build hit information based on the G4Step
+	void addHitInfos(const HitBitSet hbs, const G4Step* thisStep);
 
 };
-
-
-//using GHitsCollection = G4THitsCollection<GHit> ;
-
 
 // MT definitions, as from:
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
