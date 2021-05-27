@@ -3,12 +3,12 @@
 Import('env')
 
 # local directories include
-env.Append(CPPPATH = [Dir('dataTypes')])
+env.Append(CPPPATH = [Dir('dataTypes'), Dir('event')])
 
 sources = [
-			  'gEventData.cc',
-			  'gEventHeader.cc',
 			  'gDataCollection.cc',
+			  'event/gEventData.cc',
+			  'event/gEventHeader.cc',
 			  'dataTypes/gDigitizedData.cc',
 			  'dataTypes/gTrueInfoData.cc'
 			  ]

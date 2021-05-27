@@ -14,6 +14,7 @@ using std::map;
 using std::vector;
 
 
+// collected for each sensitive detector
 class GDataCollection {
 
 public:

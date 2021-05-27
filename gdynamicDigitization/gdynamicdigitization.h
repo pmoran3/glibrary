@@ -31,14 +31,12 @@ public:
 	// notice that this returns a vector of touchables, one g4step can produce multiple hits
 	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep) {return { gTouchID } ;}
 
-
 	// filter true information into GTrueInfoHit
 	// this integrates all available information built in GHit::buildHitInfosForBit
 	GTrueInfoData *collectTrueInformation(GHit *ghit);
 
 	// digitize true information into GDigitizedHit
 	virtual GDigitizedData *digitizeData(GHit *ghit) {return nullptr;}
-	
 
 	// loads the digitization constants
 	// return false for failure
