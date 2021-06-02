@@ -4,7 +4,7 @@
 // glibrary
 #include "goptions.h"
 
-namespace gsetup {
+namespace gsystem{
 
 	// System
 	// ------

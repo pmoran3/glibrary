@@ -21,6 +21,8 @@ class GSystemFactory
 {
 public:
 	// calls loadGeometry and loadMaterial
+	// verbosity passed here comes from goptions gsetupV
+	// a local variable verbosity is not used (if we did we'd need a dedicated constructor)
 	void loadSystem(GSystem *system, int verbosity) {
 
 		if(verbosity > GVERBOSITY_SUMMARY) {
@@ -36,10 +38,6 @@ public:
 private:
 	virtual void loadMaterial(GSystem *system, int verbosity) = 0;
 	virtual void loadGeometry(GSystem *system, int verbosity) = 0;
-
-
-protected:
-	int verbosity;
 
 };
 

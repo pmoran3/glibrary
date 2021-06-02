@@ -23,7 +23,6 @@
 #define GVERBOSITY_SUMMARY 1 // prints only summary message
 #define GVERBOSITY_DETAILS 2 // print all details
 
-
 // exit codes: 100s
 #define EC__NOOPTIONFOUND               101
 #define EC__MANDATORYOPTIONNOTFOUND     102

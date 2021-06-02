@@ -2,7 +2,7 @@
 #include "gworld.h"
 
 // project goption to a system
-namespace gsetup {
+namespace gsystem {
 
 	// System
 	// ------

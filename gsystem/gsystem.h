@@ -30,7 +30,6 @@ private:
 		return name + detectorName;
 	}
 
-
 public:
 	string getName() const      { return name; }
 	string getFactory() const   { return factory; }
@@ -62,7 +61,6 @@ public:
 	}
 	
 	map<string, GVolume*> getGVolumesMap() const {return gvolumesMap;}
-
 
 };
 

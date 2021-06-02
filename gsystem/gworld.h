@@ -6,7 +6,7 @@
 #include "gsystem.h"
 #include "gvolume.h"
 #include "gmodifier.h"
-#include "gworldOptions.h"
+#include "gSystemOptions.h"
 
 class GWorld
 {

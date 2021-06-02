@@ -15,7 +15,7 @@ GWorld::GWorld(GOptions* gopts) {
 	int verbosity = gopts->getInt("gsetupV");
 
 	// projecting options onto vector of JSystem
-	vector<gsetup::JSystem> jsystems = gsetup::getSystems(gopts);
+	vector<gsystem::JSystem> jsystems = gsystem::getSystems(gopts);
 
 	// loading gsystemsMap
 	for (auto& jsystem: jsystems) {
@@ -23,7 +23,7 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	// projecting options onto vector of GModifiers
-	vector<gsetup::JModifier> jmodifiers = gsetup::getModifiers(gopts);
+	vector<gsystem::JModifier> jmodifiers = gsystem::getModifiers(gopts);
 
 	// loading gmodifiersMap
 	for (auto& modifier: jmodifiers) {
