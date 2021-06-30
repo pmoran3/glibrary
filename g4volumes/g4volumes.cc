@@ -3,7 +3,7 @@
 
 
 
-void G4Volumes::buildSetup(GSystem* gsystem, int verbosity)
+void G4Volumes::buildGSystem(GSystem* gsystem, int verbosity)
 {
 	buildWorld(verbosity);
 
@@ -11,7 +11,7 @@ void G4Volumes::buildSetup(GSystem* gsystem, int verbosity)
 	g4SystemManager = GManager(verbosity - 1);
 
 	// register the factories needed and build the geant4 volumes
-	registerFactoriesAndBuildG4Volumes(gsetup, gopt);
+	registerFactoriesAndBuildG4Volumes(gsystem, verbosity);
 
 	
 }

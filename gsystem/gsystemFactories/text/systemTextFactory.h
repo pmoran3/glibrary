@@ -2,6 +2,7 @@
 #define SYSTEMTEXTFACTORY_H 1
 
 // gsetup
+#include "systemTextFactory.h"
 #include "systemFactory.h"
 
 // file types

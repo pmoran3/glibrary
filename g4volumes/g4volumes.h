@@ -5,7 +5,7 @@
 #include "G4PVPlacement.hh"
 
 // gvolume
-#include "g4Volume.h"
+#include "g4volume.h"
 
 // glibrary
 #include "gsystem.h"
@@ -16,7 +16,7 @@ class G4Volumes
 public:
 	G4Volumes(GSystem* gsystem, int verbosity) {
 		g4volumes = new map<string, G4Volume*>;
-		buildSetup(gsetup, gopt);
+		buildGSystem(gsystem, verbosity);
 	}
 
 	G4VSolid*          getSolid(string vname) const;
@@ -34,11 +34,11 @@ private:
 
 private:
 
-	void buildSetup(GSystem* gsystem, int verbosity);
+	void buildGSystem(GSystem* gsystem, int verbosity);
 	void buildWorld(int verbosity);
 	G4Volume* getG4Volume(string name) const;
 
-	void registerFactoriesAndBuildG4Volumes(GSetup* gsetup, GOptions* gopt);
+	void registerFactoriesAndBuildG4Volumes(GSystem* gsetup, GOptions* gopt);
 
 public:
 	void addG4Volume(G4Volume *g4v, string name);

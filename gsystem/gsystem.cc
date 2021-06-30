@@ -1,6 +1,6 @@
 // gsetup
 #include "gsystem.h"
-#include "gsetupConventions.h"
+#include "gsystemConventions.h"
 
 // glibrary
 #include "gstring.h"
