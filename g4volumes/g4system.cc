@@ -3,7 +3,7 @@
 
 
 
-void G4Volumes::buildGSystem(GSystem* gsystem, int verbosity)
+void G4System::buildGSystem(GSystem* gsystem, int verbosity)
 {
 	buildWorld(verbosity);
 

@@ -10,11 +10,11 @@
 // glibrary
 #include "gsystem.h"
 
-class G4Volumes
+class G4System
 {
 
 public:
-	G4Volumes(GSystem* gsystem, int verbosity) {
+	G4System(GSystem* gsystem, int verbosity) {
 		g4volumes = new map<string, G4Volume*>;
 		buildGSystem(gsystem, verbosity);
 	}
@@ -23,7 +23,7 @@ public:
 	G4LogicalVolume*   getLogical(string vname) const;
 	G4VPhysicalVolume* getPhysical(string vname) const;
 
-	~G4Volumes() {
+	~G4System() {
 		delete g4volumes;
 	}
 

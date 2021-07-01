@@ -16,7 +16,7 @@ gsplash             = SConscript('gsplash/SConscript',    exports='env')
 gdata               = SConscript('gdata/SConscript',      exports='env')
 gtouchable          = SConscript('gtouchable/SConscript', exports='env')
 ghit                = SConscript('ghit/SConscript',       exports='env')
-gsetup              = SConscript('gsetup/SConscript',     exports='env')
+gsystem             = SConscript('gsystem/SConscript',    exports='env')
 
 #textProgressBar     = SConscript('textProgressBar/SConscript')
 #translationTable    = SConscript('translationTable/SConscript')

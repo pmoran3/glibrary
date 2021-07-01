@@ -16,7 +16,7 @@ lib = SConscript('SConscript', exports='env')
 # ----------
 #
 # manually appending this library so the example can be compiled
-env.Append(LIBS = 'gsplash')
+env.Append(LIBS = 'g4system')
 
 # builds the example(s)
 exampleSources = [
