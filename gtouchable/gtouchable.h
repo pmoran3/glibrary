@@ -50,9 +50,9 @@ class GTouchable
 public:
 	// constructor called at gvolume construction
 	GTouchable(GTouchableType t, vector<GIdentifier> identifier, bool verb = false) :
-	gType{t},
-	gidentifier{identifier},
-	verbosity{verb} {
+	gType(t),
+	gidentifier(identifier),
+	verbosity(verb) {
 		trackId = 0;
 		eMultiplier = 1;
 		gridTimeIndex = 0;

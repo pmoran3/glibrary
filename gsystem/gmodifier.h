@@ -18,7 +18,7 @@ public:
 	isPresent(existance) {
 
 		if( verbosity ) {
-			cout << GSETUPLOGHEADER <<  " volume " << name << " modified with:";
+			cout << GSYSTEMLOGHEADER <<  " volume " << name << " modified with:";
 			if (  shift != NOMODIFIER) cout << " - shift: "     << shift   ;
 			if (  tilts != NOMODIFIER) cout << " - tilts: "     << tilts   ;
 			if ( !isPresent )         cout << " - existance: " << isPresent ;

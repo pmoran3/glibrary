@@ -10,10 +10,10 @@
 #define EC__GSETUPFILENOTOFOUND    203
 #define EC__GVOLUMENOTFOUND        204
 
-#define GSETUPNOTAPPLICABLEENTRY  "na"
-#define GSETUPLOGHEADER           " ❖ GSetup ▸"
-#define GWORLDNAME                "world"
-#define NOMODIFIER                "noModifier"
+#define GSYSTEMNOTAPPLICABLEENTRY  "na"
+#define GSYSTEMLOGHEADER           " ❖ GSystem ▸"
+#define GWORLDNAME                 "world"
+#define NOMODIFIER                 "noModifier"
 
 #define GEMC_TEXTDB       "GEMC_TEXTDB"
 #define GSYSTEMTXTFACTORY "GSystemTEXTFactory"

@@ -14,9 +14,11 @@ using namespace std;
 GSystem::GSystem(string n, string f, string v, int verbosity) :
 name(n),
 factory(f),
-variation(v){
+variation(v) {
+	gvolumesMap = new map<string, GVolume*>;
+
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSETUPLOGHEADER << " Instantiating GSystem " << name  << endl;
+		cout << GSYSTEMLOGHEADER << " Instantiating GSystem " << name  << endl;
 	}
 }
 
@@ -30,13 +32,13 @@ void GSystem::addGVolume(vector<string> pars, int verbosity)
 	} else {
 		string nameKey = formVolumeKey(pars[0]);
 		
-		if(gvolumesMap.find(nameKey) == gvolumesMap.end()) {
+		if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
 
-			gvolumesMap[nameKey] = new GVolume(pars);
+			(*gvolumesMap)[nameKey] = new GVolume(pars);
 			if(verbosity == GVERBOSITY_SUMMARY) {
-				cout << GSETUPLOGHEADER << " adding gVolume " << pars[0] << " to gvolumes map." << endl;
+				cout << GSYSTEMLOGHEADER << " adding gVolume " << pars[0] << " to gvolumes map." << endl;
 			} else if(verbosity == GVERBOSITY_DETAILS) {
-				cout << GSETUPLOGHEADER << " adding gVolume" << *(gvolumesMap[nameKey]) << endl;
+				cout << GSYSTEMLOGHEADER << " adding gVolume" << (*gvolumesMap)[nameKey] << endl;
 			}
 		} else {
 			cerr << FATALERRORL << "A volume with the name " << nameKey << " already exists. " << endl;

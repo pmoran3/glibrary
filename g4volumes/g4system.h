@@ -10,18 +10,17 @@
 // glibrary
 #include "gsystem.h"
 
+// collection of geant4 volumes related to a gsystem
 class G4System
 {
 
 public:
-	G4System(GSystem* gsystem, int verbosity) {
-		g4volumes = new map<string, G4Volume*>;
-		buildGSystem(gsystem, verbosity);
-	}
+	// constructor, from command line or jcard
+	G4System(string name, string f, int verbosity);
 
-	G4VSolid*          getSolid(string vname) const;
-	G4LogicalVolume*   getLogical(string vname) const;
-	G4VPhysicalVolume* getPhysical(string vname) const;
+//	G4VSolid*          getSolid(string vname) const;
+//	G4LogicalVolume*   getLogical(string vname) const;
+//	G4VPhysicalVolume* getPhysical(string vname) const;
 
 	~G4System() {
 		delete g4volumes;
@@ -32,16 +31,15 @@ private:
 	// the key has the form system/volumename
 	map<string, G4Volume*> *g4volumes;
 
+	// Factory that builds the detector
+	string   factory;
+
 private:
 
-	void buildGSystem(GSystem* gsystem, int verbosity);
-	void buildWorld(int verbosity);
-	G4Volume* getG4Volume(string name) const;
+//	void buildG4System(GSystem* gsystem, int verbosity);
+//	void addG4Volume(G4Volume *g4v, string name);
+//	G4Volume* getG4Volume(string name) const;
 
-	void registerFactoriesAndBuildG4Volumes(GSystem* gsetup, GOptions* gopt);
-
-public:
-	void addG4Volume(G4Volume *g4v, string name);
 
 };
 

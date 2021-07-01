@@ -19,7 +19,6 @@ public:
 	// apply modifiers
 	GWorld(GOptions* gopts);
 
-
 private:
 	map<string, GSystem*>   gsystemsMap;     // key is system name
 	map<string, GModifier*> gmodifiersMap;   // key is volume name

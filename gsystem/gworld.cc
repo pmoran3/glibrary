@@ -106,7 +106,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// making sure every detector mother is defined
 	for (auto system: gsystemsMap) {
 		// first collect all volume names
-		for (auto& [volumeName, gvolume] : system.second->getGVolumesMap() ) {
+		for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 			// will exit with error if not found
 			// skipping world volume
 			string motherVolumeName = gvolume->getMother();
@@ -141,9 +141,6 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 
 	return volumeFound;
 }
-
-
-
 
 
 

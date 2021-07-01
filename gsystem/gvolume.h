@@ -15,7 +15,7 @@ using std::vector;
 class GVolume
 {
 public:
-	GVolume(vector<string> pars, string importPath = GSETUPNOTAPPLICABLEENTRY);
+	GVolume(vector<string> pars, string importPath = GSYSTEMNOTAPPLICABLEENTRY);
 
 private:
 	string           name; ///< Name of the volume.

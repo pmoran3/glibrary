@@ -1,17 +1,23 @@
-// g4volume
-#include "g4volumes.h"
+// g4system
+#include "g4system.h"
+#include "g4systemConventions.h"
+
+// glibrary
+#include "gstring.h"
+#include "goptionsConventions.h"
+
+// c++
+#include <iostream>
+using namespace std;
 
 
+// constructor, from command line or jcard
+G4System::G4System(string name, string f, int verbosity) : factory(f) {
+	g4volumes = new map<string, G4Volume*>;
 
-void G4System::buildGSystem(GSystem* gsystem, int verbosity)
-{
-	buildWorld(verbosity);
+	if(verbosity >= GVERBOSITY_SUMMARY) {
+		cout << G4SYSTEMLOGHEADER << " Instantiating GSystem " << name  << endl;
+	}
 
-	// now loading gmanager
-	g4SystemManager = GManager(verbosity - 1);
-
-	// register the factories needed and build the geant4 volumes
-	registerFactoriesAndBuildG4Volumes(gsystem, verbosity);
-
-	
 }
+

@@ -1,7 +1,7 @@
 #ifndef  GSYSTEM_H
 #define  GSYSTEM_H 1
 
-// gsetup
+// gsystem
 #include "gvolume.h"
 
 // c++
@@ -19,7 +19,7 @@ public:
 	GSystem(string n, string f, string v, int verbosity);
 
 private:
-	string      name;               // System name, with path to it
+	string      name;               // System name, with path to it. We save it here to use formVolumeKey
 	string   factory;               // Factory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
 
@@ -27,10 +27,10 @@ private:
 	// the key is system + volume name;
 	// the names must be unique in each system
 	// each system name must be unique
-	map<string, GVolume*> gvolumesMap;
+	map<string, GVolume*> *gvolumesMap;
 
 	string formVolumeKey(string detectorName) {
-		return name + detectorName;
+		return name + "_" + detectorName;
 	}
 
 public:
@@ -47,7 +47,6 @@ public:
 	// this should be in some general utility library? gstrings?
 	// vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
 
-
 	void addGVolume(vector<string> pars, int verbosity);
 	// void addGImportedVolume(string importType, string filename, int verbosity);
 
@@ -56,14 +55,14 @@ public:
 
 		string key = formVolumeKey(detectorName);
 
-		if(gvolumesMap.find(key) != gvolumesMap.end()) {
-			return gvolumesMap[key];
+		if(gvolumesMap->find(key) != gvolumesMap->end()) {
+			return (*gvolumesMap)[key];
 		} else {
 			return nullptr;
 		}
 	}
 	
-	map<string, GVolume*> getGVolumesMap() const {return gvolumesMap;}
+	map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
 
 };
 

@@ -45,8 +45,8 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		exist = (pexists == "1") ? true : false;
 
 		// modifiers - accessed through options/jcard
-		shift = GSETUPNOTAPPLICABLEENTRY;
-		tilt  = GSETUPNOTAPPLICABLEENTRY;
+		shift = GSYSTEMNOTAPPLICABLEENTRY;
+		tilt  = GSYSTEMNOTAPPLICABLEENTRY;
 
 		// set file with path if it's a CAD/GDML import
 		importFilename = importPath;
