@@ -9,7 +9,7 @@
 	#
 	# Notice how some options have default values and could be omitted
 
-	"+gsetup": [
+	"+gsystem": [
 
 		# central detector
 		# as an example we define it in-line
@@ -17,6 +17,6 @@
 
 	],
 
-	"gsetupV": 2
+	"gsystemv": 2
 	
 }

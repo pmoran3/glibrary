@@ -102,7 +102,7 @@ namespace gsystem {
 		help.push_back("Example: +gsetup={detector: experiments/clas12/targets; factory: TEXT; variation: bonus;}");
 
 		// the last argument refers to "cumulative"
-		goptions.push_back(GOption("gsetup", "defines a group of detectors", jsonDetectorOption, help, true));
+		goptions.push_back(GOption("gsystem", "defines a group of detectors", jsonDetectorOption, help, true));
 
 
 		// Modifier
@@ -146,11 +146,10 @@ namespace gsystem {
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));
 
-
 		// gsetup verbosiry
 		json jsonVerbosityOption = {
-			{GNAME, "gsetupV"},
-			{GDESC, "Verbosity for gsetup. Default is 0"},
+			{GNAME, "gsystemv"},
+			{GDESC, "verbosity for gsystem. " + string(GVERBOSITY_DESCRIPTION)},
 			{GDFLT, 0}
 		};
 		goptions.push_back(GOption(jsonVerbosityOption));
@@ -158,7 +157,7 @@ namespace gsystem {
 		// world volume, to be done in g4volume
 		json jsonWorldVolumeOption = {
 			{GNAME, "worldVolume"},
-			{GDESC, "GVolume definition for the world volume <root>."},
+			{GDESC, "geant4 definition for the world volume <root>. Default is G4Box, 15*m, 15*m, 15*m"},
 			{GDFLT, "G4Box, 15*m, 15*m, 15*m"}
 		};
 

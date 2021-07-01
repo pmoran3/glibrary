@@ -4,10 +4,12 @@
 
 - non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
 
-
 - print help (shift each line be TTAB) and exit
 
 - if switch is given not recognized (-g) exit
+
+- organize options, for example "verbosity"
+
 
 > -helpToHtml:  print all available options in HTML format (options.html) and exit.
 

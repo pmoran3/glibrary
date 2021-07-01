@@ -6,7 +6,7 @@
 #include "gsystem.h"
 #include "gvolume.h"
 #include "gmodifier.h"
-#include "gSystemOptions.h"
+#include "gsystemOptions.h"
 
 // a world is a collection of GSystem, their
 class GWorld

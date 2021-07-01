@@ -22,6 +22,7 @@
 // standardizing verbosity
 #define GVERBOSITY_SUMMARY 1 // prints only summary message
 #define GVERBOSITY_DETAILS 2 // print all details
+#define GVERBOSITY_DESCRIPTION "Possible values: 0: shush; 1: summary message; 2: log everything"   //
 
 // exit codes: 100s
 #define EC__NOOPTIONFOUND               101
