@@ -11,7 +11,6 @@ using std::string;
 using std::ostream;
 using std::vector;
 
-
 class GVolume
 {
 public:

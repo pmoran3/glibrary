@@ -1,10 +1,8 @@
 #ifndef  GWORLD_H
 #define  GWORLD_H 1
 
-// gsetup
-#include "gworld.h"
+// gsystem
 #include "gsystem.h"
-#include "gvolume.h"
 #include "gmodifier.h"
 #include "gsystemOptions.h"
 

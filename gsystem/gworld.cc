@@ -1,7 +1,7 @@
 // glibrary
 #include "gfactory.h"
 
-// gsetup
+// gsystem
 #include "gworld.h"
 #include "gsystemFactories/systemFactory.h"
 #include "gsystemFactories/text/systemTextFactory.h"

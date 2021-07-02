@@ -8,7 +8,6 @@
 #include <map>
 using std::map;
 
-
 // a single GSystem is a collection of volumes that refers to a single detector system
 // for example: a calorimeter; a drift chamber; a time-of-flight
 class GSystem
