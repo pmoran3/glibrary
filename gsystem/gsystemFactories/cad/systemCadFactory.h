@@ -1,7 +1,7 @@
 #ifndef SYSTEMCADFACTORY_H
 #define SYSTEMCADFACTORY_H 1
 
-// gsetup
+// gsystem
 #include "systemFactory.h"
 
 // system factory

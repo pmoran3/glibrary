@@ -1,5 +1,5 @@
-#ifndef  GSETUP_CONVENTIONS_H
-#define  GSETUP_CONVENTIONS_H  1
+#ifndef  GSYSTEM_CONVENTIONS_H
+#define  GSYSTEM_CONVENTIONS_H  1
 
 // number of database pars defining a gvolume
 #define GVOLUMENUMBEROFPARS        19

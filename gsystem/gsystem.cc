@@ -1,4 +1,4 @@
-// gsetup
+// gsystem
 #include "gsystem.h"
 #include "gsystemConventions.h"
 

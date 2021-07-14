@@ -1,6 +1,6 @@
 #ifndef DOXYGEN_SHOULD_SKIP_THIS /* DOXYGEN_SHOULD_SKIP_THIS */
 
-// gsetup
+// gsystem
 #include "gworld.h"
 
 // goptions

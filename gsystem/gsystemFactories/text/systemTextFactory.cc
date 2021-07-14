@@ -2,7 +2,7 @@
 #include "gstring.h"
 using namespace gstring;
 
-// gsetup
+// gsystem
 #include "systemTextFactory.h"
 
 // c++

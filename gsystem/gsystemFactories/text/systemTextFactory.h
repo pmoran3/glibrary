@@ -1,7 +1,7 @@
 #ifndef SYSTEMTEXTFACTORY_H
 #define SYSTEMTEXTFACTORY_H 1
 
-// gsetup
+// gsystem
 #include "systemTextFactory.h"
 #include "systemFactory.h"
 

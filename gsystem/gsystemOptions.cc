@@ -1,4 +1,4 @@
-// gsetup
+// gsystem
 #include "gworld.h"
 
 // project goption to a system
@@ -19,7 +19,7 @@ namespace gsystem {
 
 		vector<JSystem> systems;
 
-		auto gdets = gopts->getStructuredOptionAssignedValues("gsetup");
+		auto gdets = gopts->getStructuredOptionAssignedValues("gsystem");
 
 		// looking over each of the vector<json> items
 		for ( const auto& gdet: gdets ) {
@@ -146,7 +146,7 @@ namespace gsystem {
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));
 
-		// gsetup verbosiry
+		// gsystem verbosiry
 		json jsonVerbosityOption = {
 			{GNAME, "gsystemv"},
 			{GDESC, "verbosity for gsystem. " + string(GVERBOSITY_DESCRIPTION)},

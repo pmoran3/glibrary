@@ -4,7 +4,7 @@
 // glibrary
 #include "goptions.h"
 
-// gsetup
+// gsystem
 #include "gsystem.h"
 
 // c++
@@ -21,7 +21,7 @@ class GSystemFactory
 {
 public:
 	// calls loadGeometry and loadMaterial
-	// verbosity passed here comes from goptions gsetupV
+	// verbosity passed here comes from goptions gsystemv
 	// a local variable verbosity is not used (if we did we'd need a dedicated constructor)
 	void loadSystem(GSystem *system, int verbosity) {
 

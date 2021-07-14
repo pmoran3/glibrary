@@ -9,7 +9,7 @@
 #include "goptions.h"
 
 // system plugin factory
-// this file is kept here in case in the future we'll need a gsetup plugin
+// this file is kept here in case in the future we'll need a gsystem plugin
 
 class GSystemDynamicFactory
 {

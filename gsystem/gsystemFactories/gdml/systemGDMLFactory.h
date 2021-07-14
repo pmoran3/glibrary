@@ -1,7 +1,7 @@
-#ifndef SYSTEMTEXTFACTORY_H
-#define SYSTEMTEXTFACTORY_H 1
+#ifndef SYSTEMGDMLFACTORY_H
+#define SYSTEMGDMLFACTORY_H 1
 
-// gsetup
+// gsystem
 #include "../systemFactory.h"
 
 // system factory

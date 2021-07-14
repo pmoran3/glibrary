@@ -1,4 +1,4 @@
-// gsetup
+// gsystem
 #include "gvolume.h"
 
 // c++

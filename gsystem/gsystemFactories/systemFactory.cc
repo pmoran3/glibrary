@@ -1,6 +1,6 @@
 // string for gexit
 #include "gstring.h"
 
-// gsetup
+// gsystem
 #include "systemFactory.h"
 

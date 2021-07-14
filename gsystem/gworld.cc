@@ -12,7 +12,7 @@
 
 GWorld::GWorld(GOptions* gopts) {
 
-	int verbosity = gopts->getInt("gsetupV");
+	int verbosity = gopts->getInt("gsystemv");
 
 	// projecting options onto vector of JSystem
 	vector<gsystem::JSystem> jsystems = gsystem::getSystems(gopts);
@@ -86,7 +86,7 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 
-	// adding root volume to the first gsetup
+	// adding root volume to the first gsystem
 	
 
 
@@ -136,7 +136,7 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 	}
 
 	// error: volume not found
-	cerr << FATALERRORL << " Gvolume named <" << volumeName << "> (" << purpose << ") not found in gsetup " << endl;
+	cerr << FATALERRORL << " Gvolume named <" << volumeName << "> (" << purpose << ") not found in gsystem " << endl;
 	gexit(EC__GVOLUMENOTFOUND);
 
 	return volumeFound;
