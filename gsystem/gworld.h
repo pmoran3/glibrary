@@ -10,11 +10,12 @@
 class GWorld
 {
 public:
-	// constructor from a jcard / command lines
-	// load systems and modifiers map
-	// load factories
-	// run factory load system for each item in gsystemsMap
-	// apply modifiers
+	// constructor from a jcard / command lines:
+	//
+	// - load systems and modifiers map
+	// - load factories
+	// - run factory load system for each item in gsystemsMap
+	// - apply modifiers
 	GWorld(GOptions* gopts);
 
 private:
@@ -26,7 +27,7 @@ private:
 
 
 public:
-	//map<string, GSystem*>   getSystemsMap() const {return gsystemsMap;}
+	map<string, GSystem*>   getSystemsMap() const {return gsystemsMap;}
 
 
 
