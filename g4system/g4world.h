@@ -17,8 +17,6 @@ public:
 
 private:
 	map<string, G4System*> g4systemsMap;   // key is system name
-	void buildRootVolume(GWorld *gworld, int verbosity);
-
 
 
 };

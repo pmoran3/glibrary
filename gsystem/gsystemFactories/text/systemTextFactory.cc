@@ -25,10 +25,10 @@ GSystemTextFactory::GSystemTextFactory() {
 			}
 
 		} else {
-			cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
+			cerr << GWARNING << " Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
 		}
 	}  else {
-		cerr << GWARNING << " Warning: Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
+		cerr << GWARNING << " Environment variable " << GEMC_TEXTDB << " not defined. The TEXT DB will only be searched in \".\" and \"/\"." << endl;
 	}
 }
 
