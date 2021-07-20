@@ -335,6 +335,11 @@ double GOptions::getDouble(string tag) {
 	return jn[tag].get<double>();
 }
 
+string GOptions::getString(string tag) {
+	json jn = getNonStructuredOptionSingleValue(tag); // will exit if not found
+	return jn[tag].get<string>();
+}
+
 bool GOptions::getSwitch(string tag) {
 	if ( switches.find(tag) != switches.end()) {
 		return switches[tag].getStatus();

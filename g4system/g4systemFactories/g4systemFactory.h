@@ -2,9 +2,21 @@
 #define G4SYSTEMFACTORY_H 1
 
 
-// g4system
-#include "gworld.h"
+// glibrary
+#include "goptions.h"
 
+// gsystem
+#include "gvolume.h"
+
+// g4system
+#include "g4volume.h"
+
+// geant4
+#include "G4VSolid.hh"
+
+// c++
+#include <map>
+using std::map;
 
 // G4SetupFactory factory
 class G4SystemFactory
@@ -16,7 +28,7 @@ public:
 
 	virtual ~G4SystemFactory() = default;
 
-private:
+protected:
 	// geant4 objects getters
 	G4VSolid*          getSolidFromMap(   string vname, map<string, G4Volume*> *g4s) const;
 	G4LogicalVolume*   getLogicalFromMap( string vname, map<string, G4Volume*> *g4s) const;
@@ -29,6 +41,15 @@ private:
 
 	G4RotationMatrix *getRotation(GVolume *s);
 	G4ThreeVector     getPosition(GVolume *s);
+
+	bool getVerbosity(GOptions* gopt, string vname) {
+
+		int    verbosity = gopt->getInt("g4volumev");
+		string logVolume = gopt->getString("logVolume");
+
+		return (verbosity == GVERBOSITY_DETAILS) || (vname == logVolume);
+	}
+
 };
 
 

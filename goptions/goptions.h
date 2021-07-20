@@ -219,7 +219,8 @@ public:
 	int getInt(string tag);       ///< gets the integer value associated with non structured option \"tag\"
 	float getFloat(string tag);   ///< gets the float value associated with non structured option \"tag\"
 	double getDouble(string tag); ///< gets the double value associated with non structured option \"tag\"
-	bool getSwitch(string tag); ///< gets the bool value associated with switch \"tag\"
+	string getString(string tag); ///< gets the string value associated with non structured option \"tag\"
+	bool getSwitch(string tag);   ///< gets the bool value associated with switch \"tag\"
 
 	/**
 	 * @brief Get the (structured) option json values corresponding to a tag

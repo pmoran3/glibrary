@@ -24,9 +24,9 @@ public:
 	G4LogicalVolume*   getLogical()  const { if(logicalVolume)  return logicalVolume;  else return nullptr;}
 	G4VPhysicalVolume* getPhysical() const { if(physicalVolume) return physicalVolume; else return nullptr;}
 
-//	void setSolid(G4VSolid* s);
-//	void setLogical(G4LogicalVolume* l);
-//	void setPhysical(G4VPhysicalVolume* p);
+	void setSolid(G4VSolid* s, int verbosity);
+	void setLogical(G4LogicalVolume* l, int verbosity);
+	void setPhysical(G4VPhysicalVolume* p, int verbosity);
 
 };
 

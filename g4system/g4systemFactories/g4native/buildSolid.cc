@@ -6,7 +6,6 @@
 using namespace gstring;
 
 // geant4
-#include "G4VSolid.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
 #include "G4CutTubs.hh"
@@ -15,16 +14,13 @@ using namespace gstring;
 #include "G4Trd.hh"
 
 
-bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
+bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
-	int    verbosity = gopt->getInt("g4volumev");
-	string logVolume = gopt->getString("logVolume");
 	string vname = s->getName();
-
-	bool depVerbosity = (verbosity == GVERBOSITY_ALL) || (vname == logVolume);
+	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
-	if(!checkSolidDependencies(depVerbosity, s, g4s)) return false;
+	if(!checkSolidDependencies(verbosity, s, g4s)) return false;
 
 	// if the g4volume doesn't exist, create one and add it to the map
 	G4Volume *thisG4Volume = nullptr;
@@ -50,7 +46,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 	string type = s->getType();
 
 	if(type == "G4Box") {
-		thisG4Volume->addSolid(new G4Box(vname,      ///< name
+		thisG4Volume->setSolid(new G4Box(vname,      ///< name
 													pars[0],    ///< half length in X
 													pars[1],    ///< half length in Y
 													pars[2]     ///< half length in Z
@@ -58,7 +54,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 									  );
 		return true;
 	} else 	if(type == "G4Tubs") {
-		thisG4Volume->addSolid(new G4Tubs(vname,     ///< name
+		thisG4Volume->setSolid(new G4Tubs(vname,     ///< name
 													 pars[0],   ///< Inner radius
 													 pars[1],   ///< Outer radius
 													 pars[2],   ///< Half length in z
@@ -68,7 +64,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 									  );
 		return true;
 	} else 	if(type == "G4CutTubs") {
-		thisG4Volume->addSolid(new G4CutTubs(vname,     ///< name
+		thisG4Volume->setSolid(new G4CutTubs(vname,     ///< name
 														 pars[0],   ///< Inner radius
 														 pars[1],   ///< Outer radius
 														 pars[2],   ///< Half length in z
@@ -80,7 +76,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 									  );
 		return true;
 	} else 	if(type == "G4Cons") {
-		thisG4Volume->addSolid(new G4Cons(vname,     ///< name
+		thisG4Volume->setSolid(new G4Cons(vname,     ///< name
 													 pars[0],   ///< Inside radius at -pDz
 													 pars[1],   ///< Outside radius at -pDz
 													 pars[2],   ///< Inside radius at +pDz
@@ -92,7 +88,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 									  );
 		return true;
 	} else 	if(type == "G4Para") {
-		thisG4Volume->addSolid(new G4Para(vname,     ///< name
+		thisG4Volume->setSolid(new G4Para(vname,     ///< name
 													 pars[0],   ///< Half length in x
 													 pars[1],   ///< Half length in y
 													 pars[2],   ///< Half length in z
@@ -103,7 +99,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 									  );
 		return true;
 	} else 	if(type == "G4Trd") {
-		thisG4Volume->addSolid(new G4Trd(vname,     ///< name
+		thisG4Volume->setSolid(new G4Trd(vname,     ///< name
 													pars[0],   ///< Half-length along x at the surface positioned at -dz
 													pars[1],   ///< Half-length along x at the surface positioned at +dz
 													pars[2],   ///< Half-length along y at the surface positioned at -dz
@@ -122,7 +118,7 @@ bool G4NativeSetupFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4
 	}
 
 	// if we are at this point the solid is not built
-	if(depVerbosity) {
+	if(verbosity) {
 		G4cout << " " << vname << " solid is not built." << G4endl;
 	}
 

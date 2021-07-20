@@ -3,7 +3,7 @@
 
 
 
-#define GSYSTEMNOTAPPLICABLEENTRY  "na"
+#define G4SYSTEMNOTAPPLICABLEENTRY  "na"
 #define G4SYSTEMLOGHEADER           " ⌂ G4System ▸"
 
 #define G4SYSTEMNATFACTORY "G4SystemNATVFactory"
