@@ -1,5 +1,5 @@
-#ifndef  GSYSTEMOPTIONS_H
-#define  GSYSTEMOPTIONS_H 1
+#ifndef  G4SYSTEMOPTIONS_H
+#define  G4SYSTEMOPTIONS_H 1
 
 // glibrary
 #include "goptions.h"

@@ -19,7 +19,7 @@ bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string,
 	if(matName == "component") return true;
 
 	// dependencies are there, can build volume
-	string dmat    = gopt->getString("defaultMat");
+	string dmat    = gopt->getString("defaultMaterial");
 	//bool gui       = gopt->getBool("gui");
 
 	// if the g4volume doesn't exist, create one and add it to the map

@@ -13,7 +13,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 	// instantiating gSystemManager
 	int verbosity = opt->getInt("g4systemv");
-	GManager g4SystemManager(verbosity);
+	GManager g4SystemManager("G4World", verbosity);
 
 	map<string, G4SystemFactory*> g4systemFactory;
 

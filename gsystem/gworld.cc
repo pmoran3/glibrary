@@ -33,7 +33,7 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	// instantiating gSystemManager
-	GManager gSystemManager(verbosity);
+	GManager gSystemManager("GWorld", verbosity);
 
 	map<string, GSystemFactory*> systemFactory;
 

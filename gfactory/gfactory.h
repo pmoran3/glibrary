@@ -55,6 +55,7 @@ private:
 	// scope does not work
 	std::map<std::string, DynamicLib*> dlMap;
 
+	string gname; // manager name
 	int verbosity;
 
 	/**
@@ -77,8 +78,10 @@ public:
 	 - 0: no not print any log
 	 - 1: print gmanager registering and instantiating classes
 	 */
-	GManager( int v = 0 ) : verbosity(v) {
-		cout  << GFACTORYLOGITEM << " GPlugin: Instantiating GManager" << endl;
+	GManager( string name, int v = 0 ) : gname(name), verbosity(v) {
+		if (verbosity > 0 ) {
+			cout  << GFACTORYLOGITEM << " GPlugin: Instantiating " << gname << " GManager" << endl;
+		}
 	}
 
 public:
@@ -93,7 +96,8 @@ public:
 	template <class Derived> void RegisterObjectFactory(string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin Manager: Registering " << name << " factory. Factory has now: " << factoryMap.size() << " plugin " << endl;
+			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering " << name << " factory. ";
+			cout << "Factory has now: " << factoryMap.size() << " plugin " << endl;
 		}
 	}
 
@@ -113,7 +117,7 @@ public:
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin Manager: Creating instance of " << name << " factory." << endl;
+			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of " << name << " factory." << endl;
 		}
 		return static_cast<Base*>(factory->second->Create());
 	}

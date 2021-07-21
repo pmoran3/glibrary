@@ -18,7 +18,7 @@ variation(v) {
 	gvolumesMap = new map<string, GVolume*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << " Instantiating GSystem " << name  << endl;
+		cout << GSYSTEMLOGHEADER << " Instantiating GSystem from " << name  << endl;
 	}
 }
 
