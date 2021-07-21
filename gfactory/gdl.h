@@ -1,7 +1,7 @@
 #ifndef  GDYNAMICLIB_H
 #define  GDYNAMICLIB_H  1
 
-// gstring conventions
+// gutilities conventions
 #include "gutsConventions.h"
 
 // c++ plugin loading functions

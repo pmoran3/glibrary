@@ -3,7 +3,7 @@
 Import('env')
 
 sources = [
-			  'gstring.cc',
+			  'gutilities.cc',
 			  'gutsConventions.cc'
 			  ]
 

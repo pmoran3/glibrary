@@ -2,7 +2,7 @@
 #include "systemTextFactory.h"
 
 // mlibrary
-#include "gstring.h"
+#include "gutilities.h"
 
 // c++
 #include <iostream>
@@ -27,7 +27,7 @@ void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity)
 			continue;
 
 		// extract gvolume parameters
-		vector<string> gvolumePars = gstring::getStringVectorFromStringWithDelimiter(dbline, "|");
+		vector<string> gvolumePars = gutilities::getStringVectorFromStringWithDelimiter(dbline, "|");
 		system->addGVolume(gvolumePars, verbosity);
 	}
 

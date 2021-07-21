@@ -1,8 +1,8 @@
 // gdata
 #include "gDigitizedData.h"
 
-// gstring for the conventions and gexit
-#include "gstring.h"
+// gutilities for the conventions and gexit
+#include "gutilities.h"
 
 void GDigitizedData::includeVariable(string vname, int value) {
 	intObservables[vname] = value;

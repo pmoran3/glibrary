@@ -1,12 +1,12 @@
-// gstring 
-#include "gstring.h"
+// gutilities
+#include "gutilities.h"
 
 // c++
 #include <sstream>
 using namespace std;
 
 //! Trim Both leading and trailing spaces
-string gstring::trimSpacesFromString(string in)
+string gutilities::trimSpacesFromString(string in)
 {
 	string out;
 
@@ -23,13 +23,13 @@ string gstring::trimSpacesFromString(string in)
 }
 
 //! Get the filename from the path (currently only posix)
-string gstring::getFileFromPath(string path)
+string gutilities::getFileFromPath(string path)
 {
 	return path.substr(path.find_last_of("/") + 1);
 }
 
 //! Return a vector of strings from a stringstream, space is delimeter
-vector<string> gstring::getStringVectorFromString(string input)
+vector<string> gutilities::getStringVectorFromString(string input)
 {
 	vector<string> pvalues;
 	stringstream plist(input);
@@ -45,7 +45,7 @@ vector<string> gstring::getStringVectorFromString(string input)
 }
 
 //! Replace all occurences of specific chars in a string with a string
-string gstring::replaceCharInStringWithChars(string input, string toReplace, string replacement)
+string gutilities::replaceCharInStringWithChars(string input, string toReplace, string replacement)
 {
 
 	string output = "";
@@ -68,7 +68,7 @@ string gstring::replaceCharInStringWithChars(string input, string toReplace, str
 }
 
 //! Replace all occurences of a a string with a string
-string gstring::replaceAllStringsWithString(string source, const string from, const string to)
+string gutilities::replaceAllStringsWithString(string source, const string from, const string to)
 {
 	string newString;
 
@@ -89,7 +89,7 @@ string gstring::replaceAllStringsWithString(string source, const string from, co
 
 
 //! Fill a string with the string c to be ndigits long
-string gstring::fillDigits(string word, string c, int ndigits)
+string gutilities::fillDigits(string word, string c, int ndigits)
 {
 	string filled;
 
@@ -121,7 +121,7 @@ using namespace CLHEP;
 /// contain units (warning given if requested)
 /// \param v input string. Ex: 10.2*cm
 /// \return value with correct G4 unit.
-double gstring::getG4Number(string v, bool warnIfNotUnit)
+double gutilities::getG4Number(string v, bool warnIfNotUnit)
 {
 	string value = trimSpacesFromString(v);
 
@@ -172,7 +172,7 @@ double gstring::getG4Number(string v, bool warnIfNotUnit)
 	return EXIT_SUCCESS;
 }
 
-vector<double> gstring::getG4NumbersFromStringVector(vector<string> vstring, bool warnIfNotUnit)
+vector<double> gutilities::getG4NumbersFromStringVector(vector<string> vstring, bool warnIfNotUnit)
 {
 	vector<double> output;
 
@@ -183,7 +183,7 @@ vector<double> gstring::getG4NumbersFromStringVector(vector<string> vstring, boo
 	return output;
 }
 
-vector<double>  gstring::getG4NumbersFromString(string vstring, bool warnIfNotUnit) {
+vector<double>  gutilities::getG4NumbersFromString(string vstring, bool warnIfNotUnit) {
 	return getG4NumbersFromStringVector(getStringVectorFromString(vstring), warnIfNotUnit);
 }
 
@@ -192,7 +192,7 @@ vector<double>  gstring::getG4NumbersFromString(string vstring, bool warnIfNotUn
 #include <fstream>
 
 // need to add verbosity
-string gstring::parseFileAndRemoveComments(string filename, string commentChars, int verbosity) {
+string gutilities::parseFileAndRemoveComments(string filename, string commentChars, int verbosity) {
 
 	// reading file
 	stringstream strStream;
@@ -226,7 +226,7 @@ string gstring::parseFileAndRemoveComments(string filename, string commentChars,
 }
 
 // retrieve string between two strings
-string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter)
+string gutilities::retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter)
 {
 	string out;
 
@@ -244,7 +244,7 @@ string gstring::retrieveStringBetweenChars(string input, string firstDelimiter, 
 }
 
 // returns a vector of strings from a stringstream, x (one char) is delimiter
-vector<string> gstring::getStringVectorFromStringWithDelimiter(string input, string x)
+vector<string> gutilities::getStringVectorFromStringWithDelimiter(string input, string x)
 {
 	vector<string> pvalues;
 
@@ -268,3 +268,4 @@ vector<string> gstring::getStringVectorFromStringWithDelimiter(string input, str
 
 	return pvalues;
 }
+

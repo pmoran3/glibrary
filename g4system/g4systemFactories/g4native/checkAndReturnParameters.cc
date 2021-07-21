@@ -2,8 +2,8 @@
 #include "g4NativeSystemFactory.h"
 
 // guts
-#include "gstring.h"
-using namespace gstring;
+#include "gutilities.h"
+using namespace gutilities;
 
 // c++
 #include <set>

@@ -7,11 +7,13 @@
 // c++
 #include <vector>
 #include <string>
+#include <map>
 
-namespace gstring {
+namespace gutilities {
 
 	using std::string;
 	using std::vector;
+	using std::map;
 
 	// Removes leading and trailing spaces
 	string trimSpacesFromString(string);
@@ -49,6 +51,17 @@ namespace gstring {
 	// retrieve string between two strings
 	string retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter);
 
+	// TODO: notice: I would like to use map<string, T*> but getting errors, to be researched
+	template<typename T> T getOrCreateItemInMap(map<string, T> *gmap, string vname) {
+		// check if g4s already exists
+		if(gmap->find(vname) != gmap->end()) {
+			return (*gmap)[vname];
+		} else {
+			(*gmap)[vname] = T();
+			return (*gmap)[vname];
+		}
+
+	}
 };
 
 

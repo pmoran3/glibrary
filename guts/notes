@@ -7,7 +7,7 @@
 * Library Target:
 
 Sources:
- - gstring.cc
+ - gutilities.cc
 
 * Example Target:
 

@@ -3,7 +3,7 @@
 #include "gsystemConventions.h"
 
 // glibrary
-#include "gstring.h"
+#include "gutilities.h"
 #include "goptionsConventions.h"
 
 // c++

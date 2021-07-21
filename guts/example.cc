@@ -1,6 +1,6 @@
-// gstring
-#include "gstring.h"
-using namespace gstring;
+// gutilities
+#include "gutilities.h"
+using namespace gutilities;
 
 
 // c++

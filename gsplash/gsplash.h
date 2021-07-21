@@ -4,8 +4,8 @@
 // gsplash
 #include "gsplash.h"
 
-// gstring for the exit codes
-#include "gstring.h"
+// gutilities for the exit codes
+#include "gutilities.h"
 
 // c++
 #include <string>

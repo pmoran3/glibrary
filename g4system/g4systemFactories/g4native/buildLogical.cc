@@ -7,7 +7,7 @@
 //#include "G4LogicalVolume.hh"
 
 // guts
-#include "gstring.h"
+#include "gutilities.h"
 
 bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {

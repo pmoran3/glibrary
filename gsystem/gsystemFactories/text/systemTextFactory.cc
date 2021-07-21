@@ -1,6 +1,6 @@
 // string for gexit
-#include "gstring.h"
-using namespace gstring;
+#include "gutilities.h"
+using namespace gutilities;
 
 // gsystem
 #include "systemTextFactory.h"

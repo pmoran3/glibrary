@@ -27,7 +27,7 @@ private:
 
 
 public:
-	map<string, GSystem*>   getSystemsMap() const {return gsystemsMap;}
+	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
 
 
 

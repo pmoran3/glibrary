@@ -1,8 +1,8 @@
 // goptions
 #include "goptions.h"
 
-// gstring for the conventions and gexit
-#include "gstring.h"
+// gutilities for the conventions and gexit
+#include "gutilities.h"
 
 // c++
 #include <iostream>
@@ -481,8 +481,8 @@ void GOption::printOptionHelp()
 		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {
 
 			cout  << HELPFILLSPACE << POINTITEM  ;
-			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GNAME], "\"", "") << ": " ;
-			cout << gstring::replaceCharInStringWithChars(definitionJsonValue[GDESC], "\"", "")  << endl;
+			cout << gutilities::replaceCharInStringWithChars(definitionJsonValue[GNAME], "\"", "") << ": " ;
+			cout << gutilities::replaceCharInStringWithChars(definitionJsonValue[GDESC], "\"", "")  << endl;
 			
 		}
 		cout << endl;

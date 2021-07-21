@@ -58,8 +58,7 @@ namespace gsystem {
 
 
 	// returns array of options definitions
-	vector<GOption> defineOptions()
-	{
+	vector<GOption> defineOptions() {
 		vector<GOption> goptions;
 
 		// System

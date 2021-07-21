@@ -1,5 +1,5 @@
 // guts
-#include "gstring.h"
+#include "gutilities.h"
 
 // g4system
 #include "g4systemConventions.h"
@@ -16,7 +16,7 @@ bool G4SystemFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<str
 
 	// copy
 	if(copyOf != G4SYSTEMNOTAPPLICABLEENTRY) {
-		vector<string> copies = gstring::getStringVectorFromString(copyOf);
+		vector<string> copies = gutilities::getStringVectorFromString(copyOf);
 		if(copies.size() == 2) {
 			// first string must be copyOf
 			if(copies[0] == "copyOf:") {
@@ -42,7 +42,7 @@ bool G4SystemFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<str
 
 		// solid operation
 	} else if(solidsOpr != G4SYSTEMNOTAPPLICABLEENTRY) {
-		vector<string> solidOperations = gstring::getStringVectorFromString(solidsOpr);
+		vector<string> solidOperations = gutilities::getStringVectorFromString(solidsOpr);
 		if(solidOperations.size() == 3) {
 			if(solidOperations[1] == "+" || solidOperations[1] == "-" || solidOperations[1] == "*") {
 				// checking if the copy solid exists

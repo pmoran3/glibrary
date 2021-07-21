@@ -2,8 +2,8 @@
 #include "systemTextFactory.h"
 
 // mlibrary
-#include "gstring.h"
-using namespace gstring;
+#include "gutilities.h"
+using namespace gutilities;
 
 // c++
 #include <iostream>

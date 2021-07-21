@@ -4,9 +4,9 @@
 // c++
 #include <iostream>
 
-// gstrings
-#include "gstring.h"
-using namespace gstring;
+// gutilities
+#include "gutilities.h"
+using namespace gutilities;
 using namespace std;
 
 // constructor:
@@ -137,7 +137,7 @@ vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 
 	// base jcard
 	// removing '#' from "base" (command line) jcard
-	// function is defined in gstrings
+	// function is defined in gutilities
 	string basePureJsonString = parseFileAndRemoveComments(jcardFilename, "#");
 
 	if ( gdebug ) {

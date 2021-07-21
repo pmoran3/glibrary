@@ -18,7 +18,7 @@ namespace gsystem {
 
 	void from_json(const json& j, JSystem& det);
 
-	// method to return a vector of GDetectors from a structured option
+	// method to return a vector of JSystem from a structured option
 	vector<JSystem> getSystems(GOptions *gopts);
 
 

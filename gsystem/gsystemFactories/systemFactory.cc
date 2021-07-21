@@ -1,5 +1,5 @@
 // string for gexit
-#include "gstring.h"
+#include "gutilities.h"
 
 // gsystem
 #include "systemFactory.h"

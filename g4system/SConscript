@@ -7,8 +7,12 @@ sources = [
 			  'g4system.cc',
 			  'g4world.cc',
 			  'g4systemFactories/geant4Dependencies.cc',
+			  'g4systemFactories/g4systemGetters.cc',
+			  'g4systemFactories/g4native/g4SolidConstructorDescription.cc',
+			  'g4systemFactories/g4native/checkAndReturnParameters.cc',
 			  'g4systemFactories/g4native/buildSolid.cc',
-			  'g4systemFactories/g4native/buildLogical.cc'
+			  'g4systemFactories/g4native/buildLogical.cc',
+			  'g4systemFactories/g4native/buildPhysical.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

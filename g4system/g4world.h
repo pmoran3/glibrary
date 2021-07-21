@@ -13,10 +13,12 @@ class G4World
 {
 public:
 	// constructor from a GWorld, using verbosity
-	G4World(GWorld *gworld, int verbosity);
+	G4World(GWorld *gworld, GOptions* opt);
 
 private:
 	map<string, G4System*> g4systemsMap;   // key is system name
+
+	G4System* getOrCreateG4System(string sname, string factory, int verbosity);
 
 
 };

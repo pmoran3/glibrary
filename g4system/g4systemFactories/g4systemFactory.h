@@ -24,7 +24,7 @@ class G4SystemFactory
 public:
 	// returns true if the system could be built
 	// returns false if dependencies are not met
-	virtual bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) = 0;
+	virtual bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4smap) = 0;
 
 	virtual ~G4SystemFactory() = default;
 
@@ -44,7 +44,7 @@ protected:
 
 	bool getVerbosity(GOptions* gopt, string vname) {
 
-		int    verbosity = gopt->getInt("g4volumev");
+		int    verbosity = gopt->getInt("g4systemv");
 		string logVolume = gopt->getString("logVolume");
 
 		return (verbosity == GVERBOSITY_DETAILS) || (vname == logVolume);

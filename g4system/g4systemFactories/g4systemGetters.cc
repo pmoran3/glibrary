@@ -1,6 +1,6 @@
 // guts
-#include "gstring.h"
-using namespace gstring;
+#include "gutilities.h"
+using namespace gutilities;
 
 // g4system
 #include "g4systemConventions.h"

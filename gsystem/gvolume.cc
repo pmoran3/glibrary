@@ -5,10 +5,10 @@
 #include <iostream>
 
 // glibrary
-#include "gstring.h"
+#include "gutilities.h"
 
 using namespace std;
-using namespace gstring;
+using namespace gutilities;
 
 GVolume::GVolume(vector<string> pars, string importPath)
 {

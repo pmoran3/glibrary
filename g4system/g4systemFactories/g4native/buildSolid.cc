@@ -2,8 +2,8 @@
 #include "g4NativeSystemFactory.h"
 
 // glibrary
-#include "gstring.h"
-using namespace gstring;
+#include "gutilities.h"
+using namespace gutilities;
 
 // geant4
 #include "G4Box.hh"

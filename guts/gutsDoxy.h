@@ -1,8 +1,8 @@
 /// \mainpage
 /// \section Overview
-/// gstring provides basic string utilities (in a namespace) and conventions for stream i/o:
+/// gutilities provides basic  utilities in a dedicated namespace
 ///
-/// \section Main gstring namespace:
+/// \section Main gutilities namespace:
 /// \n
 /// * string trimSpacesFromString(string);
 /// *	vector<string> getStringVectorFromString(string);

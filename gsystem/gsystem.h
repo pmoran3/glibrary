@@ -39,11 +39,11 @@ public:
 
 	
 	// returns a vector of import files, checking all possible directories.
-	// this should be in some general utility library? gstrings?
+	// this should be in some general utility library? gutilities?
 	// vector<string> gImportFiles(vector<string> locations, int verbosity, vector<string> possibleExtensions);
 
 	// load all names in the directory matching extension
-	// this should be in some general utility library? gstrings?
+	// this should be in some general utility library? gutilities?
 	// vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
 
 	void addGVolume(vector<string> pars, int verbosity);

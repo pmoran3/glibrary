@@ -23,13 +23,13 @@ public:
 //	G4VPhysicalVolume* getPhysical(string vname) const;
 
 	~G4System() {
-		delete g4volumes;
+		delete g4volumesMap;
 	}
 
 private:
 
 	// the key has the form system/volumename
-	map<string, G4Volume*> *g4volumes;
+	map<string, G4Volume*> *g4volumesMap;
 
 	// Factory that builds the detector
 	string   factory;
@@ -40,6 +40,8 @@ private:
 //	void addG4Volume(G4Volume *g4v, string name);
 //	G4Volume* getG4Volume(string name) const;
 
+public:
+	map<string, G4Volume*>* getg4volumesMap() { return g4volumesMap ;}
 
 };
 
