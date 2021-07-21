@@ -51,7 +51,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
-			exit(99);
+			exit(EC__PARAMETERSMISMATCH);
 		} else {
 			return parameters;
 		}
@@ -66,7 +66,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
-			exit(99);
+			exit(EC__PARAMETERSMISMATCH);
 		} else {
 			return parameters;
 		}
@@ -89,7 +89,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 		<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 		G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
-		exit(99);
+		exit(EC__PARAMETERSMISMATCH);
 	}
 
 	return parameters;

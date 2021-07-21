@@ -12,6 +12,8 @@
 
 // error codes in the 500s
 #define EC__DEPENDENCIESNOTSOLVED  501
+#define EC__WRONGORDEREDROTATION   502
+#define EC__PARAMETERSMISMATCH     503
 
 #endif
 

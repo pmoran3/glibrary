@@ -77,7 +77,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 		}
 		if(allRemainingVolumes != 0 && thisIterationRemainingVolumes != 0) {
 			if(allRemainingVolumes >= thisIterationRemainingVolumes) {
-				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish. TODO: Add (g)exit?" << endl;
+				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish." << endl;
 				gexit(EC__DEPENDENCIESNOTSOLVED);
 			}
 		} else {
