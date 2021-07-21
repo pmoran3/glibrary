@@ -6,6 +6,7 @@ sources = [
 			  'g4volume.cc',
 			  'g4system.cc',
 			  'g4world.cc',
+			  'g4systemOptions.cc',
 			  'g4systemFactories/geant4Dependencies.cc',
 			  'g4systemFactories/g4systemGetters.cc',
 			  'g4systemFactories/g4native/g4SolidConstructorDescription.cc',

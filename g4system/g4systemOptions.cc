@@ -1,5 +1,5 @@
 // g4system
-#include "g4world.h"
+#include "g4systemOptions.h"
 
 // project goption to a system
 namespace g4system {
@@ -7,9 +7,11 @@ namespace g4system {
 	// returns array of options definitions
 	vector<GOption> defineOptions() {
 
+		vector<GOption> goptions;
+
 		// geant4 world verbosity is defined here and passed to the g4world constructor
 		json jsonG4WorldVerbosity = {
-			{GNAME, "g4worldv"},
+			{GNAME, "g4systemv"},
 			{GDESC, GVERBOSITY_DESCRIPTION},
 			{GDFLT, 1}
 		};
