@@ -67,7 +67,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 						thisIterationRemainingVolumes += 1;
 					}
 				} else {
-					cerr << FATALERRORL << "  Fatal Error: g4setupactory factory <" << factory << "> not found." << endl;
+					cerr << FATALERRORL << "g4setupactory factory <" << factory << "> not found." << endl;
 					exit(0);
 				}
 			}
@@ -77,8 +77,8 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 		}
 		if(allRemainingVolumes != 0 && thisIterationRemainingVolumes != 0) {
 			if(allRemainingVolumes >= thisIterationRemainingVolumes) {
-				cerr << FATALERRORL << " Fatal Error: dependencies are not being resolved: their number should diminish. TODO: Add (g)exit?" << endl;
-				exit(0);
+				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish. TODO: Add (g)exit?" << endl;
+				gexit(EC__DEPENDENCIESNOTSOLVED);
 			}
 		} else {
 			allRemainingVolumes = thisIterationRemainingVolumes;

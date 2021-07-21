@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 {
 	
 	if(argc != 2) {
-		cerr << FATALERRORL << " Error: run example with exactly one argument: a quotes enclosed list of strings." << endl;
+		cerr << FATALERRORL << "run example with exactly one argument: a quotes enclosed list of strings." << endl;
 	} else {
 		
 		string test = argv[1];

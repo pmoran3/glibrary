@@ -47,7 +47,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 		// the first constructor must have a number of pars multiple of 3
 		// the second constructor must have a number of pars (-3) multiple of 2
 		if(actualNumberOfParameters%3 !=0 && (actualNumberOfParameters - 3)%2 != 0) {
-			G4cerr << FATALERRORL << "  Fatal Error: the number of parameters in the constructor of " << name << ", " << type
+			G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
 			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
@@ -62,7 +62,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 		// the first constructor must have a number of pars (-4) multiple of 3
 		// the second constructor must have a number of pars (-4) multiple of 2
 		if((actualNumberOfParameters - 4)%3 !=0 && (actualNumberOfParameters - 3)%2 != 0) {
-			G4cerr << FATALERRORL << "  Fatal Error: the number of parameters in the constructor of " << name << ", " << type
+			G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
 			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
@@ -85,7 +85,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 
 
 	if(possibleNumberOfParameters.find(actualNumberOfParameters) == possibleNumberOfParameters.end() ) {
-		G4cerr << FATALERRORL << "  Fatal Error: the number of parameters in the constructor of " << name << ", " << type
+		G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
 		<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 		G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;

@@ -63,7 +63,7 @@ ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE
 	}
 	
 	// at this point file was not found, error
-	cout << GSYSTEMLOGHEADER << " File " << fname << " not found " << endl;
+	cerr << GSYSTEMLOGHEADER << " File " << fname << " not found " << endl;
 	gexit(EC__GSETUPFILENOTOFOUND);
 	
 	

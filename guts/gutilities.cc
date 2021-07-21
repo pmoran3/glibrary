@@ -198,7 +198,7 @@ string gutilities::parseFileAndRemoveComments(string filename, string commentCha
 	stringstream strStream;
 	ifstream in(filename.c_str());
 	if(!in) {
-		cerr << FATALERRORL << " Error: can't open input file " << filename << ". Check your spelling. " << endl;
+		cerr << FATALERRORL << "can't open input file " << filename << ". Check your spelling. " << endl;
 		gexit(EC__FILENOTFOUND);
 	} else {
 		if(verbosity > 0) {

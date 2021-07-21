@@ -26,7 +26,7 @@ variation(v) {
 void GSystem::addGVolume(vector<string> pars, int verbosity)
 {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
-		cerr << FATALERRORL << "Incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
+		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
 		gexit(EC__GVOLUMENUMBEROFPARS);
 	} else {
@@ -41,7 +41,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity)
 				cout << GSYSTEMLOGHEADER << " adding gVolume" << (*gvolumesMap)[nameKey] << endl;
 			}
 		} else {
-			cerr << FATALERRORL << "A volume with the name " << nameKey << " already exists. " << endl;
+			cerr << FATALERRORL << "a volume with the name " << nameKey << " already exists. " << endl;
 			gexit(EC__GVOLUMEALREADYPRESENT);
 		}
 	}

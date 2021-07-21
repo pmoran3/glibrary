@@ -95,13 +95,13 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 {
 	// if "+" was not found but option is cumulative, it's a mistake.
 	if ( !isAddition && cumulative ) {
-		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
+		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
 		gexit(EC__NOADDFORCUMULATIVE);
 	}
 
 	// if "+" was found but option is not cumulative, it's a mistake.
 	if ( isAddition && !cumulative ) {
-		cerr << FATALERRORL  " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
+		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
 		gexit(EC__ADDFORNONCUMULATIVE);
 	}
 
@@ -256,7 +256,7 @@ void GOption::assignSingleValueFromSimpleJson(string userJsonKey, json userJsonV
 	if ( jOptionAssignedValues.size() && !isDefault ) {
 		// strict: error
 		if ( gstrict ) {
-			cout << FATALERRORL " the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative, is already present, and it's not the default. " << endl;
+			cout << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative, is already present, and it's not the default. " << endl;
 			gexit(EC__NONCUMULATIVEALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
@@ -392,7 +392,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 	}
 
 	if ( !isDefined )  {
-		cerr << FATALERRORL  " the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
+		cerr << FATALERRORL << "the " << YELLOWHHL << key << RSTHHR << " tag is not known to this system. " << endl;
 		gexit(EC__NOOPTIONFOUND);
 	}
 

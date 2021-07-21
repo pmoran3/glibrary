@@ -10,5 +10,8 @@
 #define G4SYSTEMCADFACTORY "G4SystemCADFactory"
 #define G4SYSTEMGDMFACTORY "G4SystemGDMLFactory"
 
+// error codes in the 500s
+#define EC__DEPENDENCIESNOTSOLVED  501
+
 #endif
 

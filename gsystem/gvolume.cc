@@ -13,7 +13,7 @@ using namespace gutilities;
 GVolume::GVolume(vector<string> pars, string importPath)
 {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
-		cerr << FATALERRORL << "Incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
+		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
 		gexit(GVOLUMENUMBEROFPARS);
 	} else {

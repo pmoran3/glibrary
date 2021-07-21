@@ -92,11 +92,11 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
-			cerr << FATALERRORL << " parsing " << jcardFilename
+			cerr << FATALERRORL << "parsing " << jcardFilename
 			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
 			cout << " Remember to remove the comments, for example with \' grep -v #\' jcardFileName" << endl;
 		} else {
-			cerr << FATALERRORL << " exception: " << thisException << endl;
+			cerr << FATALERRORL << "exception: " << thisException << endl;
 		}
 
 		gexit(EC__JSONPARSEERROR);
@@ -249,7 +249,7 @@ void GOptions::addSwitch(string name, string description) {
 		switches[name] = GSwitch(description);
 	} else {
 		if ( gstrict ) {
-			cerr << FATALERRORL " the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
+			cerr << FATALERRORL << "the " << YELLOWHHL << name << RSTHHR << " switch is already present." << endl;
 			gexit(EC__SWITCHALREADYPRESENT);
 			// non strict: warning and clear
 			// the last appereance of the option is the valid one
@@ -303,7 +303,7 @@ json GOptions::getNonStructuredOptionSingleValue(string tag) {
 
 	// will exit if not found
 	if(getStructuredOptionAssignedValues(tag).size() == 0) {
-		cerr << FATALERRORL << " The tag " << tag << " is not assigned. " << endl;
+		cerr << FATALERRORL << "the tag " << tag << " is not assigned. " << endl;
 		gexit(EC__OPTIONNOTASSIGNED);
 	}
 
@@ -311,7 +311,7 @@ json GOptions::getNonStructuredOptionSingleValue(string tag) {
 	json jn = getStructuredOptionAssignedValues(tag).front();
 
 	if ( jn.begin().value().is_structured() ) {
-		cerr << FATALERRORL << " The tag " << tag << " is part of the structured option " << jn << endl;
+		cerr << FATALERRORL << "the tag " << tag << " is part of the structured option " << jn << endl;
 		cerr << " Use structure projection to retrieve this option (see documentation at " << GOPTIONDOCUMENTATION << ")" << endl;
 		gexit(EC__OPTIONSHOULDNOTBESTRUCTURED);
 	}
@@ -344,7 +344,7 @@ bool GOptions::getSwitch(string tag) {
 	if ( switches.find(tag) != switches.end()) {
 		return switches[tag].getStatus();
 	} else {
-		cerr << FATALERRORL  " the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
+		cerr << FATALERRORL  << "the " << YELLOWHHL << tag << RSTHHR << " switch is not known to this system. " << endl;
 		gexit(EC__NOOPTIONFOUND);
 	}
 	return false;

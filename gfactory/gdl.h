@@ -56,7 +56,7 @@ public:
 			}
 			handle = load_lib(dlFileName);
 		} else {
-			cerr << FATALERRORL  " couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
+			cerr << FATALERRORL  << "couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
 			gexit(EC__DLNOTFOUND);
 		}
 	}

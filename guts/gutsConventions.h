@@ -33,8 +33,8 @@
 #define BOLD(x) "\x1B[1m" x RST
 #define UNDL(x) "\x1B[4m" x RST
 
-#define FATALERRORL BOLD(FRED(" error: "))
-#define GWARNING    BOLD(FYEL(" warning: "))
+#define FATALERRORL BOLD(FRED(" Error: "))
+#define GWARNING    BOLD(FYEL(" Warning: "))
 
 #define CONSTRUCTORLOG " ↑ "
 #define DESTRUCTORLOG " ↓ "

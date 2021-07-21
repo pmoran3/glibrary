@@ -113,7 +113,7 @@ public:
 	template <class Base> Base* CreateObject(string name) const {
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end()) {
-			cerr << FATALERRORL  " couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << endl;
+			cerr << FATALERRORL  << "couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {

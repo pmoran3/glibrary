@@ -80,7 +80,7 @@ GWorld::GWorld(GOptions* gopts) {
 		if(systemFactory.find(factory) != systemFactory.end()) {
 			systemFactory[factory]->loadSystem(system.second, verbosity);
 		} else {
-			cerr << FATALERRORL << "SystemFactory factory <" << factory << "> not found for " << systemName << endl;
+			cerr << FATALERRORL << "systemFactory factory <" << factory << "> not found for " << systemName << endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 
@@ -139,7 +139,7 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 	}
 
 	// error: volume not found
-	cerr << FATALERRORL << " Gvolume named <" << volumeName << "> (" << purpose << ") not found in gsystem " << endl;
+	cerr << FATALERRORL << "gvolume named <" << volumeName << "> (" << purpose << ") not found in gsystem " << endl;
 	gexit(EC__GVOLUMENOTFOUND);
 
 	return volumeFound;
