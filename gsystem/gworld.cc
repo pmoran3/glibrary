@@ -20,8 +20,8 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// loading gsystemsMap with GSystems
 	for (auto& jsystem: jsystems) {
-		gsystemsMap[jsystem.system] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
-//		gsystemsMap[gutilities::getFileFromPath(jsystem.system)] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
+//		gsystemsMap[jsystem.system] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
+		gsystemsMap[gutilities::getFileFromPath(jsystem.system)] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
 	}
 
 	// projecting options onto vector of GModifiers

@@ -37,6 +37,7 @@ public:
 	string getName() const      { return name; }
 	string getFactory() const   { return factory; }
 	string getVariation() const { return variation; }
+	string getFile() const      { return path + "/" + name; }
 
 	
 	// returns a vector of import files, checking all possible directories.

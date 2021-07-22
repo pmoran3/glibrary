@@ -36,17 +36,13 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			}
 		}
 	}
-
+	// done with g4SystemManager
 	g4SystemManager.clearDLMap();
-
-	// build root volume first
-	// buildRootVolume(gworld, verbosity);
-
 
 	if(verbosity == GVERBOSITY_DETAILS) {
 		for(auto &system : gworld->getSystemsMap()) {
 			for(auto &gvolume : *system.second->getGVolumesMap()) {
-				cout << G4SYSTEMLOGHEADER << " g4system " << system.first << ", g4volume " << gvolume.first << endl;
+				cout << G4SYSTEMLOGHEADER << "g4system <" << KYEL << system.first << RST << ">, g4volume <" << KYEL << gvolume.first << RST << ">" << endl;
 			}
 		}
 	}

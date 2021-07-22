@@ -3,6 +3,7 @@
 
 // glibrary
 #include "goptions.h"
+#include "gutsConventions.h"
 
 // gsystem
 #include "gsystem.h"
@@ -26,7 +27,7 @@ public:
 	void loadSystem(GSystem *system, int verbosity) {
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			cout << GSYSTEMLOGHEADER << "Loading system " << system->getName() << " using factory: " << system->getFactory() <<  endl;
+			cout << GSYSTEMLOGHEADER << "Loading system <" << KWHT << system->getName() << RST << "> using factory <" << system->getFactory() << ">" <<  endl;
 		}
 
 		loadMaterial(system, verbosity);

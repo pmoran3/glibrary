@@ -96,7 +96,7 @@ public:
 	template <class Derived> void RegisterObjectFactory(string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering " << name << " factory. ";
+			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering <" << name << "> factory. ";
 			cout << "Factory has now: " << factoryMap.size() << " plugin " << endl;
 		}
 	}
@@ -117,7 +117,7 @@ public:
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of " << name << " factory." << endl;
+			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << name << "> factory." << endl;
 		}
 		return static_cast<Base*>(factory->second->Create());
 	}

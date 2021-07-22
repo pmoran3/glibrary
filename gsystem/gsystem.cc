@@ -14,11 +14,14 @@ using namespace std;
 GSystem::GSystem(string n, string f, string v, int verbosity) :
 factory(f),
 variation(v) {
-	name = gutilities::::getDirFromPath(n);
+
+	path = gutilities::getDirFromPath(n);
+	name = gutilities::getFileFromPath(n);
+
 	gvolumesMap = new map<string, GVolume*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << "Instantiating GSystem from " << name  << endl;
+		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KWHT << name  << RST << "> using path <" << KWHT << path << RST << ">" << endl;
 	}
 }
 
