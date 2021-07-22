@@ -13,6 +13,8 @@
 
 GWorld::GWorld(GOptions* gopts) {
 
+	gsystemsMap = new map<string, GSystem*>;
+	
 	int verbosity = gopts->getInt("gsystemv");
 
 	// projecting json options onto vector of JSystem
@@ -20,8 +22,8 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// loading gsystemsMap with GSystems
 	for (auto& jsystem: jsystems) {
-//		gsystemsMap[jsystem.system] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
-		gsystemsMap[gutilities::getFileFromPath(jsystem.system)] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
+		string keyName = gutilities::getFileFromPath(jsystem.system);
+		(*gsystemsMap)[keyName] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
 	}
 
 	// projecting options onto vector of GModifiers
@@ -42,7 +44,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// registering factories in gSystemManager
 	// and adding them to systemFactory
 	// if a factory is not existing already, registering it in the manager, instantiating it, and loading it into the map
-	for (auto& system: gsystemsMap) {
+	for (auto& system: *gsystemsMap) {
 		string factory = system.second->getFactory();
 
 		if(factory == "text") {
@@ -72,7 +74,7 @@ GWorld::GWorld(GOptions* gopts) {
 	gSystemManager.clearDLMap();
 
 	// now loading gvolumes definitions for all systems
-	for (auto& system: gsystemsMap) {
+	for (auto& system: *gsystemsMap) {
 		string systemName = system.first;
 		string factory = system.second->getFactory();
 
@@ -88,7 +90,7 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	if(verbosity == GVERBOSITY_DETAILS) {
-		for (auto system: gsystemsMap) {
+		for (auto system: *gsystemsMap) {
 			// first collect all volume names
 			for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 				cout << GSYSTEMLOGHEADER << "system " << system.first << " volume " << volumeName << endl;
@@ -99,8 +101,8 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// adding root volume to the a "root" gsystem
 	string worldVolume = gopts->getString("worldVolume");
-	gsystemsMap[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, ROOTWORLDGVOLUMENAME, "default", verbosity);
-	gsystemsMap[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, ROOTWORLDGVOLUMENAME, "default", verbosity);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
 
 	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {
@@ -116,7 +118,7 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 	// making sure every detector mother is defined
-	for (auto system: gsystemsMap) {
+	for (auto system: *gsystemsMap) {
 		// first collect all volume names
 		for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 			// will exit with error if not found
@@ -140,7 +142,7 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 
 	GVolume* volumeFound = nullptr;
 
-	for (auto& system: gsystemsMap) {
+	for (auto& system: *gsystemsMap) {
 		GVolume *thisVolume = system.second->getGVolume(volumeName);
 		if(thisVolume != nullptr) {
 			return thisVolume;

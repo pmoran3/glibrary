@@ -17,9 +17,13 @@ public:
 	// - run factory load system for each item in gsystemsMap
 	// - apply modifiers
 	GWorld(GOptions* gopts);
+	~GWorld() {
+		delete gsystemsMap;
+	}
+
 
 private:
-	map<string, GSystem*>   gsystemsMap;     // key is system name
+	map<string, GSystem*>  *gsystemsMap;    // key is system name
 	map<string, GModifier*> gmodifiersMap;   // key is volume name
 
 	// seerch for a volume among systems in gsystemsMap
@@ -27,7 +31,7 @@ private:
 
 
 public:
-	map<string, GSystem*> getSystemsMap() const {return gsystemsMap;}
+	map<string, GSystem*>* getSystemsMap() const {return gsystemsMap;}
 
 
 
