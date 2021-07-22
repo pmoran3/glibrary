@@ -25,7 +25,7 @@ public:
 //		bool lbuild = buildLogical(gopt, s, g4s);
 //		bool pbuild = buildPhysical(gopt, s, g4s);
 //
-//		if(verbosity >= GVERBOSITY_DETAILS) {
+//		if(verbosity == GVERBOSITY_DETAILS) {
 //			string vname = s->getName();
 //			string solid = sbuild ? " solid build, "    : " solid not build, ";
 //			string logic = lbuild ? " logical build, "  : " logical not not build, ";

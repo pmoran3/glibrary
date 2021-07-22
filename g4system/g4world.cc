@@ -53,6 +53,8 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	unsigned long allRemainingVolumes = 0;
 	do {
 		thisIterationRemainingVolumes.clear();
+
+
 		// looping over system in the gsystemsMap
 		for(auto &system : *gworld->getSystemsMap()) {
 			string systemName = system.first;
@@ -89,7 +91,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			if(allRemainingVolumes >= thisIterationRemainingVolumes.size()) {
 				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish. Outstanding volumes:" << endl;
 				for (auto &gvolumeLeft: thisIterationRemainingVolumes) {
-					cout << GTAB << "- " << gvolumeLeft->getName() << " with mother " << gvolumeLeft->getMother() << endl;
+					cout << GTAB << "- <" << gvolumeLeft->getName() << "> with mother <" << gvolumeLeft->getMother() << ">" << endl;
 				}
 				gexit(EC__DEPENDENCIESNOTSOLVED);
 			}
@@ -106,10 +108,17 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 // then return that one.
 G4System* G4World::getOrCreateG4System(string sname, string factory, int verbosity) {
 
+
 	// check if g4s already exists
 	if(g4systemsMap.find(sname) != g4systemsMap.end()) {
+		if(verbosity == GVERBOSITY_DETAILS) {
+			cout << G4SYSTEMLOGHEADER << "System  <" << KYEL << sname << RST << "> already exist in g4systemsMap" << endl;
+		}
 		return g4systemsMap[sname];
 	} else {
+		if(verbosity == GVERBOSITY_DETAILS) {
+			cout << G4SYSTEMLOGHEADER << "Creating new system  <" << KYEL << sname << RST << "> and adding it to g4systemsMap" << endl;
+		}
 		// adding volume to the map
 		g4systemsMap[sname] = new G4System(sname, factory, verbosity);
 		return g4systemsMap[sname];

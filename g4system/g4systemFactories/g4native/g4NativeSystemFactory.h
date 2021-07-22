@@ -11,6 +11,7 @@ class G4NativeSystemFactory : G4SystemFactory
 public:
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {
 
+
 		int verbosity = gopt->getInt("g4systemv");
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
@@ -21,7 +22,7 @@ public:
 		bool lbuild = buildLogical(gopt, s, g4s);
 		bool pbuild = buildPhysical(gopt, s, g4s);
 
-		if(verbosity >= GVERBOSITY_DETAILS) {
+		if(verbosity == GVERBOSITY_DETAILS) {
 			string vname = s->getName();
 			string solid = sbuild ? " solid build, "    : " solid not build, ";
 			string logic = lbuild ? " logical build, "  : " logical not not build, ";
