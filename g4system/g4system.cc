@@ -16,7 +16,7 @@ G4System::G4System(string name, string f, int verbosity) : factory(f) {
 	g4volumesMap = new map<string, G4Volume*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << G4SYSTEMLOGHEADER << " Instantiating G4System " << name  << endl;
+		cout << G4SYSTEMLOGHEADER << "Instantiating G4System " << name  << endl;
 	}
 
 }

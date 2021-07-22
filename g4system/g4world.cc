@@ -22,9 +22,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	for(auto &s : gworld->getSystemsMap()) {
 		string factory = s.second->getFactory();
 
-		// text
-		// ----
-		if(factory == "text") {
+		if(factory == "text" || factory == ROOTWORLDGVOLUMENAME) {
 			// if factory not found, registering it in the manager and loading it into the map
 			if(g4systemFactory.find(factory) == g4systemFactory.end()) {
 				g4SystemManager.RegisterObjectFactory<G4NativeSystemFactory>("G4NativeSystemFactory");
@@ -44,17 +42,26 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	// build root volume first
 	// buildRootVolume(gworld, verbosity);
 
+
+	if(verbosity == GVERBOSITY_DETAILS) {
+		for(auto &system : gworld->getSystemsMap()) {
+			for(auto &gvolume : *system.second->getGVolumesMap()) {
+				cout << G4SYSTEMLOGHEADER << " g4system " << system.first << ", g4volume " << gvolume.first << endl;
+			}
+		}
+	}
+
 	// now building geant4 objects
 	// every volume that is not built (due to dependencies) increments remainingVolumes
-	int thisIterationRemainingVolumes;
-	int allRemainingVolumes = 0;
+	vector<string> thisIterationRemainingVolumes;
+	unsigned long allRemainingVolumes = 0;
 	do {
-		thisIterationRemainingVolumes = 0;
+		thisIterationRemainingVolumes.clear();
 		// looping over system in the gsystemsMap
 		for(auto &system : gworld->getSystemsMap()) {
 			string systemName = system.first;
 			string factory = system.second->getFactory();
-			// looping over v = gvolumes in that system
+			// looping over getGVolumesMap in that system
 			for(auto &gvolume : *system.second->getGVolumesMap()) {
 				if(g4systemFactory.find(factory) != g4systemFactory.end()) {
 
@@ -62,28 +69,34 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 					auto g4volumesMapForThisSystem = getOrCreateG4System(systemName, factory, verbosity)->getg4volumesMap();
 
 					// calling loadG4System
-					// if a new cannot be loaded, false is returned and thisIterationRemainingVolumes increases by 1
+					// if a new system cannot be loaded, false is returned and the volumes added to thisIterationRemainingVolumes
 					if(g4systemFactory[factory]->loadG4System(opt, gvolume.second, g4volumesMapForThisSystem) == false) {
-						thisIterationRemainingVolumes += 1;
+						thisIterationRemainingVolumes.push_back(gvolume.first);
 					}
 				} else {
-					cerr << FATALERRORL << "g4setupactory factory <" << factory << "> not found." << endl;
-					exit(0);
+					cerr << FATALERRORL << "g4systemFactory factory <" << factory << "> not found." << endl;
+					gexit(EC__G4SYSTEMFACTORYNOTFOUND);
 				}
 			}
-			if(verbosity == GVERBOSITY_SUMMARY) {
-				cout << G4SYSTEMLOGHEADER << " " << system.first << " remaining g4volumes to be built: " << thisIterationRemainingVolumes << endl;
+			if(verbosity == GVERBOSITY_DETAILS) {
+				cout << G4SYSTEMLOGHEADER << system.first << " : " << thisIterationRemainingVolumes.size() << " remaining g4volumes to be built: " <<  endl;
+				for (auto &gvolumeName: thisIterationRemainingVolumes) {
+					cout << gvolumeName << endl;
+				}
 			}
 		}
-		if(allRemainingVolumes != 0 && thisIterationRemainingVolumes != 0) {
-			if(allRemainingVolumes >= thisIterationRemainingVolumes) {
-				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish." << endl;
+		if(allRemainingVolumes != 0 && thisIterationRemainingVolumes.size() != 0) {
+			if(allRemainingVolumes >= thisIterationRemainingVolumes.size()) {
+				cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish. Outstanding volumes:" << endl;
+				for (auto &gvolumeName: thisIterationRemainingVolumes) {
+					cout << gvolumeName << endl;
+				}
 				gexit(EC__DEPENDENCIESNOTSOLVED);
 			}
 		} else {
-			allRemainingVolumes = thisIterationRemainingVolumes;
+			allRemainingVolumes = thisIterationRemainingVolumes.size();
 		}
-	} while (thisIterationRemainingVolumes > 0);
+	} while (thisIterationRemainingVolumes.size() > 0);
 
 
 }

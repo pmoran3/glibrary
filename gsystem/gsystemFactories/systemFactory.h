@@ -25,8 +25,8 @@ public:
 	// a local variable verbosity is not used (if we did we'd need a dedicated constructor)
 	void loadSystem(GSystem *system, int verbosity) {
 
-		if(verbosity > GVERBOSITY_SUMMARY) {
-			cout << GSYSTEMLOGHEADER << " Loading system " << system->getName() << " using factory: " << system->getFactory() <<  endl;
+		if(verbosity >= GVERBOSITY_SUMMARY) {
+			cout << GSYSTEMLOGHEADER << "Loading system " << system->getName() << " using factory: " << system->getFactory() <<  endl;
 		}
 
 		loadMaterial(system, verbosity);

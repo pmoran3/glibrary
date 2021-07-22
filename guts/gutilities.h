@@ -20,6 +20,8 @@ namespace gutilities {
 
 	// get the filename from the path (currently only posix)
 	string getFileFromPath(string);
+	// get the directory from the path (currently only posix)
+	string getDirFromPath(string);
 
 	// a vector of strings from a stringstream, space is delimiter
 	vector<string> getStringVectorFromString(string);

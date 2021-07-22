@@ -38,11 +38,10 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		replicaOf    = trimSpacesFromString(pars[i++]);
 		solidsOpr    = trimSpacesFromString(pars[i++]);
 		mirror       = trimSpacesFromString(pars[i++]);
-
-		description  = trimSpacesFromString(pars[i++]);
-
 		string pexists = trimSpacesFromString(pars[i++]);
 		exist = (pexists == "1") ? true : false;
+
+		description  = trimSpacesFromString(pars[i++]);
 
 		// modifiers - accessed through options/jcard
 		shift = GSYSTEMNOTAPPLICABLEENTRY;
@@ -86,3 +85,42 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 
 
 
+GVolume::GVolume(string rootVolumeDefinition) {
+
+	vector<string> rootDefinitions = getStringVectorFromString(rootVolumeDefinition);
+	string volumeParameters = "";
+
+	for (int i=1; i<rootDefinitions.size(); i++) {
+		volumeParameters += " " + rootDefinitions[i];
+	}
+
+	name         = ROOTWORLDGVOLUMENAME;
+	mother       = MOTHEROFUSALL;
+	type         = rootDefinitions[0];
+	parameters   = volumeParameters;
+	material     = rootDefinitions.back();
+	pos          = "0*cm 0*cm 0*cm";
+	rot          = "0*deg 0*deg 0*deg";
+	emfield      = "no";
+	visible      = false;
+	style        = 0; // wireframe
+	color        = "ccffff";
+	digitization = "none";
+	touchableID  = "none";
+	copyOf       = "none";
+	replicaOf    = "none";
+	solidsOpr    = "none";
+	mirror       = "none";
+	exist        = 1;
+
+	description  = "root volume";
+
+
+	// modifiers - accessed through options/jcard
+	shift = GSYSTEMNOTAPPLICABLEENTRY;
+	tilt  = GSYSTEMNOTAPPLICABLEENTRY;
+
+	// set file with path if it's a CAD/GDML import
+	importFilename = "none";
+
+}

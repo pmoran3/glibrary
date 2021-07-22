@@ -15,6 +15,7 @@ class GVolume
 {
 public:
 	GVolume(vector<string> pars, string importPath = GSYSTEMNOTAPPLICABLEENTRY);
+	GVolume(string rootVolumeDefinition); // special constructor for root volume
 
 private:
 	string           name; ///< Name of the volume.

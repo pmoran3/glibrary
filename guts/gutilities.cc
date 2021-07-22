@@ -28,6 +28,13 @@ string gutilities::getFileFromPath(string path)
 	return path.substr(path.find_last_of("/") + 1);
 }
 
+//! Get the directory from the path (currently only posix)
+string gutilities::getDirFromPath(string path)
+{
+	auto lastSlash = path.find_last_of("/");
+	return path.substr(0, lastSlash);
+}
+
 //! Return a vector of strings from a stringstream, space is delimeter
 vector<string> gutilities::getStringVectorFromString(string input)
 {

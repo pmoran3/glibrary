@@ -12,19 +12,18 @@ using namespace std;
 
 // init system based on name, factory, variation and run number
 GSystem::GSystem(string n, string f, string v, int verbosity) :
-name(n),
 factory(f),
 variation(v) {
+	name = gutilities::::getDirFromPath(n);
 	gvolumesMap = new map<string, GVolume*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << " Instantiating GSystem from " << name  << endl;
+		cout << GSYSTEMLOGHEADER << "Instantiating GSystem from " << name  << endl;
 	}
 }
 
 // build and add a gvolume to the map from system parameters
-void GSystem::addGVolume(vector<string> pars, int verbosity)
-{
+void GSystem::addGVolume(vector<string> pars, int verbosity) {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
@@ -35,17 +34,21 @@ void GSystem::addGVolume(vector<string> pars, int verbosity)
 		if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
 
 			(*gvolumesMap)[nameKey] = new GVolume(pars);
-			if(verbosity == GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << " adding gVolume " << pars[0] << " to gvolumes map." << endl;
-			} else if(verbosity == GVERBOSITY_DETAILS) {
-				cout << GSYSTEMLOGHEADER << " adding gVolume" << (*gvolumesMap)[nameKey] << endl;
-			}
+			if(verbosity >= GVERBOSITY_SUMMARY) {
+				cout << GSYSTEMLOGHEADER << "adding gVolume " << pars[0] << " to gvolumes map." << endl;
+			} 
 		} else {
 			cerr << FATALERRORL << "a volume with the name " << nameKey << " already exists. " << endl;
 			gexit(EC__GVOLUMEALREADYPRESENT);
 		}
 	}
 }
+
+void GSystem::addROOTVolume(string rootVolumeDefinition) {
+	string nameKey = formVolumeKey(ROOTWORLDGVOLUMENAME);
+	(*gvolumesMap)[nameKey] = new GVolume(rootVolumeDefinition);
+}
+
 
 // build and add an imported volume to the map
 //void GSystem::addGImportedVolume(string importType, string filename, int verbosity)

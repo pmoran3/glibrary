@@ -14,7 +14,7 @@ public:
 		int verbosity = gopt->getInt("g4systemv");
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			G4cout << G4SYSTEMLOGHEADER << " Building geant4 volumes." << G4endl;
+			G4cout << G4SYSTEMLOGHEADER << "Building geant4 volumes." << G4endl;
 		}
 
 		bool sbuild = buildSolid(gopt, s, g4s);
@@ -26,7 +26,7 @@ public:
 			string solid = sbuild ? " solid build, "    : " solid not build, ";
 			string logic = lbuild ? " logical build, "  : " logical not not build, ";
 			string physi = pbuild ? " physical build. " : " physical not build. ";
-			G4cout << G4SYSTEMLOGHEADER << " g4volume <" << vname << "> solid, logical and physical volume pointers: " << solid << logic << physi << G4endl;
+			G4cout << G4SYSTEMLOGHEADER << "g4volume <" << vname << "> solid, logical and physical volume pointers: " << solid << logic << physi << G4endl;
 		}
 
 		if(sbuild && lbuild && pbuild) {

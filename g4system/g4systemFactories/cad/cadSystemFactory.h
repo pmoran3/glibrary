@@ -18,7 +18,7 @@ public:
 		int verbosity = gopt->getInt("g4systemv");
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			G4cout << G4SYSTEMLOGHEADER << " Importing cad volumes." << G4endl;
+			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes." << G4endl;
 		}
 
 //		bool sbuild = buildSolid(gopt, s, g4s);

@@ -15,10 +15,11 @@ class GSystem
 	
 public:
 	// constructor, from command line or jcard
-	GSystem(string n, string f, string v, int verbosity);
+	GSystem(string givenname, string factory, string variation, int verbosity);
 
 private:
-	string      name;               // System name, with path to it. We save it here to use formVolumeKey
+	string      name;               // System name
+	string      path;               // System path (directory for text, gdml, cad factories, mysql db name for mysql)
 	string   factory;               // Factory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
 
@@ -47,6 +48,7 @@ public:
 	// vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
 
 	void addGVolume(vector<string> pars, int verbosity);
+	void addROOTVolume(string rootVolumeDefinition);
 	// void addGImportedVolume(string importType, string filename, int verbosity);
 
 	// need to filter system name from key

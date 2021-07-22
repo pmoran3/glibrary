@@ -19,7 +19,7 @@ void GSystemTextFactory::loadGeometry(GOptions* gopt, GSystem *s)
 		return;
 	}
 	
-	if(verbosity > GVERBOSITY_SUMMARY) {
+	if(verbosity >= GVERBOSITY_SUMMARY) {
 		cout << setupLogHeader << " Loading <text> geometry for " <<  s->getName() << endl;
 	}
 	

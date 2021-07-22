@@ -13,8 +13,8 @@ void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity)
 	ifstream *IN = gSystemTextFile(system, GTEXTGEOMTYPE, verbosity);
 
 
-	if(verbosity > GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << " Loading <text> geometry for " <<  system->getName() << endl;
+	if(verbosity >= GVERBOSITY_SUMMARY) {
+		cout << GSYSTEMLOGHEADER << "Loading <text> geometry for " <<  system->getName() << endl;
 	}
 
 	// loading volumes

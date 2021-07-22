@@ -48,13 +48,13 @@ ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE
 			
 			string newName = trialLocation + "/" + fname;
 			if( verbosity == GVERBOSITY_DETAILS ) {
-				cout << GSYSTEMLOGHEADER << " Trying TEXT " << newName << endl;
+				cout << GSYSTEMLOGHEADER << "Trying TEXT " << newName << endl;
 			}
 			IN->open(newName.c_str());
 			
 			if( IN->good() ) {
 				if(verbosity >= GVERBOSITY_SUMMARY) {
-					cout << GSYSTEMLOGHEADER << " Opening " << newName << endl;
+					cout << GSYSTEMLOGHEADER << "Opening " << newName << endl;
 				}
 				// file found, return stream
 				return  IN;
@@ -63,7 +63,7 @@ ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE
 	}
 	
 	// at this point file was not found, error
-	cerr << GSYSTEMLOGHEADER << " File " << fname << " not found " << endl;
+	cerr << GSYSTEMLOGHEADER << "File " << fname << " not found " << endl;
 	gexit(EC__GSETUPFILENOTOFOUND);
 	
 	

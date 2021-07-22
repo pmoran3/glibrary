@@ -11,7 +11,7 @@
 #define EC__GVOLUMENOTFOUND        204
 
 #define GSYSTEMNOTAPPLICABLEENTRY  "na"
-#define GSYSTEMLOGHEADER           " ❖ GSystem ▸"
+#define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GWORLDNAME                 "world"
 #define NOMODIFIER                 "noModifier"
 
@@ -22,5 +22,6 @@
 #define GSYSTEMSQLFACTORY "GSystemMYSQLFactory"
 
 #define ROOTWORLDGVOLUMENAME "root"
+#define MOTHEROFUSALL        "akasha"
 
 #endif

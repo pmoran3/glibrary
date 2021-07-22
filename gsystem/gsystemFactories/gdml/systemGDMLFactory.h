@@ -10,7 +10,7 @@ class GSystemGDMLFactory : GSystemFactory
 public:
 	void loadSystem(GOptions* gopt, GSystem *s) {
 		verbosity = gopt->getInt("gvolumev");
-		if(verbosity > GVERBOSITY_SUMMARY) {
+		if(verbosity >= GVERBOSITY_SUMMARY) {
 			cout << setupLogHeader << " Loading <GDML> system " << s->getName() << endl;
 		}
 		loadMaterial(gopt, s);
