@@ -14,13 +14,13 @@ using namespace gutilities;
 #include "G4Trd.hh"
 
 
-bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
+G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
-	if(!checkSolidDependencies(verbosity, s, g4s)) return false;
+	if(!checkSolidDependencies(verbosity, s, g4s)) return nullptr;
 
 	// if the g4volume doesn't exist, create one and add it to the map
 	G4Volume *thisG4Volume = nullptr;
@@ -28,8 +28,8 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 	// check if g4s already exists
 	if(g4s->find(vname) != g4s->end()) {
 		thisG4Volume = (*g4s)[vname];
-		// if the solid is already built, nothing to do
-		if(thisG4Volume->getSolid() != nullptr) return true;
+		// if the solid is already built, returning it
+		if (thisG4Volume->getSolid() != nullptr) return thisG4Volume->getSolid();
 	} else {
 		thisG4Volume = new G4Volume();
 		// adding volume to the map
@@ -52,7 +52,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 													pars[2]     ///< half length in Z
 													), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	} else 	if(type == "G4Tubs") {
 		thisG4Volume->setSolid(new G4Tubs(vname,     ///< name
 													 pars[0],   ///< Inner radius
@@ -62,7 +62,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 													 pars[4]    ///< Delta Phi angle
 													 ), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	} else 	if(type == "G4CutTubs") {
 		thisG4Volume->setSolid(new G4CutTubs(vname,     ///< name
 														 pars[0],   ///< Inner radius
@@ -74,7 +74,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 														 G4ThreeVector(pars[8], pars[9], pars[10])    ///< Outside Normal at +z
 														 ), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	} else 	if(type == "G4Cons") {
 		thisG4Volume->setSolid(new G4Cons(vname,     ///< name
 													 pars[0],   ///< Inside radius at -pDz
@@ -86,7 +86,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 													 pars[6]    ///< Delta Phi angle
 													 ), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	} else 	if(type == "G4Para") {
 		thisG4Volume->setSolid(new G4Para(vname,     ///< name
 													 pars[0],   ///< Half length in x
@@ -97,7 +97,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 													 pars[5]    ///< Azimuthal angle of the line joining the centres of the faces at -dz and +dz in z
 													 ), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	} else 	if(type == "G4Trd") {
 		thisG4Volume->setSolid(new G4Trd(vname,     ///< name
 													pars[0],   ///< Half-length along x at the surface positioned at -dz
@@ -107,7 +107,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 													pars[4]    ///< Half-length along z axis
 													), verbosity
 									  );
-		return true;
+		return thisG4Volume->getSolid();
 	}
 
 
@@ -122,7 +122,7 @@ bool G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G
 		G4cout << " " << vname << " solid is not built." << G4endl;
 	}
 
-	return false;
+	return nullptr;
 }
 
 

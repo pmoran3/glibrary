@@ -2,7 +2,9 @@
 #define  GSYSTEM_CONVENTIONS_H  1
 
 // number of database pars defining a gvolume
-#define GVOLUMENUMBEROFPARS        19
+#define GVOLUMENUMBEROFPARS    19
+#define DEFAULTPOSITION       "0*cm, 0*cm, 0*cm";
+#define DEFAULTROTATION       "0*deg, 0*deg, 0*deg";
 
 // exit codes: 200s
 #define EC__GVOLUMEALREADYPRESENT  201

@@ -37,8 +37,8 @@ private:
 	string     emfield;    ///< Magnetic Field. Possible choices: "inherit", "fieldName", "noField"
 
 	// physical attributes
-	string          pos;   ///< Position relative to the mother volume
-	string          rot;   ///< Rotation Matrix, defined by rotations along x,y,z axis relative to the mother volume
+	string          pos;   ///< Defines the position relative to the mother volume
+	string          rot;   ///< Define the rotation Matrix, defined by rotations along x,y,z axis relative to the mother volume
 	string        shift;   ///< Position modifier
 	string         tilt;   ///< Rotation modifier
 	bool          exist;   ///< Existance modifier

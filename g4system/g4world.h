@@ -18,6 +18,9 @@ public:
 private:
 	map<string, G4System*> g4systemsMap;   // key is system name
 
+	// the key has the form gsystem/gvolumename
+	map<string, G4Volume*> *g4volumesMap;
+
 	G4System* getOrCreateG4System(string sname, string factory, int verbosity);
 
 

@@ -47,10 +47,9 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 		// the first constructor must have a number of pars multiple of 3
 		// the second constructor must have a number of pars (-3) multiple of 2
 		if(actualNumberOfParameters%3 !=0 && (actualNumberOfParameters - 3)%2 != 0) {
-			G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
-			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
+			G4cerr << FATALERRORL << "the number of parameters in the constructor of <" << name << ">, of solid type <" << type << "> is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
-			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
+			G4cerr << "      This does not match a <" << type <<">. Exiting." << G4endl << G4endl;
 			exit(EC__G4PARAMETERSMISMATCH);
 		} else {
 			return parameters;
@@ -62,8 +61,7 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 		// the first constructor must have a number of pars (-4) multiple of 3
 		// the second constructor must have a number of pars (-4) multiple of 2
 		if((actualNumberOfParameters - 4)%3 !=0 && (actualNumberOfParameters - 3)%2 != 0) {
-			G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
-			<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
+			G4cerr << FATALERRORL << "the number of parameters in the constructor of <" << name << ">, of solid type <" << type << "> is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 			G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
 			exit(EC__G4PARAMETERSMISMATCH);
@@ -82,14 +80,16 @@ vector<double> G4NativeSystemFactory::checkAndReturnParameters(GVolume *s)
 	else if(type == "G4TwistedTrap")    possibleNumberOfParameters = {5, 11};
 	else if(type == "G4TwistedTrd")     possibleNumberOfParameters = {6};
 	else if(type == "G4TwistedTubs")    possibleNumberOfParameters = {5};
-
+	else {
+		G4cerr << FATALERRORL << "The constructor of <" << name << "> uses an unknow solid type <" << type << ">" << G4endl;
+		gexit(EC__G4SOLIDTYPENOTFOUND);
+	}
 
 	if(possibleNumberOfParameters.find(actualNumberOfParameters) == possibleNumberOfParameters.end() ) {
-		G4cerr << FATALERRORL << "the number of parameters in the constructor of " << name << ", " << type
-		<< " is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
+		G4cerr << FATALERRORL << "the number of parameters in the constructor of <" << name << ">, of solid type <" << type << "> is " << actualNumberOfParameters <<  ":" << s->getParameters() << G4endl;
 
 		G4cerr << "      This does not match a " << type <<". Exiting." << G4endl << G4endl;
-		exit(EC__G4PARAMETERSMISMATCH);
+		gexit(EC__G4PARAMETERSMISMATCH);
 	}
 
 	return parameters;

@@ -44,9 +44,9 @@ public:
 	}
 
 private:
-//	bool buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-//	bool buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-//	bool buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+//	G4VSolid*          buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+//	G4LogicalVolume*   buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+//	G4VPhysicalVolume* buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 
 };
 

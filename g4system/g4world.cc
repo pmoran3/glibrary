@@ -22,17 +22,17 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	for(auto &s : *gworld->getSystemsMap()) {
 		string factory = s.second->getFactory();
 
-		if(factory == "text" || factory == ROOTWORLDGVOLUMENAME) {
+		if(factory == "text" || factory == "mysql") {
 			// if factory not found, registering it in the manager and loading it into the map
-			if(g4systemFactory.find(factory) == g4systemFactory.end()) {
-				g4SystemManager.RegisterObjectFactory<G4NativeSystemFactory>("G4NativeSystemFactory");
-				g4systemFactory[factory] = g4SystemManager.CreateObject<G4SystemFactory>("G4NativeSystemFactory");
+			if(g4systemFactory.find(G4SYSTEMNATFACTORY) == g4systemFactory.end()) {
+				g4SystemManager.RegisterObjectFactory<G4NativeSystemFactory>(G4SYSTEMNATFACTORY);
+				g4systemFactory[factory] = g4SystemManager.CreateObject<G4SystemFactory>(G4SYSTEMNATFACTORY);
 			}
 		} else if(factory == "cad") {
 			// if factory not found, registering it in the manager and loading it into the map
-			if(g4systemFactory.find(factory) == g4systemFactory.end()) {
-				g4SystemManager.RegisterObjectFactory<G4CadSystemFactory>("G4CadSystemFactory");
-				g4systemFactory[factory] = g4SystemManager.CreateObject<G4SystemFactory>("G4CadSystemFactory");
+			if(g4systemFactory.find(G4SYSTEMCADFACTORY) == g4systemFactory.end()) {
+				g4SystemManager.RegisterObjectFactory<G4CadSystemFactory>(G4SYSTEMCADFACTORY);
+				g4systemFactory[factory] = g4SystemManager.CreateObject<G4SystemFactory>(G4SYSTEMCADFACTORY);
 			}
 		}
 	}
@@ -47,13 +47,16 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 		}
 	}
 
+	// build root G4Volume and get its pointer. This pointer will be added to all systems g4volumesMap
+
+
+
 	// now building geant4 objects
 	// every volume that is not built (due to dependencies) increments remainingVolumes
 	vector<GVolume*> thisIterationRemainingVolumes;
 	unsigned long allRemainingVolumes = 0;
 	do {
 		thisIterationRemainingVolumes.clear();
-
 
 		// looping over system in the gsystemsMap
 		for(auto &system : *gworld->getSystemsMap()) {

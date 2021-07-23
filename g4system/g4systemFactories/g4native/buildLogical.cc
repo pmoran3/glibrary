@@ -9,14 +9,14 @@
 // guts
 #include "gutilities.h"
 
-bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
+G4LogicalVolume* G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// if it's a component, do nothing
 	string matName = s->getMaterial();
-	if(matName == "component") return true;
+	//if(matName == "component") return true;
 
 	// dependencies are there, can build volume
 	string dmat             = gopt->getString("defaultMaterial");
@@ -31,10 +31,10 @@ bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string,
 		thisG4Volume = (*g4s)[vname];
 		// if the logical is already built, nothing to do
 		// this can happen if it's a copy
-		if(thisG4Volume->getLogical() != nullptr) return true;
+		if(thisG4Volume->getLogical() != nullptr) return thisG4Volume->getLogical();
 
 		// if the solid does not exist, can't build the logical
-		if(thisG4Volume->getSolid() == nullptr) return false;
+		if(thisG4Volume->getSolid() == nullptr) return nullptr;
 	} else {
 		thisG4Volume = new G4Volume();
 	}
@@ -79,7 +79,7 @@ bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string,
 
 
 
-	return true;
+	return thisG4Volume->getLogical();
 }
 
 

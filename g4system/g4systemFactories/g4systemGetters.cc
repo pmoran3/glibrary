@@ -47,7 +47,7 @@ G4RotationMatrix* G4SystemFactory::getRotation(GVolume *s)
 																G4ThreeVector(0, 0, 1));
 
 
-	vector<string> rotDef = getStringVectorFromString(s->getRot());
+	vector<string> rotDef = getStringVectorFromStringWithDelimiter(s->getRot(), ",");
 
 	// default ordered rotation
 	if(rotDef.size() == 3) {

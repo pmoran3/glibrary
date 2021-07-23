@@ -87,11 +87,11 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 
 GVolume::GVolume(string rootVolumeDefinition) {
 
-	vector<string> rootDefinitions = getStringVectorFromString(rootVolumeDefinition);
+	vector<string> rootDefinitions = getStringVectorFromStringWithDelimiter(rootVolumeDefinition, ",");
 	string volumeParameters = "";
 
 	for (int i=1; i<rootDefinitions.size()-1; i++) {
-		volumeParameters += " " + rootDefinitions[i];
+		volumeParameters += ", " + rootDefinitions[i];
 	}
 
 	name         = ROOTWORLDGVOLUMENAME;
@@ -99,8 +99,8 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	type         = rootDefinitions[0];
 	parameters   = volumeParameters;
 	material     = rootDefinitions.back();
-	pos          = "0*cm 0*cm 0*cm";
-	rot          = "0*deg 0*deg 0*deg";
+	pos          = DEFAULTPOSITION;
+	rot          = DEFAULTROTATION;
 	emfield      = GSYSTEMNOTAPPLICABLEENTRY;
 	visible      = false;
 	style        = 0; // wireframe

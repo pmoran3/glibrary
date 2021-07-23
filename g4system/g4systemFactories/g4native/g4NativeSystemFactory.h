@@ -19,15 +19,15 @@ public:
 			G4cout << G4SYSTEMLOGHEADER << "Building geant4 volume originating from <" << vname << ">" << G4endl;
 		}
 
-		bool sbuild = buildSolid(gopt, s, g4s);
-		bool lbuild = buildLogical(gopt, s, g4s);
-		bool pbuild = buildPhysical(gopt, s, g4s);
+		G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
+		G4LogicalVolume*   lbuild = buildLogical(gopt, s, g4s);
+		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
 
 		if(verbosity == GVERBOSITY_DETAILS) {
-			string solid = sbuild ? " solid build, "    : " solid not build, ";
-			string logic = lbuild ? " logical build, "  : " logical not not build, ";
-			string physi = pbuild ? " physical build. " : " physical not build. ";
-			G4cout << G4SYSTEMLOGHEADER << "g4volume <" << vname << "> solid, logical and physical volume pointers: " << solid << logic << physi << G4endl;
+			string solid = sbuild != nullptr ? " solid build, "    : " solid not build, ";
+			string logic = lbuild != nullptr ? " logical build, "  : " logical not not build, ";
+			string physi = pbuild != nullptr ? " physical build. " : " physical not build. ";
+			G4cout << G4SYSTEMLOGHEADER << "g4volume <" << vname << "> " << solid << logic << physi << " with pointers: " << sbuild << ", " << lbuild << ", " << pbuild << G4endl;
 		}
 
 		if(sbuild && lbuild && pbuild) {
@@ -38,9 +38,9 @@ public:
 	}
 
 private:
-	bool buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-	bool buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-	bool buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4VSolid*          buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4LogicalVolume*   buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4VPhysicalVolume* buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 
 	// solid
 	vector<string> descriptionsOfParameters(GVolume *s); // returns description of geant4 constructor parameters

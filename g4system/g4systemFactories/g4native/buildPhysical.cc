@@ -4,7 +4,7 @@
 // geant4
 #include "G4PVPlacement.hh"
 
-bool G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
+G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
 	bool verbosity = getVerbosity(gopt, vname);
@@ -13,11 +13,13 @@ bool G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string
 	// gvolume
 	// logical volume must exist
 	// logical mother must exist
-	if(!checkPhysicalDependencies(verbosity, s, g4s)) return false;
+	if(!checkPhysicalDependencies(verbosity, s, g4s)) return nullptr;
 
 	// if it's a component, do nothing
 	string matName = s->getMaterial();
-	if(matName == "component") return true;
+
+	// how to handle components?
+	//if(matName == "component") return true;
 
 
 
@@ -60,6 +62,6 @@ bool G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string
 															  ), verbosity
 									  );
 
-	return true;
+	return thisG4Volume->getPhysical();
 }
 

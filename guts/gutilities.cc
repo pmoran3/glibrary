@@ -190,7 +190,7 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		else if( units == "ns")        answer *= ns;
 		else if( units == "na")        answer *= 1;
 		else if( units == "counts")    answer *= 1;
-		else cerr << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
+		else cerr << GWARNING << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
 		return answer;
 	}
 
