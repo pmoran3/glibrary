@@ -25,6 +25,15 @@ private:
 
 	string g4FactoryNameFromSystemFactory(string factory);
 
+public:
+	G4Volume* getG4Volume(string volumeName) {
+		if ( g4volumesMap->find(volumeName) != g4volumesMap->end() ) {
+			return (*g4volumesMap)[volumeName];
+		}
+		return nullptr;
+	}
+
+
 };
 
 

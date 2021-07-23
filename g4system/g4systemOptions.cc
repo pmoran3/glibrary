@@ -38,7 +38,7 @@ namespace g4system {
 		json jsonG4CheckOverlaps = {
 			{GNAME, "checkOverlaps"},
 			{GDESC, "check overlaps (need better help)"},
-			{GDFLT, 1}
+			{GDFLT, 0}
 		};
 		goptions.push_back(GOption(jsonG4CheckOverlaps));
 
