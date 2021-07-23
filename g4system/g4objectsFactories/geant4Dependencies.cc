@@ -3,10 +3,10 @@
 
 // g4system
 #include "g4systemConventions.h"
-#include "g4systemFactories/g4systemFactory.h"
+#include "g4objectsFactories/g4objectsFactory.h"
 
 
-bool G4SystemFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
+bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	// checking if it's a copy, replica or solid operation
 	// they are mutually exclusve
@@ -55,7 +55,7 @@ bool G4SystemFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<str
 	return true;
 }
 
-bool G4SystemFactory::checkLogicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
+bool G4ObjectsFactory::checkLogicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	// PRAGMA TODO
 	// check material here
@@ -63,7 +63,7 @@ bool G4SystemFactory::checkLogicalDependencies(bool verbosity, GVolume *s, map<s
 	return true;
 }
 
-bool G4SystemFactory::checkPhysicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
+bool G4ObjectsFactory::checkPhysicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname      = s->getName();
 	string motherName = s->getMother();
@@ -89,9 +89,9 @@ bool G4SystemFactory::checkPhysicalDependencies(bool verbosity, GVolume *s, map<
 	}
 
 	if(motherName != MOTHEROFUSALL) {
-	if(verbosity) G4cout << G4SYSTEMLOGHEADER << "dependencies: <" << vname << "> and mother <" << motherName << "> logical volumes are found. Ready to build Physical volume." << G4endl ;
+	if(verbosity) G4cout << G4SYSTEMLOGHEADER << "dependencies: <" << vname << "> and mother <" << motherName << "> logical volumes are found. Ready to build or get physical volume." << G4endl ;
 	} else {
-		if(verbosity) G4cout << G4SYSTEMLOGHEADER << "dependencies: <" << vname << "> logical volume is found. Ready to build Physical volume." << G4endl ;
+		if(verbosity) G4cout << G4SYSTEMLOGHEADER << "dependencies: <" << vname << "> logical volume is found. Ready to build or get physical volume." << G4endl ;
 	}
 	return true;
 }

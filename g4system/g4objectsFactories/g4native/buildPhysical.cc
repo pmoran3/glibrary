@@ -1,5 +1,5 @@
 // g4system
-#include "g4NativeSystemFactory.h"
+#include "g4NativeObjectsFactory.h"
 
 // geant4
 #include "G4PVPlacement.hh"
@@ -51,16 +51,18 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 
 	G4Volume *thisG4Volume = (*g4s)[vname];
 
-	thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),
-															  getPosition(s),
-															  thisG4Volume->getLogical(),
-															  vname,
-															  getLogicalFromMap(s->getMother(), g4s),
-															  false,
-															  s->getPCopyNo(),
-															  checkForOverlaps
-															  ), verbosity
-									  );
+	if(thisG4Volume->getPhysical() == nullptr) {
+		thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),
+																  getPosition(s),
+																  thisG4Volume->getLogical(),
+																  vname,
+																  getLogicalFromMap(s->getMother(), g4s),
+																  false,
+																  s->getPCopyNo(),
+																  checkForOverlaps
+																  ), verbosity
+										  );
+	}
 
 	return thisG4Volume->getPhysical();
 }

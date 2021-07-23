@@ -1,5 +1,5 @@
 // g4system
-#include "g4NativeSystemFactory.h"
+#include "g4NativeObjectsFactory.h"
 
 // glibrary
 #include "gutilities.h"

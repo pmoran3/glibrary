@@ -19,14 +19,14 @@
 using std::map;
 
 // G4SetupFactory factory
-class G4SystemFactory
+class G4ObjectsFactory
 {
 public:
 	// returns true if the system could be built
 	// returns false if dependencies are not met
 	virtual bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4smap) = 0;
 
-	virtual ~G4SystemFactory() = default;
+	virtual ~G4ObjectsFactory() = default;
 
 protected:
 	// geant4 objects getters

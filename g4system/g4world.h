@@ -5,7 +5,7 @@
 #include "gworld.h"
 
 // g4system
-#include "g4system.h"
+#include "g4volume.h"
 
 
 // a world is a collection of GSystem, their
@@ -15,14 +15,15 @@ public:
 	// constructor from a GWorld, using verbosity
 	G4World(GWorld *gworld, GOptions* opt);
 
-private:
-	map<string, G4System*> g4systemsMap;   // key is system name
+	~G4World() {
+		delete g4volumesMap;
+	}
 
+private:
 	// the key has the form gsystem/gvolumename
 	map<string, G4Volume*> *g4volumesMap;
 
-	G4System* getOrCreateG4System(string sname, string factory, int verbosity);
-
+	string g4FactoryNameFromSystemFactory(string factory);
 
 };
 

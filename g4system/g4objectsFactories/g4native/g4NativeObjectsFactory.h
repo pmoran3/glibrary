@@ -3,10 +3,10 @@
 
 // g4system
 #include "g4systemConventions.h"
-#include "g4systemFactories/g4systemFactory.h"
+#include "g4objectsFactories/g4objectsFactory.h"
 
 // system factory
-class G4NativeSystemFactory : G4SystemFactory
+class G4NativeSystemFactory : G4ObjectsFactory
 {
 public:
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {

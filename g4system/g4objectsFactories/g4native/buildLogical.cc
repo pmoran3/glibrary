@@ -1,5 +1,5 @@
-// g4volume
-#include "g4NativeSystemFactory.h"
+// g4system
+#include "g4NativeObjectsFactory.h"
 
 // geant4
 #include "G4NistManager.hh"

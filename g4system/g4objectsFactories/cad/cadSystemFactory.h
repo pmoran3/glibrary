@@ -3,10 +3,10 @@
 
 // g4system
 #include "g4systemConventions.h"
-#include "g4systemFactories/g4systemFactory.h"
+#include "g4objectsFactories/g4objectsFactory.h"
 
 // system factory
-class G4CadSystemFactory : G4SystemFactory
+class G4CadSystemFactory : G4ObjectsFactory
 {
 public:
 

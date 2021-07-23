@@ -4,10 +4,10 @@ using namespace gutilities;
 
 // g4system
 #include "g4systemConventions.h"
-#include "g4systemFactories/g4systemFactory.h"
+#include "g4objectsFactories/g4objectsFactory.h"
 
 
-G4VSolid* G4SystemFactory::getSolidFromMap(string vname, map<string, G4Volume*> *g4s) const
+G4VSolid* G4ObjectsFactory::getSolidFromMap(string vname, map<string, G4Volume*> *g4s) const
 {
 
 	if(g4s->find(vname) != g4s->end()) {
@@ -18,7 +18,7 @@ G4VSolid* G4SystemFactory::getSolidFromMap(string vname, map<string, G4Volume*> 
 	return nullptr;
 }
 
-G4LogicalVolume* G4SystemFactory::getLogicalFromMap(string vname, map<string, G4Volume*> *g4s) const
+G4LogicalVolume* G4ObjectsFactory::getLogicalFromMap(string vname, map<string, G4Volume*> *g4s) const
 {
 
 	if(g4s->find(vname) != g4s->end()) {
@@ -29,7 +29,7 @@ G4LogicalVolume* G4SystemFactory::getLogicalFromMap(string vname, map<string, G4
 	return nullptr;
 }
 
-G4VPhysicalVolume* G4SystemFactory::getPhysicalFromMap(string vname, map<string, G4Volume*> *g4s) const
+G4VPhysicalVolume* G4ObjectsFactory::getPhysicalFromMap(string vname, map<string, G4Volume*> *g4s) const
 {
 
 	if(g4s->find(vname) != g4s->end()) {
@@ -40,7 +40,7 @@ G4VPhysicalVolume* G4SystemFactory::getPhysicalFromMap(string vname, map<string,
 	return nullptr;
 }
 
-G4RotationMatrix* G4SystemFactory::getRotation(GVolume *s)
+G4RotationMatrix* G4ObjectsFactory::getRotation(GVolume *s)
 {
 	G4RotationMatrix *rot = new G4RotationMatrix(G4ThreeVector(1, 0, 0),
 																G4ThreeVector(0, 1, 0),
@@ -101,7 +101,7 @@ G4RotationMatrix* G4SystemFactory::getRotation(GVolume *s)
 	return rot;
 }
 
-G4ThreeVector G4SystemFactory::getPosition(GVolume *s)
+G4ThreeVector G4ObjectsFactory::getPosition(GVolume *s)
 {
 	G4ThreeVector pos(0,0,0);
 
