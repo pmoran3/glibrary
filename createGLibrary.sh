@@ -29,7 +29,7 @@ do
 done
 
 echo " "
-for f in todo
+for f in todo notes
 do
 	echo " "touching $f
 	rm -f $library/$f

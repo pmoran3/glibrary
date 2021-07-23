@@ -4,3 +4,6 @@
 - do data in digitized hit need to be value or reference?
 
 - streamData instead of EventData. How to organize this?
+  add class hardware that transform sensitive identifier to crate / slot / channel
+  add class that collects crate / slot / channel into a single stream
+  stream using gstreamer

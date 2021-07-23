@@ -1,0 +1,4 @@
+#ifndef  GSTREAMER_H_CONVENTIONS
+#define  GSTREAMER_H_CONVENTIONS 1
+
+#endif

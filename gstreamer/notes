@@ -1,0 +1,33 @@
+## Create project:
+
+- Start with with  Cross-platform Empty project: "COMMAND-SHIFT-N". Do no create local git repos.
+- Close it. Move the project from  its own dir created to one dir up. Delete dir.
+- Add all the files (make sure to do scons -c to avoid including objects). Added folders: Create groups (create folder reference won't let add sources later)
+- On the general project add "settings.xcconfig" configuration for debug and release
+- Add macos Library target "libraryName". Dynamic . Organization Identifier: mlibrary
+- remove libraryName directoy
+- add sources libraryName.cc in Compile Sources "Build Phases"
+
+
+
+
+## QT Resources
+
+resources is the executable name, for example argv[0]
+
+QFileInfo qrcFileInfoExecutable(resources.c_str());
+QString rccPath = qrcFileInfoExecutable.absolutePath() + "/" + "gemcResources.rcc";
+QResource::registerResource(rccPath);
+
+The rcc file (i.e. gemcResources.rcc) is obtained with:
+rcc -binary exampleResources.qrc -o exampleResources.rcc
+add to project and copy it in product directory in case it is compiled by xcode (I think it could be added as part of xcode steps)
+scons on the other hand knows about it because the qt module
+compiles exampleResources.qrc directly
+
+
+
+## Using Namespace std
+- never in headers
+- can use use std::cout 
+- can be inside scopes
