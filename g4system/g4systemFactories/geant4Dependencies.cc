@@ -21,7 +21,7 @@ bool G4SystemFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<str
 			// first string must be copyOf
 			if(copies[0] == "copyOf:") {
 				// checking if the copy solid exists
-				if(verbosity) G4cout << " " << s->getName() << " is a copy of " << copies[1] ;
+				if(verbosity) G4cout << G4SYSTEMLOGHEADER << "<" << s->getName() << "> is a copy of <" << copies[1] << "<" ;
 				if(getSolidFromMap(copies[1], g4s) != nullptr) {
 					if(verbosity) G4cout << " which already exists" << G4endl; ;
 					return true;

@@ -28,7 +28,7 @@ namespace g4system {
 		json jsonDefaultMaterial = {
 			{GNAME, "defaultMaterial"},
 			{GDESC, GVERBOSITY_DESCRIPTION},
-			{GDFLT, "G4Galactica"}
+			{GDFLT, "G4_Galactic"}
 		};
 		goptions.push_back(GOption(jsonDefaultMaterial));
 

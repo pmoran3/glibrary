@@ -64,6 +64,11 @@ namespace gutilities {
 		}
 
 	}
+
+
+	template<class KEY, class VALUE> vector<KEY> getKeys(const map<KEY, VALUE>& map);
+
+
 };
 
 

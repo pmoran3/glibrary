@@ -90,7 +90,7 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	vector<string> rootDefinitions = getStringVectorFromString(rootVolumeDefinition);
 	string volumeParameters = "";
 
-	for (int i=1; i<rootDefinitions.size(); i++) {
+	for (int i=1; i<rootDefinitions.size()-1; i++) {
 		volumeParameters += " " + rootDefinitions[i];
 	}
 
@@ -101,16 +101,16 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	material     = rootDefinitions.back();
 	pos          = "0*cm 0*cm 0*cm";
 	rot          = "0*deg 0*deg 0*deg";
-	emfield      = "no";
+	emfield      = GSYSTEMNOTAPPLICABLEENTRY;
 	visible      = false;
 	style        = 0; // wireframe
 	color        = "ccffff";
-	digitization = "none";
-	touchableID  = "none";
-	copyOf       = "none";
-	replicaOf    = "none";
-	solidsOpr    = "none";
-	mirror       = "none";
+	digitization = GSYSTEMNOTAPPLICABLEENTRY;
+	touchableID  = GSYSTEMNOTAPPLICABLEENTRY;
+	copyOf       = GSYSTEMNOTAPPLICABLEENTRY;
+	replicaOf    = GSYSTEMNOTAPPLICABLEENTRY;
+	solidsOpr    = GSYSTEMNOTAPPLICABLEENTRY;
+	mirror       = GSYSTEMNOTAPPLICABLEENTRY;
 	exist        = 1;
 
 	description  = "root volume";

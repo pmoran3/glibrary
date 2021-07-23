@@ -63,7 +63,6 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			for(auto &gvolume : *system.second->getGVolumesMap()) {
 				if(g4systemFactory.find(factory) != g4systemFactory.end()) {
 
-
 					if(verbosity == GVERBOSITY_DETAILS) {
 						cout << G4SYSTEMLOGHEADER << "using factory <" << KYEL << factory << RST << ">, to build g4volume <" << KYEL << gvolume.first << RST << ">" << endl;
 					}
@@ -93,7 +92,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 				for (auto &gvolumeLeft: thisIterationRemainingVolumes) {
 					cout << GTAB << "- <" << gvolumeLeft->getName() << "> with mother <" << gvolumeLeft->getMother() << ">" << endl;
 				}
-				gexit(EC__DEPENDENCIESNOTSOLVED);
+				gexit(EC__G4DEPENDENCIESNOTSOLVED);
 			}
 		} else {
 			allRemainingVolumes = thisIterationRemainingVolumes.size();

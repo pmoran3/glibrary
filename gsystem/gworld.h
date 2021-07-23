@@ -24,7 +24,7 @@ public:
 
 private:
 	map<string, GSystem*>  *gsystemsMap;    // key is system name
-	map<string, GModifier*> gmodifiersMap;   // key is volume name
+	map<string, GModifier*> gmodifiersMap;  // key is volume name
 
 	// seerch for a volume among systems in gsystemsMap
 	GVolume* searchForVolume(string volumeName, string purpose) ;

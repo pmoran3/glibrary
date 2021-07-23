@@ -100,8 +100,10 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 	// adding root volume to the a "root" gsystem
+	// using the first existing factory name
+	string firstFactory = gsystemsMap->begin()->second->getFactory();
 	string worldVolume = gopts->getString("worldVolume");
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, ROOTWORLDGVOLUMENAME, "default", verbosity);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
 	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
 
 	// applying gvolumes modifiers

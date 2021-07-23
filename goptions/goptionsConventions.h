@@ -40,24 +40,6 @@ namespace goptions {
 
 }
 
-// gutilities namespace:
-#include <vector>
-#include <map>
-
-namespace gutilities {
-	using std::map;
-	using std::vector;
-
-	// returns all keys from a map<key, value>
-	// I think this is in STL now?
-	template<class KEY, class VALUE> vector<KEY> getKeys(const map<KEY, VALUE>& map) {
-		vector<KEY> keys(map.size());
-		for (const auto& it : map)
-			keys.push_back(it.first);
-		return keys;
-	}
-}
-
 
 #endif
 

@@ -138,17 +138,35 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		// No unit is still ok if the number is 0
 
 		if(value.length()>0 && warnIfNotUnit && stod(value) != 0) {
-			cout << " ! Warning: value " << v << " does not contain units." << endl;
+			cerr << " ! Warning: value " << v << " does not contain units." << endl;
 		}
-		return stod(value);
+
+		double answer;
+
+		try {
+			answer = stod(value);
+		}
+		catch(exception& e) {
+			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double " << e.what() << endl;
+		}
+
+		return answer;
 
 	} else {
 		string rootValue = value.substr(0, value.find("*"));
 		string units     = value.substr(value.find("*") + 1);
 
-		double answer = stod(rootValue);
+		double answer;
 
-		if( units == "m")         answer *= m;
+		try {
+			answer = stod(rootValue);
+		}
+		catch(exception& e) {
+			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double " << e.what() << endl;
+		}
+
+
+		      if( units == "m")        answer *= m;
 		else if( units == "inches")    answer *= 2.54*cm;
 		else if( units == "inch")      answer *= 2.54*cm;
 		else if( units == "cm")        answer *= cm;
@@ -191,7 +209,7 @@ vector<double> gutilities::getG4NumbersFromStringVector(vector<string> vstring, 
 }
 
 vector<double>  gutilities::getG4NumbersFromString(string vstring, bool warnIfNotUnit) {
-	return getG4NumbersFromStringVector(getStringVectorFromString(vstring), warnIfNotUnit);
+	return getG4NumbersFromStringVector(getStringVectorFromStringWithDelimiter(vstring, ","), warnIfNotUnit);
 }
 
 
@@ -276,3 +294,12 @@ vector<string> gutilities::getStringVectorFromStringWithDelimiter(string input, 
 	return pvalues;
 }
 
+// returns all keys from a map<key, value>
+// I think this is in STL now?
+// wow including this in a code makes the library not build correctly? How? I added it in gworld.cc to get first key and it was not building the constructor
+template<class KEY, class VALUE> vector<KEY> gutilities::getKeys(const map<KEY, VALUE>& map) {
+	vector<KEY> keys(map.size());
+	for (const auto& it : map)
+		keys.push_back(it.first);
+	return keys;
+}

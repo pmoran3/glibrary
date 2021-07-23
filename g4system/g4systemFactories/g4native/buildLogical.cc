@@ -19,8 +19,8 @@ bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string,
 	if(matName == "component") return true;
 
 	// dependencies are there, can build volume
-	string dmat    = gopt->getString("defaultMaterial");
-	//bool gui       = gopt->getBool("gui");
+	string dmat             = gopt->getString("defaultMaterial");
+	bool useDefaultMaterial = gopt->getSwitch("useDefaultMaterial");
 
 	// if the g4volume doesn't exist, create one and add it to the map
 	G4Volume *thisG4Volume = nullptr;
@@ -44,13 +44,13 @@ bool G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string,
 	// looking for material
 	G4Material* thisMaterial = NISTman->FindOrBuildMaterial(matName);
 	// if not found, use the material specified in the options
-	if(thisMaterial == nullptr) {
+	if(thisMaterial == nullptr && useDefaultMaterial) {
 		G4cout << " ! Warning: material " << matName << " not found for volume " << vname << ". Using " << dmat << " instead." << G4endl;
 		thisMaterial = NISTman->FindOrBuildMaterial(dmat);
 		if(thisMaterial == nullptr) {
 			// you set an option incorrectly, error!
 			G4cerr << FATALERRORL << "options default material " << dmat << " not found. Exiting. Need to add (g)exit nice here." << G4endl;
-			//exit(99);
+			gexit(EC__G4MATERIALNOTFOUND);
 		}
 	}
 
