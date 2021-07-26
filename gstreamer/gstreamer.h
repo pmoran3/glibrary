@@ -1,6 +1,14 @@
 #ifndef  GSTREAMER_H
 #define  GSTREAMER_H  1
 
+// gdata
+#include "event/gEventData.h"
+
+// c++
+#include <string>
+
+// gfactory
+#include "gfactory.h"
 
 class GStreamer
 {
