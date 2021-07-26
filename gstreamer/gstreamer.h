@@ -2,7 +2,7 @@
 #define  GSTREAMER_H  1
 
 
-class gstreamer
+class GStreamer
 {
 
 
