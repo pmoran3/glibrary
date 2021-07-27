@@ -13,6 +13,11 @@
 class GStreamer
 {
 
+public:
+	// runs all the virtual methods to write a single event to file
+	map<string, bool> publishEvent(GEventData *eventData);
+
+
 protected:
 
 	string outputFileName;
@@ -24,8 +29,8 @@ protected:
 	// one per event, called per geant4 run
 	virtual bool startEvent() { return false;}
 	virtual bool endEvent()   { return false;}
-
-	virtual bool publishEvent(GEventData *eventData) { return false;}
+	virtual bool publishEventHeader(GEventData *eventData) { return false;}
+	virtual bool publishEventData(GEventData *eventData) { return false;}
 
 
 	// stream virtual methods
