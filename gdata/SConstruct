@@ -1,4 +1,4 @@
-# This compiles the example(s) and the library
+# This compiles the example(s) and the gdata library
 from init_env import init_environment
 
 # load needed environment for this library

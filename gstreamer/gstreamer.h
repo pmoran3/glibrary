@@ -1,36 +1,37 @@
 #ifndef  GSTREAMER_H
 #define  GSTREAMER_H  1
 
-// gdata
+// glibrary
 #include "event/gEventData.h"
+#include "gfactory.h"
+#include "goptions.h"
 
 // c++
 #include <string>
 
-// gfactory
-#include "gfactory.h"
 
 class GStreamer
 {
 
 public:
 	// runs all the virtual methods to write a single event to file
-	map<string, bool> publishEvent(GEventData *eventData);
+	map<string, bool> publishEvent(GOptions *gopts, vector<GEventData*> *runData);
+
+	virtual bool openConnection(GOptions *gopts) { return false;}   // in GActionInitialization constructor
+	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
 
 
 protected:
 
 	string outputFileName;
-	virtual bool openConnection() { return false;}
-	virtual bool closeConnection() { return false;}
-
 
 	// event virtual methods
 	// one per event, called per geant4 run
 	virtual bool startEvent() { return false;}
 	virtual bool endEvent()   { return false;}
 	virtual bool publishEventHeader(GEventData *eventData) { return false;}
-	virtual bool publishEventData(GEventData *eventData) { return false;}
+	virtual bool publishEventTrueInfoData(GEventData *eventData) { return false;}
+	virtual bool publishEventDigitizedData(GEventData *eventData) { return false;}
 
 
 	// stream virtual methods

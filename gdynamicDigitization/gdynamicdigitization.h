@@ -8,8 +8,8 @@
 #include "gdl.h"
 #include "gtouchable.h"
 #include "ghit.h"
-#include "dataTypes/gDigitizedData.h"
-#include "dataTypes/gTrueInfoData.h"
+#include "gDigitizedData.h"
+#include "gTrueInfoData.h"
 
 // c++
 #include <vector>
