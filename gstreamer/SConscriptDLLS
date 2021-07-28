@@ -1,0 +1,31 @@
+# The environment is not passed here because the user may not have ROOT setup
+from init_env import init_environment
+import os
+
+
+if os.environ.get('ROOTSYS') is not None:
+	ROOTSYS = os.environ['ROOTSYS']
+else:
+	ROOTSYS = "doesNotExist"
+
+if os.path.exists(ROOTSYS):
+	env = init_environment('glibrary qt5 clhep geant4 root')
+else:
+	env = init_environment('glibrary qt5 clhep geant4')
+
+
+txtSources = [
+	'factories/TEXT/gstreamerTEXTFactory.cc',
+	'factories/TEXT/gstreamerTEXTConnection.cc',
+	'factories/TEXT/gstreamerTEXTEvent.cc',
+	'factories/TEXT/gstreamerTEXTEventHeader.cc'
+#	'factories/TEXT/publishDetectorDigiObservables.cc',
+#	'factories/TEXT/publishDetectorTrueObservables.cc'
+	]
+
+
+# standard pre and suffix for gemc plugins
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
+
+txt_dll  = env.SharedLibrary( source = txtSources,  target = "../lib/textStreamer")

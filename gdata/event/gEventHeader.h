@@ -17,12 +17,13 @@ using std::to_string;
 class GEventHeader
 {
 public:
-	GEventHeader(int n, int tid, int v = 0) : evn(n), threadID(tid), verbosity(v) {
+	// the event number comes from aEvent->GetEventID(), that is why it's called g4EventNumber here
+	GEventHeader(int n, int tid, int v = 0) : g4EventNumber(n), threadID(tid), verbosity(v) {
 
 		timeStamp = assignTimeStamp();
 
 		if ( verbosity ) {
-			string log = "GEventHeader evn " + to_string(evn);
+			string log = "GEventHeader evn " + to_string(g4EventNumber);
 			gLogClassConstruct(log);
 			print();
 		}
@@ -30,24 +31,24 @@ public:
 
 	~GEventHeader() {
 		if ( verbosity ) {
-			string log = "GEventHeader evn " + to_string(evn);
+			string log = "GEventHeader evn " + to_string(g4EventNumber);
 			gLogDestruct(log);
 		}
 	}
 	
 	string getTimeStamp() {return timeStamp;}
-	int getEvn()          {return evn;}
+	int getEvn()          {return g4EventNumber;}
 	int getThreadID()     {return threadID;}
 
 	void print() {
 		cout << CONSTRUCTORLOG <<  " Event header: " << endl;
-		cout << TPOINTITEM <<  " Event Number:  "    << evn << endl;
+		cout << TPOINTITEM <<  " Event Number:  "    << g4EventNumber << endl;
 		cout << TPOINTITEM <<  " Thread ID:  "       << threadID  << endl;
 		cout << TPOINTITEM <<  " Time Stamp:  "      << timeStamp << endl;
 	}
 
 private:
-	int evn;
+	int g4EventNumber;
 	int threadID;
 	int verbosity;
 

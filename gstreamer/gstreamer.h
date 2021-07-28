@@ -34,8 +34,8 @@ protected:
 	virtual bool endEvent()   { return false;}
 	virtual bool publishEventHeader(GEventHeader *gheader) { return false;}
 	// vector index is hit number
-	virtual bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData) { return false;}
-	virtual bool publishEventDigitizedData(vector<GTrueInfoData*>* digitizedData) { return false;}
+	virtual bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData)    { return false;}
+	virtual bool publishEventDigitizedData(vector<GDigitizedData*>* digitizedData) { return false;}
 
 
 	// stream virtual methods
