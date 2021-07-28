@@ -7,6 +7,8 @@
 - Add macos Library target "libraryName". Dynamic . Organization Identifier: mlibrary
 - remove libraryName directoy
 - add sources libraryName.cc in Compile Sources "Build Phases"
+- build settings: Build Active Architecture only: set to no
+- make sure any needed library is "linked to" and not "embedded" in the frameworks
 
 
 

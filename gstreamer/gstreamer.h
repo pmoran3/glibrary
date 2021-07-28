@@ -20,8 +20,8 @@ public:
 	virtual bool openConnection()  { return false;}  // in GActionInitialization constructor
 	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
 
-	// runs the protected virtual methods to write a single event to file
-	map<string, bool> publishEvent(GOptions *gopts, vector<GEventData*> *runData);
+	// runs the protected virtual methods to write events from a run to file
+	map<string, bool> publishRunData(GOptions *gopts, vector<GEventData*> *runData);
 
 
 protected:
@@ -32,9 +32,10 @@ protected:
 	// one per event, called per geant4 run
 	virtual bool startEvent() { return false;}
 	virtual bool endEvent()   { return false;}
-	virtual bool publishEventHeader(GEventData *eventData) { return false;}
-	virtual bool publishEventTrueInfoData(GEventData *eventData) { return false;}
-	virtual bool publishEventDigitizedData(GEventData *eventData) { return false;}
+	virtual bool publishEventHeader(GEventHeader *gheader) { return false;}
+	// vector index is hit number
+	virtual bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData) { return false;}
+	virtual bool publishEventDigitizedData(vector<GTrueInfoData*>* digitizedData) { return false;}
 
 
 	// stream virtual methods

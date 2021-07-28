@@ -44,9 +44,11 @@ public:
 public:
 
 	void addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData);
-	// index is hit number
-	vector<GTrueInfoData*>*  getTrueInfoData(string detector);
-	vector<GDigitizedData*>* getDigitizedData(string detector);
+
+	// getters
+	GEventHeader *getHeader() {return gheader;}
+
+	map<string, GDataCollection*> *getDataCollection() {return gdataCollection;}
 
 private:
 	int verbosity;
@@ -54,7 +56,7 @@ private:
 	GEventHeader *gheader = nullptr;
 
 	// key is sensitive detector name
-	map<string, GDataCollection*> gdataCollection;
+	map<string, GDataCollection*> *gdataCollection;
 
 
 };
