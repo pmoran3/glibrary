@@ -44,6 +44,9 @@ public:
 public:
 
 	void addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData);
+	// index is hit number
+	vector<GTrueInfoData*>*  getTrueInfoData(string detector);
+	vector<GDigitizedData*>* getDigitizedData(string detector);
 
 private:
 	int verbosity;

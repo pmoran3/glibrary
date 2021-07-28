@@ -14,11 +14,14 @@ class GStreamer
 {
 
 public:
-	// runs all the virtual methods to write a single event to file
-	map<string, bool> publishEvent(GOptions *gopts, vector<GEventData*> *runData);
+	GStreamer(GOptions *gopts);
+	virtual ~GStreamer() = default;
 
-	virtual bool openConnection(GOptions *gopts) { return false;}   // in GActionInitialization constructor
+	virtual bool openConnection()  { return false;}  // in GActionInitialization constructor
 	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
+
+	// runs the protected virtual methods to write a single event to file
+	map<string, bool> publishEvent(GOptions *gopts, vector<GEventData*> *runData);
 
 
 protected:

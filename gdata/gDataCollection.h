@@ -43,11 +43,14 @@ public:
 	// public interface to add hit
 	void addDigitizedData(GDigitizedData *dgtzHit);
 
+	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
+	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
+
 private:
 
 	// index is hit number
-	vector<GDigitizedData*>  *digitizedData = nullptr;
 	vector<GTrueInfoData*>   *trueInfosData = nullptr;
+	vector<GDigitizedData*>  *digitizedData = nullptr;
 
 };
 
