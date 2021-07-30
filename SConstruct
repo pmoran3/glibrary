@@ -1,8 +1,5 @@
-# TODO:
-#
-# 1. related: compiling with too many processors causes some example executable to try to load the gmedia library even when it's not build.
-#    How to prevent that? Maybe this is resolved
-# 2. finish the export=env for various libraries
+# TODO: compiling with too many processors causes some example executable to try to load the gmedia library even when it's not build.
+# How to prevent that? Maybe this is resolved, check on ifarm with 30+ parallele jobs
 
 from init_env import init_environment
 
@@ -20,20 +17,18 @@ gsystem             = SConscript('gsystem/SConscript',    exports='env')
 g4system            = SConscript('g4system/SConscript',   exports='env')
 gstreamer           = SConscript('gstreamer/SConscript',  exports='env')
 
+Depends(gstreamer, gdata)
+
+# output plugins
+gstreamerDLLS   = SConscript('gstreamer/SConscriptDLLS',  exports='env')
+Depends(gstreamerDLLS, gstreamer)
+
+
+
 #textProgressBar     = SConscript('textProgressBar/SConscript')
 #translationTable    = SConscript('translationTable/SConscript')
 #gruns               = SConscript('gruns/SConscript')
 #frequencySyncSignal = SConscript('frequencySyncSignal/SConscript')
 #qtButtonsWidget     = SConscript('qtButtonsWidget/SConscript')
 #g4display           = SConscript('g4display/SConscript', exports='env')
-#g4volume            = SConscript('g4volume/SConscript')
-#ghit                = SConscript('ghit/SConscript', exports='env')
-#gdynamic            = SConscript('gdynamic/SConscript', exports='env')
-
-#gmedia              = SConscript('gmedia/SConscript', exports='env')
-#Depends(gmedia, gdata)
-
-# output plugins
-#gmediaDLLS   = SConscript('gmedia/SConscriptDLL')
-#$Depends(gmediaDLLS, gmedia)
 

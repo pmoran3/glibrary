@@ -11,16 +11,15 @@ else:
 if os.path.exists(ROOTSYS):
 	env = init_environment('glibrary qt5 clhep geant4 root')
 else:
-	env = init_environment('glibrary qt5 clhep geant4')
-
+	Import('env')
 
 txtSources = [
 	'factories/TEXT/gstreamerTEXTFactory.cc',
 	'factories/TEXT/gstreamerTEXTConnection.cc',
 	'factories/TEXT/gstreamerTEXTEvent.cc',
-	'factories/TEXT/gstreamerTEXTEventHeader.cc'
-#	'factories/TEXT/publishDetectorDigiObservables.cc',
-#	'factories/TEXT/publishDetectorTrueObservables.cc'
+	'factories/TEXT/gstreamerTEXTEventHeader.cc',
+	'factories/TEXT/gstreamerTEXTPublishTrueInfo.cc',
+	'factories/TEXT/gstreamerTEXTPublishDigitized.cc'
 	]
 
 

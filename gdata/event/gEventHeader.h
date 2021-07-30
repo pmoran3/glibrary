@@ -37,7 +37,7 @@ public:
 	}
 	
 	string getTimeStamp() {return timeStamp;}
-	int getEvn()          {return g4EventNumber;}
+	int getG4Evn()        {return g4EventNumber;}
 	int getThreadID()     {return threadID;}
 
 	void print() {

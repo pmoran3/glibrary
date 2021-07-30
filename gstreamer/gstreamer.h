@@ -14,7 +14,7 @@ class GStreamer
 {
 
 public:
-	GStreamer(GOptions *gopts);
+//	GStreamer(GOptions *gopts);
 	virtual ~GStreamer() = default;
 
 	virtual bool openConnection()  { return false;}  // in GActionInitialization constructor

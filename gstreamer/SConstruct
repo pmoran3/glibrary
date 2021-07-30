@@ -13,7 +13,7 @@ env.Default('../')
 lib = SConscript('SConscript', exports='env')
 
 # build the factories. Notice: the environment is not passed here but loaded in SConscriptDLL
-libsDLL = SConscript('SConscriptDLLS')
+libsDLL = SConscript('SConscriptDLLS', exports='env')
 
 
 # example(s)

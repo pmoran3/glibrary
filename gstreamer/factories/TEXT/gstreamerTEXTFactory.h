@@ -10,7 +10,7 @@ using std::ofstream;
 class GstreamerTextFactory : public GStreamer
 {
 public:
-	GstreamerTextFactory(GOptions *gopts) :  GStreamer(gopts), ofile(nullptr) {}
+	GstreamerTextFactory() :  ofile(nullptr) {}
 
 private:
 	// open and close the output media
@@ -22,7 +22,7 @@ private:
 	bool endEvent();
 
 	// write the header
-	bool publishEventHeader(GEventHeader *gheader) { return false;}
+	bool publishEventHeader(GEventHeader *gheader);
 
 	// vector index is hit number
 	bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData);
