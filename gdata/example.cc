@@ -1,5 +1,5 @@
 // gdata
-#include "gEventData.h"
+#include "event/gEventData.h"
 
 // c++
 #include <iostream>

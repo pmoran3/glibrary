@@ -1,9 +1,6 @@
 // gstreamer 
 #include "gstreamer.h"
 
-//GStreamer::GStreamer(GOptions *gopts) {
-//
-//}
 
 // pragma todo: pass someting like map<string, bitset> to each detector to decide which data to publish
 // TODO: stream

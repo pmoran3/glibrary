@@ -7,8 +7,9 @@
 - Add macos Library target "libraryName". Dynamic . Organization Identifier: mlibrary
 - remove libraryName directoy
 - add sources libraryName.cc in Compile Sources "Build Phases"
-- build settings: Build Active Architecture only: set to no
+- build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64 ?
 - make sure any needed library is "linked to" and not "embedded" in the frameworks
+- Publish Your App With Symbol Information: add dSYM file so the symbols are kept in the crash reports (for example testflights). However this is only useful if we have different xcode versions. See: https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information/
 
 
 
