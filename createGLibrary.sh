@@ -15,46 +15,46 @@ fi
 
 
 library=$1
-echo " "
-echo " Creating glibrary" $library
+echo ' '
+echo '  Creating glibrary '$library
 mkdir -p $library
 
 
 # template files
-echo " "
+echo ' '
 for f in SConstruct SConscript example.cc settings.xcconfig README.md
 do
-	echo " "copying $f
+	echo '  copying '$f
 	cp templateGLibrary/$f $library/
 done
 
-echo " "
+echo ' '
 for f in todo notes
 do
-	echo " "touching $f
+	echo '  touching '$f
 	rm -f $library/$f
 	touch $library/$f
 done
 
 # header
 cheader=$(echo $library"_h" | tr "[:lower:]" "[:upper:]")
-echo " "
-echo " "Creating $library header using $cheader
+echo ' '
+echo '  Creating '$library' header using $cheader'
 
 rm -f $library/$library".h" ;  touch $library/$library".h"
 rm -f $library/$library".cc" ; touch $library/$library".cc"
 
 echo '// doxygen'                       >> $library/$library".cc"
-echo '#include $library"Doxy.h"'        >> $library/$library".cc"
+echo '#include '$library'Doxy.h'        >> $library/$library".cc"
 echo ''                                 >> $library/$library".cc"
 echo '// conventions'                   >> $library/$library".cc"
-echo '#include $library"Conventions.h"' >> $library/$library".cc"
+echo '#include '$library'Conventions.h' >> $library/$library".cc"
 echo ''                                 >> $library/$library".cc"
 echo '#ifndef ' $cheader                >> $library/$library".h"
 echo '#define ' $cheader ' 1'           >> $library/$library".h"
 echo                                    >> $library/$library".h"
 echo                                    >> $library/$library".h"
-echo 'class $library'                   >> $library/$library".h"
+echo 'class ' $library                  >> $library/$library".h"
 echo '{'                                >> $library/$library".h"
 echo                                    >> $library/$library".h"
 echo                                    >> $library/$library".h"
@@ -88,7 +88,7 @@ echo                                   >> $convFile
 echo '// glibrary'                     >> $convFile
 echo '#include "goptions.h" '          >> $convFile
 echo                                   >> $convFile
-echo 'namespace gstreamer {'           >> $convFile
+echo 'namespace '$library' {'          >> $convFile
 echo                                   >> $convFile
 echo '	// returns array of options definitions'  >> $convFile
 echo '	vector<GOption> defineOptions();'         >> $convFile
@@ -100,10 +100,10 @@ echo '#endif'                          >> $convFile
 # options source
 convFile=$library/$library"Options.cc"
 rm -f $convFile ;  touch $convFile
-echo '// $library '                    >> $convFile
-echo '#include "'$library'Options.h"'  >> $convFile
+echo '// '$library                     >> $convFile
+echo '#include "'$library'Options.h'   >> $convFile
 echo '// namespace to define options'  >> $convFile
-echo 'namespace gstreamer {'           >> $convFile
+echo 'namespace '$library' {'           >> $convFile
 echo                                   >> $convFile
 echo '	// returns array of options definitions'  >> $convFile
 echo '	vector<GOption> defineOptions() {'        >> $convFile
@@ -119,15 +119,15 @@ echo '}'   >> $convFile
 
 # c++ code
 echo ' '
-echo ' 'Creating $library cc source
+echo '  Creating '$library ' cc source'
 rm -f $library/$library".cc"; touch $library/$library".cc"
 
-echo '// $library '             >> $library/$library".cc"
-echo '#include "'$library'.h"'  >> $library/$library".cc"
+echo '// '$library' '             >> $library/$library".cc"
+echo '#include '$library'.h'      >> $library/$library".cc"
 
 # changing the name in the template files
 echo ' '
-echo ' 'Changing template name to $library in:
+echo '  Changing template name to '$library' in template files:'
 echo ' '
 for f in SConstruct SConscript example.cc README.md
 do

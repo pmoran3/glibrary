@@ -3,9 +3,9 @@
 Import('env')
 
 sources = [
-			  'templateGLibrary.cc'
+			  'textProgressBar.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript
-lib = env.Library(source = sources, target = '../lib/templateGLibrary')
+lib = env.Library(source = sources, target = '../lib/textProgressBar')
 

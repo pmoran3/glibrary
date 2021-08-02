@@ -22,7 +22,7 @@ public:
 		digitizedData  = new vector<GDigitizedData*>;
 		trueInfosData  = new vector<GTrueInfoData*>;
 	}
-
+	
 	~GDataCollection() {
 
 		for ( auto* hit: (*digitizedData) )  { delete hit; }
