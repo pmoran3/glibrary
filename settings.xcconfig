@@ -54,17 +54,17 @@ GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 // - core
 // - RIO for files
 // - TTree for trees
-ROOT_VERSION = 6.18.04
+ROOT_VERSION = 6.24.02
 ROOTSYS      = $JLAB_SOFTWARE/root/$ROOT_VERSION
 ROOT_HEADS   = $ROOTSYS/include
 
 
 // GLIBRARY
 // adding includes here
-GLIB_ROOT    = /opt/projects/gemc/glibrary
-GLIB_HEADS1  = $GLIB_ROOT/guts $GLIB_ROOT/goptions $GLIB_ROOT/gsplash 
-GLIB_HEADS2  = $GLIB_ROOT/gdata $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit $GLIB_ROOT/gdynamicDigitization
-GLIB_HEADS3  = $GLIB_ROOT/gsystem $GLIB_ROOT/g4system $GLIB_ROOT/gstreamer $GLIB_ROOT/textProgressBar
+GLIB_ROOT   = /opt/projects/gemc/glibrary
+GLIB_HEADS1 = $GLIB_ROOT/guts $GLIB_ROOT/goptions $GLIB_ROOT/gsplash
+GLIB_HEADS2 = $GLIB_ROOT/gdata $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit $GLIB_ROOT/gdynamicDigitization
+GLIB_HEADS3 = $GLIB_ROOT/gsystem $GLIB_ROOT/g4system $GLIB_ROOT/gstreamer $GLIB_ROOT/textProgressBar $GLIB_ROOT/eventDispenser
 
 // $GLIB_ROOT/g4volume $GLIB_ROOT/g4display  
 

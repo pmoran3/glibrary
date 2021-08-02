@@ -4,6 +4,8 @@
 // glibrary
 #include "ghitConventions.h"
 
+#include <math.h>       /* floor */
+
 
 // properties of the readout electronics, used in GTouchable and GHit.
 // they are defined here so that the plugin can define it

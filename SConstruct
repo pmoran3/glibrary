@@ -17,6 +17,7 @@ ghit                = SConscript('ghit/SConscript',            exports='env')
 gsystem             = SConscript('gsystem/SConscript',         exports='env')
 g4system            = SConscript('g4system/SConscript',        exports='env')
 gstreamer           = SConscript('gstreamer/SConscript',       exports='env')
+eventDispenser      = SConscript('eventDispenser/SConscript',  exports='env')
 
 Depends(gstreamer, gdata)
 
@@ -27,7 +28,6 @@ Depends(gstreamerDLLS, gstreamer)
 
 
 #translationTable    = SConscript('translationTable/SConscript')
-#gruns               = SConscript('gruns/SConscript')
 #frequencySyncSignal = SConscript('frequencySyncSignal/SConscript')
 #qtButtonsWidget     = SConscript('qtButtonsWidget/SConscript')
 #g4display           = SConscript('g4display/SConscript', exports='env')

@@ -43,25 +43,26 @@ echo '  Creating '$library' header using $cheader'
 
 rm -f $library/$library".h" ;  touch $library/$library".h"
 rm -f $library/$library".cc" ; touch $library/$library".cc"
+CLname=${(C)library}
 
-echo '// doxygen'                       >> $library/$library".cc"
-echo '#include '$library'Doxy.h'        >> $library/$library".cc"
-echo ''                                 >> $library/$library".cc"
-echo '// conventions'                   >> $library/$library".cc"
-echo '#include '$library'Conventions.h' >> $library/$library".cc"
-echo ''                                 >> $library/$library".cc"
-echo '#ifndef ' $cheader                >> $library/$library".h"
-echo '#define ' $cheader ' 1'           >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo 'class ' $library                  >> $library/$library".h"
-echo '{'                                >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo  '};'                              >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo                                    >> $library/$library".h"
-echo "#endif"                           >> $library/$library".h"
+echo '// doxygen'                         >> $library/$library".cc"
+echo '#include "'$library'Doxy.h"'        >> $library/$library".cc"
+echo ''                                   >> $library/$library".cc"
+echo '// conventions'                     >> $library/$library".cc"
+echo '#include "'$library'Conventions.h"' >> $library/$library".cc"
+echo ''                                   >> $library/$library".cc"
+echo '#ifndef ' $cheader                  >> $library/$library".h"
+echo '#define ' $cheader ' 1'             >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo 'class ' $CLname                     >> $library/$library".h"
+echo '{'                                  >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo  '};'                                >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo                                      >> $library/$library".h"
+echo "#endif"                             >> $library/$library".h"
 
 # doxy main file
 doxyFile=$library/$library"Doxy.h"
@@ -101,9 +102,9 @@ echo '#endif'                          >> $convFile
 convFile=$library/$library"Options.cc"
 rm -f $convFile ;  touch $convFile
 echo '// '$library                     >> $convFile
-echo '#include "'$library'Options.h'   >> $convFile
+echo '#include "'$library'Options.h"'  >> $convFile
 echo '// namespace to define options'  >> $convFile
-echo 'namespace '$library' {'           >> $convFile
+echo 'namespace '$library' {'          >> $convFile
 echo                                   >> $convFile
 echo '	// returns array of options definitions'  >> $convFile
 echo '	vector<GOption> defineOptions() {'        >> $convFile
@@ -123,7 +124,7 @@ echo '  Creating '$library ' cc source'
 rm -f $library/$library".cc"; touch $library/$library".cc"
 
 echo '// '$library' '             >> $library/$library".cc"
-echo '#include '$library'.h'      >> $library/$library".cc"
+echo '#include "'$library'.h"'    >> $library/$library".cc"
 
 # changing the name in the template files
 echo ' '
