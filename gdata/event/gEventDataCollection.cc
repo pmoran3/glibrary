@@ -1,9 +1,9 @@
 // gdata 
-#include "gEventData.h"
+#include "gEventDataCollection.h"
 
 // glibrary
 
-void GEventData::addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData) {
+void GEventDataCollection::addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData) {
 
 	auto detectorHitCollection = gdataCollection->find(sdName);
 

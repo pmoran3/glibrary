@@ -4,7 +4,7 @@
 
 // pragma todo: pass someting like map<string, bitset> to each detector to decide which data to publish
 // TODO: stream
-map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventData*> *runData) {
+map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCollection*> *runData) {
 
 	map<string, bool> gstreamReport;
 

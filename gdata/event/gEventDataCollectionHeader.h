@@ -14,11 +14,11 @@ using std::to_string;
 #include "goptions.h"
 #include "gutsConventions.h"
 
-class GEventHeader
+class GEventDataCollectionHeader
 {
 public:
 	// the event number comes from aEvent->GetEventID(), that is why it's called g4EventNumber here
-	GEventHeader(int n, int tid, int v = 0) : g4EventNumber(n), threadID(tid), verbosity(v) {
+	GEventDataCollectionHeader(int n, int tid, int v = 0) : g4EventNumber(n), threadID(tid), verbosity(v) {
 
 		timeStamp = assignTimeStamp();
 
@@ -29,7 +29,7 @@ public:
 		}
 	}
 
-	~GEventHeader() {
+	~GEventDataCollectionHeader() {
 		if ( verbosity ) {
 			string log = "GEventHeader evn " + to_string(g4EventNumber);
 			gLogDestruct(log);

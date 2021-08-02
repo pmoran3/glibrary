@@ -22,7 +22,7 @@ private:
 	bool endEvent();
 
 	// write the header
-	bool publishEventHeader(GEventHeader *gheader);
+	bool publishEventHeader(GEventDataCollectionHeader *gheader);
 
 	// vector index is hit number
 	bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData);

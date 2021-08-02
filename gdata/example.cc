@@ -1,5 +1,5 @@
 // gdata
-#include "event/gEventData.h"
+#include "event/gEventDataCollection.h"
 
 // c++
 #include <iostream>
@@ -14,13 +14,13 @@ int main(int argc, char* argv[])
 	int nevents = 10;
 
 	// a run is a collection of 10 events
-	vector<GEventData*> *runData = new vector<GEventData*>;
+	vector<GEventDataCollection*> *runData = new vector<GEventDataCollection*>;
 
 	for (int evn = 1; evn <= nevents ; evn++ ) {
 
 		// calling gheader with verbosity 1 for debugging purposes
-		GEventHeader *gheader = new GEventHeader(evn, evn, 1);
-		GEventData *eventData = new GEventData(gheader, 1);
+		GEventDataCollectionHeader *gheader = new GEventDataCollectionHeader(evn, evn, 1);
+		GEventDataCollection *eventData = new GEventDataCollection(gheader, 1);
 
 		GDigitizedData *thisHit = new GDigitizedData();
 		

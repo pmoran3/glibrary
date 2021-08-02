@@ -9,7 +9,7 @@
 using std::vector;
 
 // gdata
-#include "gEventHeader.h"
+#include "gEventDataCollectionHeader.h"
 #include "gDataCollection.h"
 
 // glibrary
@@ -17,11 +17,11 @@ using std::vector;
 #include "gutsConventions.h"
 
 
-class GEventData
+class GEventDataCollection
 {
 public:
 	// construct event data using a GEventHeader
-	GEventData(GEventHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
+	GEventDataCollection(GEventDataCollectionHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
 		if ( verbosity ) {
 			gLogClassConstruct("GEventData");
 		}
@@ -32,7 +32,7 @@ public:
 //		}
 	}
 
-	~GEventData() {
+	~GEventDataCollection() {
 
 		if ( verbosity ) {
 			gLogDestruct("GEventData");
@@ -46,14 +46,14 @@ public:
 	void addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData);
 
 	// getters
-	GEventHeader *getHeader() {return gheader;}
+	GEventDataCollectionHeader *getHeader() {return gheader;}
 
 	map<string, GDataCollection*> *getDataCollection() {return gdataCollection;}
 
 private:
 	int verbosity;
 
-	GEventHeader *gheader = nullptr;
+	GEventDataCollectionHeader *gheader = nullptr;
 
 	// key is sensitive detector name
 	map<string, GDataCollection*> *gdataCollection;

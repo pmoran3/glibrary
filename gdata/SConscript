@@ -7,8 +7,8 @@ env.Append(CPPPATH = [Dir('event')])
 
 sources = [
 			  'gDataCollection.cc',
-			  'event/gEventData.cc',
-			  'event/gEventHeader.cc',
+			  'event/gEventDataCollection.cc',
+			  'event/gEventDataCollectionHeader.cc',
 			  'gDigitizedData.cc',
 			  'gTrueInfoData.cc'
 			  ]

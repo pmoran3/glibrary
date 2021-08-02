@@ -2,7 +2,7 @@
 #define  GSTREAMER_H  1
 
 // glibrary
-#include "event/gEventData.h"
+#include "event/gEventDataCollection.h"
 #include "gfactory.h"
 #include "goptions.h"
 
@@ -21,7 +21,7 @@ public:
 	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
 
 	// runs the protected virtual methods to write events from a run to file
-	map<string, bool> publishRunData(GOptions *gopts, vector<GEventData*> *runData);
+	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> *runData);
 
 
 protected:
@@ -32,7 +32,7 @@ protected:
 	// one per event, called per geant4 run
 	virtual bool startEvent() { return false;}
 	virtual bool endEvent()   { return false;}
-	virtual bool publishEventHeader(GEventHeader *gheader) { return false;}
+	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
 	virtual bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData)    { return false;}
 	virtual bool publishEventDigitizedData(vector<GDigitizedData*>* digitizedData) { return false;}
