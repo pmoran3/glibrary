@@ -1,21 +1,13 @@
 - Check github action workflows
 - add PROJECTNUMBER support in makeDoxyfileForLibrary
 
-- create function to return this in myenv:
-
-extraArgument=''
-case `uname` in
-	Darwin)
-		extraArgument=\'\'
-	;;
-	Linux)
-		extraArgument=''
-	;;
-esac
-echo extraArgument $extraArgument
-
 
 
 
 - for now we need to append on this SConstruct and inside each glibrary SConstruct
 env.Append(CXXFLAGS=['-std=c++17'])
+
+
+Add this at the top of each class definition
+// Class GMAPCOORDINATES
+// Thread Type: GLOBAL

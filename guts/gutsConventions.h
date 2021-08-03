@@ -1,10 +1,8 @@
 #ifndef  GUTS_CONVENTIONS_H
 #define  GUTS_CONVENTIONS_H  1
 
-
 // exit codes: 600
 #define EC__FILENOTFOUND     601
-
 
 // use of colors in iostream
 // example:

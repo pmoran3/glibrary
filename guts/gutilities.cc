@@ -296,7 +296,8 @@ vector<string> gutilities::getStringVectorFromStringWithDelimiter(string input, 
 
 // returns all keys from a map<key, value>
 // I think this is in STL now?
-// wow including this in a code makes the library not build correctly? How? I added it in gworld.cc to get first key and it was not building the constructor
+// wow including this in a code makes the library not build correctly?
+// How? I added it in gworld.cc to get first key and it was not building the constructor
 template<class KEY, class VALUE> vector<KEY> gutilities::getKeys(const map<KEY, VALUE>& map) {
 	vector<KEY> keys(map.size());
 	for (const auto& it : map)

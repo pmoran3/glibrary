@@ -4,13 +4,32 @@
 - Close it. Move the project from  its own dir created to one dir up. Delete dir.
 - Add all the files (make sure to do scons -c to avoid including objects). Added folders: Create groups (create folder reference won't let add sources later)
 - On the general project add "settings.xcconfig" configuration for debug and release
-- Add macos Library target "libraryName". Dynamic . Organization Identifier: mlibrary
+- Add macos Library target "libraryName". Dynamic .
 - remove libraryName directoy
 - add sources libraryName.cc in Compile Sources "Build Phases"
-- build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64 ?
+- build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64
 - make sure any needed library is "linked to" and not "embedded" in the frameworks
 - Publish Your App With Symbol Information: add dSYM file so the symbols are kept in the crash reports (for example testflights). However this is only useful if we have different xcode versions. See: https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information/
+- for executables: Add macos command line tool exampleName
 
+
+## QT Objects derived classes
+
+
+Select your project target and in Build Rules make a new custom rule ("+" button).
+Set the "Process" drop down to "Source files with names matching" and type in *.h next to that.
+Set the "Using" drop down to "Custom script:" and in the script type:
+
+/pathTo/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
+
+Now add the "Output files" ("+" button):
+
+${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
+
+Remember to add the header to "Compile Sources"
+
+Xcode will then run moc on the headers in Build Phases and it will understand
+that the output from moc is a .cpp and needs to be compiled and linked into you app and do that for you.
 
 
 
@@ -31,6 +50,24 @@ compiles exampleResources.qrc directly
 
 
 ## Using Namespace std
+
 - never in headers
-- can use use std::cout 
+- can use std::cout 
 - can be inside scopes
+
+
+## Framework and library dir of interest
+
+	Qt:     open $QTDIR/lib/
+	geant4: open $G4ROOT/$GEANT4_VERSION/lib/
+	ccdb:   open $CCDB_HOME/lib/
+	clhep:  open $CLHEP_BASE_DIR/lib/
+	root:   open $ROOTSYS/lib/
+
+
+## Shared schemes:
+
+Shared schemes are stored in <.xcodeproj or .xcworkspace file>/xcshareddata/xcschemes/.
+A shared scheme is visible to all users of a project or workspace file.
+We do not need it at the moment.
+
