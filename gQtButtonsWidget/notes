@@ -1,0 +1,12 @@
+
+
+
+
+
+open $QTDIR/lib
+
+  - QtCore
+  - QtGUI
+  - QtWidgets
+
+

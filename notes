@@ -31,6 +31,10 @@ Remember to add the header to "Compile Sources"
 Xcode will then run moc on the headers in Build Phases and it will understand
 that the output from moc is a .cpp and needs to be compiled and linked into you app and do that for you.
 
+## Cocoa plugin not found
+
+Add $QTDIR/plugins/ explicit, currently: /opt/jlab_software/2.4/Darwin_macosx10.15-clang12.0.0/qt/system/clang_64/plugins
+to scheme environment var QT_PLUGIN_PATH
 
 
 ## QT Resources
@@ -43,7 +47,7 @@ QResource::registerResource(rccPath);
 
 The rcc file (i.e. gemcResources.rcc) is obtained with:
 rcc -binary exampleResources.qrc -o exampleResources.rcc
-add to project and copy it in product directory in case it is compiled by xcode (I think it could be added as part of xcode steps)
+add to the rcc file to the project and copy it in product directory
 scons on the other hand knows about it because the qt module
 compiles exampleResources.qrc directly
 
