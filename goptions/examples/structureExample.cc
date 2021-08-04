@@ -29,7 +29,7 @@ namespace gdetector {
 		j.at("variation").get_to(det.variation);
 	}
 
-	// method to return a vector of GDetectors from a structured option
+	// method to return a GDetectors from a structured option
 	GDetector getDetector(GOptions *gopts) {
 
 		// getting json detector from option
