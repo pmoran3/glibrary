@@ -2,9 +2,17 @@
 #define  G4CONTROLS_H  1
 
 
-class  G4Controls
+// qt
+#include <QtWidgets>
+
+// glibrary
+#include "goptions.h"
+
+class  G4Controls : public QTabWidget
 {
 
+public:
+	G4Controls(GOptions* gopt, QWidget* parent = Q_NULLPTR);
 
 };
 

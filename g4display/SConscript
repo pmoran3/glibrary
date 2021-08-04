@@ -3,6 +3,7 @@
 Import('env')
 
 sources = [
+			  'g4displayOptions.cc',
 			  'g4display.cc'
 			  ]
 

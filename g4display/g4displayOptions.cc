@@ -21,7 +21,7 @@ namespace g4display {
 	JView getJView(GOptions *gopts) {
 
 		// getting json detector from option
-		auto jview = gopts->getStructuredOptionAssignedValues("gview");
+		auto jview = gopts->getStructuredOptionAssignedValues("g4view");
 
 		// projecting it onto GDetector structure
 		return jview.front().get<JView>();
@@ -36,9 +36,9 @@ namespace g4display {
 		// JView
 		// ------
 
-		string VIEWERCHOICES = "g4 viewer. possible choice are:";
+		string VIEWERCHOICES = "g4 viewer. possible choice are:\n";
 		for (auto c: AVAILABLEG4VIEWERS) {
-			VIEWERCHOICES += "- " + c + "\n";
+			VIEWERCHOICES += "\t\t\t\t- " + c + "\n";
 		}
 
 		// gview option, non groupable
