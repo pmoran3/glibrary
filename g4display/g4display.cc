@@ -15,10 +15,8 @@ G4Display::G4Display(GOptions* gopts)
 	// PRAGMA TODO: add resolution option, hits options, here?
 	// PRAGMA TOOO: if run/beamOn is given (e.g. command line options) then the label needs to be updated!
 
-	// projecting option onto GDetector
+	// projecting option onto JView
 	JView jview = getJView(gopts);
-
-	string viewer = jview.viewer;
 
 	string gemcViewAndOption = "/vis/open " + jview.viewer + " " + jview.dimension + " " + jview.position;
 

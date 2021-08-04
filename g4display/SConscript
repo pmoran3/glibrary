@@ -4,7 +4,10 @@ Import('env')
 
 sources = [
 			  'g4displayOptions.cc',
-			  'g4display.cc'
+			  'g4display.cc',
+			  'g4controls.cc',
+			  'tabs/gcamera.cc',
+			  'tabs/gslice.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

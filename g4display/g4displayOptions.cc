@@ -10,7 +10,8 @@ vector<string> AVAILABLEG4VIEWERS = {
 // namespace to define options
 namespace g4display {
 
-	// JView getter
+	// JView
+	// -----
 	void from_json(const json& j, JView& jview) {
 		j.at("viewer").get_to(jview.viewer);
 		j.at("dimension").get_to(jview.dimension);
@@ -27,6 +28,24 @@ namespace g4display {
 		return jview.front().get<JView>();
 	}
 
+
+	// JCamera
+	// -----
+	void from_json(const json& j, JCamera& jcamera) {
+		j.at("theta").get_to(jcamera.theta);
+		j.at("phi").get_to(jcamera.phi);
+	}
+
+	// method to return a JView from a structured option
+	JCamera getJCamera(GOptions *gopts) {
+
+		// getting json detector from option
+		auto jcamera = gopts->getStructuredOptionAssignedValues("g4camera");
+
+		// projecting it onto GDetector structure
+		return jcamera.front().get<JCamera>();
+	}
+
 	// returns array of options definitions
 	vector<GOption> defineOptions() {
 
@@ -34,7 +53,7 @@ namespace g4display {
 
 
 		// JView
-		// ------
+		// -----
 
 		string VIEWERCHOICES = "g4 viewer. possible choice are:\n";
 		for (auto c: AVAILABLEG4VIEWERS) {
@@ -70,6 +89,35 @@ namespace g4display {
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("g4view", "geant4 viewer, dimension, and position", jsonViewOption, help, false));
+
+
+		// JCamera
+		// -------
+
+
+		// gview option, non groupable
+		json jsonCameraPhi = {
+			{GNAME, "phi"},
+			{GDESC, "geant4 camera phi"},
+			{GDFLT, "0*deg"}
+		};
+		json jsonCameratheta = {
+			{GNAME, "theta"},
+			{GDESC, "geant4 camera theta"},
+			{GDFLT, "0*deg"}
+		};
+		json jsonCameraOption = {
+			jsonCameraPhi,
+			jsonCameratheta
+		};
+
+		help.clear();
+		help.push_back("Defines the geant4 camera");
+		help.push_back("");
+		help.push_back("Example: -g4camera={phi: 20*deg; theta: 15*deg;}");
+
+		// the last argument refers to "cumulative"
+		goptions.push_back(GOption("g4camera", "geant4 camera", jsonCameraOption, help, false));
 
 
 		return goptions;

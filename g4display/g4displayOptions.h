@@ -17,16 +17,30 @@ namespace g4display {
 		string position;
 	};
 
-	JView getJView(GOptions *gopts);
-
 	void from_json(const json& j, JView& jview);
 
-	// method to return a vector of JSystem from a structured option
-	vector<JView> getSystems(GOptions *gopts);
+	// get JView from options
+	JView getJView(GOptions *gopts);
 
 
-	// returns array of options definitions
+	// G4Camera
+	// --------
+
+	struct JCamera {
+		string phi;
+		string theta;
+	};
+
+	void from_json(const json& j, JCamera& jcamera);
+
+	// get JCamera from options
+	JCamera getJCamera(GOptions *gopts);
+
+
+	// returns the array of options definitions
+	// ------------------------------------
 	vector<GOption> defineOptions();
+
 
 }
 

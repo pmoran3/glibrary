@@ -15,10 +15,9 @@
 
 ## QT Objects derived classes
 
-
 Select your project target and in Build Rules make a new custom rule ("+" button).
 Set the "Process" drop down to "Source files with names matching" and type in *.h next to that.
-Set the "Using" drop down to "Custom script:" and in the script type:
+Set the "Using" drop down to "Custom script:" and in the script type (find path to moc):
 
 /pathTo/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
 

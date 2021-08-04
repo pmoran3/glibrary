@@ -1,5 +1,6 @@
 // g4display
 #include "g4display.h"
+#include "g4controls.h"
 #include "g4displayOptions.h"
 
 // c++
@@ -22,9 +23,9 @@ int main(int argc, char* argv[])
 	window->setWindowTitle(QString::fromUtf8("displayUI example"));
 	window->resize(600, 800);
 
-	// 
-//	DisplayUI *dUI = new DisplayUI(gopts, window);
-//	window->setCentralWidget(dUI);
+	// controls
+	G4Controls *g4controls = new G4Controls(gopts, window);
+	window->setCentralWidget(g4controls);
 
 
 	window->show();
