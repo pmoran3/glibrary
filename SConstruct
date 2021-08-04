@@ -19,6 +19,7 @@ g4system            = SConscript('g4system/SConscript',         exports='env')
 gstreamer           = SConscript('gstreamer/SConscript',        exports='env')
 eventDispenser      = SConscript('eventDispenser/SConscript',   exports='env')
 gQtButtonsWidget    = SConscript('gQtButtonsWidget/SConscript', exports='env')
+g4display           = SConscript('g4display/SConscript',        exports='env')
 
 Depends(gstreamer, gdata)
 
@@ -30,6 +31,3 @@ Depends(gstreamerDLLS, gstreamer)
 
 #translationTable    = SConscript('translationTable/SConscript')
 #frequencySyncSignal = SConscript('frequencySyncSignal/SConscript')
-#qtButtonsWidget     = SConscript('qtButtonsWidget/SConscript')
-#g4display           = SConscript('g4display/SConscript', exports='env')
-

@@ -1,0 +1,14 @@
+
+
+
+open $QTDIR/lib
+  - QtCore
+  - QtWidgets
+
+> glibraries:
+  - goptions
+  - guts
+
+> geant4
+  - intercoms
+

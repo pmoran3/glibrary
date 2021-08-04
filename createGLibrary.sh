@@ -137,3 +137,5 @@ do
 done
 
 echo ' '
+
+open $library

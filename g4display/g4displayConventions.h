@@ -1,0 +1,4 @@
+#ifndef  G4DISPLAY_H_CONVENTIONS
+#define  G4DISPLAY_H_CONVENTIONS 1
+
+#endif
