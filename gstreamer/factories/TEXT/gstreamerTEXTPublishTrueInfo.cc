@@ -3,5 +3,9 @@
 
 
 bool GstreamerTextFactory::publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData) {
+
+
+
+
 	return false;
 }

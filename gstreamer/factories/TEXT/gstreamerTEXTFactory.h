@@ -30,11 +30,6 @@ private:
 
 
 private:
-	// utility function to write observable
-	// PRAGMA TODO: check if this is feasible for all output plugins. In case, make it virtual
-	void writeObservables(map<string, int> observableAtIndex, int index);
-
-private:
 	ofstream *ofile = nullptr;
 };
 

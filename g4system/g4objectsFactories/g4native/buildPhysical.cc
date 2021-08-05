@@ -51,6 +51,8 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 
 	G4Volume *thisG4Volume = (*g4s)[vname];
 
+	//std::cout << " ASD " << thisG4Volume->getLogical()->GetMaterial() << std::endl;
+
 	if(thisG4Volume->getPhysical() == nullptr) {
 		thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),
 																  getPosition(s),
