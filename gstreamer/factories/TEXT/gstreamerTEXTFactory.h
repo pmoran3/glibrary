@@ -10,7 +10,7 @@ using std::ofstream;
 class GstreamerTextFactory : public GStreamer
 {
 public:
-	GstreamerTextFactory() :  ofile(nullptr) {}
+	GstreamerTextFactory() {}
 
 private:
 	// open and close the output media
@@ -35,7 +35,7 @@ private:
 	void writeObservables(map<string, int> observableAtIndex, int index);
 
 private:
-	ofstream *ofile;
+	ofstream *ofile = nullptr;
 };
 
 

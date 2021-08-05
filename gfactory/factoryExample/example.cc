@@ -40,7 +40,7 @@ int main()
 	// A manages Shapes
 	// registering 3 shape classes
 	// notice, here we know of them through the header
-	GManager managerA;    // no verbosity
+	GManager managerA("exampleA");    // no verbosity
 	managerA.RegisterObjectFactory<Triangle>("triangle");
 	managerA.RegisterObjectFactory<Box>("box1");
 	managerA.RegisterObjectFactory<Box>("box2");
@@ -68,7 +68,7 @@ int main()
 	// PRAGMA: These two names must match in the registerDL and in the LoadAndRegisterObjectFromLibrary:
 	// tesla
 	// that's ok but need to spit error if that doesn't happen
-	GManager managerB(1); // no verbosity of 1
+	GManager managerB("exampleB", 1); // no verbosity of 1
 	
 	map<string, Car*> ggg;
 	ggg["tesla"] = managerB.LoadAndRegisterObjectFromLibrary<Car>("teslaFactory");

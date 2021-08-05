@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-	GManager manager(1);
+	GManager manager("example", 1);
 
 
 	// using dynamicRoutines map

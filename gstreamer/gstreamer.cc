@@ -29,12 +29,9 @@ map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCo
 
 
 		gstreamReport["endEvent"] = endEvent();
-
 	}
 
 
 
-
 	return gstreamReport;
-
 }

@@ -13,9 +13,11 @@ namespace gstreamer {
 
 	void from_json(const json& j, JOutput& det);
 
-	// method to return a vector of JSystem from a structured option
-	vector<JOutput> getSystems(GOptions *gopts);
+	// returns dynamic library name from the factory
+	string gstreamerPluginNameFromFactory(string factory);
 
+	// method to return a vector of JSystem from a structured option
+	vector<JOutput> getJOutputs(GOptions *gopts);
 
 	// returns array of options definitions
 	vector<GOption> defineOptions();

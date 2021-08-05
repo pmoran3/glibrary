@@ -12,7 +12,7 @@ namespace gstreamer {
 	}
 
 	// method to return a vector of GDetectors from a structured option
-	vector<JOutput> getSystems(GOptions *gopts) {
+	vector<JOutput> getJOutputs(GOptions *gopts) {
 
 		vector<JOutput> outputs;
 
@@ -26,6 +26,11 @@ namespace gstreamer {
 		return outputs;
 	}
 
+	// returns dynamic library name from the factory
+	string gstreamerPluginNameFromFactory(string factory) {
+		
+		return "streamer" + factory + "Factory";
+	}
 
 
 
@@ -63,11 +68,11 @@ namespace gstreamer {
 		vector<string> help;
 		help.push_back("Define a Output format and name");
 		help.push_back("");
-		help.push_back("Example: +output={format: text; name: output.txt; }");
+		help.push_back("Example: +output={format: TEXT; name: output.txt; }");
 		help.push_back("");
 		help.push_back("Current available formats:");
 		help.push_back("");
-		help.push_back(" - text");
+		help.push_back(" - TEXT");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("goutput", "Output format and name", jsonOutput, help, true));

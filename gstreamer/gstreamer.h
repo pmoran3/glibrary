@@ -22,6 +22,7 @@ public:
 	// runs the protected virtual methods to write events from a run to file
 	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> *runData);
 
+	void setOutputName(string output) {outputFileName = output;}
 
 protected:
 
