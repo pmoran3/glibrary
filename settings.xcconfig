@@ -67,10 +67,5 @@ GLIB_HEADS2 = $GLIB_ROOT/gdata $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_R
 GLIB_HEADS3 = $GLIB_ROOT/gsystem $GLIB_ROOT/g4system $GLIB_ROOT/gstreamer $GLIB_ROOT/textProgressBar $GLIB_ROOT/eventDispenser
 GLIB_HEADS4 = $GLIB_ROOT/gQtButtonsWidget $GLIB_ROOT/g4display
 
-// $GLIB_ROOT/g4volume $GLIB_ROOT/g4display  
-
-//GLIB_HEADS2  = $GLIB_ROOT/textProgressBar  $GLIB_ROOT/qtButtonsWidget
-//GLIB_HEADS4  = $GLIB_ROOT/gmedia
 //GLIB_CMESH    = $GLIB_ROOT/cadmesh/include $GLIB_ROOT/cadmesh/external/tetgen $GLIB_ROOT/cadmesh/external/assimp/include/
-//GLIB_HEADS   = $GLIB_HEADS1 $GLIB_HEADS2 $GLIB_HEADS3 $GLIB_HEADS4 $GLIB_MESH
 GLIB_HEADS = $GLIB_HEADS1 $GLIB_HEADS2 $GLIB_HEADS3 $GLIB_HEADS4

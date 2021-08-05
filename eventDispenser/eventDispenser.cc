@@ -17,13 +17,17 @@ using namespace std;
 EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*> *gDDGlobal) : gDigitizationGlobal(gDDGlobal) {
 	verbosity        = gopt->getInt("eventDistributionv");
 	string filename  = gopt->getString("runWeightsFile");
-	string nbunchOpt = gopt->getString("nEventsBatchToBeamOn");
-	neventsToProcess = gopt->getInt("n");
-	userRunno        = gopt->getInt("userRunno");
+	//string nbunchOpt = gopt->getString("nEventsBatchToBeamOn");
+
+//	neventsToProcess = gopt->getInt("n");
+//	userRunno        = gopt->getInt("userRunno");
+	nEventsBatchToBeamOn = 1;
+
+	int neventsToProcess = 0;
+	int userRunno        = 1;
 
 	// nothing to do here
 	if(neventsToProcess == 0) return;
-
 
 	// no filename
 	// run number from options

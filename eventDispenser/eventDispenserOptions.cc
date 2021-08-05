@@ -16,6 +16,19 @@ namespace eventDispenser {
 		};
 		goptions.push_back(GOption(jsonEDVerbosity));
 
+		json jsonRunWeights = {
+			{GNAME, "runWeightsFile"},
+			{GDESC, "Text file with run number and their weights"},
+			{GDFLT, "na"}
+		};
+		goptions.push_back(GOption(jsonRunWeights));
+
+		json jsonnbunch = {
+			{GNAME, "runWeightsFile"},
+			{GDESC, "Text file with run number and their weights"},
+			{GDFLT, "na"}
+		};
+		goptions.push_back(GOption(jsonnbunch));
 
 		return goptions;
 	}

@@ -3,7 +3,8 @@
 Import('env')
 
 sources = [
-			  'eventDispenser.cc'
+			  'eventDispenser.cc',
+			  'eventDispenserOptions.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript
