@@ -45,6 +45,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// and adding them to systemFactory
 	// if a factory is not existing already, registering it in the manager, instantiating it, and loading it into the map
 	for (auto& system: *gsystemsMap) {
+		
 		string factory = system.second->getFactory();
 
 		if(factory == "text") {
@@ -100,11 +101,13 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 	// adding root volume to the a "root" gsystem
-	// using the first existing factory name
-	string firstFactory = gsystemsMap->begin()->second->getFactory();
-	string worldVolume = gopts->getString("worldVolume");
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
+	// using the first existing factory name (if there is anything in the factory)
+	if (gsystemsMap->size() > 0) {
+		string firstFactory = gsystemsMap->begin()->second->getFactory();
+		string worldVolume = gopts->getString("worldVolume");
+		(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
+		(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
+	}
 
 	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {

@@ -27,4 +27,4 @@ txtSources = [
 env.Replace(SHLIBSUFFIX = ".gplugin")
 env.Replace(SHLIBPREFIX = "")
 
-txt_dll  = env.SharedLibrary( source = txtSources,  target = "../lib/textStreamer")
+txt_dll  = env.SharedLibrary( source = txtSources,  target = "../lib/gstreamerTEXTFactory")

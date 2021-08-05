@@ -95,13 +95,13 @@ void GOption::assignValuesFromJson(string userJsonKey, json userJsonValues, bool
 {
 	// if "+" was not found but option is cumulative, it's a mistake.
 	if ( !isAddition && cumulative ) {
-		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"add-\" directive was not given. " << endl;
+		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is cumulative. Mandatory \"+\" directive was not given. " << endl;
 		gexit(EC__NOADDFORCUMULATIVE);
 	}
 
 	// if "+" was found but option is not cumulative, it's a mistake.
 	if ( isAddition && !cumulative ) {
-		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"add-\" was given. " << endl;
+		cerr << FATALERRORL << "the " << YELLOWHHL << userJsonKey << RSTHHR << " tag is non cumulative but \"+\" was given. " << endl;
 		gexit(EC__ADDFORNONCUMULATIVE);
 	}
 

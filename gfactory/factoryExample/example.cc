@@ -14,7 +14,7 @@ int main()
 	// AV manages Shapes. It's the same as managerA but with verbosity 1
 	// registering 3 shape classes
 	// notice, here we know of them through the header
-	GManager managerAV(1);    // no verbosity
+	GManager managerAV("exampleAV", 1);    // no verbosity
 	managerAV.RegisterObjectFactory<Triangle>("triangle");
 	managerAV.RegisterObjectFactory<Box>("box1");
 	managerAV.RegisterObjectFactory<Box>("box2");
@@ -83,6 +83,8 @@ int main()
 	cout << " Shape pointers: " << fff["triangle"] << " " << aShape << endl;
 	cout << " Car pointers: " << ggg["ford"] << " " << aCar << endl;
 
+
+	cout << "generalCarVar from factory map: " << ggg["tesla"]->generalCarVar << endl;
 
 	// why this need to be cleared here, and not after the factories are
 	// put in the map?

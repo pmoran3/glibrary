@@ -38,7 +38,5 @@ private:
 	ofstream *ofile = nullptr;
 };
 
-
-
 #endif // GSTREAMERTXTFACTORY_H
 

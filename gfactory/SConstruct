@@ -5,8 +5,12 @@ from init_env import init_environment
 env = init_environment('glibrary')
 env.Append(CXXFLAGS=['-std=c++17'])
 
-ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory.gplugin')
-tesla_dll = env.SharedLibrary( source = 'factoryExample/TeslaFactory.cc', target = 'teslaFactory.gplugin')
+# standard pre and suffix for gemc plugins
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
+
+ford_dll  = env.SharedLibrary( source = 'factoryExample/FordFactory.cc',  target = 'fordFactory')
+tesla_dll = env.SharedLibrary( source = 'factoryExample/TeslaFactory.cc', target = 'teslaFactory')
 
 sources = [
 			  'factoryExample/example.cc',

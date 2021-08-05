@@ -1,3 +1,7 @@
+The comments below fo not apply if scons is used. Note: the scons gplugin can be used when running xcode to load the gplugins (nice!)
+
+xcode notes:
+
 Notice 1: to run the examples we need to link or mv the dynamic libraries to the glibrary naming convention to be loaded correctly:
 the extension is .gplugin
 

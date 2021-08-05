@@ -29,7 +29,7 @@ namespace gstreamer {
 	// returns dynamic library name from the factory
 	string gstreamerPluginNameFromFactory(string factory) {
 		
-		return "streamer" + factory + "Factory";
+		return "gstreamer" + factory + "Factory";
 	}
 
 

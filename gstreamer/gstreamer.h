@@ -26,7 +26,7 @@ public:
 
 protected:
 
-	string outputFileName;
+	string outputFileName = "na";
 
 	// event virtual methods
 	// one per event, called per geant4 run
