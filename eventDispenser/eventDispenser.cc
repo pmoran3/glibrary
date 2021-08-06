@@ -18,12 +18,10 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	verbosity        = gopt->getInt("eventDistributionv");
 	string filename  = gopt->getString("runWeightsFile");
 	//string nbunchOpt = gopt->getString("nEventsBatchToBeamOn");
+	//	userRunno        = gopt->getInt("userRunno");
 
-//	neventsToProcess = gopt->getInt("n");
-//	userRunno        = gopt->getInt("userRunno");
+	neventsToProcess = gopt->getInt("n");
 	nEventsBatchToBeamOn = 1;
-
-	int neventsToProcess = 0;
 	int userRunno        = 1;
 
 	// nothing to do here
@@ -58,7 +56,8 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 			distributeEvents(neventsToProcess);
 		}
 		in.close();
-		if(verbosity == 3) {
+
+		if(verbosity >= GVERBOSITY_SUMMARY) {
 			printRunsDetails(neventsToProcess);
 		}
 	}
@@ -140,13 +139,13 @@ int EventDispenser::processEvents()
 		}
 
 
-		// loads the constants
-		// PRAGMA TODO: pass variation to this routine
-		for(auto gDigi: (*gDigitizationGlobal)) {
-			// protecting against plugin not loaded
-			if(gDigi.second) {
-				gDigi.second->loadConstants(runNumber, "default");
-
+//		// loads the constants
+//		// PRAGMA TODO: pass variation to this routine
+//		for(auto gDigi: (*gDigitizationGlobal)) {
+//			// protecting against plugin not loaded
+//			if(gDigi.second) {
+//				gDigi.second->loadConstants(runNumber, "default");
+//
 //				// instantiates pointer to GSensitivePars
 //				gDigi.second->loadSensitivePars(runNumber, "default");
 //
@@ -155,10 +154,11 @@ int EventDispenser::processEvents()
 //														gDigi.second->showConstants(),
 //														gDigi.second->showParameters());
 //				}
+//
+//			}
+//		}
 
-			}
-		}
-
+		cout << " ASD 0 " << endl;
 		// running max nEventsBuffer events
 		int nEventsLeftToProcess = nevents;
 		while(nEventsLeftToProcess > 0) {
@@ -171,11 +171,17 @@ int EventDispenser::processEvents()
 			}
 		}
 
+		cout << " ASD 1 " << endl;
+
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			cout << EVENTDISPENSERLOGMSGITEM << " Run Number ∙" << runNumber << "∙ done with " << nevents << " events." << endl << endl;
 		}
 	}
+
+	cout << " ASD 2 " << endl;
+
+
 	cout << endl;
 
 	return 1;

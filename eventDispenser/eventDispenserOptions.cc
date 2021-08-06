@@ -30,6 +30,13 @@ namespace eventDispenser {
 		};
 		goptions.push_back(GOption(jsonnbunch));
 
+		json jsonNEvents = {
+			{GNAME, "n"},
+			{GDESC, "Number of events to process"},
+			{GDFLT, 0}
+		};
+		goptions.push_back(GOption(jsonNEvents));
+
 		return goptions;
 	}
 

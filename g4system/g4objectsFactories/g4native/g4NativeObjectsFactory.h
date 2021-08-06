@@ -21,8 +21,7 @@ public:
 
 		G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
 		G4LogicalVolume*   lbuild = buildLogical(gopt, s, g4s);
-		G4VisAttributes vattr = createVisualAttributes(s);
-		lbuild->SetVisAttributes(vattr);
+		lbuild->SetVisAttributes(createVisualAttributes(s));
 		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
 
 		if(verbosity == GVERBOSITY_DETAILS) {

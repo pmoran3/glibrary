@@ -9,8 +9,7 @@ using namespace std;
 #include <QApplication>
 
 
-
-GSplash::GSplash(string imageName) :  splash(nullptr)
+GSplash::GSplash(string imageName) : splash(nullptr)
 {
 	// no argument, imageName is defaulted at NOSPLASHIMAGESELECTED
 	if ( imageName == NOSPLASHIMAGESELECTED ) {
@@ -34,7 +33,6 @@ GSplash::GSplash(string imageName) :  splash(nullptr)
 
 		QPixmap pixmap(resourceImage.c_str());
 		splash = new QSplashScreen(pixmap);
-		cout << " Need to add gutilities and goptions but loading image from resource" << endl;
 	}
 
 	if (splash != nullptr) {
@@ -43,8 +41,7 @@ GSplash::GSplash(string imageName) :  splash(nullptr)
 	}
 }
 
-void GSplash::message(string msg)
-{
+void GSplash::message(string msg) {
 	if(splash != nullptr) {
 		splash->showMessage(msg.c_str(),  Qt::AlignLeft,  Qt::white );
 		qApp->processEvents();
