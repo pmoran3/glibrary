@@ -13,6 +13,7 @@
 
 // geant4
 #include "G4VSolid.hh"
+#include "G4VisAttributes.hh"
 
 // c++
 #include <map>
@@ -33,6 +34,8 @@ protected:
 	G4VSolid*          getSolidFromMap(   string vname, map<string, G4Volume*> *g4s) const;
 	G4LogicalVolume*   getLogicalFromMap( string vname, map<string, G4Volume*> *g4s) const;
 	G4VPhysicalVolume* getPhysicalFromMap(string vname, map<string, G4Volume*> *g4s) const;
+
+	G4VisAttributes createVisualAttributes(GVolume *s);
 
 	// geant4 dependencies checkers
 	bool checkSolidDependencies(   bool verbosity, GVolume *s, map<string, G4Volume*> *g4s);

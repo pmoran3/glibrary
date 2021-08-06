@@ -123,3 +123,33 @@ G4ThreeVector G4ObjectsFactory::getPosition(GVolume *s)
 
 	return pos;
 }
+
+G4VisAttributes G4ObjectsFactory::createVisualAttributes(GVolume *s) {
+
+	string vcolor = s->getColor();
+
+	G4Colour g4Color;
+
+	if(vcolor.size() == 6) {
+		// if color is 6 digits then it's only rrggbb. Setting transparency to zero (1 in G4Colour)
+		g4Color = G4Colour(strtol(vcolor.substr(0, 2).c_str(), NULL, 16)/255.0,
+								 strtol(vcolor.substr(2, 2).c_str(), NULL, 16)/255.0,
+								 strtol(vcolor.substr(4, 2).c_str(), NULL, 16)/255.0,
+								 1);
+	} else if(vcolor.size() == 7) {
+		// Transparency 0 to 5 where 5=max transparency  (default is 0 if nothing is specified)
+		g4Color = G4Colour(strtol(vcolor.substr(0, 2).c_str(), NULL, 16)/255.0,
+								 strtol(vcolor.substr(2, 2).c_str(), NULL, 16)/255.0,
+								 strtol(vcolor.substr(4, 2).c_str(), NULL, 16)/255.0,
+								 1.0 - stof(vcolor.substr(6, 1))/5.0);
+	}
+
+	// new attributes, constructed from color
+	G4VisAttributes g4attributes = G4VisAttributes(g4Color);
+
+	// visibility and solid/wireframe style
+	s->isVisible() ? g4attributes.SetVisibility(true) : g4attributes.SetVisibility(false);
+	s->getStyle()  ? g4attributes.SetForceSolid(true) : g4attributes.SetForceWireframe(true);
+
+	return g4attributes;
+}

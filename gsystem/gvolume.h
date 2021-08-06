@@ -65,6 +65,9 @@ public:
 	string getParameters() {return parameters;}
 	string getMaterial()   {return material;}
 	int    getPCopyNo()    {return pCopyNo;}
+	string getColor()      {return color;}
+	bool   isVisible()     {return visible;}
+	int    getStyle()      {return style;}
 
 	string getPos()   {return pos;}
 	string getRot()   {return rot;}

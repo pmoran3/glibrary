@@ -7,7 +7,7 @@ sources = [
 			  'g4world.cc',
 			  'g4systemOptions.cc',
 			  'g4objectsFactories//geant4Dependencies.cc',
-			  'g4objectsFactories//g4objectsGetters.cc',
+			  'g4objectsFactories//g4objectsCreators.cc',
 			  'g4objectsFactories//g4native/g4SolidConstructorDescription.cc',
 			  'g4objectsFactories//g4native/checkAndReturnParameters.cc',
 			  'g4objectsFactories//g4native/buildSolid.cc',
