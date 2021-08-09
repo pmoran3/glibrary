@@ -46,7 +46,7 @@ private:
 public:
 	// default constructor
 	DynamicLib() = default;
-	dlhandle handle;   ///< posix handle of the dynamic library
+	dlhandle handle = nullptr;   ///< posix handle of the dynamic library
 
 	DynamicLib(string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 
@@ -55,6 +55,11 @@ public:
 				cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << endl;
 			}
 			handle = load_lib(dlFileName);
+			if(handle == nullptr) {
+				cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but couldn't be loaded" << endl;
+				gexit(EC__DLNOTFOUND);
+			}
+
 		} else {
 			cerr << FATALERRORL  << "couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
 			gexit(EC__DLNOTFOUND);
