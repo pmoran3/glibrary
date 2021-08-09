@@ -1,7 +1,6 @@
 
 
 
-G4 Libraries needed:
 
-open $G4LIB/
-G4Intercoms
+open $G4ROOT/$GEANT4_VERSION/lib
+- intercoms

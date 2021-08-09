@@ -12,6 +12,7 @@ using namespace gutilities;
 #include "G4Cons.hh"
 #include "G4Para.hh"
 #include "G4Trd.hh"
+#include "G4Polycone.hh"
 
 
 G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
@@ -52,7 +53,9 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													pars[2]     ///< half length in Z
 													), verbosity
 									  );
+
 		return thisG4Volume->getSolid();
+
 	} else 	if(type == "G4Tubs") {
 		thisG4Volume->setSolid(new G4Tubs(vname,     ///< name
 													 pars[0],   ///< Inner radius
@@ -62,7 +65,9 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													 pars[4]    ///< Delta Phi angle
 													 ), verbosity
 									  );
+
 		return thisG4Volume->getSolid();
+
 	} else 	if(type == "G4CutTubs") {
 		thisG4Volume->setSolid(new G4CutTubs(vname,     ///< name
 														 pars[0],   ///< Inner radius
@@ -74,7 +79,9 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 														 G4ThreeVector(pars[8], pars[9], pars[10])    ///< Outside Normal at +z
 														 ), verbosity
 									  );
+
 		return thisG4Volume->getSolid();
+
 	} else 	if(type == "G4Cons") {
 		thisG4Volume->setSolid(new G4Cons(vname,     ///< name
 													 pars[0],   ///< Inside radius at -pDz
@@ -86,7 +93,9 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													 pars[6]    ///< Delta Phi angle
 													 ), verbosity
 									  );
+
 		return thisG4Volume->getSolid();
+
 	} else 	if(type == "G4Para") {
 		thisG4Volume->setSolid(new G4Para(vname,     ///< name
 													 pars[0],   ///< Half length in x
@@ -97,7 +106,9 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													 pars[5]    ///< Azimuthal angle of the line joining the centres of the faces at -dz and +dz in z
 													 ), verbosity
 									  );
+
 		return thisG4Volume->getSolid();
+
 	} else 	if(type == "G4Trd") {
 		thisG4Volume->setSolid(new G4Trd(vname,     ///< name
 													pars[0],   ///< Half-length along x at the surface positioned at -dz
@@ -108,13 +119,37 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													), verbosity
 									  );
 		return thisG4Volume->getSolid();
-	}
 
+	} else if(type == "G4Polycone") {
+		// see https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomSolids.html
 
+		double phistart = pars[0];
+		double phitotal = pars[1];
+		int zplanes    = (int) pars[2];
 
-	else {
-		// PRAGMA TODO  throw exception here if solid is unknown to system
-		G4cout << " " << vname << " solid " << type << " uknown! " << G4endl;
+		double* zPlane = new double[zplanes];
+		double* rInner = new double[zplanes];
+		double* rOuter = new double[zplanes];
+
+		for(int zpl=0; zpl<zplanes; zpl++) {
+			zPlane[zpl] = pars[3 + 0*zplanes + zpl] ;
+			rInner[zpl] = pars[3 + 1*zplanes + zpl] ;
+			rOuter[zpl] = pars[3 + 2*zplanes + zpl] ;
+		}
+
+		thisG4Volume->setSolid(new G4Polycone(vname,          ///< name
+														  phistart,       ///< Initial Phi starting angle
+														  phitotal,       ///< Total Phi angle
+														  zplanes,        ///< Number of z planes
+														  zPlane,         ///< z coordinate of corners
+														  rInner,         ///< Tangent distance to inner surface
+														  rOuter          ///< Tangent distance to outer surface, verbosity
+														  ), verbosity
+									  );
+
+		return thisG4Volume->getSolid();
+	} else {
+		G4cerr << " " << vname << " solid " << type << " uknown! " << G4endl;
 	}
 
 	// if we are at this point the solid is not built

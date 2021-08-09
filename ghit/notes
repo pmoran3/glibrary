@@ -1,4 +1,4 @@
-G4 libraries needed for the library:
+open $G4ROOT/$GEANT4_VERSION/lib
 
 - graphics_reps
 - digits_hits
@@ -10,12 +10,4 @@ For the example:
 - gtouchable
 
 
-
-Notice: I had to add arm64 to  Project -> Build Settings -> Excluded Architecture
-
-
-- Allows for different color schema for different detectors
-
-
-- this is a standalone library cause it's worth to have its dedicated doxy build
 

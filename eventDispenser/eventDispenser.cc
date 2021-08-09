@@ -31,6 +31,7 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	// run number from options
 	// number of events from options
 	if(filename == "na" && neventsToProcess > 0 ) {
+		// only one run, defined in the option
 		runEvents[userRunno] = neventsToProcess;
 		return;
 	} else {
@@ -158,7 +159,6 @@ int EventDispenser::processEvents()
 //			}
 //		}
 
-		cout << " ASD 0 " << endl;
 		// running max nEventsBuffer events
 		int nEventsLeftToProcess = nevents;
 		while(nEventsLeftToProcess > 0) {
@@ -171,16 +171,10 @@ int EventDispenser::processEvents()
 			}
 		}
 
-		cout << " ASD 1 " << endl;
-
-
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			cout << EVENTDISPENSERLOGMSGITEM << " Run Number ∙" << runNumber << "∙ done with " << nevents << " events." << endl << endl;
 		}
 	}
-
-	cout << " ASD 2 " << endl;
-
 
 	cout << endl;
 

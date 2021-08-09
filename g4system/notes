@@ -3,7 +3,11 @@
 
 ## From Scratch:
 
+open $CLHEP_BASE_DIR/lib/
+ 
 
-geant4 libraries to link against:
-
-
+open $G4ROOT/$GEANT4_VERSION/lib
+- materials
+- global
+- graphics
+- geometry
