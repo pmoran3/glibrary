@@ -12,7 +12,7 @@ namespace eventDispenser {
 		json jsonEDVerbosity = {
 			{GNAME, "eventDistributionv"},
 			{GDESC, GVERBOSITY_DESCRIPTION},
-			{GDFLT, 1}
+			{GDFLT, 0}
 		};
 		goptions.push_back(GOption(jsonEDVerbosity));
 

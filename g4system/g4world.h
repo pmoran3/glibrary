@@ -16,6 +16,11 @@ public:
 	G4World(GWorld *gworld, GOptions* opt);
 
 	~G4World() {
+		// now deleting events
+		for (auto& [keys, values]: (*g4volumesMap) ) {
+			delete values;
+		}
+
 		delete g4volumesMap;
 	}
 
