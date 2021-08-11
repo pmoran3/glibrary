@@ -1,7 +1,36 @@
 // gtouchable
 #include "gtouchable.h"
 
+// glibrary
+#include "gutilities.h"
+
 using namespace std;
+
+// contructor from digitization and gidentity strings
+GTouchable::GTouchable(string digitization, string gidentityString, bool verb) : verbosity(verb), trackId(0), eMultiplier(1), gridTimeIndex(0) {
+
+	// gtype from digitization
+	if ( digitization == "flux" ) {
+		gType = flux;
+	} else if ( digitization == "flux" ) {
+		gType = particleCounter;
+	} else {
+		gType = readout;
+	}
+
+	// the gidentity string is of the form: 'sector: 2, layer: 4, wire; 33'
+	// by construction in the sci-g API
+	vector<string> identity = gutilities::getStringVectorFromStringWithDelimiter(gidentityString, ",");
+	// each identity item is a string of the form 'sector: 2'
+	for ( auto& gid: identity) {
+		vector<string> identifier = gutilities::getStringVectorFromStringWithDelimiter(gid, ":");
+		string idName  = identifier[0];
+		int idValue = stoi(identifier[0]);
+		gidentity.push_back(GIdentifier(idName, idValue));
+	}
+
+}
+
 
 // todo: optimize the algorithm
 bool GTouchable::operator == (const GTouchable& that) const
@@ -9,7 +38,7 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	// first, compare size of identity
 	// this should never happen because the same sensitivity should be assigned the same identifier structure
-	if (this->gidentifier.size() != that.gidentifier.size()) {
+	if (this->gidentity.size() != that.gidentity.size()) {
 		if (verbosity) {
 			cout << " Touchable sizes are different " << endl;
 		}
@@ -18,15 +47,15 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	if (verbosity) {
 		cout << " Touchable comparison:  " << endl;
-		for (int i=0; i<that.gidentifier.size(); i++) {
-			cout << this->gidentifier[i] << " " <<  that.gidentifier[i] << endl;
+		for (int i=0; i<that.gidentity.size(); i++) {
+			cout << this->gidentity[i] << " " <<  that.gidentity[i] << endl;
 		}
 	}
 
 	// now compare that the identity is actuallty the same
 	// return false if something is different
-	for (int i=0; i<that.gidentifier.size(); i++) {
-		if (this->gidentifier[i] != that.gidentifier[i]) {
+	for (int i=0; i<that.gidentity.size(); i++) {
+		if (this->gidentity[i] != that.gidentity[i]) {
 			return false;
 		}
 	}

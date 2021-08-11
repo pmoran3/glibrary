@@ -33,7 +33,7 @@ GVolume::GVolume(vector<string> pars, string importPath)
 		style        = stoi(trimSpacesFromString(pars[i++]));
 		color        = trimSpacesFromString(pars[i++]);
 		digitization = trimSpacesFromString(pars[i++]);
-		touchableID  = trimSpacesFromString(pars[i++]);
+		gidentity    = trimSpacesFromString(pars[i++]);
 		copyOf       = trimSpacesFromString(pars[i++]);
 		replicaOf    = trimSpacesFromString(pars[i++]);
 		solidsOpr    = trimSpacesFromString(pars[i++]);
@@ -76,7 +76,7 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 	stream << "   - Positions:       "    << gVol.pos << endl;
 	stream << "   - Rotation(s):     "    << gVol.rot << endl;
 	stream << "   - Digitization:    "    << gVol.digitization << endl;
-	stream << "   - Touchable ID:    "    << gVol.touchableID << endl;
+	stream << "   - GIdentity:       "    << gVol.gidentity << endl;
 	stream << "   - Col, Vis, Style: "    << gVol.color   << ", " << visibility << ", "  << style << endl;
 
 	return stream;
@@ -106,7 +106,7 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	style        = 0; // wireframe
 	color        = "ccffff";
 	digitization = GSYSTEMNOTAPPLICABLEENTRY;
-	touchableID  = GSYSTEMNOTAPPLICABLEENTRY;
+	gidentity    = GSYSTEMNOTAPPLICABLEENTRY;
 	copyOf       = GSYSTEMNOTAPPLICABLEENTRY;
 	replicaOf    = GSYSTEMNOTAPPLICABLEENTRY;
 	solidsOpr    = GSYSTEMNOTAPPLICABLEENTRY;

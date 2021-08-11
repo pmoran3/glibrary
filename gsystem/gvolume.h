@@ -44,7 +44,7 @@ private:
 	bool          exist;   ///< Existance modifier
 
 	string  digitization;   ///< Assigns digitization type and collection ID
-	string  touchableID;   ///< Assigns identifier to single volume
+	string  gidentity;      ///< String with identifiers in it. Example: 'sector: 2, layer: 4, wire; 33'
 
 	// special cases
 	string       copyOf;   ///< name of gvolume to copy from
@@ -75,7 +75,7 @@ public:
 	string getTilt()  {return tilt;}
 
 	string  getDigitization(){return digitization;}
-	string  getTouchableID(){return touchableID;}
+	string  getTouchableID() {return gidentity;}
 
 	// special cases
 	string getCopyOf()     {return copyOf;}

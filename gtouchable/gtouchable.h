@@ -20,7 +20,6 @@ enum GTouchableType { readout, flux, particleCounter };
 
 struct GIdentifier {
 
-
 public:
 	// constructor
 	GIdentifier(string n, int v) : idName{n}, idValue{v} {}
@@ -48,20 +47,15 @@ class GTouchable
 {
 	
 public:
-	// constructor called at gvolume construction
-	GTouchable(GTouchableType t, vector<GIdentifier> identifier, bool verb = false) :
-	gType(t),
-	gidentifier(identifier),
-	verbosity(verb) {
-		trackId = 0;
-		eMultiplier = 1;
-		gridTimeIndex = 0;
-	}
+	// constructor called in GDetectorConstruction::ConstructSDandField
+	// to register a new gtouchable in the sensitive detector gtouchable map
+	GTouchable(string digitization, string gidentityString, bool verb = false);
+
 
 private:
 	// set by sensitive detector constructor
 	GTouchableType  gType;
-	vector<GIdentifier> gidentifier;   ///< Uniquely identify a sensitive element
+	vector<GIdentifier> gidentity;  ///< Uniquely identify a sensitive element
 	bool verbosity;
 
 	// set in sensitiveDetector::ProcessHit
@@ -78,7 +72,7 @@ private:
 
 	// to print it out
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable) {
-		for ( auto& identity: gtouchable.gidentifier ) {
+		for ( auto& identity: gtouchable.gidentity ) {
 			stream << identity << std::endl;
 		}
 

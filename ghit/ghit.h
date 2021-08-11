@@ -36,7 +36,7 @@ private:
 	// only used if pVVisManager exist (interactive mode)
 	string colorSchema;
 
-	// it is copied here so it can be used in the overloaded == function
+	// GTouchable saved here so it can be used in the overloaded == function
 	GTouchable *gtouchable;
 
 private:
