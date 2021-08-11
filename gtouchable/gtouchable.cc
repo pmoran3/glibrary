@@ -24,8 +24,12 @@ GTouchable::GTouchable(string digitization, string gidentityString, bool verb) :
 	// each identity item is a string of the form 'sector: 2'
 	for ( auto& gid: identity) {
 		vector<string> identifier = gutilities::getStringVectorFromStringWithDelimiter(gid, ":");
+
+//		cout << " ASD " << gid << endl;
+
 		string idName  = identifier[0];
-		int idValue = stoi(identifier[0]);
+		int idValue = stoi(identifier[1]);
+
 		gidentity.push_back(GIdentifier(idName, idValue));
 	}
 
