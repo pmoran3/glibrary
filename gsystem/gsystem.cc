@@ -36,12 +36,12 @@ void GSystem::addGVolume(vector<string> pars, int verbosity) {
 		
 		if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
 
-			(*gvolumesMap)[nameKey] = new GVolume(pars);
+			(*gvolumesMap)[nameKey] = new GVolume(name, pars);
 			if(verbosity >= GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << "adding gVolume " << pars[0] << " to gvolumes map." << endl;
+				cout << GSYSTEMLOGHEADER << "adding gVolume " << pars[0] << " to gvolumes map with name <" << nameKey << ">" << endl;
 			} 
 		} else {
-			cerr << FATALERRORL << "a volume with the name " << nameKey << " already exists. " << endl;
+			cerr << FATALERRORL << "a volume with the name <" << nameKey << "> already exists. " << endl;
 			gexit(EC__GVOLUMEALREADYPRESENT);
 		}
 	}

@@ -17,7 +17,8 @@ using namespace gutilities;
 
 G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
-	string vname = s->getName();
+	string vname    = s->getName();
+	string vMapname = s->getMapName();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
@@ -27,14 +28,14 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 	G4Volume *thisG4Volume = nullptr;
 
 	// check if g4s already exists
-	if(g4s->find(vname) != g4s->end()) {
-		thisG4Volume = (*g4s)[vname];
+	if(g4s->find(vMapname) != g4s->end()) {
+		thisG4Volume = (*g4s)[vMapname];
 		// if the solid is already built, returning it
 		if (thisG4Volume->getSolid() != nullptr) return thisG4Volume->getSolid();
 	} else {
 		thisG4Volume = new G4Volume();
 		// adding volume to the map
-		(*g4s)[vname] = thisG4Volume;
+		(*g4s)[vMapname] = thisG4Volume;
 	}
 
 
@@ -47,7 +48,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 	string type = s->getType();
 
 	if(type == "G4Box") {
-		thisG4Volume->setSolid(new G4Box(vname,      ///< name
+		thisG4Volume->setSolid(new G4Box(vMapname,      ///< name
 													pars[0],    ///< half length in X
 													pars[1],    ///< half length in Y
 													pars[2]     ///< half length in Z
@@ -57,7 +58,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Tubs") {
-		thisG4Volume->setSolid(new G4Tubs(vname,     ///< name
+		thisG4Volume->setSolid(new G4Tubs(vMapname,     ///< name
 													 pars[0],   ///< Inner radius
 													 pars[1],   ///< Outer radius
 													 pars[2],   ///< Half length in z
@@ -69,7 +70,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4CutTubs") {
-		thisG4Volume->setSolid(new G4CutTubs(vname,     ///< name
+		thisG4Volume->setSolid(new G4CutTubs(vMapname,     ///< name
 														 pars[0],   ///< Inner radius
 														 pars[1],   ///< Outer radius
 														 pars[2],   ///< Half length in z
@@ -83,7 +84,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Cons") {
-		thisG4Volume->setSolid(new G4Cons(vname,     ///< name
+		thisG4Volume->setSolid(new G4Cons(vMapname,     ///< name
 													 pars[0],   ///< Inside radius at -pDz
 													 pars[1],   ///< Outside radius at -pDz
 													 pars[2],   ///< Inside radius at +pDz
@@ -97,7 +98,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Para") {
-		thisG4Volume->setSolid(new G4Para(vname,     ///< name
+		thisG4Volume->setSolid(new G4Para(vMapname,     ///< name
 													 pars[0],   ///< Half length in x
 													 pars[1],   ///< Half length in y
 													 pars[2],   ///< Half length in z
@@ -110,7 +111,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Trd") {
-		thisG4Volume->setSolid(new G4Trd(vname,     ///< name
+		thisG4Volume->setSolid(new G4Trd(vMapname,     ///< name
 													pars[0],   ///< Half-length along x at the surface positioned at -dz
 													pars[1],   ///< Half-length along x at the surface positioned at +dz
 													pars[2],   ///< Half-length along y at the surface positioned at -dz
@@ -137,7 +138,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 			rOuter[zpl] = pars[3 + 2*zplanes + zpl] ;
 		}
 
-		thisG4Volume->setSolid(new G4Polycone(vname,          ///< name
+		thisG4Volume->setSolid(new G4Polycone(vMapname,       ///< name
 														  phistart,       ///< Initial Phi starting angle
 														  phitotal,       ///< Total Phi angle
 														  zplanes,        ///< Number of z planes

@@ -7,6 +7,7 @@
 G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
+	string vMapname = s->getMapName();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
@@ -49,7 +50,7 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 	bool checkForOverlaps = false;
 	if(gopt->getInt("checkOverlaps") > 0) checkForOverlaps = true;
 
-	G4Volume *thisG4Volume = (*g4s)[vname];
+	G4Volume *thisG4Volume = (*g4s)[vMapname];
 
 	//std::cout << " ASD " << thisG4Volume->getLogical()->GetMaterial() << std::endl;
 
@@ -57,8 +58,8 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 		thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),
 																  getPosition(s),
 																  thisG4Volume->getLogical(),
-																  vname,
-																  getLogicalFromMap(s->getMother(), g4s),
+																  vMapname,
+																  getLogicalFromMap(s->getMotherMapName(), g4s),
 																  false,
 																  s->getPCopyNo(),
 																  checkForOverlaps

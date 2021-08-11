@@ -15,7 +15,7 @@ public:
 
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {
 
-		int verbosity = gopt->getInt("g4systemv");
+		int verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes." << G4endl;

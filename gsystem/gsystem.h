@@ -30,7 +30,10 @@ private:
 	map<string, GVolume*> *gvolumesMap;
 
 	string formVolumeKey(string detectorName) {
-		return name + "_" + detectorName;
+		if (name == ROOTWORLDGVOLUMENAME) {
+			return ROOTWORLDGVOLUMENAME;
+		}
+		return name + "/" + detectorName;
 	}
 
 public:

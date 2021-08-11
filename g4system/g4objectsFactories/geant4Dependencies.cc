@@ -65,8 +65,8 @@ bool G4ObjectsFactory::checkLogicalDependencies(bool verbosity, GVolume *s, map<
 
 bool G4ObjectsFactory::checkPhysicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
 {
-	string vname      = s->getName();
-	string motherName = s->getMother();
+	string vname      = s->getMapName();
+	string motherName = s->getMotherMapName();
 
 	// the gvolume must exist
 	if(g4s->find(vname) == g4s->end()) {

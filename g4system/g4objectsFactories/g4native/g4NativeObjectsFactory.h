@@ -12,8 +12,8 @@ public:
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {
 
 
-		int verbosity = gopt->getInt("g4systemv");
-		string vname = s->getName();
+		int verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
+		string vname = s->getMapName();
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			G4cout << G4SYSTEMLOGHEADER << "Building geant4 volume originating from <" << vname << ">" << G4endl;
@@ -24,7 +24,7 @@ public:
 		lbuild->SetVisAttributes(createVisualAttributes(s));
 		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
 
-		if(verbosity == GVERBOSITY_DETAILS) {
+		if(verbosity >= GVERBOSITY_DETAILS) {
 			string solid = sbuild != nullptr ? " solid build, "    : " solid not build, ";
 			string logic = lbuild != nullptr ? " logical build, "  : " logical not not build, ";
 			string physi = pbuild != nullptr ? " physical build. " : " physical not build. ";

@@ -4,11 +4,10 @@
 
 // glibrary
 #include "goptions.h"
-
-// gsystem
 #include "gvolume.h"
 
 // g4system
+#include "g4systemConventions.h"
 #include "g4volume.h"
 
 // geant4
@@ -47,7 +46,7 @@ protected:
 
 	bool getVerbosity(GOptions* gopt, string vname) {
 
-		int    verbosity = gopt->getInt("g4systemv");
+		int    verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
 		string logVolume = gopt->getString("logVolume");
 
 		return (verbosity == GVERBOSITY_DETAILS) || (vname == logVolume);

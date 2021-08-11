@@ -12,6 +12,7 @@
 G4LogicalVolume* G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
+	string vMapname = s->getMapName();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// if it's a component, do nothing
@@ -27,8 +28,8 @@ G4LogicalVolume* G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s,
 
 	// check if g4s already exists
 	// it could not exist if this is a copy
-	if(g4s->find(vname) != g4s->end()) {
-		thisG4Volume = (*g4s)[vname];
+	if(g4s->find(vMapname) != g4s->end()) {
+		thisG4Volume = (*g4s)[vMapname];
 		// if the logical is already built, nothing to do
 		// this can happen if it's a copy
 		if(thisG4Volume->getLogical() != nullptr) return thisG4Volume->getLogical();
@@ -47,7 +48,7 @@ G4LogicalVolume* G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s,
 	// if not found, trying defaultmaterial if useDefaultMaterial
 	if(thisMaterial == nullptr) {
 		if(useDefaultMaterial) {
-			G4cout << " ! Warning: material " << matName << " not found for volume " << vname << ". Trying default material <" << defaultmaterial << "> instead." << G4endl;
+			G4cout << " ! Warning: material " << matName << " not found for volume " << vMapname << ". Trying default material <" << defaultmaterial << "> instead." << G4endl;
 			thisMaterial = NISTman->FindOrBuildMaterial(defaultmaterial);
 			if(thisMaterial == nullptr) {
 				G4cerr << FATALERRORL << "default material <" << defaultmaterial << "> not found. Exiting. " << G4endl;
@@ -75,7 +76,7 @@ G4LogicalVolume* G4NativeSystemFactory::buildLogical(GOptions* gopt, GVolume *s,
 	// hierarchy is applied by default. For parameterised volumes in
 	// the hierarchy, optimisation is -always- applied.
 
-	thisG4Volume->setLogical(new G4LogicalVolume(thisG4Volume->getSolid(), thisMaterial, vname), verbosity);
+	thisG4Volume->setLogical(new G4LogicalVolume(thisG4Volume->getSolid(), thisMaterial, vMapname), verbosity);
 
 	// material found, can build the logical volume
 //	if(gui) {

@@ -1,5 +1,6 @@
 // g4system
 #include "g4systemOptions.h"
+#include "g4systemConventions.h"
 
 // project goption to a system
 namespace g4system {
@@ -10,7 +11,7 @@ namespace g4system {
 		vector<GOption> goptions;
 
 		json jsonG4WorldVerbosity = {
-			{GNAME, "g4systemv"},
+			{GNAME, G4SYSTEMVERBOSITY},
 			{GDESC, GVERBOSITY_DESCRIPTION},
 			{GDFLT, 1}
 		};

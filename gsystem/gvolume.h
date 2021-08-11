@@ -14,13 +14,14 @@ using std::vector;
 class GVolume
 {
 public:
-	GVolume(vector<string> pars, string importPath = GSYSTEMNOTAPPLICABLEENTRY);
+	GVolume(string s, vector<string> pars, string importPath = GSYSTEMNOTAPPLICABLEENTRY);
 	GVolume(string rootVolumeDefinition); // special constructor for root volume
 
 private:
-	string           name; ///< Name of the volume.
-	string         mother; ///< Mother Volume name.
-	string    description; ///< Volume Description, for documentation.
+	string         system; ///< System of provenience
+	string           name; ///< Name of the volume
+	string         mother; ///< Mother Volume name
+	string    description; ///< Volume Description, for documentation
 	string importFilename; ///< For imports, filename with path, set with the import factory
 	
 	// solid parameters
@@ -60,7 +61,23 @@ private:
 
 public:
 	string getName()       {return name;}
+	string getMapName()    {
+		if (mother == MOTHEROFUSALL) {
+			return ROOTWORLDGVOLUMENAME;
+		}
+		return system + "/" + name;
+	}
 	string getMother()     {return mother;}
+	string getMotherMapName()     {
+		if (mother == ROOTWORLDGVOLUMENAME) {
+			return ROOTWORLDGVOLUMENAME;
+		} else if (mother == MOTHEROFUSALL) {
+			return MOTHEROFUSALL;
+		}
+		return system + "/" + mother;
+	}
+
+
 	string getType()       {return type;}
 	string getParameters() {return parameters;}
 	string getMaterial()   {return material;}
@@ -75,7 +92,7 @@ public:
 	string getTilt()  {return tilt;}
 
 	string  getDigitization(){return digitization;}
-	string  getTouchableID() {return gidentity;}
+	string  getGIdentity() {return gidentity;}
 
 	// special cases
 	string getCopyOf()     {return copyOf;}

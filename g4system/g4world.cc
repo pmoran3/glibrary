@@ -16,7 +16,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	g4volumesMap = new map<string, G4Volume*>;
 
 	// instantiating gSystemManager
-	int verbosity = opt->getInt("g4systemv");
+	int verbosity = opt->getInt(G4SYSTEMVERBOSITY);
 	GManager g4SystemManager("G4World", verbosity);
 
 	map<string, G4ObjectsFactory*> g4systemFactory;

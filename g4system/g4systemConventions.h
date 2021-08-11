@@ -1,7 +1,7 @@
 #ifndef  G4VOLUMESCONVENTIONS_H
 #define  G4VOLUMESCONVENTIONS_H 1
 
-
+#define G4SYSTEMVERBOSITY "g4systemv"
 
 #define G4SYSTEMNOTAPPLICABLEENTRY  "na"
 #define G4SYSTEMLOGHEADER           " ⌂ G4System ▸ "
