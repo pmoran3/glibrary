@@ -38,7 +38,7 @@ public:
 			gLogDestruct("GEventData");
 		}
 
-		delete gheader;
+	//	delete gheader;
 	}
 
 public:

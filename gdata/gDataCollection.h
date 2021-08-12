@@ -25,11 +25,11 @@ public:
 	
 	~GDataCollection() {
 
-		for ( auto* hit: (*digitizedData) )  { delete hit; }
-		for ( auto* hit: (*trueInfosData) )  { delete hit; }
-
-		delete digitizedData;
-		delete trueInfosData;
+//		for ( auto* hit: (*digitizedData) )  { delete hit; }
+//		for ( auto* hit: (*trueInfosData) )  { delete hit; }
+//
+//		delete digitizedData;
+//		delete trueInfosData;
 	}
 
 
