@@ -78,7 +78,7 @@ def writeHeader(sName, routines):
 	headerFile.write('\n')
 
 	headerFile.write('\t// mandatory readout specs definitions\n')
-	headerFile.write('\tbool defineReadoutSpecs(int runno, string variation);\n')
+	headerFile.write('\tbool defineReadoutSpecs();\n')
 
 	if 'constants' in routines:
 		headerFile.write('\n')
@@ -133,25 +133,6 @@ def writeHitDigitization(sName):
 	constantsFile.write('}\n')
 
 
-# PRAGMA TODO: add comments/documentation
-# PRAGMA TODO: add commented example
-def writePulseDigitization(sName):
-	constantsFile = open('pulseDigitization.cc', 'w')
-	constantsFile.write('#include "' + sName + '.h"\n')
-	constantsFile.write('\n')
-	constantsFile.write('GObservables* ' + sName + 'Plugin::digitizePulse(GHit *ghit)\n')
-	constantsFile.write('{\n')
-	constantsFile.write('\tGObservables* gdata = new GObservables();\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\n')
-	constantsFile.write('\treturn gdata;\n')
-	constantsFile.write('}\n')
 
 
 # PRAGMA TODO: add comments/documentation
@@ -188,7 +169,7 @@ def writeReadoutSpects(sName):
 	readoutSpecs = open('readoutSpecs.cc', 'w')
 	readoutSpecs.write('#include "' + sName + '.h"\n')
 	readoutSpecs.write('\n')
-	readoutSpecs.write('bool ' + sName + 'Plugin::defineReadoutSpecs(int runno, string variation)\n')
+	readoutSpecs.write('bool ' + sName + 'Plugin::defineReadoutSpecs()\n')
 	readoutSpecs.write('{\n')
 	readoutSpecs.write('\tfloat     timeWindow = 10;                  // electronic readout time-window of the detector\n')
 	readoutSpecs.write('\tfloat     gridStartTime = 0;                // defines the windows grid\n')

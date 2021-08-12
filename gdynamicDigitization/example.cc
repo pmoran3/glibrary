@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
 
 	// using dynamicRoutines map
 	map<string, GDynamicDigitization*> dynamicRoutines;
-	dynamicRoutines["ctof"] = manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin");
+	dynamicRoutines["ctof"] = manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinesExample");
 
 	// using shared_ptr
-	shared_ptr<GDynamicDigitization> globalCtof1(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin"));
-	shared_ptr<GDynamicDigitization> globalCtof2(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinePlugin"));
+	shared_ptr<GDynamicDigitization> globalCtof1(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinesExample"));
+	shared_ptr<GDynamicDigitization> globalCtof2(manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinesExample"));
 
 	// increments reference count
 	// to be used in the local thread

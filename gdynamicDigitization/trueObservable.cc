@@ -2,7 +2,6 @@
 #include "gdynamicdigitization.h"
 
 
-
 GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData();

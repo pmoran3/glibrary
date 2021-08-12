@@ -47,9 +47,8 @@ public:
 
 	GReadoutSpecs *readoutSpecs = nullptr;
 
-	// initialize readout specs in GSensitiveDetector constructor if it's a readout electronics
-	// must be implemented in case the detector has readout
-	virtual bool defineReadoutSpecs(int runno, string variation) = 0;
+	// mandatory initialization of readout specs
+	virtual bool defineReadoutSpecs() = 0;
 	
 	// method to dynamically load factories
 	static GDynamicDigitization* instantiate(const dlhandle handle) {

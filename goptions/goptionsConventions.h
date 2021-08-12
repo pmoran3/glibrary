@@ -5,10 +5,11 @@
 #define HELPFILLSPACE "                              "
 
 //  TAGS
-#define GNAME     "JsonTagGNAME"
-#define GDESC     "JsonTagGDESCription"
-#define GDFLT     "jsonTagDefault"
-#define NODFLT    "NODFLT"
+#define GNAME          "JsonTagGNAME"
+#define GDESC          "JsonTagGDESCription"
+#define GDFLT          "jsonTagDefault"
+#define NODFLT         "NODFLT"
+#define GNOTAPPLICABLE "na"
 
 #define IMPORTJCARD "import jcard"
 

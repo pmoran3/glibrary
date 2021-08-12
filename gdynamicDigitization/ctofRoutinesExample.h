@@ -14,7 +14,7 @@ public:
 	bool loadConstants(int runno, string variation);
 
 	// mandatory readout specs definitions
-	void defineReadoutSpecs(int runno, string variation);
+	bool defineReadoutSpecs(int runno, string variation);
 
 private:
 
