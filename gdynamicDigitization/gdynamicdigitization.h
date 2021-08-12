@@ -49,7 +49,7 @@ public:
 
 	// initialize readout specs in GSensitiveDetector constructor if it's a readout electronics
 	// must be implemented in case the detector has readout
-	virtual void defineReadoutSpecs(int runno, string variation) = 0;
+	virtual bool defineReadoutSpecs(int runno, string variation) = 0;
 	
 	// method to dynamically load factories
 	static GDynamicDigitization* instantiate(const dlhandle handle) {

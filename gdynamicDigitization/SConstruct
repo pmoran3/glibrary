@@ -12,6 +12,10 @@ env.Default('../')
 # build the library
 lib = SConscript('SConscript', exports='env')
 
+# standard pre and suffix for gemc plugins
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
+
 ctof_dll  = env.SharedLibrary( source = 'ctofRoutinesExample.cc',  target = 'ctofRoutinesExample')
 Depends(ctof_dll,  lib);
 

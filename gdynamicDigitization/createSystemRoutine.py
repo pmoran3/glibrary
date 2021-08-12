@@ -1,9 +1,13 @@
 #!/usr/bin/python -B   # -B prevents writing .pyc compiled versions of each module
 
+# TODO: use argparse for options
+# TODO: add sconstruct
+# TODO: 
+
 import sys, getopt, string
 
-validRoutineNames = ["constants",       "touchable",            "sensitivePars",                "hitDigitization",  "pulseDigitization",  "all"]
-validRoutineDescr = ["loads constants", "manipulate touchable", "defines sensitive parameters", "digitize a hit",   "digitize a pulse",   "write all routines"]
+validRoutineNames = ["constants",       "processID",                "sensitivePars",                "hitDigitization",  "pulseDigitization",  "all"]
+validRoutineDescr = ["loads constants", "manipulate/create new ID", "defines sensitive parameters", "digitize a hit",   "digitize a pulse",   "write all routines"]
 
 def printHelp():
 	print ''
@@ -15,7 +19,7 @@ def printHelp():
 	print 'Example: createSystemRoutine.py -s driftChamber -r constants touchable'
 	print ''
 	print 'Available routines:'
-	for n in range(0, len(validRoutineNames)):
+	for n in range(len(validRoutineNames)):
 		print '-', validRoutineNames[n], ':',validRoutineDescr[n]
 	print ''
 
@@ -65,18 +69,20 @@ def writeHeader(sName, routines):
 	headerFile.write('#ifndef ' + sName.upper() + 'PLUGIN\n')
 	headerFile.write('#define ' + sName.upper() + 'PLUGIN 1\n')
 	headerFile.write('\n')
-	headerFile.write('// gdynamic\n')
-	headerFile.write('#include "gdynamic.h"\n')
+	headerFile.write('// gdynamicdigitization\n')
+	headerFile.write('#include "gdynamicdigitization.h"\n')
 	headerFile.write('\n')
-	headerFile.write('// c++\n')
-	headerFile.write('#include <string>\n')
-	headerFile.write('using namespace std;\n')
-	headerFile.write('\n')
-	headerFile.write('class ' + sName + 'Plugin : public GDynamic {\n')
+	headerFile.write('class ' + sName + 'Plugin : public GDynamicDigitization {\n')
 	headerFile.write('\n')
 	headerFile.write('public:\n')
 	headerFile.write('\n')
+
+	headerFile.write('\t// mandatory readout specs definitions\n')
+	headerFile.write('\tbool defineReadoutSpecs(int runno, string variation);\n')
+
 	if 'constants' in routines:
+		headerFile.write('\n')
+		headerFile.write('\t// loads digitization constants\n')
 		headerFile.write('\tbool loadConstants(int runno, string variation);\n')
 		headerFile.write('\n')
 	
@@ -85,10 +91,6 @@ def writeHeader(sName, routines):
 	headerFile.write('\t // constants definitions\n')
 	headerFile.write('\n')
 	headerFile.write('};\n')
-	headerFile.write('\n')
-	headerFile.write('extern "C" GDynamic* GDynamicFactory(void) {\n')
-	headerFile.write('\treturn static_cast<GDynamic*>(new ' + sName + 'Plugin);\n')
-	headerFile.write('}\n')
 	headerFile.write('\n')
 	headerFile.write('#endif\n')
 	headerFile.write('\n')
@@ -180,15 +182,41 @@ def writeSConstruct(sName, routines):
 	sconsFile.write('\n')
 	sconsFile.write('\n')
 
+# PRAGMA TODO: add comments/documentation
+# PRAGMA TODO: add commented example
+def writeReadoutSpects(sName):
+	readoutSpecs = open('readoutSpecs.cc', 'w')
+	readoutSpecs.write('#include "' + sName + '.h"\n')
+	readoutSpecs.write('\n')
+	readoutSpecs.write('bool ' + sName + 'Plugin::defineReadoutSpecs(int runno, string variation)\n')
+	readoutSpecs.write('{\n')
+	readoutSpecs.write('\tfloat     timeWindow = 10;                  // electronic readout time-window of the detector\n')
+	readoutSpecs.write('\tfloat     gridStartTime = 0;                // defines the windows grid\n')
+	readoutSpecs.write('\tHitBitSet hitBitSet = HitBitSet("100000");  // defines what information to be stored in the hit\n')
+	readoutSpecs.write('\tbool      verbosity = true;\n')
+	readoutSpecs.write('\n')
+	readoutSpecs.write('\treadoutSpecs = new GReadoutSpecs(timeWindow, gridStartTime, hitBitSet, verbosity);\n')
+	readoutSpecs.write('\n')
+	readoutSpecs.write('\treturn true;\n')
+	readoutSpecs.write('}\n')
+	readoutSpecs.write('\n')
+	readoutSpecs.write('\n')
+	readoutSpecs.write('// DO NOT EDIT BELOW THIS LINE: defines how to create the <' + sName + 'Plugin>\n')
+	readoutSpecs.write('extern "C" GDynamicDigitization* GDynamicFactory(void) {\n')
+	readoutSpecs.write('\treturn static_cast<GDynamicDigitization*>(new ' + sName + 'Plugin);\n')
+	readoutSpecs.write('}\n')
+	readoutSpecs.write('\n')
+
+
 # parsing and writing sources
 systemName = parseSystem(sys.argv[1:])
 routines   = parseRNames(sys.argv[1:])
 
 validateOptions(systemName, routines)
 
-# let's not overwrite this?
-# or use createHeader function
-# writeHeader(systemName, routines)
+# or use createNewHeader function
+writeHeader(systemName, routines)
+writeReadoutSpects(systemName)
 
 if 'constants' in routines or 'all' in routines:
 	writeLoadConstants(systemName)

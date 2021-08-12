@@ -1,6 +1,6 @@
 #include "ctofRoutinesExample.h"
 
-void CTofRoutineExample::defineReadoutSpecs(int runno, string variation) {
+bool CTofRoutineExample::defineReadoutSpecs(int runno, string variation) {
 
 	float     timeWindow = 10;                  // electronic readout time-window of the detector
 	float     gridStartTime = 0;                // defines the windows grid
@@ -9,6 +9,7 @@ void CTofRoutineExample::defineReadoutSpecs(int runno, string variation) {
 
 	readoutSpecs = new GReadoutSpecs(timeWindow, gridStartTime, hitBitSet, verbosity);
 
+	return true;
 }
 
 

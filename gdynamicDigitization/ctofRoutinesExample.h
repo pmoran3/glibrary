@@ -13,8 +13,7 @@ class CTofRoutineExample : public GDynamicDigitization {
 public:
 	bool loadConstants(int runno, string variation);
 
-	// readout specs definitions
-	// this MUST be defined, and public
+	// mandatory readout specs definitions
 	void defineReadoutSpecs(int runno, string variation);
 
 private:
