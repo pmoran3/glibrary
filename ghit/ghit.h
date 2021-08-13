@@ -50,11 +50,13 @@ private:
 
 	// hit data, selected by HitBitSet, to be collected for each step
 private:
-	vector<G4ThreeVector> stepGlobalPos; // always present
+	// always present:
+	vector<G4ThreeVector> stepGlobalPos;
+	vector<G4ThreeVector> stepLocalPos;
+	vector<float> stepEdep, stepTime;
 
-	vector<float> stepEdep, stepTime;    // bit 1
-
-	vector<float> stepSize;              // bit 2
+	// bit 1
+	vector<float> stepSize;             
 
 	// geant4 touchable hierarchy
 	vector<int> g4TouchableHierarchyID;

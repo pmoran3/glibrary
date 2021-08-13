@@ -12,13 +12,16 @@ using HitBitSet = std::bitset<NHITBITS> ;
 // GHIT Bitset.
 // Setting a bit will call the corresponding code in buildHitInfos
 //
-// 1st bit: energy deposited, time
-// 2nd bit: global position, step length
-// 3rd bit: local position
-// 4th bit: track informations: momentum, total energy, vertex, pid, track id
-// 5th bit: mother particle track information. This is created after the event
-// 6th bit: meta information: magnetic field. process id name that created the particle
-// 7th bit: optical photon only: wavelength, momentum, vertex, track id
+// Information always present:
+// - local and global positions (G4ThreeVector)
+// - energy deposited, time
+//
+// Toggle existance by bit
+// 1rd bit: step length
+// 2th bit: track informations: momentum, total energy, vertex, pid, track id
+// 3th bit: mother particle track information. This is created after the event
+// 4th bit: meta information: magnetic field. process id name that created the particle
+// 5th bit: optical photon only: wavelength, momentum, vertex, track id
 
 
 #endif
