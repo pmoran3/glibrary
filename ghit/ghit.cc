@@ -4,6 +4,7 @@
 // geant4
 #include "G4VVisManager.hh"
 #include "G4Circle.hh"
+#include "G4VisAttributes.hh"
 
 // MT definitions, as from:
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
@@ -33,6 +34,7 @@ void GHit::Draw()
 		G4Circle circle(stepGlobalPos[0]);
 		circle.SetFillStyle(G4Circle::filled);
 		circle.SetScreenSize(10);
+		circle.SetVisAttributes(G4VisAttributes(colour_hit));
 		pVVisManager->Draw(circle);
 
 	}
@@ -43,6 +45,9 @@ void GHit::Draw()
 
 bool GHit::setColorSchema()
 {
+	colour_touch  = G4Colour(0.0, 0.0, 1.0);
+	colour_hit    = G4Colour(1.0, 0.0, 0.0);
+	colour_passby = G4Colour(0.0, 1.0, 0.0);
 
 	return false;
 }

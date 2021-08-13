@@ -1,7 +1,7 @@
 #ifndef  G4WORLD_H
 #define  G4WORLD_H 1
 
-// gsystem
+// glibrary
 #include "gworld.h"
 
 // g4system
@@ -16,12 +16,12 @@ public:
 	G4World(GWorld *gworld, GOptions* opt);
 
 	~G4World() {
-		// now deleting events
-//		for (auto& [keys, values]: (*g4volumesMap) ) {
-//			delete values;
-//		}
-//
-//		delete g4volumesMap;
+		// now deleting values
+		for (auto& [keys, values]: (*g4volumesMap) ) {
+			delete values;
+		}
+
+		delete g4volumesMap;
 	}
 
 private:

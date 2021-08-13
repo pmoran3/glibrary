@@ -13,6 +13,7 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 #include "G4Step.hh"
+#include "G4Colour.hh"
 
 // glibrary
 #include "gtouchable.h"
@@ -40,6 +41,7 @@ private:
 	GTouchable *gtouchable;
 
 private:
+	G4Colour colour_touch, colour_hit, colour_passby;
 	bool setColorSchema();
 
 
@@ -48,9 +50,10 @@ private:
 
 	// hit data, selected by HitBitSet, to be collected for each step
 private:
+	vector<G4ThreeVector> stepGlobalPos; // always present
+
 	vector<float> stepEdep, stepTime;    // bit 1
 
-	vector<G4ThreeVector> stepGlobalPos; // bit 2
 	vector<float> stepSize;              // bit 2
 
 	// geant4 touchable hierarchy

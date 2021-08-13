@@ -180,7 +180,7 @@ int EventDispenser::processEvents()
 //			}
 //		}
 
-		g4uim->ApplyCommand("/run/initialize");
+		//g4uim->ApplyCommand("/run/initialize");
 		g4uim->ApplyCommand("/run/beamOn 10");
 
 
