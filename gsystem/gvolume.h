@@ -65,7 +65,7 @@ public:
 		if (mother == MOTHEROFUSALL) {
 			return ROOTWORLDGVOLUMENAME;
 		}
-		return system + "/" + name;
+		return system + "__" + name;
 	}
 	string getMother()     {return mother;}
 	string getMotherMapName()     {
@@ -74,7 +74,7 @@ public:
 		} else if (mother == MOTHEROFUSALL) {
 			return MOTHEROFUSALL;
 		}
-		return system + "/" + mother;
+		return system + "__" + mother;
 	}
 
 

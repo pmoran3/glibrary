@@ -42,7 +42,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	}
 
 	// done with g4SystemManager
-	g4SystemManager.clearDLMap();
+	//g4SystemManager.clearDLMap();
 
 	// now building geant4 objects
 	// every volume that is not built (due to dependencies) increments remainingVolumes

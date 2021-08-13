@@ -3,6 +3,7 @@
 
 // geant4
 #include "G4VVisManager.hh"
+#include "G4Circle.hh"
 
 // MT definitions, as from:
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
@@ -28,6 +29,12 @@ void GHit::Draw()
 	// only care about schema if we are interactie
 	if(pVVisManager) {
 		setColorSchema();
+
+		G4Circle circle(stepGlobalPos[0]);
+		circle.SetFillStyle(G4Circle::filled);
+		circle.SetScreenSize(10);
+		pVVisManager->Draw(circle);
+
 	}
 }
 

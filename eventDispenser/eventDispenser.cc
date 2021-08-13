@@ -20,6 +20,8 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	//string nbunchOpt = gopt->getString("nEventsBatchToBeamOn");
 	//	userRunno        = gopt->getInt("userRunno");
 
+
+
 	neventsToProcess = gopt->getInt("n");
 	nEventsBatchToBeamOn = 1;
 	int userRunno        = 1;
@@ -139,14 +141,21 @@ int EventDispenser::processEvents()
 			cout << EVENTDISPENSERLOGMSGITEM << " Starting Run Number ∙" << runNumber << "∙,  processing " << nevents << " events." << endl;
 		}
 
-
 //		// loads the constants
 //		// PRAGMA TODO: pass variation to this routine
-//		for(auto gDigi: (*gDigitizationGlobal)) {
-//			// protecting against plugin not loaded
-//			if(gDigi.second) {
-//				gDigi.second->loadConstants(runNumber, "default");
+		for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
+			if(verbosity >= GVERBOSITY_DETAILS) {
+				cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
+			}
+			digiRoutine->loadConstants(runNumber, "default");
+
+		}
 //
+//
+//			// protecting against plugin not loaded
+//			if(digiRoutine) {
+
+
 //				// instantiates pointer to GSensitivePars
 //				gDigi.second->loadSensitivePars(runNumber, "default");
 //
@@ -155,21 +164,25 @@ int EventDispenser::processEvents()
 //														gDigi.second->showConstants(),
 //														gDigi.second->showParameters());
 //				}
-//
+
 //			}
-//		}
+//	}
 
 		// running max nEventsBuffer events
 		int nEventsLeftToProcess = nevents;
-		while(nEventsLeftToProcess > 0) {
-			if(nEventsLeftToProcess > nEventsBatchToBeamOn) {
-				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventsBatchToBeamOn));
-				nEventsLeftToProcess = nEventsLeftToProcess - nEventsBatchToBeamOn;
-			} else {
-				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventsLeftToProcess));
-				nEventsLeftToProcess = 0;
-			}
-		}
+//		while(nEventsLeftToProcess > 0) {
+//			if(nEventsLeftToProcess > nEventsBatchToBeamOn) {
+//				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventsBatchToBeamOn));
+//				nEventsLeftToProcess = nEventsLeftToProcess - nEventsBatchToBeamOn;
+//			} else {
+//				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventsLeftToProcess));
+//				nEventsLeftToProcess = 0;
+//			}
+//		}
+
+		g4uim->ApplyCommand("/run/initialize");
+		g4uim->ApplyCommand("/run/beamOn 10");
+
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			cout << EVENTDISPENSERLOGMSGITEM << " Run Number ∙" << runNumber << "∙ done with " << nevents << " events." << endl << endl;

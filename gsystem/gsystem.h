@@ -33,7 +33,7 @@ private:
 		if (name == ROOTWORLDGVOLUMENAME) {
 			return ROOTWORLDGVOLUMENAME;
 		}
-		return name + "/" + detectorName;
+		return name + "__" + detectorName;
 	}
 
 public:

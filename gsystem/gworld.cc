@@ -72,7 +72,7 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	// done with gSystemManager
-	gSystemManager.clearDLMap();
+	//gSystemManager.clearDLMap();
 
 	// now loading gvolumes definitions for all systems
 	for (auto& system: *gsystemsMap) {

@@ -78,17 +78,25 @@ public:
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
 extern G4ThreadLocal G4Allocator<GHit>* GHitAllocator;
 
+using GHitsCollection = G4THitsCollection<GHit> ;
+
 inline void* GHit::operator new(size_t)
 {
 
-	if(!GHitAllocator) {
-		GHitAllocator = new G4Allocator<GHit>;
-	}
-//	return (void *) GHitAllocator->MallocSingle();
+//	if(!GHitAllocator) {
+//		GHitAllocator = new G4Allocator<GHit>;
+//	}
+////	return (void *) GHitAllocator->MallocSingle();
+//
+//	void *hit;
+//	hit = (void *) GHitAllocator->MallocSingle();
+//	return hit;
 
-	void *hit;
-	hit = (void *) GHitAllocator->MallocSingle();
-	return hit;
+
+
+	if(!GHitAllocator) GHitAllocator = new G4Allocator<GHit>;
+	return (void *) GHitAllocator->MallocSingle();
+
 }
 
 inline void GHit::operator delete(void *hit)
@@ -96,6 +104,7 @@ inline void GHit::operator delete(void *hit)
 	if (!GHitAllocator) {
 		GHitAllocator = new G4Allocator<GHit>;
 	}
+
 	GHitAllocator->FreeSingle((GHit*) hit);
 }
 
