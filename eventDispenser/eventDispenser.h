@@ -16,7 +16,6 @@ private:
 	// from GOptions
 	int verbosity;
 	int neventsToProcess;
-	int nEventsBatchToBeamOn;
 	int userRunno;
 
 	// internal use

@@ -22,7 +22,7 @@ public:
 
 		timeStamp = assignTimeStamp();
 
-		if ( verbosity ) {
+		if ( verbosity >= GVERBOSITY_DETAILS ) {
 			string log = "GEventHeader evn " + to_string(g4EventNumber);
 			gLogClassConstruct(log);
 			print();
@@ -30,7 +30,7 @@ public:
 	}
 
 	~GEventDataCollectionHeader() {
-		if ( verbosity ) {
+		if ( verbosity >= GVERBOSITY_DETAILS) {
 			string log = "GEventHeader evn " + to_string(g4EventNumber);
 			gLogDestruct(log);
 		}
