@@ -20,14 +20,25 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 	float  avgx = 0,  avgy = 0,  avgz = 0;
 	float avglx = 0, avgly = 0, avglz = 0;
 
-	for ( auto s=0; s<edeps.size(); s++ ) {
-		avgTime = avgTime + times[s]*edeps[s]/totalEDeposited;
-		avgx  = avgx  + globalPositions[s].getX()*edeps[s]/totalEDeposited;
-		avgy  = avgy  + globalPositions[s].getY()*edeps[s]/totalEDeposited;
-		avgz  = avgz  + globalPositions[s].getZ()*edeps[s]/totalEDeposited;
-		avglx = avglx + localPositions[s].getX()*edeps[s]/totalEDeposited;
-		avgly = avgly + localPositions[s].getY()*edeps[s]/totalEDeposited;
-		avglz = avglz + localPositions[s].getZ()*edeps[s]/totalEDeposited;
+	auto nsteps = edeps.size();
+	for ( auto s=0; s<nsteps; s++ ) {
+		if ( totalEDeposited > 0 ) {
+			avgTime = avgTime + times[s]*edeps[s]/totalEDeposited;
+			avgx  = avgx  + globalPositions[s].getX()*edeps[s]/totalEDeposited;
+			avgy  = avgy  + globalPositions[s].getY()*edeps[s]/totalEDeposited;
+			avgz  = avgz  + globalPositions[s].getZ()*edeps[s]/totalEDeposited;
+			avglx = avglx + localPositions[s].getX() *edeps[s]/totalEDeposited;
+			avgly = avgly + localPositions[s].getY() *edeps[s]/totalEDeposited;
+			avglz = avglz + localPositions[s].getZ() *edeps[s]/totalEDeposited;
+		} else {
+			avgTime = avgTime + times[s]/nsteps;
+			avgx  = avgx  + globalPositions[s].getX()/nsteps;
+			avgy  = avgy  + globalPositions[s].getY()/nsteps;
+			avgz  = avgz  + globalPositions[s].getZ()/nsteps;
+			avglx = avglx + localPositions[s].getX() /nsteps;
+			avgly = avgly + localPositions[s].getY() /nsteps;
+			avglz = avglz + localPositions[s].getZ() /nsteps;
+		}
 	}
 
 	trueInfoData->includeVariable("totalEDeposited", totalEDeposited);
@@ -41,7 +52,7 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 
 
 
-	// bit 1 
+	// bit 1
 
 	return trueInfoData;
 }

@@ -5,6 +5,6 @@
 #include "gutilities.h"
 
 void GTrueInfoData::includeVariable(string varName, float var) {
-	trueInfo[varName] = var;
+	trueInfoVariablesMap[varName] = var;
 }
 

@@ -25,8 +25,8 @@ private:
 	bool publishEventHeader(GEventDataCollectionHeader *gheader);
 
 	// vector index is hit number
-	bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData);
-	bool publishEventDigitizedData(vector<GDigitizedData*>* digitizedData);
+	bool publishEventTrueInfoData(string detectorName,  vector<GTrueInfoData*>*  trueInfoData);
+	bool publishEventDigitizedData(string detectorName, vector<GDigitizedData*>* digitizedData);
 
 
 private:

@@ -12,7 +12,7 @@ bool GstreamerTextFactory::openConnection()
 bool GstreamerTextFactory::closeConnection()
 {
 	ofile->close();
-	//delete ofile;
+	delete ofile;
 
 	
 	// PRAGMA: need to check if file closed successfully

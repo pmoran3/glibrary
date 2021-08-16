@@ -38,6 +38,7 @@ public:
 		for (auto& [keys, values]: (*gdataCollection) ) {
 			delete values;
 		}
+		delete gheader;
 		delete gdataCollection;
 	}
 
@@ -47,8 +48,8 @@ public:
 	void addDetectorDigitizedData(string sdName, GDigitizedData *data);
 
 	// getters
+	// we want to crash if the pointers do not exist
 	GEventDataCollectionHeader *getHeader() {return gheader;}
-
 	map<string, GDataCollection*> *getDataCollection() {return gdataCollection;}
 
 private:

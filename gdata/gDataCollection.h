@@ -34,18 +34,13 @@ public:
 
 
 public:
-	// called by virtual method. Default: does nothing.
-	//void initializeVarDescrition();
-	
-	//map<string, string> *varDescriptions;
-
 
 	// public interface to add hit
 	void addTrueInfoData(GTrueInfoData *data);
 	void addDigitizedData(GDigitizedData *data);
 
-//	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
-//	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
+	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
+	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
 
 private:
 

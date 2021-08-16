@@ -20,7 +20,7 @@ public:
 	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
 
 	// runs the protected virtual methods to write events from a run to file
-	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> *runData);
+	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> runData);
 
 	void setOutputName(string output) {outputFileName = output;}
 
@@ -34,8 +34,8 @@ protected:
 	virtual bool endEvent()   { return false;}
 	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
-	virtual bool publishEventTrueInfoData(vector<GTrueInfoData*>* trueInfoData)    { return false;}
-	virtual bool publishEventDigitizedData(vector<GDigitizedData*>* digitizedData) { return false;}
+	virtual bool publishEventTrueInfoData(string detectorName,  vector<GTrueInfoData*>* trueInfoData)   { return false;}
+	virtual bool publishEventDigitizedData(string detectorName, vector<GDigitizedData*>* digitizedData) { return false;}
 
 
 	// stream virtual methods

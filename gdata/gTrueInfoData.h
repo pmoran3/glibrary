@@ -14,11 +14,12 @@ class GTrueInfoData {
 public:
 
 	void includeVariable(string varName, float var);
+	inline map<string, float> getVariablesMap() const {return trueInfoVariablesMap;}
 
 private:
 
 	// the data map are keyd with the variable name
-	map<string, float> trueInfo ;
+	map<string, float> trueInfoVariablesMap ;
 };
 
 
