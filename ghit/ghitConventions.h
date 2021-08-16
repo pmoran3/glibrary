@@ -17,11 +17,11 @@ using HitBitSet = std::bitset<NHITBITS> ;
 // - energy deposited, time
 //
 // Toggle existance by bit
-// 1rd bit: step length
-// 2th bit: track informations: momentum, total energy, vertex, pid, track id
-// 3th bit: mother particle track information. This is created after the event
-// 4th bit: meta information: magnetic field. process id name that created the particle
-// 5th bit: optical photon only: wavelength, momentum, vertex, track id
+// 1st bit 000001: step length
+// 2nd bit 000010: track informations: momentum, total energy, vertex, pid, track id
+// 3rd bit 000100: mother particle track information. This is created after the event
+// 4th bit 001000: meta information: magnetic field. process id name that created the particle
+// 5th bit 010000: optical photon only: wavelength, momentum, vertex, track id
 
 
 #endif

@@ -6,9 +6,8 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData();
 
-
 	// notices:
-	// we do each var bit group loop separately in case some are not filled
+	// we do each var hitbit group loop separately in case some are not filled
 
 	// local and global positions, edep and stepTime are always there
 	float totalEDeposited = ghit->getTotalEnergyDeposited();
@@ -16,7 +15,6 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 	auto times = ghit->getTimes();
 	auto globalPositions = ghit->getGlobalPositions();
 	auto localPositions  = ghit->getLocalPositions();
-
 
 	float avgTime = 0;
 	float  avgx = 0,  avgy = 0,  avgz = 0;
@@ -40,6 +38,10 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 	trueInfoData->includeVariable("avglx", avglx);
 	trueInfoData->includeVariable("avgly", avgly);
 	trueInfoData->includeVariable("avglz", avglz);
-	
+
+
+
+	// bit 1 
+
 	return trueInfoData;
 }

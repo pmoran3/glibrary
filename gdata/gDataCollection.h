@@ -25,11 +25,11 @@ public:
 	
 	~GDataCollection() {
 
-//		for ( auto* hit: (*digitizedData) )  { delete hit; }
-//		for ( auto* hit: (*trueInfosData) )  { delete hit; }
-//
-//		delete digitizedData;
-//		delete trueInfosData;
+		for ( auto* hit: (*digitizedData) )  { delete hit; }
+		for ( auto* hit: (*trueInfosData) )  { delete hit; }
+
+		delete digitizedData;
+		delete trueInfosData;
 	}
 
 
@@ -41,10 +41,11 @@ public:
 
 
 	// public interface to add hit
-	void addDigitizedData(GDigitizedData *dgtzHit);
+	void addTrueInfoData(GTrueInfoData *data);
+	void addDigitizedData(GDigitizedData *data);
 
-	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
-	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
+//	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
+//	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
 
 private:
 

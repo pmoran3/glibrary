@@ -42,8 +42,9 @@ public:
 	}
 
 public:
-
-	void addDetectorDigitizedData(string sdName, GDigitizedData *dgtzData);
+	// api to add data
+	void addDetectorTrueInfoData(string sdName,  GTrueInfoData *data);
+	void addDetectorDigitizedData(string sdName, GDigitizedData *data);
 
 	// getters
 	GEventDataCollectionHeader *getHeader() {return gheader;}
@@ -56,6 +57,7 @@ private:
 	GEventDataCollectionHeader *gheader = nullptr;
 
 	// key is sensitive detector name
+	// each GDataCollection is a vector, indexed by hit number
 	map<string, GDataCollection*> *gdataCollection;
 
 
