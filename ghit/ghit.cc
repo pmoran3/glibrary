@@ -31,7 +31,7 @@ void GHit::Draw()
 	if(pVVisManager) {
 		setColorSchema();
 
-		G4Circle circle(stepGlobalPos[0]);
+		G4Circle circle(globalPositions[0]);
 		circle.SetFillStyle(G4Circle::filled);
 		circle.SetScreenSize(10);
 		circle.SetVisAttributes(G4VisAttributes(colour_hit));
@@ -42,7 +42,6 @@ void GHit::Draw()
 
 
 // sets marker type, size, open or filled, its color based on its energy deposited
-
 bool GHit::setColorSchema()
 {
 	colour_touch  = G4Colour(0.0, 0.0, 1.0);

@@ -10,15 +10,15 @@ void GHit::addHitInfos(const HitBitSet hbs, const G4Step* thisStep) {
 	// PRAGMA TODO: there is a difference between using pre and post step
 	G4ThreeVector  xyz  = poststep->GetPosition();
 	G4ThreeVector  xyzL = poststep->GetTouchableHandle()->GetHistory()->GetTopTransform().TransformPoint(xyz);
-	stepGlobalPos.push_back(xyz);
-	stepLocalPos.push_back(xyzL);
+	globalPositions.push_back(xyz);
+	localPositions.push_back(xyzL);
 
 	// explicit variable for documentation
 	float edep = thisStep->GetTotalEnergyDeposit()*gtouchable->getEnergyMultiplier();
 	float time = poststep->GetGlobalTime();
 
-	stepEdep.push_back(edep);
-	stepTime.push_back(time);
+	edeps.push_back(edep);
+	times.push_back(time);
 
 	// build hit information based on the bit index and the touchable
 	for(size_t hbIndex = 0; hbIndex < hbs.size(); hbIndex++) {

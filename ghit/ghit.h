@@ -51,20 +51,22 @@ private:
 	// hit data, selected by HitBitSet, to be collected for each step
 private:
 	// always present:
-	vector<G4ThreeVector> stepGlobalPos;
-	vector<G4ThreeVector> stepLocalPos;
-	vector<float> stepEdep, stepTime;
+	vector<float> edeps, times;
+	vector<G4ThreeVector> globalPositions;
+	vector<G4ThreeVector> localPositions;
 
 	// bit 1
 	vector<float> stepSize;             
 
 	// geant4 touchable hierarchy
-	vector<int> g4TouchableHierarchyID;
+	// vector<int> g4TouchableHierarchyID;
 
 	// public interface: getting step by step quantities
 public:
-	vector<float> getStepEdep() {return stepEdep;}
-	vector<float> getStepTime() {return stepTime;}
+	vector<float> getEdeps() {return edeps;}
+	vector<float> getTimes() {return times;}
+	vector<G4ThreeVector> getGlobalPositions() {return globalPositions;}
+	vector<G4ThreeVector> getLocalPositions()  {return localPositions;}
 
 	// public interface: calculated quantities defined in calculationscc
 public:
@@ -74,6 +76,7 @@ public:
 public:
 	// Overloaded "==" operator for the class 'GHit'
 	// bool operator== (const GHit& that) const;
+
 	// build hit information based on the G4Step
 	void addHitInfos(const HitBitSet hbs, const G4Step* thisStep);
 
@@ -87,18 +90,6 @@ using GHitsCollection = G4THitsCollection<GHit> ;
 
 inline void* GHit::operator new(size_t)
 {
-
-//	if(!GHitAllocator) {
-//		GHitAllocator = new G4Allocator<GHit>;
-//	}
-////	return (void *) GHitAllocator->MallocSingle();
-//
-//	void *hit;
-//	hit = (void *) GHitAllocator->MallocSingle();
-//	return hit;
-
-
-
 	if(!GHitAllocator) GHitAllocator = new G4Allocator<GHit>;
 	return (void *) GHitAllocator->MallocSingle();
 

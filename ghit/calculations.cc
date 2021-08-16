@@ -5,7 +5,7 @@ float GHit::getTotalEnergyDeposited()
 {
 	float totalEdep = 0;
 	
-	for(const auto &ei: stepEdep) {
+	for(const auto &ei: edeps) {
 		totalEdep += ei;
 	}
 	
