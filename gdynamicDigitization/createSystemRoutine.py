@@ -89,7 +89,7 @@ def writeHeader(sName, routines):
 	if 'hitDigitization' in routines:
 		headerFile.write('\n')
 		headerFile.write('\t// digitized the hit\n')
-		headerFile.write('\tGDigitizedData* digitizeHit(GHit *ghit);\n')
+		headerFile.write('\tGDigitizedData* digitizeHit(GHit *ghit, int hitn);\n')
 
 	headerFile.write('\n')
 	headerFile.write('private:\n')
@@ -124,7 +124,7 @@ def writeHitDigitization(sName):
 	constantsFile = open('hitDigitization.cc', 'w')
 	constantsFile.write('#include "' + sName + '.h"\n')
 	constantsFile.write('\n')
-	constantsFile.write('GDigitizedData* ' + sName + 'Plugin::digitizeHit(GHit *ghit)\n')
+	constantsFile.write('GDigitizedData* ' + sName + 'Plugin::digitizeHit(GHit *ghit, int hitn)\n')
 	constantsFile.write('{\n')
 	constantsFile.write('\tGDigitizedData* gdata = new GDigitizedData();\n')
 	constantsFile.write('\n')
@@ -134,7 +134,7 @@ def writeHitDigitization(sName):
 	constantsFile.write('\n')
 	constantsFile.write('\n')
 	constantsFile.write('\n')
-	constantsFile.write('\n')
+	constantsFile.write('\t\tgdata->includeVariable("hitn",  hitn);\n')
 	constantsFile.write('\treturn gdata;\n')
 	constantsFile.write('}\n')
 

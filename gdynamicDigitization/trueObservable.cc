@@ -3,7 +3,7 @@
 
 // notice: if the energy deposited is very low (~50eV)
 // the rounding error on the averave calculations could be up to 10^-3
-GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
+GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData();
 
@@ -25,6 +25,7 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 	trueInfoData->includeVariable("avglx", avgLocalPos.getX());
 	trueInfoData->includeVariable("avgly", avgLocalPos.getY());
 	trueInfoData->includeVariable("avglz", avgLocalPos.getZ());
+	trueInfoData->includeVariable("hitn ", hitn);
 
 
 
