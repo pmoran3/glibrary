@@ -46,3 +46,8 @@ void gLogDestruct(string className) {
 	mu.unlock();
 }
 
+void gLogMessage(string message) {
+	mu.lock();
+	cout <<  message << endl;
+	mu.unlock();
+}

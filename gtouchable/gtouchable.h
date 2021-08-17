@@ -4,7 +4,6 @@
 // conventions
 #include "gtouchableConventions.h"
 
-
 // c++
 #include <vector>
 #include <string>

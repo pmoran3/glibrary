@@ -17,6 +17,7 @@ using namespace std;
 EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*> *gDDGlobal) : gDigitizationGlobal(gDDGlobal) {
 	verbosity        = gopt->getInt("eventDistributionv");
 	string filename  = gopt->getString("runWeightsFile");
+	variation        = gopt->getString("digitizationVariation");
 	//	userRunno        = gopt->getInt("userRunno");
 	int userRunno        = 1;
 
@@ -138,31 +139,13 @@ int EventDispenser::processEvents()
 			cout << EVENTDISPENSERLOGMSGITEM << " Starting Run Number ∙" << runNumber << "∙,  processing " << nevents << " events." << endl;
 		}
 
-//		// loads the constants
-//		// PRAGMA TODO: pass variation to this routine
+		// loads the constants
 		for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
 			if(verbosity >= GVERBOSITY_DETAILS) {
 				cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
 			}
-			digiRoutine->loadConstants(runNumber, "default");
+			digiRoutine->loadConstants(runNumber, variation);
 		}
-//
-//
-//			// protecting against plugin not loaded
-//			if(digiRoutine) {
-
-
-//				// instantiates pointer to GSensitivePars
-//				gDigi.second->loadSensitivePars(runNumber, "default");
-//
-//				if(verbosity >= GVERBOSITY_DETAILS) {
-//					showDigitizationParameters(gDigi.first,
-//														gDigi.second->showConstants(),
-//														gDigi.second->showParameters());
-//				}
-
-//			}
-//	}
 
 		// I think we may need this here
 		//g4uim->ApplyCommand("/run/initialize");

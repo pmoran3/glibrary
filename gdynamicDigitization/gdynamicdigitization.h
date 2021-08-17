@@ -35,7 +35,7 @@ public:
 	GTrueInfoData *collectTrueInformation(GHit *ghit);
 
 	// digitize true information into GDigitizedHit
-	virtual GDigitizedData *digitizeData(GHit *ghit) {return nullptr;}
+	virtual GDigitizedData *digitizeHit(GHit *ghit) {return nullptr;}
 
 	// loads the digitization constants
 	// return false for failure

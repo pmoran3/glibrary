@@ -17,6 +17,7 @@ private:
 	int verbosity;
 	int neventsToProcess;
 	int userRunno;
+	string variation;
 
 	// internal use
 	// map of runs with weights as coming from the file

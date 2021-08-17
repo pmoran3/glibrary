@@ -18,15 +18,6 @@ class GDigitizedData {
 	
 public:
 
-	// called at the beginning of the event
-	inline void prepeareHit() {
-
-		intVObservables.clear();
-		fltVObservables.clear();
-		dblVObservables.clear();
-
-	}
-
 	void print();
 
 	// public interface to add data to a hit

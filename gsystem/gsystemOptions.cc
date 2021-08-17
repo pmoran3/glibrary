@@ -78,7 +78,7 @@ namespace gsystem {
 		};
 		json jsonSystemVariationTag = {
 			{GNAME, "variation"},
-			{GDESC, "variation (optional, default is \"default\")"},
+			{GDESC, "geometry variation (optional, default is \"default\")"},
 			{GDFLT, "default"}
 		};
 

@@ -54,6 +54,7 @@
 // tab is three spaces
 #define GTAB "   "
 #define GTABTAB GTAB GTAB
+#define GTABTABTAB GTAB GTAB GTAB
 
 // with one GTAB
 #define TPOINTITEM       GTAB POINTITEM
@@ -104,5 +105,6 @@ void gLogClassConstruct(string className);
 void gLogCopyConstruct(string className);
 void gLogMoveConstruct(string className);
 void gLogDestruct(string className);
+void gLogMessage(string message);
 
 #endif

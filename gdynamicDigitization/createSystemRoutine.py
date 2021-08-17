@@ -6,8 +6,8 @@
 
 import sys, getopt, string
 
-validRoutineNames = ["constants",       "processID",                "sensitivePars",                "hitDigitization",  "pulseDigitization",  "all"]
-validRoutineDescr = ["loads constants", "manipulate/create new ID", "defines sensitive parameters", "digitize a hit",   "digitize a pulse",   "write all routines"]
+validRoutineNames = ["constants",       "processID",                "hitDigitization",  "all"]
+validRoutineDescr = ["loads constants", "manipulate/create new ID", "digitize a hit",   "write all routines"]
 
 def printHelp():
 	print ''
@@ -69,8 +69,9 @@ def writeHeader(sName, routines):
 	headerFile.write('#ifndef ' + sName.upper() + 'PLUGIN\n')
 	headerFile.write('#define ' + sName.upper() + 'PLUGIN 1\n')
 	headerFile.write('\n')
-	headerFile.write('// gdynamicdigitization\n')
+	headerFile.write('// glibrary\n')
 	headerFile.write('#include "gdynamicdigitization.h"\n')
+	headerFile.write('#include "gutsConventions.h"\n')
 	headerFile.write('\n')
 	headerFile.write('class ' + sName + 'Plugin : public GDynamicDigitization {\n')
 	headerFile.write('\n')
@@ -84,11 +85,16 @@ def writeHeader(sName, routines):
 		headerFile.write('\n')
 		headerFile.write('\t// loads digitization constants\n')
 		headerFile.write('\tbool loadConstants(int runno, string variation);\n')
+
+	if 'hitDigitization' in routines:
 		headerFile.write('\n')
-	
+		headerFile.write('\t// digitized the hit\n')
+		headerFile.write('\tGDigitizedData* digitizeHit(GHit *ghit);\n')
+
+	headerFile.write('\n')
 	headerFile.write('private:\n')
 	headerFile.write('\n')
-	headerFile.write('\t // constants definitions\n')
+	headerFile.write('\t// constants definitions\n')
 	headerFile.write('\n')
 	headerFile.write('};\n')
 	headerFile.write('\n')
@@ -118,9 +124,9 @@ def writeHitDigitization(sName):
 	constantsFile = open('hitDigitization.cc', 'w')
 	constantsFile.write('#include "' + sName + '.h"\n')
 	constantsFile.write('\n')
-	constantsFile.write('GObservables* ' + sName + 'Plugin::digitizeHit(GHit *ghit)\n')
+	constantsFile.write('GDigitizedData* ' + sName + 'Plugin::digitizeHit(GHit *ghit)\n')
 	constantsFile.write('{\n')
-	constantsFile.write('\tGObservables* gdata = new GObservables();\n')
+	constantsFile.write('\tGDigitizedData* gdata = new GDigitizedData();\n')
 	constantsFile.write('\n')
 	constantsFile.write('\n')
 	constantsFile.write('\n')
@@ -131,23 +137,6 @@ def writeHitDigitization(sName):
 	constantsFile.write('\n')
 	constantsFile.write('\treturn gdata;\n')
 	constantsFile.write('}\n')
-
-
-
-
-# PRAGMA TODO: add comments/documentation
-# PRAGMA TODO: add commented example
-def writeSensitivePars(sName):
-	sensitiveParsFile = open('loadSensitivePars.cc', 'w')
-	sensitiveParsFile.write('#include "' + sName + '.h"\n')
-	sensitiveParsFile.write('\n')
-	sensitiveParsFile.write('void ' + sName + 'Plugin::loadSensitivePars(int runno, string variation)\n')
-	sensitiveParsFile.write('{\n')
-	sensitiveParsFile.write('\n')
-	sensitiveParsFile.write('\n')
-	sensitiveParsFile.write('\n')
-	sensitiveParsFile.write('\treturn true;\n')
-	sensitiveParsFile.write('}\n')
 
 
 # PRAGMA TODO: load the file existing in the directory
@@ -173,7 +162,7 @@ def writeReadoutSpects(sName):
 	readoutSpecs.write('{\n')
 	readoutSpecs.write('\tfloat     timeWindow = 10;                  // electronic readout time-window of the detector\n')
 	readoutSpecs.write('\tfloat     gridStartTime = 0;                // defines the windows grid\n')
-	readoutSpecs.write('\tHitBitSet hitBitSet = HitBitSet("100000");  // defines what information to be stored in the hit\n')
+	readoutSpecs.write('\tHitBitSet hitBitSet = HitBitSet("000000");  // defines what information to be stored in the hit\n')
 	readoutSpecs.write('\tbool      verbosity = true;\n')
 	readoutSpecs.write('\n')
 	readoutSpecs.write('\treadoutSpecs = new GReadoutSpecs(timeWindow, gridStartTime, hitBitSet, verbosity);\n')
@@ -202,15 +191,8 @@ writeReadoutSpects(systemName)
 if 'constants' in routines or 'all' in routines:
 	writeLoadConstants(systemName)
 
-if 'sensitivePars' in routines or 'all' in routines:
-	writeSensitivePars(systemName)
-
 if 'hitDigitization' in routines or 'all' in routines:
 	writeHitDigitization(systemName)
-
-if 'pulseDigitization' in routines or 'all' in routines:
-	writePulseDigitization(systemName)
-
 
 
 
