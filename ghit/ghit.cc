@@ -15,6 +15,9 @@ GHit::GHit(GTouchable *gt, const G4Step* thisStep, const HitBitSet hbs, string c
 colorSchema(cScheme),
 gtouchable(gt) {
 	addHitInfos(hbs, thisStep);
+	totalEnergyDeposited = UNINITIALIZEDQUANTITY;
+	averageTime = UNINITIALIZEDQUANTITY;
+
 }
 
 GHit::~GHit() {

@@ -1,7 +1,8 @@
 // gdynamic
 #include "gdynamicdigitization.h"
 
-
+// notice: if the energy deposited is very low (~50eV)
+// the rounding error on the averave calculations could be up to 10^-3
 GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData();

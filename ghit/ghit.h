@@ -28,28 +28,22 @@ public:
 	// examples/basic/B4/B4c/include/CalorHit
 	inline void* operator new(size_t);
 	inline void  operator delete(void*);
+	// Overloaded "==" operator for the class 'GHit'
+	// bool operator== (const GHit& that) const;
 
-	// draws an object at hit location
+	// G4VHit: draws an object at hit location
 	void Draw();
 
 private:
 
-	// only used if pVVisManager exist (interactive mode)
+	G4Colour colour_touch, colour_hit, colour_passby;
+	bool setColorSchema();
 	string colorSchema;
 
 	// GTouchable saved here so it can be used in the overloaded == function
 	GTouchable *gtouchable;
 
-private:
-	G4Colour colour_touch, colour_hit, colour_passby;
-	bool setColorSchema();
-
-
-	// build hit information based on the bit index and the touchable
-	bool addHitInfosForBit(size_t bitIndex, const bool test, const G4Step* thisStep);
-
 	// hit data, selected by HitBitSet, to be collected for each step
-private:
 	// always present:
 	vector<float> edeps, times;
 	vector<G4ThreeVector> globalPositions;
@@ -58,8 +52,10 @@ private:
 	// bit 1
 	vector<float> stepSize;             
 
-	// geant4 touchable hierarchy
-	// vector<int> g4TouchableHierarchyID;
+
+	// initialized to -1. Set/retrieved with calculated quantities below
+	float totalEnergyDeposited;
+	float averageTime;
 
 	// public interface: getting step by step quantities
 public:
@@ -69,17 +65,18 @@ public:
 	vector<G4ThreeVector> getLocalPositions()  {return localPositions;}
 
 	// public interface: calculated quantities defined in calculationscc
-public:
 	float getTotalEnergyDeposited();
-	inline GTouchable*         getGTouchable() const { return gtouchable;}
-	inline vector<GIdentifier> getGID() const { return gtouchable->getIdentity();}
+	float getAverageTime();
 
-public:
-	// Overloaded "==" operator for the class 'GHit'
-	// bool operator== (const GHit& that) const;
-
+	// gemc api
 	// build hit information based on the G4Step
 	void addHitInfos(const HitBitSet hbs, const G4Step* thisStep);
+
+	// build hit information based on the bit index and the touchable
+	bool addHitInfosForBit(size_t bitIndex, const bool test, const G4Step* thisStep);
+
+	inline GTouchable*         getGTouchable() const { return gtouchable;}
+	inline vector<GIdentifier> getGID() const { return gtouchable->getIdentity();}
 
 };
 
