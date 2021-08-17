@@ -4,6 +4,10 @@
 // conventions
 #include "gsystemConventions.h"
 
+// glibrary
+#include "gutilities.h"
+using namespace gutilities;
+
 // c++
 #include <string>
 #include <vector>
@@ -60,15 +64,15 @@ private:
 	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
 
 public:
-	string getName()       {return name;}
-	string getMapName()    {
+	inline string getName() const {return name;}
+	inline string getMapName() const {
 		if (mother == MOTHEROFUSALL) {
 			return ROOTWORLDGVOLUMENAME;
 		}
 		return system + "__" + name;
 	}
-	string getMother()     {return mother;}
-	string getMotherMapName()     {
+	inline string getMother() const {return mother;}
+	inline string getMotherMapName() const {
 		if (mother == ROOTWORLDGVOLUMENAME) {
 			return ROOTWORLDGVOLUMENAME;
 		} else if (mother == MOTHEROFUSALL) {
@@ -77,27 +81,28 @@ public:
 		return system + "__" + mother;
 	}
 
+	inline vector<double> getDetectorDimensions() const {return getG4NumbersFromString(parameters);}
 
-	string getType()       {return type;}
-	string getParameters() {return parameters;}
-	string getMaterial()   {return material;}
-	int    getPCopyNo()    {return pCopyNo;}
-	string getColor()      {return color;}
-	bool   isVisible()     {return visible;}
-	int    getStyle()      {return style;}
+	inline string getType()       const {return type;}
+	inline string getParameters() const {return parameters;}
+	inline string getMaterial()   const {return material;}
+	inline int    getPCopyNo()    const {return pCopyNo;}
+	inline string getColor()      const {return color;}
+	inline bool   isVisible()     const {return visible;}
+	inline int    getStyle()      const {return style;}
 
-	string getPos()   {return pos;}
-	string getRot()   {return rot;}
-	string getShift() {return shift;}
-	string getTilt()  {return tilt;}
+	inline string getPos()   const {return pos;}
+	inline string getRot()   const {return rot;}
+	inline string getShift() const {return shift;}
+	inline string getTilt()  const {return tilt;}
 
-	string  getDigitization(){return digitization;}
-	string  getGIdentity() {return gidentity;}
+	inline string  getDigitization() const {return digitization;}
+	inline string  getGIdentity()    const {return gidentity;}
 
 	// special cases
-	string getCopyOf()     {return copyOf;}
-	string getReplicaOf()  {return replicaOf;}
-	string getSolidsOpr()  {return solidsOpr;}
+	inline string getCopyOf()     const {return copyOf;}
+	inline string getReplicaOf()  const {return replicaOf;}
+	inline string getSolidsOpr()  const {return solidsOpr;}
 
 	// assign modifier
 	void applyShift(string s)    {shift = s;}

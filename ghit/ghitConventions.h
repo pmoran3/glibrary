@@ -18,9 +18,11 @@ using HitBitSet = std::bitset<NHITBITS> ;
 // - energy deposited, time
 //
 // Toggle existance by bit
-// 1st bit 000001: step length
-// 2nd bit 000010: track informations: momentum, total energy, vertex, pid, track id
-// 3rd bit 000100: mother particle track information. This is created after the event
+// 1st bit 000001: detector dimensions
+
+// Not implemented yet:
+// 2nd bit 000010: step length, track informations: momentum, total energy, vertex, pid, track id
+// 3rd bit 000100: mother particle tracks information
 // 4th bit 001000: meta information: magnetic field. process id name that created the particle
 // 5th bit 010000: optical photon only: wavelength, momentum, vertex, track id
 

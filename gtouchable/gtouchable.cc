@@ -7,7 +7,12 @@
 using namespace std;
 
 // contructor from digitization and gidentity strings
-GTouchable::GTouchable(string digitization, string gidentityString, bool verb) : verbosity(verb), trackId(0), eMultiplier(1), gridTimeIndex(0) {
+GTouchable::GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb) :
+verbosity(verb),
+trackId(0),
+eMultiplier(1),
+gridTimeIndex(0),
+detectorDimenions(dimensions) {
 
 	// gtype from digitization
 	if ( digitization == "flux" ) {

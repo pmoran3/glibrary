@@ -1,7 +1,7 @@
 // g4system
 #include "g4NativeObjectsFactory.h"
 
-// guts
+// glibrary
 #include "gutilities.h"
 using namespace gutilities;
 

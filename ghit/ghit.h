@@ -75,8 +75,9 @@ public:
 	// build hit information based on the bit index and the touchable
 	bool addHitInfosForBit(size_t bitIndex, const bool test, const G4Step* thisStep);
 
-	inline GTouchable*         getGTouchable() const { return gtouchable;}
-	inline vector<GIdentifier> getGID() const { return gtouchable->getIdentity();}
+	inline const GTouchable*         getGTouchable()         const { return gtouchable; }
+	inline const vector<GIdentifier> getGID()                const { return gtouchable->getIdentity(); }
+	inline const vector<double>      getDetectorDimensions() const { return gtouchable->getDetectorDimensions(); }
 
 };
 

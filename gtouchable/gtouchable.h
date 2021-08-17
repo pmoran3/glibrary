@@ -51,7 +51,7 @@ class GTouchable
 public:
 	// constructor called in GDetectorConstruction::ConstructSDandField
 	// to register a new gtouchable in the sensitive detector gtouchable map
-	GTouchable(string digitization, string gidentityString, bool verb = false);
+	GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb = false);
 
 
 private:
@@ -75,6 +75,9 @@ private:
 	// to print it out
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
 
+	// could be used in GDynamicDigitization when the dimensions are needed
+	vector<double> detectorDimenions;
+
 public:
 	// Overloaded "==" operator for the class 'GTouchable'
 	bool operator== (const GTouchable& gtouchable) const;
@@ -82,12 +85,13 @@ public:
 	// called in ProcessHits
 	void placeInTimeWindow(int twindex) {gridTimeIndex = twindex;}
 
-	const float getEnergyMultiplier() {return eMultiplier;}
+	inline const float getEnergyMultiplier() const {return eMultiplier;}
 
 
 // api
 public:
-	vector<GIdentifier> getIdentity() const {return gidentity;}
+	inline const vector<GIdentifier> getIdentity() const {return gidentity;}
+	inline const vector<double> getDetectorDimensions() const {return detectorDimenions;}
 
 
 
