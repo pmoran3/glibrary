@@ -14,10 +14,14 @@ G4ThreadLocal G4Allocator<GHit>* GHitAllocator = 0;
 GHit::GHit(GTouchable *gt, const G4Step* thisStep, const HitBitSet hbs, string cScheme) : G4VHit(),
 colorSchema(cScheme),
 gtouchable(gt) {
-	addHitInfos(hbs, thisStep);
+	addHitInfosForBitset(hbs, thisStep);
+
+	// unitialized quantities
+	// bit 0: always there
 	totalEnergyDeposited = UNINITIALIZEDQUANTITY;
 	averageTime = UNINITIALIZEDQUANTITY;
-
+	avgGlobalPosition = G4ThreeVector(UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY);
+	avgLocalPosition  = G4ThreeVector(UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY);
 }
 
 GHit::~GHit() {
@@ -45,6 +49,7 @@ void GHit::Draw()
 
 
 // sets marker type, size, open or filled, its color based on its energy deposited
+// notice: colorSchema should drive this
 bool GHit::setColorSchema()
 {
 	colour_touch  = G4Colour(0.0, 0.0, 1.0);
@@ -54,12 +59,3 @@ bool GHit::setColorSchema()
 	return false;
 }
 
-//bool GHit::operator == (const GHit& that) const
-//{
-//	if ( this->gtouchable == that.gtouchable) {
-//		return true;
-//	}
-//
-//	return false;
-//}
-//

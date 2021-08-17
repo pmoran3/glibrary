@@ -56,24 +56,30 @@ private:
 	// initialized to -1. Set/retrieved with calculated quantities below
 	float totalEnergyDeposited;
 	float averageTime;
+	G4ThreeVector avgGlobalPosition;
+	G4ThreeVector avgLocalPosition;
 
-	// public interface: getting step by step quantities
 public:
+	// public interface: getting step by step quantities
 	vector<float> getEdeps() {return edeps;}
 	vector<float> getTimes() {return times;}
 	vector<G4ThreeVector> getGlobalPositions() {return globalPositions;}
 	vector<G4ThreeVector> getLocalPositions()  {return localPositions;}
 
 	// public interface: calculated quantities defined in calculationscc
+	void calculateInfosForBit(int bit);
 	float getTotalEnergyDeposited();
 	float getAverageTime();
+	G4ThreeVector getAvgLocalPosition();
+	G4ThreeVector getAvgGlobaPosition();
+
 
 	// gemc api
 	// build hit information based on the G4Step
-	void addHitInfos(const HitBitSet hbs, const G4Step* thisStep);
+	void addHitInfosForBitset(const HitBitSet hbs, const G4Step* thisStep);
 
 	// build hit information based on the bit index and the touchable
-	bool addHitInfosForBit(size_t bitIndex, const bool test, const G4Step* thisStep);
+	bool addHitInfosForBitIndex(size_t bitIndex, const bool test, const G4Step* thisStep);
 
 	inline const GTouchable*         getGTouchable()         const { return gtouchable; }
 	inline const vector<GIdentifier> getGID()                const { return gtouchable->getIdentity(); }

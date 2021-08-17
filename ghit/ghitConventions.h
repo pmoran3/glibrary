@@ -6,7 +6,7 @@
 
 // number of bits that defines a ghit.
 #define NHITBITS 6
-#define UNINITIALIZEDQUANTITY -1
+#define UNINITIALIZEDQUANTITY -123456
 
 using HitBitSet = std::bitset<NHITBITS> ;
 
