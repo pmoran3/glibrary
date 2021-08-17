@@ -71,7 +71,8 @@ public:
 	// public interface: calculated quantities defined in calculationscc
 public:
 	float getTotalEnergyDeposited();
-	GTouchable* getGTouchable() { return gtouchable;}
+	inline GTouchable*         getGTouchable() const { return gtouchable;}
+	inline vector<GIdentifier> getGID() const { return gtouchable->getIdentity();}
 
 public:
 	// Overloaded "==" operator for the class 'GHit'

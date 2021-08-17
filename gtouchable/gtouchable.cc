@@ -25,7 +25,7 @@ GTouchable::GTouchable(string digitization, string gidentityString, bool verb) :
 	for ( auto& gid: identity) {
 		vector<string> identifier = gutilities::getStringVectorFromStringWithDelimiter(gid, ":");
 
-//		cout << " ASD " << gid << endl;
+		//		cout << " ASD " << gid << endl;
 
 		string idName  = identifier[0];
 		int idValue = stoi(identifier[1]);
@@ -65,13 +65,27 @@ bool GTouchable::operator == (const GTouchable& that) const
 	}
 
 	switch (this->gType) {
-	case readout:
-		return this->gridTimeIndex == that.gridTimeIndex;
-	case flux:
-		return this->trackId == that.trackId;
-	case particleCounter:
-		return true;
+		case readout:
+			return this->gridTimeIndex == that.gridTimeIndex;
+		case flux:
+			return this->trackId == that.trackId;
+		case particleCounter:
+			return true;
 	}
 
 	return false;
+}
+
+// ostream GTouchable
+ostream &operator<<(ostream &stream, GTouchable gtouchable) {
+	for ( auto& gid: gtouchable.gidentity ) {
+		stream << gid << std::endl;
+	}
+	return stream;
+}
+
+// ostream GIdentifier
+ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
+	stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
+	return stream;
 }

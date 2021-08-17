@@ -6,6 +6,8 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData();
 
+	trueInfoData->setIdentity(ghit->getGID());
+
 	// notices:
 	// we do each var hitbit group loop separately in case some are not filled
 

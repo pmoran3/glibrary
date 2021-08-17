@@ -29,15 +29,18 @@ private:
 	int idValue;
 
 	// Logs GIdentifier on screen
-	friend ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
-		stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
-		return stream;
-	}
+	friend ostream &operator<<(ostream &stream, GIdentifier gidentifier);
 
 public:
 
 	//  Overloaded "!=": comparing idValue
 	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
+
+// api
+public:
+	inline string getName() const {return idName;}
+	inline int getValue() const {return idValue;}
+
 
 };
 
@@ -71,14 +74,7 @@ private:
 	int gridTimeIndex;
 
 	// to print it out
-	friend ostream &operator<<(ostream &stream, GTouchable gtouchable) {
-		for ( auto& identity: gtouchable.gidentity ) {
-			stream << identity << std::endl;
-		}
-
-		return stream;
-
-	}
+	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
 
 public:
 	// Overloaded "==" operator for the class 'GTouchable'
@@ -88,6 +84,13 @@ public:
 	void placeInTimeWindow(int twindex) {gridTimeIndex = twindex;}
 
 	const float getEnergyMultiplier() {return eMultiplier;}
+
+
+// api
+public:
+	vector<GIdentifier> getIdentity() const {return gidentity;}
+
+
 
 };
 
