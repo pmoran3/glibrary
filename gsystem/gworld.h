@@ -33,10 +33,8 @@ private:
 public:
 	map<string, GSystem*>* getSystemsMap() const {return gsystemsMap;}
 
-
-
-	// key is sensitive name, value is path
-//	map<string, string> getSensitiveVolumes();
+	// sensitive detector names, needed to load the plugins at run time
+	vector<string> getSensitiveDetectorsList();
 
 };
 

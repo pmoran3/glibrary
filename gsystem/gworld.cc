@@ -164,6 +164,19 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
 }
 
 
+vector<string> GWorld::getSensitiveDetectorsList() {
+	vector<string> snames;
+	for (auto& system: *gsystemsMap) {
+		for (auto &gvolume: *system.second->getGVolumesMap()) {
+			string digitization = gvolume.second->getDigitization();
+			if ( digitization != GSYSTEMNOTAPPLICABLEENTRY) {
+				snames.push_back(digitization);
+			}
+		}
+	}
+
+	return snames;
+}
 
 
 
