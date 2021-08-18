@@ -13,24 +13,20 @@ map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCo
 	// looping over events
 	for(auto eventDataCollection: runData) {
 
-		gstreamReport["startEvent"] = startEvent();
-		gstreamReport["header"]     = publishEventHeader(eventDataCollection->getHeader());
+		gstreamReport["Stream report #1 <startEvent>: "] = startEvent();
+		gstreamReport["Stream report #2 <header>: "]     = publishEventHeader(eventDataCollection->getHeader());
 
 		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollection() ) {
 			// publish true info
-			string dnameKey = detectorName + "__TrueInfo";
-			gstreamReport[dnameKey] = publishEventTrueInfoData(detectorName, gDataCollection->getTrueInfoData());
+			string reportName = "Stream report #3 <" + detectorName + "__TrueInfo>: ";
+			gstreamReport[reportName] = publishEventTrueInfoData(detectorName, gDataCollection->getTrueInfoData());
 
 			// publish digitized data
-			dnameKey = detectorName + "__Digitized";
-			gstreamReport[dnameKey] = publishEventDigitizedData(detectorName, gDataCollection->getDigitizedData());
+			reportName = "Stream report #4: <" +  detectorName + "__Digitized>: ";
+			gstreamReport[reportName] = publishEventDigitizedData(detectorName, gDataCollection->getDigitizedData());
 		}
-
-
-		gstreamReport["endEvent"] = endEvent();
+		gstreamReport["Stream report #5 <endEvent>: "] = endEvent();
 	}
-
-
 
 	return gstreamReport;
 }

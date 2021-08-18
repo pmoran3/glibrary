@@ -29,5 +29,5 @@ bool GstreamerTextFactory::publishEventTrueInfoData(string detectorName, const v
 	*ofile << GTAB << "}" << endl;
 
 
-	return false;
+	return true;
 }
