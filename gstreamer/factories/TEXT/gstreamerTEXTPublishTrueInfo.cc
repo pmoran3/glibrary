@@ -2,13 +2,14 @@
 #include "gstreamerTEXTFactory.h"
 
 
-bool GstreamerTextFactory::publishEventTrueInfoData(string detectorName, vector<GTrueInfoData*>* trueInfoData) {
-
+bool GstreamerTextFactory::publishEventTrueInfoData(string detectorName, const vector<GTrueInfoData*>* trueInfoData) {
 
 	if(ofile == nullptr) return false;
 	
 	*ofile << GTAB << "Detector <" <<  detectorName << "> True Info Bank {" << endl;
+
 	for ( auto trueInfoHit: *trueInfoData ) {
+
 		string identifierString = "";
 		vector<GIdentifier> gidentity = trueInfoHit->getIdentity();
 		for ( int i=0; i<gidentity.size() - 1; i++ ) {

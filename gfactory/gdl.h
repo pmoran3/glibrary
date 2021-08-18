@@ -56,7 +56,7 @@ public:
 			}
 			handle = load_lib(dlFileName);
 			if(handle == nullptr) {
-				cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but couldn't be loaded" << endl;
+				cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but could not be loaded" << endl;
 				gexit(EC__DLNOTFOUND);
 			}
 

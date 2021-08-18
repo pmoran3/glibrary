@@ -5,9 +5,7 @@
 // the rounding error on the averave calculations could be up to 10^-3
 GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn)
 {
-	GTrueInfoData* trueInfoData = new GTrueInfoData();
-
-	trueInfoData->setIdentity(ghit->getGID());
+	GTrueInfoData* trueInfoData = new GTrueInfoData(ghit);
 
 	// notices:
 	// we do each var hitbit group loop separately in case some are not filled
@@ -30,6 +28,5 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 
 
 	// bit 1
-
 	return trueInfoData;
 }

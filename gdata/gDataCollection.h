@@ -19,34 +19,34 @@ class GDataCollection {
 
 public:
 	GDataCollection() {
-		digitizedData  = new vector<GDigitizedData*>;
 		trueInfosData  = new vector<GTrueInfoData*>;
+		digitizedData  = new vector<GDigitizedData*>;
 	}
 	
 	~GDataCollection() {
 
-		for ( auto* hit: (*digitizedData) )  { delete hit; }
 		for ( auto* hit: (*trueInfosData) )  { delete hit; }
+		for ( auto* hit: (*digitizedData) )  { delete hit; }
 
-		delete digitizedData;
 		delete trueInfosData;
+		delete digitizedData;
 	}
 
 
 public:
 
 	// public interface to add hit
-	void addTrueInfoData(GTrueInfoData *data);
+	void addTrueInfoData( GTrueInfoData *data);
 	void addDigitizedData(GDigitizedData *data);
 
-	vector<GTrueInfoData*>  *getTrueInfoData()  { return trueInfosData;}
-	vector<GDigitizedData*> *getDigitizedData() { return digitizedData;}
+	inline const vector<GTrueInfoData*>  *getTrueInfoData()  const { return trueInfosData;}
+	inline const vector<GDigitizedData*> *getDigitizedData() const { return digitizedData;}
 
 private:
 
 	// index is hit number
-	vector<GTrueInfoData*>   *trueInfosData = nullptr;
-	vector<GDigitizedData*>  *digitizedData = nullptr;
+	vector<GTrueInfoData*>  *trueInfosData;
+	vector<GDigitizedData*> *digitizedData;
 
 };
 

@@ -1,5 +1,6 @@
-The comments below fo not apply if scons is used.
-Note: the scons gplugin CANNOT be used when running xcode to load the gplugins
+Note: the scons gplugin CANNOT be used when running xcode to load the gplugins, and viceversa
+
+The comments below do not apply if scons is used.
 
 xcode notes:
 ############

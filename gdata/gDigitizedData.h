@@ -10,31 +10,44 @@ using std::string;
 using std::map;
 using std::vector;
 
+// glibrary
+#include "ghit.h"
 
-
-// in each hit, the digitization can produce single values or vectors of values
-// requirement: the variable names must all be different
+// in each hit, the digitization can produce:
+// - single values
+// - vectors of values
+// requirement: the variable names for each type must be unique
 class GDigitizedData {
 	
 public:
 
-	void print();
+	GDigitizedData(GHit *ghit);
+	vector<GIdentifier> getIdentity() const {return gidentity;}
 
 	// public interface to add data to a hit
 	void includeVariable(string vname, int value);
 	void includeVariable(string vname, float value);
-	void includeVariable(string vname, double value);
+
+	void includeVariable(string vname, vector<int> values);
+	void includeVariable(string vname, vector<float> values);
+
+	inline map<string, int>   getIntObservablesMap() const {return intObservablesMap;}
+	inline map<string, float> getFltObservablesMap() const {return fltObservablesMap;}
+
+	inline map<string, vector<int>>   getArrayIntObservablesMap() const {return arrayIntObservablesMap;}
+	inline map<string, vector<float>> getArrayFltObservablesMap() const {return arrayFltObservablesMap;}
+
 
 private:
 
 	// the data map are keyd with the variable name
-	map<string, int>    intObservables;
-	map<string, float>  fltObservables;
-	map<string, double> dblObservables;
+	map<string, int>    intObservablesMap;
+	map<string, float>  fltObservablesMap;
 
-	map<string, vector<int> >    intVObservables;
-	map<string, vector<float> >  fltVObservables;
-	map<string, vector<double> > dblVObservables;
+	map<string, vector<int> >    arrayIntObservablesMap;
+	map<string, vector<float> >  arrayFltObservablesMap;
+
+	vector<GIdentifier> gidentity;
 
 };
 

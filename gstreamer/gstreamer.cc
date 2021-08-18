@@ -11,12 +11,12 @@ map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCo
 	// TODO: this needs to run if it's requested by the gopts
 	// option should be added to write this / or stream this
 	// looping over events
-	for(auto eventData: runData) {
+	for(auto eventDataCollection: runData) {
 
 		gstreamReport["startEvent"] = startEvent();
-		gstreamReport["header"]     = publishEventHeader(eventData->getHeader());
+		gstreamReport["header"]     = publishEventHeader(eventDataCollection->getHeader());
 
-		for (auto& [detectorName, gDataCollection] : *eventData->getDataCollection() ) {
+		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollection() ) {
 			// publish true info
 			string dnameKey = detectorName + "__TrueInfo";
 			gstreamReport[dnameKey] = publishEventTrueInfoData(detectorName, gDataCollection->getTrueInfoData());

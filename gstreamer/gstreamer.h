@@ -9,7 +9,6 @@
 // c++
 #include <string>
 
-
 class GStreamer
 {
 
@@ -19,7 +18,8 @@ public:
 	virtual bool openConnection()  { return false;}  // in GActionInitialization constructor
 	virtual bool closeConnection() { return false;}  // in GActionInitialization destructor
 
-	// runs the protected virtual methods to write events from a run to file
+	// called in GRunAction::EndOfRunAction
+	// runs the protected virtual methods below to write events from a run to file
 	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> runData);
 
 	void setOutputName(string output) {outputFileName = output;}
@@ -28,14 +28,13 @@ protected:
 
 	string outputFileName = "na";
 
-	// event virtual methods
-	// one per event, called per geant4 run
+	// event virtual methods called by publishRunData, in order
 	virtual bool startEvent() { return false;}
-	virtual bool endEvent()   { return false;}
 	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
-	virtual bool publishEventTrueInfoData(string detectorName,  vector<GTrueInfoData*>* trueInfoData)   { return false;}
-	virtual bool publishEventDigitizedData(string detectorName, vector<GDigitizedData*>* digitizedData) { return false;}
+	virtual bool publishEventTrueInfoData(string detectorName,  const vector<GTrueInfoData*>* trueInfoData)   { return false;}
+	virtual bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData) { return false;}
+	virtual bool endEvent()   { return false;}
 
 
 	// stream virtual methods
