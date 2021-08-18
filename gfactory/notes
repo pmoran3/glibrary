@@ -1,17 +1,12 @@
 Note: the scons gplugin CANNOT be used when running xcode to load the gplugins, and viceversa
 
+
 The comments below do not apply if scons is used.
 
 xcode notes:
 ############
 
-Notice 1: to run the examples we need to link or mv the dynamic libraries to the glibrary naming convention to be loaded correctly:
-the extension is .gplugin
-
-Notice 2: do not do this through finder! It will keep dylib
-
-ln -s libfordFactory.dylib  fordFactory.gplugin
-ln -s libteslaFactory.dylib teslaFactory.gplugin
+Go to build settings > Packaging and assing gplugin extension, remove "lib" prefix
 
 
 // the gdl header is based on this tutorial:

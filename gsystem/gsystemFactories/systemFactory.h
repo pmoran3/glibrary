@@ -27,7 +27,7 @@ public:
 	void loadSystem(GSystem *system, int verbosity) {
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			cout << GSYSTEMLOGHEADER << "Loading system <" << KWHT << system->getName() << RST << "> using factory <" << system->getFactory() << ">" <<  endl;
+			cout << GSYSTEMLOGHEADER << "Loading system <" << KWHT << system->getName() << RST << "> using factory <" << system->getFactoryName() << ">" <<  endl;
 		}
 
 		loadMaterial(system, verbosity);

@@ -20,7 +20,7 @@ public:
 private:
 	string      name;               // System name
 	string      path;               // System path (directory for text, gdml, cad factories, mysql db name for mysql)
-	string   factory;               // Factory that builds the detector
+	string   factoryName;               // Factory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
 
 	// map containing the volumes
@@ -38,7 +38,7 @@ private:
 
 public:
 	string getName() const      { return name; }
-	string getFactory() const   { return factory; }
+	string getFactoryName() const   { return factoryName; }
 	string getVariation() const { return variation; }
 	string getFile() const      { return path + "/" + name; }
 

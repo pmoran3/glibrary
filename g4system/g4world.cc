@@ -24,7 +24,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	// registering factories in the manager
 	// and adding them to g4systemFactory
 	for(auto &s : *gworld->getSystemsMap()) {
-		string factory = s.second->getFactory();
+		string factory = s.second->getFactoryName();
 		string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
 		if(factory == "text" || factory == "mysql") {
@@ -54,7 +54,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 		// looping over system in the gsystemsMap
 		for(auto &system : *gworld->getSystemsMap()) {
 			string systemName = system.first;
-			string factory = system.second->getFactory();
+			string factory = system.second->getFactoryName();
 			string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
 			// looping over getGVolumesMap in that system

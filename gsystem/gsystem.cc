@@ -12,7 +12,7 @@ using namespace std;
 
 // init system based on name, factory, variation and run number
 GSystem::GSystem(string n, string f, string v, int verbosity) :
-factory(f),
+factoryName(f),
 variation(v) {
 
 	path = gutilities::getDirFromPath(n);

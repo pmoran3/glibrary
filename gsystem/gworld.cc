@@ -46,27 +46,27 @@ GWorld::GWorld(GOptions* gopts) {
 	// if a factory is not existing already, registering it in the manager, instantiating it, and loading it into the map
 	for (auto& system: *gsystemsMap) {
 		
-		string factory = system.second->getFactory();
+		string factoryName = system.second->getFactoryName();
 
-		if(factory == "text") {
-			if(systemFactory.find(factory) == systemFactory.end()) {
+		if(factoryName == "text") {
+			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
 			}
-		} else if(factory == "cad") {
-			if(systemFactory.find(factory) == systemFactory.end()) {
+		} else if(factoryName == "cad") {
+			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMCADFACTORY);
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
 			}
-		}  else if(factory == "gdml") {
-			if(systemFactory.find(factory) == systemFactory.end()) {
+		}  else if(factoryName == "gdml") {
+			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMGDMFACTORY);
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMFACTORY);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMFACTORY);
 			}
-		} else if(factory == "mysql") {
-			if(systemFactory.find(factory) == systemFactory.end()) {
+		} else if(factoryName == "mysql") {
+			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMSQLFACTORY);
-				systemFactory[factory] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMSQLFACTORY);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMSQLFACTORY);
 			}
 		}
 	}
@@ -77,7 +77,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// now loading gvolumes definitions for all systems
 	for (auto& system: *gsystemsMap) {
 		string systemName = system.first;
-		string factory = system.second->getFactory();
+		string factory = system.second->getFactoryName();
 
 		if(systemFactory.find(factory) != systemFactory.end()) {
 			systemFactory[factory]->loadSystem(system.second, verbosity);
@@ -102,12 +102,14 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// adding root volume to the a "root" gsystem
 	// using the first existing factory name (if there is anything in the factory)
+	// otherwise use "TEXT"
+	string firstFactory = "text";
 	if (gsystemsMap->size() > 0) {
-		string firstFactory = gsystemsMap->begin()->second->getFactory();
-		string worldVolume = gopts->getString("worldVolume");
-		(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
-		(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
-	}
+		firstFactory = gsystemsMap->begin()->second->getFactoryName();
+	} 
+	string worldVolume = gopts->getString("worldVolume");
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
 
 	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {
