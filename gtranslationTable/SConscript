@@ -3,6 +3,7 @@
 Import('env')
 
 sources = [
+			  'gtron.cc',
 			  'gtranslationTable.cc'
 			  ]
 

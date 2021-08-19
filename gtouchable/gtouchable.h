@@ -33,7 +33,7 @@ private:
 public:
 
 	//  Overloaded "!=": comparing idValue
-	bool operator!= (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
+	bool operator != (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
 
 // api
 public:
