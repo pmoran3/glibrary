@@ -145,6 +145,7 @@ int EventDispenser::processEvents()
 				cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
 			}
 			digiRoutine->loadConstants(runNumber, variation);
+			digiRoutine->loadTT(runNumber, variation);
 		}
 
 		// I think we may need this here

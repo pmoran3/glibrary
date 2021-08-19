@@ -1,5 +1,6 @@
 // translationTable
 #include "gtranslationTableOptions.h"
+
 // namespace to define options
 namespace gtranslationTable {
 

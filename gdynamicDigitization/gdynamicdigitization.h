@@ -10,6 +10,7 @@
 #include "ghit.h"
 #include "gDigitizedData.h"
 #include "gTrueInfoData.h"
+#include "gtranslationTable.h"
 
 // c++
 #include <vector>
@@ -40,12 +41,18 @@ public:
 	// loads the digitization constants
 	// return false for failure
 	virtual bool loadConstants(int runno, string variation) { return false; }
+
+	// loads the translation table
+	// return false for failure
+	virtual bool loadTT(int runno, string variation) { return false; }
+
 	
 	// logs the constants
 	//virtual vector<string> showConstants() { return  {" Please implement showConstants() in your plugin."}; }
 	//vector<string> showParameters()        { return gSensitiveParameters->showParameters();}
 
 	GReadoutSpecs *readoutSpecs = nullptr;
+	GTranslationTable *translationTable = nullptr;
 
 	// mandatory initialization of readout specs
 	virtual bool defineReadoutSpecs() = 0;

@@ -6,8 +6,8 @@
 
 import sys, getopt, string
 
-validRoutineNames = ["constants",       "processID",                "hitDigitization",  "all"]
-validRoutineDescr = ["loads constants", "manipulate/create new ID", "digitize a hit",   "write all routines"]
+validRoutineNames = ["constants",       "loadTT",                 "processID",                "hitDigitization",  "all"]
+validRoutineDescr = ["loads constants", "loat translation table", "manipulate/create new ID", "digitize a hit",   "write all routines"]
 
 def printHelp():
 	print ''
@@ -86,6 +86,11 @@ def writeHeader(sName, routines):
 		headerFile.write('\t// loads digitization constants\n')
 		headerFile.write('\tbool loadConstants(int runno, string variation);\n')
 
+	if 'loadTT' in routines:
+		headerFile.write('\n')
+		headerFile.write('\t// loads the translation table\n')
+		headerFile.write('\tbool loadTT(int runno, string variation);\n')
+
 	if 'hitDigitization' in routines:
 		headerFile.write('\n')
 		headerFile.write('\t// digitized the hit\n')
@@ -117,6 +122,21 @@ def writeLoadConstants(sName):
 	constantsFile.write('\treturn true;\n')
 	constantsFile.write('}\n')
 
+# PRAGMA TODO: add comments/documentation
+# PRAGMA TODO: add commented example
+def writeLoadTT(sName):
+	constantsFile = open('loadTT.cc', 'w')
+	constantsFile.write('#include "' + sName + '.h"\n')
+	constantsFile.write('\n')
+	constantsFile.write('bool ' + sName + 'Plugin::loadTT(int runno, string variation)\n')
+	constantsFile.write('{\n')
+	constantsFile.write('\n')
+	constantsFile.write('\ttranslationTable = new GTranslationTable();\n')
+	constantsFile.write('\n')
+	constantsFile.write('\n')
+	constantsFile.write('\treturn true;\n')
+	constantsFile.write('}\n')
+
 
 # PRAGMA TODO: add comments/documentation
 # PRAGMA TODO: add commented example
@@ -134,7 +154,7 @@ def writeHitDigitization(sName):
 	constantsFile.write('\n')
 	constantsFile.write('\n')
 	constantsFile.write('\n')
-	constantsFile.write('\t\tgdata->includeVariable("hitn",  hitn);\n')
+	constantsFile.write('\tgdata->includeVariable("hitn",  hitn);\n')
 	constantsFile.write('\treturn gdata;\n')
 	constantsFile.write('}\n')
 
@@ -190,6 +210,9 @@ writeReadoutSpects(systemName)
 
 if 'constants' in routines or 'all' in routines:
 	writeLoadConstants(systemName)
+
+if 'loadTT' in routines or 'all' in routines:
+	writeLoadTT(systemName)
 
 if 'hitDigitization' in routines or 'all' in routines:
 	writeHitDigitization(systemName)
