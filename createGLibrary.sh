@@ -139,3 +139,4 @@ done
 echo ' '
 
 open $library
+open /Users/ungaro/Dropbox/xcode/glibrary
