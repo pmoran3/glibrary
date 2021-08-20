@@ -8,8 +8,8 @@
 #include "gdl.h"
 #include "gtouchable.h"
 #include "ghit.h"
-#include "gDigitizedData.h"
-#include "gTrueInfoData.h"
+#include "event/gDigitizedData.h"
+#include "event/gTrueInfoData.h"
 #include "gtranslationTable.h"
 
 // c++
@@ -46,10 +46,6 @@ public:
 	// return false for failure
 	virtual bool loadTT(int runno, string variation) { return false; }
 
-	
-	// logs the constants
-	//virtual vector<string> showConstants() { return  {" Please implement showConstants() in your plugin."}; }
-	//vector<string> showParameters()        { return gSensitiveParameters->showParameters();}
 
 	GReadoutSpecs *readoutSpecs = nullptr;
 	GTranslationTable *translationTable = nullptr;

@@ -3,14 +3,17 @@
 Import('env')
 
 # local directories include
-env.Append(CPPPATH = [Dir('event')])
+env.Append(CPPPATH = [Dir('event'), Dir('frame')])
 
 sources = [
-			  'gDataCollection.cc',
-			  'event/gEventDataCollection.cc',
+			  'event/gDigitizedData.cc',
+			  'event/gTrueInfoData.cc',
+			  'event/gDataCollection.cc',
 			  'event/gEventDataCollectionHeader.cc',
-			  'gDigitizedData.cc',
-			  'gTrueInfoData.cc'
+			  'event/gEventDataCollection.cc',
+			  'frame/gIntegralPayload.cc',
+			  'frame/gFrameDataCollectionHeader.cc',
+			  'frame/gFrameDataCollection.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

@@ -1,18 +1,18 @@
 #ifndef  GEVENTHEADER_H
 #define  GEVENTHEADER_H  1
 
-//// c++
-#include <iostream>
-using std::cout;
-using std::endl;
-using std::to_string;
-
 // gdata
 #include "gdataConventions.h"
 
 // glibrary
-#include "goptions.h"
-#include "gutsConventions.h"
+#include "goptions.h"         // GVERBOSITY
+#include "gutsConventions.h"  // gLogClassConstruct
+
+// c++
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::to_string;
 
 class GEventDataCollectionHeader
 {
@@ -52,7 +52,6 @@ private:
 	int threadID;
 	int verbosity;
 
-	string g4randomNumber;  // PRAGMA TODO: not used yet. check feasibility
 	string assignTimeStamp();
 	string timeStamp;
 };

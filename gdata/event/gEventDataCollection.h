@@ -1,21 +1,14 @@
 #ifndef  GEVENTDATA_H
 #define  GEVENTDATA_H  1
 
-// conventions
+// gdata
+#include "gEventDataCollectionHeader.h"
 #include "gdataConventions.h"
+#include "gDataCollection.h"
 
 // c++
 #include <vector>
 using std::vector;
-
-// gdata
-#include "gEventDataCollectionHeader.h"
-#include "gDataCollection.h"
-
-// glibrary
-#include "goptions.h"
-#include "gutsConventions.h"
-
 
 class GEventDataCollection
 {

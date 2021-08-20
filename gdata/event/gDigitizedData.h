@@ -47,6 +47,7 @@ private:
 	map<string, vector<int> >    arrayIntObservablesMap;
 	map<string, vector<float> >  arrayFltObservablesMap;
 
+	// set at constructor, from the hit
 	vector<GIdentifier> gidentity;
 
 };

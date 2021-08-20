@@ -8,6 +8,7 @@ using std::thread;
 
 
 // emulation of a run of 10 events
+// PRAGMA TODO: fix example, add stream example
 int main(int argc, char* argv[])
 {
 
@@ -22,13 +23,18 @@ int main(int argc, char* argv[])
 		GEventDataCollectionHeader *gheader = new GEventDataCollectionHeader(evn, evn, 1);
 		GEventDataCollection *eventData = new GEventDataCollection(gheader, 1);
 
-		GDigitizedData *thisHit = new GDigitizedData();
-		
-		thisHit->includeVariable("crate",     evn);
-		thisHit->includeVariable("slot",    2*evn);
-		thisHit->includeVariable("channel", 3*evn);
+		// hit with null G4Step (not used)
+		// a bitset
+		HitBitSet hitBitSet("000000");
+		GHit *newHit = new GHit(ctof, nullptr, hitBitSet);
 
-		eventData->addDetectorDigitizedData("dc", thisHit);
+		GDigitizedData *thisHitData = new GDigitizedData(newHit);
+		
+		thisHitData->includeVariable("crate",     evn);
+		thisHitData->includeVariable("slot",    2*evn);
+		thisHitData->includeVariable("channel", 3*evn);
+
+		eventData->addDetectorDigitizedData("dc", thisHitData);
 
 		runData->push_back(eventData);
 	}
