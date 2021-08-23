@@ -1,5 +1,12 @@
-// gtranslationtable
+// gtouchable
 #include "gtron.h"
+
+
+void GElectronic::setHAddress(int c, int s, int ch) {
+	crate   = c;
+	slot    = s;
+	channel = ch;
+}
 
 // comparison based on mode
 bool GElectronic::operator == (const GElectronic& ge) const {

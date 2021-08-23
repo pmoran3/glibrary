@@ -1,7 +1,7 @@
 #ifndef GTRANSLATIONTABLE_H
 #define GTRANSLATIONTABLE_H  1
 
-// gtranslationtable
+// glibrary
 #include "gtron.h"
 
 // c++

@@ -38,6 +38,12 @@ detectorDimenions(dimensions) {
 		gidentity.push_back(GIdentifier(idName, idValue));
 	}
 
+	haddress = GElectronic();
+
+}
+
+void GTouchable::setHAddress(int c, int s, int ch) {
+	haddress.setHAddress(c, s, ch);
 }
 
 

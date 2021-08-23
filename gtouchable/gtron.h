@@ -7,7 +7,9 @@ struct GElectronic {
 
 	GElectronic(int c, int s, int ch, int m) : crate(c), slot(s), channel(ch), mode(m) {}
 	// empty constructor needed because of the map declaration in the translation table
-	GElectronic() : crate(0), slot(0), channel(0), mode(0) {}
+	GElectronic() : crate(-1), slot(-1), channel(-1), mode(-1) {}
+
+	void setHAddress(int c, int s, int ch);
 
 private:
 	int crate;
