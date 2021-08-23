@@ -1,6 +1,9 @@
 // ghit
 #include "ghit.h"
 
+// glibrary
+#include "gutsConventions.h"
+
 // notice: if the energy deposited is very low (~50eV)
 // the rounding error on the averave calculations could be up to 10^-3
 
@@ -9,7 +12,7 @@ void GHit::calculateInfosForBit(int bit)
 	// bit 0: always present
 	if ( bit == 0 ) {
 
-		if(totalEnergyDeposited == UNINITIALIZEDQUANTITY) {
+		if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {
 			getTotalEnergyDeposited();
 		}
 
@@ -52,7 +55,7 @@ void GHit::calculateInfosForBit(int bit)
 
 float GHit::getTotalEnergyDeposited()
 {
-	if(totalEnergyDeposited == UNINITIALIZEDQUANTITY) {
+	if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {
 		totalEnergyDeposited = 0;
 
 		for(const auto &ei: edeps) {
@@ -65,9 +68,9 @@ float GHit::getTotalEnergyDeposited()
 float GHit::getAverageTime()
 {
 
-	if(averageTime == UNINITIALIZEDQUANTITY) {
+	if(averageTime == UNINITIALIZEDNUMBERQUANTITY) {
 
-		if(totalEnergyDeposited == UNINITIALIZEDQUANTITY) {
+		if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {
 			getTotalEnergyDeposited();
 		}
 
@@ -90,9 +93,9 @@ float GHit::getAverageTime()
 
 G4ThreeVector GHit::getAvgGlobaPosition() {
 
-	if ( avgGlobalPosition.getX() == UNINITIALIZEDQUANTITY && avgGlobalPosition.getY() == UNINITIALIZEDQUANTITY) {
+	if ( avgGlobalPosition.getX() == UNINITIALIZEDNUMBERQUANTITY && avgGlobalPosition.getY() == UNINITIALIZEDNUMBERQUANTITY) {
 
-		if(totalEnergyDeposited == UNINITIALIZEDQUANTITY) {
+		if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {
 			getTotalEnergyDeposited();
 		}
 
@@ -119,9 +122,9 @@ G4ThreeVector GHit::getAvgGlobaPosition() {
 
 G4ThreeVector GHit::getAvgLocalPosition() {
 
-	if ( avgLocalPosition.getX() == UNINITIALIZEDQUANTITY && avgLocalPosition.getY() == UNINITIALIZEDQUANTITY) {
+	if ( avgLocalPosition.getX() == UNINITIALIZEDNUMBERQUANTITY && avgLocalPosition.getY() == UNINITIALIZEDNUMBERQUANTITY) {
 
-		if(totalEnergyDeposited == UNINITIALIZEDQUANTITY) {
+		if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {
 			getTotalEnergyDeposited();
 		}
 

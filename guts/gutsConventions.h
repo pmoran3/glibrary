@@ -1,6 +1,8 @@
 #ifndef  GUTS_CONVENTIONS_H
 #define  GUTS_CONVENTIONS_H  1
 
+#define UNINITIALIZEDNUMBERQUANTITY -123456
+
 // exit codes: 600
 #define EC__FILENOTFOUND     601
 

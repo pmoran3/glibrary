@@ -6,5 +6,7 @@
 
 #define GDATALOGITEM " ℹ︎"
 
+#define CHARGEANDTIMEATHARDWARE "chargeAndTimeAtHardware"
+
 
 #endif

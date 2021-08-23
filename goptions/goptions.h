@@ -193,7 +193,7 @@ private:
 	void parseJSONSIntoGOption(vector<json> allUserJsons);       // parse all the jsons from the jcards / command line in the GOptions array
 
 	// search utilities
-	long findOptionIndex(string name);  // find goption from the array. return jOptions array index or -1 if not found
+	long findOptionIndex(string name);  // find goption from the array. return jOptions array index or UNINITIALIZEDNUMBERQUANTITY if not found
 
 	// same as above, but look for specifically a non structured option
 	// exit if the tag refers to a non structured option

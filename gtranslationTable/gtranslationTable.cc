@@ -17,7 +17,6 @@ string GTranslationTable::formTTKey(vector<int> identity)
 	}
 	ttKey += to_string(identity.back());
 
-
 	return ttKey;
 }
 

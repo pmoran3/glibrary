@@ -1,6 +1,9 @@
 // ghit
 #include "ghit.h"
 
+// glibrary
+#include "gutsConventions.h"
+
 // geant4
 #include "G4VVisManager.hh"
 #include "G4Circle.hh"
@@ -18,10 +21,13 @@ gtouchable(gt) {
 
 	// unitialized quantities
 	// bit 0: always there
-	totalEnergyDeposited = UNINITIALIZEDQUANTITY;
-	averageTime = UNINITIALIZEDQUANTITY;
-	avgGlobalPosition = G4ThreeVector(UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY);
-	avgLocalPosition  = G4ThreeVector(UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY, UNINITIALIZEDQUANTITY);
+	totalEnergyDeposited = UNINITIALIZEDNUMBERQUANTITY;
+	averageTime          = UNINITIALIZEDNUMBERQUANTITY;
+	avgGlobalPosition = G4ThreeVector(UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY);
+	avgLocalPosition  = G4ThreeVector(UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY);
+
+	chargeAtElectronics = UNINITIALIZEDNUMBERQUANTITY;
+	timeAtElectronics   = UNINITIALIZEDNUMBERQUANTITY;
 }
 
 GHit::~GHit() {
@@ -29,6 +35,23 @@ GHit::~GHit() {
 }
 
 
+void GHit::setQandTimeAtElectronics(float t, int q) {
+	timeAtElectronics   = t;
+	chargeAtElectronics = q;
+}
+
+
+vector<int> GHit::getTTID() {
+	vector<int> ttid;
+
+	vector<GIdentifier> gids = getGID();
+
+	for ( auto& gid : gids ) {
+		ttid.push_back(gid.getValue());
+	}
+
+	return ttid;
+}
 
 void GHit::Draw()
 {

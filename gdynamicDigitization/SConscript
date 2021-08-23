@@ -3,7 +3,7 @@
 Import('env')
 
 sources = [
-	'trueObservable.cc'
+	'gdynamicdigitization.cc'
 	]
 
 # destination library is one dir up - relative to this SConscript

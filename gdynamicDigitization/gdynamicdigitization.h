@@ -46,13 +46,19 @@ public:
 	// return false for failure
 	virtual bool loadTT(int runno, string variation) { return false; }
 
+	// this will set the ghit:
+	// - chargeAtElectronics
+	// - timeAtElectronics
+	// and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
+	// this will exit with error if the TT is not defined, or if
+	void chargeAndTimeAtHardware(GHit *ghit, float time, int q);
+
+	// mandatory initialization of readout specs
+	virtual bool defineReadoutSpecs() = 0;
 
 	GReadoutSpecs *readoutSpecs = nullptr;
 	GTranslationTable *translationTable = nullptr;
 
-	// mandatory initialization of readout specs
-	virtual bool defineReadoutSpecs() = 0;
-	
 	// method to dynamically load factories
 	static GDynamicDigitization* instantiate(const dlhandle handle) {
 				

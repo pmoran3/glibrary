@@ -20,7 +20,7 @@ private:
 
 public:
 	void addGElectronicWithIdentity(vector<int> identity, GElectronic gtron);
-	GElectronic getElectronics(vector<int> identity);
+	GElectronic getElectronics(const vector<int> identity);
 	void print();
 
 };

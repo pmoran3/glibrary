@@ -2,14 +2,19 @@
 #define GELECTRONIC_H  1
 
 #include <ostream>
+#include <vector>
 
 struct GElectronic {
 
-	GElectronic(int c, int s, int ch, int m) : crate(c), slot(s), channel(ch), mode(m) {}
+public:
+
+	GElectronic(int c, int s, int ch, int m);
+
 	// empty constructor needed because of the map declaration in the translation table
-	GElectronic() : crate(-1), slot(-1), channel(-1), mode(-1) {}
+	GElectronic();
 
 	void setHAddress(int c, int s, int ch);
+	std::vector<int> getHAddress();
 
 private:
 	int crate;

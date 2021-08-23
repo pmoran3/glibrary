@@ -1,11 +1,26 @@
 // gtouchable
 #include "gtron.h"
 
+// glibrary
+#include "gutsConventions.h"
+
+// c++
+using std::vector;
+
+GElectronic::GElectronic(int c, int s, int ch, int m) : crate(c), slot(s), channel(ch), mode(m) {}
+
+GElectronic::GElectronic() : crate(UNINITIALIZEDNUMBERQUANTITY), slot(UNINITIALIZEDNUMBERQUANTITY),
+channel(UNINITIALIZEDNUMBERQUANTITY), mode(UNINITIALIZEDNUMBERQUANTITY) {}
+
 
 void GElectronic::setHAddress(int c, int s, int ch) {
 	crate   = c;
 	slot    = s;
 	channel = ch;
+}
+
+vector<int> GElectronic::getHAddress() {
+	return {crate, slot, channel};
 }
 
 // comparison based on mode

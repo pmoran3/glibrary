@@ -203,7 +203,7 @@ void GOptions::parseJSONSIntoGOption(vector<json> allUserJsons)
 				cout << GTAB << "Is an addition: " << isAnAddition << endl;
 			}
 
-			// GOption index, -1 if not found
+			// GOption index, UNINITIALIZEDNUMBERQUANTITY if not found
 			long userJsonOptionDefinitionIndex = findOptionIndex(userJsonKeyRoot);
 
 			if ( gdebug ) {
@@ -230,7 +230,7 @@ long GOptions::findOptionIndex(string name) {
 	cerr << "Use option " << PRINTALLOPTIONS << " to print all availaible options " << endl;
 	gexit(EC__NOOPTIONFOUND);
 
-	return -1;
+	return UNINITIALIZEDNUMBERQUANTITY;
 }
 
 
