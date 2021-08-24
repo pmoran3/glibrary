@@ -26,8 +26,6 @@ bool GstreamerTextFactory::publishEventDigitizedData(string detectorName, const 
 		}
 
 		*ofile << GTABTAB << "}" << endl;
-
-
 	}
 	*ofile << GTAB << "}" << endl;
 	

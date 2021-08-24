@@ -30,9 +30,9 @@ int main(int argc, char* argv[])
 
 		GDigitizedData *thisHitData = new GDigitizedData(newHit);
 		
-		thisHitData->includeVariable("crate",     evn);
-		thisHitData->includeVariable("slot",    2*evn);
-		thisHitData->includeVariable("channel", 3*evn);
+		thisHitData->includeVariable(CRATESTRINGID,     evn);
+		thisHitData->includeVariable(SLOTSTRINGID,    2*evn);
+		thisHitData->includeVariable(CHANNELSTRINGID, 3*evn);
 
 		eventData->addDetectorDigitizedData("dc", thisHitData);
 

@@ -6,7 +6,12 @@
 
 #define GDATALOGITEM " ℹ︎"
 
-#define CHARGEANDTIMEATHARDWARE "chargeAndTimeAtHardware"
+
+#define CRATESTRINGID   "crate"
+#define SLOTSTRINGID    "slot"
+#define CHANNELSTRINGID "channel"
+#define CHARGEATELECTRONICS "chargeAtElectronics"
+#define TIMEATELECTRONICS   "timeAtElectronics"
 
 
 #endif

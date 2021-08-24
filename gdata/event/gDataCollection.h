@@ -39,6 +39,7 @@ public:
 	void addTrueInfoData( GTrueInfoData *data);
 	void addDigitizedData(GDigitizedData *data);
 
+	// one entry / hit
 	inline const vector<GTrueInfoData*>  *getTrueInfoData()  const { return trueInfosData;}
 	inline const vector<GDigitizedData*> *getDigitizedData() const { return digitizedData;}
 

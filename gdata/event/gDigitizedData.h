@@ -31,8 +31,8 @@ public:
 	void includeVariable(string vname, vector<int> values);
 	void includeVariable(string vname, vector<float> values);
 
-	inline map<string, int>   getIntObservablesMap() const {return intObservablesMap;}
-	inline map<string, float> getFltObservablesMap() const {return fltObservablesMap;}
+	map<string, int>   const getIntObservablesMap() const;
+	map<string, float> const getFltObservablesMap() const;
 
 	inline map<string, vector<int>>   getArrayIntObservablesMap() const {return arrayIntObservablesMap;}
 	inline map<string, vector<float>> getArrayFltObservablesMap() const {return arrayFltObservablesMap;}
@@ -49,6 +49,8 @@ private:
 
 	// set at constructor, from the hit
 	vector<GIdentifier> gidentity;
+
+	bool const validVarName(string varName) const;
 
 };
 

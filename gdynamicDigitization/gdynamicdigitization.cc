@@ -3,6 +3,7 @@
 
 // glibrary
 #include "gtranslationTableConventions.h"
+#include "gdataConventions.h"
 
 
 // notice: if the energy deposited is very low (~50eV)
@@ -57,14 +58,17 @@ void GDynamicDigitization::chargeAndTimeAtHardware(float time, int q, GHit *ghit
 			cerr << FATALERRORL << "Translation Table found, but haddress was not initialized." << endl;
 			gexit(EC__GIDENTITYNOTFOUNDINTT);
 		} else {
-			// everything is good. update gtouchable with crate/slot/channel address
 
-			gdata->includeVariable("crate",   haddress[0]);
-			gdata->includeVariable("slot",    haddress[1]);
-			gdata->includeVariable("channel", haddress[2]);
+			// everything is good.
+			// include crate/slot/channel address
+			// include payload time and charge for this hit
 
+			gdata->includeVariable(CRATESTRINGID,   haddress[0]);
+			gdata->includeVariable(SLOTSTRINGID,    haddress[1]);
+			gdata->includeVariable(CHANNELSTRINGID, haddress[2]);
+			gdata->includeVariable(TIMEATELECTRONICS, time);
+			gdata->includeVariable(CHARGEATELECTRONICS, q);
 		}
-
 	}
 }
 
