@@ -1,10 +1,6 @@
 #ifndef  GTOUCHABLE_H
 #define  GTOUCHABLE_H 1
 
-// gtouchable
-#include "gtouchableConventions.h"
-#include "gtron.h"
-
 // c++
 #include <vector>
 #include <string>
@@ -53,14 +49,12 @@ public:
 	// constructor called in GDetectorConstruction::ConstructSDandField
 	// to register a new gtouchable in the sensitive detector gtouchable map
 	GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb = false);
-	void setHAddress(int c, int s, int ch);
 
 
 private:
 	// set by sensitive detector constructor
 	GTouchableType  gType;
 	vector<GIdentifier> gidentity;  ///< Uniquely identify a sensitive element
-	GElectronic haddress;           ///< Electronic address: crate/slot/channel struct
 	bool verbosity;
 
 	// set in sensitiveDetector::ProcessHit

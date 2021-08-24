@@ -21,12 +21,12 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 
 	trueInfoData->includeVariable("totalEDeposited", ghit->getTotalEnergyDeposited());
 	trueInfoData->includeVariable("avgTime", ghit->getAverageTime());
-	trueInfoData->includeVariable("avgx",  avgGlobalPos.getX());
-	trueInfoData->includeVariable("avgy",  avgGlobalPos.getY());
-	trueInfoData->includeVariable("avgz",  avgGlobalPos.getZ());
-	trueInfoData->includeVariable("avglx", avgLocalPos.getX());
-	trueInfoData->includeVariable("avgly", avgLocalPos.getY());
-	trueInfoData->includeVariable("avglz", avgLocalPos.getZ());
+	trueInfoData->includeVariable("avgx",    avgGlobalPos.getX());
+	trueInfoData->includeVariable("avgy",    avgGlobalPos.getY());
+	trueInfoData->includeVariable("avgz",    avgGlobalPos.getZ());
+	trueInfoData->includeVariable("avglx",   avgLocalPos.getX());
+	trueInfoData->includeVariable("avgly",   avgLocalPos.getY());
+	trueInfoData->includeVariable("avglz",   avgLocalPos.getZ());
 	trueInfoData->includeVariable("hitn",  hitn);
 
 
@@ -39,9 +39,8 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 // - timeAtElectronics
 // and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
 // this will exit with error if the TT is not defined, or if
-void GDynamicDigitization::chargeAndTimeAtHardware(GHit *ghit, float time, int q)
+void GDynamicDigitization::chargeAndTimeAtHardware(float time, int q, GHit *ghit, GDigitizedData *gdata)
 {
-	ghit->setQandTimeAtElectronics(time, q);
 
 	// gexit if translation table not defined
 	if ( translationTable == nullptr ) {
@@ -58,9 +57,12 @@ void GDynamicDigitization::chargeAndTimeAtHardware(GHit *ghit, float time, int q
 			cerr << FATALERRORL << "Translation Table found, but haddress was not initialized." << endl;
 			gexit(EC__GIDENTITYNOTFOUNDINTT);
 		} else {
-			// everything is good. update gtouchable
-			// in order: crate, slot, channel
-			ghit->setHAddress(haddress[0], haddress[1], haddress[2]);
+			// everything is good. update gtouchable with crate/slot/channel address
+
+			gdata->includeVariable("crate",   haddress[0]);
+			gdata->includeVariable("slot",    haddress[1]);
+			gdata->includeVariable("channel", haddress[2]);
+
 		}
 
 	}

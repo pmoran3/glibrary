@@ -26,18 +26,10 @@ gtouchable(gt) {
 	avgGlobalPosition = G4ThreeVector(UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY);
 	avgLocalPosition  = G4ThreeVector(UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY, UNINITIALIZEDNUMBERQUANTITY);
 
-	chargeAtElectronics = UNINITIALIZEDNUMBERQUANTITY;
-	timeAtElectronics   = UNINITIALIZEDNUMBERQUANTITY;
 }
 
 GHit::~GHit() {
 	
-}
-
-
-void GHit::setQandTimeAtElectronics(float t, int q) {
-	timeAtElectronics   = t;
-	chargeAtElectronics = q;
 }
 
 

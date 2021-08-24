@@ -18,25 +18,26 @@ void GHit::calculateInfosForBit(int bit)
 
 		float  avgx = 0,  avgy = 0,  avgz = 0;
 		float avglx = 0, avgly = 0, avglz = 0;
+		float averageTime= 0;
 
 		auto nsteps = edeps.size();
 		for ( auto s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
 				averageTime += times[s]*edeps[s]/totalEnergyDeposited;
-				avgx  = avgx  + globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
-				avgy  = avgy  + globalPositions[s].getY()*edeps[s]/totalEnergyDeposited;
-				avgz  = avgz  + globalPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
-				avglx = avglx + localPositions[s].getX() *edeps[s]/totalEnergyDeposited;
-				avgly = avgly + localPositions[s].getY() *edeps[s]/totalEnergyDeposited;
-				avglz = avglz + localPositions[s].getZ() *edeps[s]/totalEnergyDeposited;
+				avgx  += globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
+				avgy  += globalPositions[s].getY()*edeps[s]/totalEnergyDeposited;
+				avgz  += globalPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
+				avglx += localPositions[s].getX() *edeps[s]/totalEnergyDeposited;
+				avgly += localPositions[s].getY() *edeps[s]/totalEnergyDeposited;
+				avglz += localPositions[s].getZ() *edeps[s]/totalEnergyDeposited;
 			} else {
 				averageTime += times[s]/nsteps;
-				avgx  = avgx  + globalPositions[s].getX()/nsteps;
-				avgy  = avgy  + globalPositions[s].getY()/nsteps;
-				avgz  = avgz  + globalPositions[s].getZ()/nsteps;
-				avglx = avglx + localPositions[s].getX() /nsteps;
-				avgly = avgly + localPositions[s].getY() /nsteps;
-				avglz = avglz + localPositions[s].getZ() /nsteps;
+				avgx  += globalPositions[s].getX()/nsteps;
+				avgy  += globalPositions[s].getY()/nsteps;
+				avgz  += globalPositions[s].getZ()/nsteps;
+				avglx += localPositions[s].getX() /nsteps;
+				avgly += localPositions[s].getY() /nsteps;
+				avglz += localPositions[s].getZ() /nsteps;
 			}
 		}
 		avgGlobalPosition = G4ThreeVector(avgx,  avgy,  avgz);
@@ -104,14 +105,14 @@ G4ThreeVector GHit::getAvgGlobaPosition() {
 		auto nsteps = edeps.size();
 		for ( auto s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
-				avgx  = avgx  + globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
-				avgy  = avgy  + globalPositions[s].getY()*edeps[s]/totalEnergyDeposited;
-				avgz  = avgz  + globalPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
+				avgx  += globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
+				avgy  += globalPositions[s].getY()*edeps[s]/totalEnergyDeposited;
+				avgz  += globalPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
 			} else {
 				averageTime += times[s]/nsteps;
-				avgx  = avgx  + globalPositions[s].getX()/nsteps;
-				avgy  = avgy  + globalPositions[s].getY()/nsteps;
-				avgz  = avgz  + globalPositions[s].getZ()/nsteps;
+				avgx  += globalPositions[s].getX()/nsteps;
+				avgy  += globalPositions[s].getY()/nsteps;
+				avgz  += globalPositions[s].getZ()/nsteps;
 			}
 		}
 		avgGlobalPosition = G4ThreeVector(avgx,  avgy,  avgz);
@@ -129,19 +130,19 @@ G4ThreeVector GHit::getAvgLocalPosition() {
 		}
 
 
-		float  avgx = 0,  avgy = 0,  avgz = 0;
+		float  avgx = 0, avgy = 0, avgz = 0;
 
 		auto nsteps = edeps.size();
 		for ( auto s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
-				avgx  = avgx  + localPositions[s].getX()*edeps[s]/totalEnergyDeposited;
-				avgy  = avgy  + localPositions[s].getY()*edeps[s]/totalEnergyDeposited;
-				avgz  = avgz  + localPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
+				avgx  += localPositions[s].getX()*edeps[s]/totalEnergyDeposited;
+				avgy  += localPositions[s].getY()*edeps[s]/totalEnergyDeposited;
+				avgz  += localPositions[s].getZ()*edeps[s]/totalEnergyDeposited;
 			} else {
 				averageTime += times[s]/nsteps;
-				avgx  = avgx  + localPositions[s].getX()/nsteps;
-				avgy  = avgy  + localPositions[s].getY()/nsteps;
-				avgz  = avgz  + localPositions[s].getZ()/nsteps;
+				avgx  += localPositions[s].getX()/nsteps;
+				avgy  += localPositions[s].getY()/nsteps;
+				avgz  += localPositions[s].getZ()/nsteps;
 			}
 		}
 		avgLocalPosition = G4ThreeVector(avgx,  avgy,  avgz);

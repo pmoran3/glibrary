@@ -58,12 +58,6 @@ private:
 	G4ThreeVector avgGlobalPosition;
 	G4ThreeVector avgLocalPosition;
 
-	// for streaming purposes
-	// Initialized to UNINITIALIZEDNUMBERQUANTITY. Set with updateGTouchableWithPayload
-	// retrieved with methods below
-	float chargeAtElectronics;
-	float timeAtElectronics;
-
 	// build hit information based on the bit index and the touchable
 	bool addHitInfosForBitIndex(size_t bitIndex, const bool test, const G4Step* thisStep);
 
@@ -84,9 +78,7 @@ public:
 	// gemc api
 	// build hit information based on the G4Step
 	void addHitInfosForBitset(const HitBitSet hbs, const G4Step* thisStep);
-	void setQandTimeAtElectronics(float t, int q);
 
-	inline void setHAddress(int c, int s, int ch) {gtouchable->setHAddress(c, s, ch);}
 	inline const GTouchable*         getGTouchable()         const { return gtouchable; }
 	inline const vector<GIdentifier> getGID()                const { return gtouchable->getIdentity(); }
 	inline const vector<double>      getDetectorDimensions() const { return gtouchable->getDetectorDimensions(); }

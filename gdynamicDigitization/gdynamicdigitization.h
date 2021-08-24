@@ -51,7 +51,7 @@ public:
 	// - timeAtElectronics
 	// and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
 	// this will exit with error if the TT is not defined, or if
-	void chargeAndTimeAtHardware(GHit *ghit, float time, int q);
+	void chargeAndTimeAtHardware(float time, int q, GHit *ghit, GDigitizedData *gdata);
 
 	// mandatory initialization of readout specs
 	virtual bool defineReadoutSpecs() = 0;
