@@ -69,7 +69,6 @@ namespace gstreamer {
 			jsonOutputType
 		};
 
-
 		vector<string> help;
 		help.push_back("Define a Output format and name");
 		help.push_back("");

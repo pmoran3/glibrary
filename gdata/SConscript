@@ -11,7 +11,7 @@ sources = [
 			  'event/gDataCollection.cc',
 			  'event/gEventDataCollectionHeader.cc',
 			  'event/gEventDataCollection.cc',
-#			  'frame/gIntegralPayload.cc',
+			  'frame/gIntegralPayload.cc',
 #			  'frame/gFrameDataCollectionHeader.cc',
 			  'frame/gFrameDataCollection.cc'
 			  ]

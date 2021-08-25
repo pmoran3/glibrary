@@ -1,7 +1,6 @@
 // gstreamer
 #include "gstreamerTEXTFactory.h"
 
-
 bool GstreamerTextFactory::publishEventTrueInfoData(string detectorName, const vector<GTrueInfoData*>* trueInfoData) {
 
 	if(ofile == nullptr) return false;

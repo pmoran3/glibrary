@@ -28,6 +28,8 @@ public:
 		}
 	}
 
+	vector<int> getPayload();
+
 private:
 	int verbosity;
 

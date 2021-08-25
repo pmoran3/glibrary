@@ -36,10 +36,9 @@ map<string, bool> GStreamer::publishFrameRunData(GOptions *gopts, GFrameDataColl
 	map<string, bool> gstreamReport;
 
 	gstreamReport["Frame Stream report #1 <startStream>: "] = startStream();
-
-	gstreamReport["Frame Stream report #2 <startStream>: "] = publishStream(frameRunData);
-
-	gstreamReport["Frame Stream report #3 <endStream>: "] = endStream();
+	gstreamReport["Frame Stream report #2 <frameHeader>: "] = publishFrameHeader(frameRunData->getHeader());
+	gstreamReport["Frame Stream report #3 <payload>: "]     = publishPayload(frameRunData->getIntegralPayload());
+	gstreamReport["Frame Stream report #3 <endStream>: "]   = endStream();
 
 
 

@@ -17,6 +17,7 @@ private:
 	bool openConnection();
 	bool closeConnection();
 
+	// event streams
 	// start and end each event
 	bool startEvent();
 	bool endEvent();
@@ -27,6 +28,12 @@ private:
 	// vector index is hit number
 	bool publishEventTrueInfoData( string detectorName, const vector<GTrueInfoData*>*  trueInfoData);
 	bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData);
+
+	// frame streams
+	bool startStream();
+	bool endStream();
+	bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader);
+	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
 
 private:

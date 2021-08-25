@@ -36,9 +36,12 @@ public:
 	// getters
 	// we want to crash if the pointers do not exist
 	GFrameDataCollectionHeader *getHeader() {return gheader;}
+
+	// integral payload: integrated quantity
 	void addIntegralPayload(vector<int> payload, int verbosity);
 	vector<GIntegralPayload*> const *getIntegralPayload() const {return integralPayload;}
 
+	inline long int const getFrameID() const { return gheader->getFrameID(); }
 
 private:
 	int verbosity;

@@ -2,7 +2,6 @@
 from init_env import init_environment
 import os
 
-
 if os.environ.get('ROOTSYS') is not None:
 	ROOTSYS = os.environ['ROOTSYS']
 else:
@@ -13,13 +12,18 @@ if os.path.exists(ROOTSYS):
 else:
 	Import('env')
 
+env.Append(CPPPATH = [Dir('factories/TEXT')] )
+
 txtSources = [
 				  'factories/TEXT/gstreamerTEXTFactory.cc',
 				  'factories/TEXT/gstreamerTEXTConnection.cc',
 				  'factories/TEXT/event/event.cc',
 				  'factories/TEXT/event/eventHeader.cc',
 				  'factories/TEXT/event/publishTrueInfo.cc',
-				  'factories/TEXT/event/publishDigitized.cc'
+				  'factories/TEXT/event/publishDigitized.cc',
+				  'factories/TEXT/stream/stream.cc',
+				  'factories/TEXT/stream/eventHeader.cc',
+				  'factories/TEXT/stream/publishPayload.cc'
 				  ]
 
 # standard pre and suffix for gemc plugins

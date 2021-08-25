@@ -30,10 +30,13 @@ public:
 	map<string, bool> publishFrameRunData(GOptions *gopts, GFrameDataCollection* frameRunData);
 
 	void setOutputName(string output) {outputFileName = output;}
+	void setStreamType(string stype)  {streamType = stype;}
+	inline string const getStreamType() const {return streamType;}
 
 protected:
 
 	string outputFileName = UNINITIALIZEDSTRINGQUANTITY;
+	string streamType     = UNINITIALIZEDSTRINGQUANTITY;
 
 	// event virtual methods called by publishRunData, in order
 	// --------------------------------------------------------
@@ -48,7 +51,8 @@ protected:
 	// stream virtual methods
 	virtual bool startStream() { return false;}
 	virtual bool endStream()   { return false;}
-	virtual bool publishStream(GFrameDataCollection *frameRunData) { return false;}
+	virtual bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) { return false;}
+	virtual bool publishPayload(const vector<GIntegralPayload*> *payload)           { return false;}
 
 
 public:
