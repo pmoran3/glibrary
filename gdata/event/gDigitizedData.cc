@@ -13,7 +13,6 @@ map<string, int> const GDigitizedData::getIntObservablesMap(int which) const {
 	map<string, int> filteredIntObservablesMap;
 
 	for ( auto [varName, value]: intObservablesMap) {
-		cout << " ASD i" << varName << " " << validVarName(varName, which) << endl;
 		if ( validVarName(varName, which) ) {
 			filteredIntObservablesMap[varName] = value;
 		}
@@ -26,7 +25,6 @@ map<string, float> const GDigitizedData::getFltObservablesMap(int which) const {
 
 
 	for ( auto [varName, value]: fltObservablesMap) {
-		cout << " ASD f" << varName << " " << validVarName(varName, which) << endl;
 		if ( validVarName(varName, which) ) {
 			filteredFltObservablesMap[varName] = value;
 		}

@@ -18,4 +18,3 @@ sources = [
 
 # destination library is one dir up - relative to this SConscript
 lib = env.Library(source = sources, target='../lib/gdata')
-Depends(lib, '../lib/libguts.a')

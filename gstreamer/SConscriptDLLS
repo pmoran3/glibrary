@@ -26,8 +26,10 @@ txtSources = [
 env.Replace(SHLIBSUFFIX = ".gplugin")
 env.Replace(SHLIBPREFIX = "")
 
+# notice: these two libraries needs to be added explicitly, with also the dependency below,
+# as the env scanner may run at a time where the libraries are not built yet
+env.Append(LIBS = ['gdata', 'guts'])
+
 # destination library is one dir up - relative to this SConscript
 txt_dll = env.SharedLibrary(source = txtSources, target='../lib/gstreamerTEXTFactory')
-Depends(txt_dll, '../lib/libgstreamer.a')
 Depends(txt_dll, '../lib/libgdata.a')
-Depends(txt_dll, '../lib/libguts.a')
