@@ -3,6 +3,7 @@
 
 // glibrary
 #include "event/gEventDataCollection.h"
+#include "frame/gFrameDataCollection.h"
 #include "gfactory.h"
 #include "goptions.h"
 
@@ -20,7 +21,13 @@ public:
 
 	// called in GRunAction::EndOfRunAction
 	// runs the protected virtual methods below to write events from a run to file
-	map<string, bool> publishRunData(GOptions *gopts, vector<GEventDataCollection*> runData);
+	// the key is the routine name + sensitive detector name
+	map<string, bool> publishEventRunData(GOptions *gopts, vector<GEventDataCollection*> runData);
+
+	// called in GRunAction::EndOfRunAction
+	// runs the protected virtual methods below to write frames from a run to file
+	// the key is the routine name + frame streamer id
+	map<string, bool> publishFrameRunData(GOptions *gopts, GFrameDataCollection* frameRunData);
 
 	void setOutputName(string output) {outputFileName = output;}
 
@@ -29,6 +36,8 @@ protected:
 	string outputFileName = UNINITIALIZEDSTRINGQUANTITY;
 
 	// event virtual methods called by publishRunData, in order
+	// --------------------------------------------------------
+	
 	virtual bool startEvent() { return false;}
 	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
@@ -36,11 +45,10 @@ protected:
 	virtual bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData) { return false;}
 	virtual bool endEvent()   { return false;}
 
-
 	// stream virtual methods
-//	virtual bool startStream() { return false;}
-//	virtual bool endStream()   { return false;}
-//	virtual bool publishStream(GEventData *eventData) { return false;}
+	virtual bool startStream() { return false;}
+	virtual bool endStream()   { return false;}
+	virtual bool publishStream(GFrameDataCollection *frameRunData) { return false;}
 
 
 public:

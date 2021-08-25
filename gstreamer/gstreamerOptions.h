@@ -9,6 +9,7 @@ namespace gstreamer {
 	struct JOutput {
 		string format;
 		string name;
+		string type;
 	};
 
 	void from_json(const json& j, JOutput& det);

@@ -16,10 +16,10 @@ else:
 txtSources = [
 				  'factories/TEXT/gstreamerTEXTFactory.cc',
 				  'factories/TEXT/gstreamerTEXTConnection.cc',
-				  'factories/TEXT/gstreamerTEXTEvent.cc',
-				  'factories/TEXT/gstreamerTEXTEventHeader.cc',
-				  'factories/TEXT/gstreamerTEXTPublishTrueInfo.cc',
-				  'factories/TEXT/gstreamerTEXTPublishDigitized.cc'
+				  'factories/TEXT/event/event.cc',
+				  'factories/TEXT/event/eventHeader.cc',
+				  'factories/TEXT/event/publishTrueInfo.cc',
+				  'factories/TEXT/event/publishDigitized.cc'
 				  ]
 
 # standard pre and suffix for gemc plugins

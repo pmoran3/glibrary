@@ -3,8 +3,7 @@
 
 
 // pragma todo: pass someting like map<string, bitset> to each detector to decide which data to publish
-// TODO: stream
-map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCollection*> runData) {
+map<string, bool> GStreamer::publishEventRunData(GOptions *gopts, vector<GEventDataCollection*> runData) {
 
 	map<string, bool> gstreamReport;
 
@@ -13,20 +12,37 @@ map<string, bool> GStreamer::publishRunData(GOptions *gopts, vector<GEventDataCo
 	// looping over events
 	for(auto eventDataCollection: runData) {
 
-		gstreamReport["Stream report #1 <startEvent>: "] = startEvent();
-		gstreamReport["Stream report #2 <header>: "]     = publishEventHeader(eventDataCollection->getHeader());
+		gstreamReport["Event Stream report #1 <startEvent>: "] = startEvent();
+		gstreamReport["Event Stream report #2 <header>: "]     = publishEventHeader(eventDataCollection->getHeader());
 
 		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollection() ) {
 			// publish true info
-			string reportName = "Stream report #3 <" + detectorName + "__TrueInfo>: ";
+			string reportName = "Event Stream report #3 <" + detectorName + "__TrueInfo>: ";
 			gstreamReport[reportName] = publishEventTrueInfoData(detectorName, gDataCollection->getTrueInfoData());
 
 			// publish digitized data
-			reportName = "Stream report #4: <" +  detectorName + "__Digitized>: ";
+			reportName = "Event Stream report #4: <" +  detectorName + "__Digitized>: ";
 			gstreamReport[reportName] = publishEventDigitizedData(detectorName, gDataCollection->getDigitizedData());
 		}
-		gstreamReport["Stream report #5 <endEvent>: "] = endEvent();
+		gstreamReport["Event Stream report #5 <endEvent>: "] = endEvent();
 	}
 
 	return gstreamReport;
 }
+
+
+// stream an individual frame
+map<string, bool> GStreamer::publishFrameRunData(GOptions *gopts, GFrameDataCollection* frameRunData) {
+	map<string, bool> gstreamReport;
+
+	gstreamReport["Frame Stream report #1 <startStream>: "] = startStream();
+
+	gstreamReport["Frame Stream report #2 <startStream>: "] = publishStream(frameRunData);
+
+	gstreamReport["Frame Stream report #3 <endStream>: "] = endStream();
+
+
+
+	return gstreamReport;
+}
+

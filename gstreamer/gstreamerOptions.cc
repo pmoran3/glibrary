@@ -9,6 +9,7 @@ namespace gstreamer {
 	void from_json(const json& j, JOutput& output) {
 		j.at("format").get_to(output.format);
 		j.at("name").get_to(output.name);
+		j.at("type").get_to(output.type);
 	}
 
 	// method to return a vector of GDetectors from a structured option
@@ -31,8 +32,6 @@ namespace gstreamer {
 		
 		return "gstreamer" + factory + "Factory";
 	}
-
-
 
 	// returns array of options definitions
 	vector<GOption> defineOptions() {
@@ -58,21 +57,32 @@ namespace gstreamer {
 			{GDESC, "Output file name"},
 			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
 		};
+		json jsonOutputType = {
+			{GNAME, "type"},
+			{GDESC, "Output type"},
+			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
+		};
 
 		json jsonOutput = {
 			jsonOutputFormat,
-			jsonOutputName
+			jsonOutputName,
+			jsonOutputType
 		};
 
 
 		vector<string> help;
 		help.push_back("Define a Output format and name");
 		help.push_back("");
-		help.push_back("Example: +output={format: TEXT; name: output.txt; }");
+		help.push_back("Example: +output={format: TEXT; name: output.txt; type: event; }");
 		help.push_back("");
 		help.push_back("Current available formats:");
 		help.push_back("");
 		help.push_back(" - TEXT");
+		help.push_back("");
+		help.push_back("Output types");
+		help.push_back("");
+		help.push_back(" - event: write events");
+		help.push_back(" - stream: write frame stream");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("goutput", "Output format and name", jsonOutput, help, true));
