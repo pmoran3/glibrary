@@ -152,8 +152,6 @@ int EventDispenser::processEvents()
 		//g4uim->ApplyCommand("/run/initialize");
 		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
 
-
-
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			cout << EVENTDISPENSERLOGMSGITEM << " Run Number ∙" << runNumber << "∙ done with " << nevents << " events." << endl << endl;
 		}

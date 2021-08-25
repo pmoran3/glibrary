@@ -19,7 +19,7 @@ lib = SConscript('SConscript', exports='env')
 env.Append(LIBS = 'gdata')
 
 # builds the example
-example = env.Program(source = 'example.cc', target = 'example')
+#example = env.Program(source = 'example.cc', target = 'example')
 
 # example(s) depend on the library existance
-Depends(example,  lib);
+#Depends(example,  lib);

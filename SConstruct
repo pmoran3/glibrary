@@ -20,7 +20,13 @@ g4display            = SConscript('g4display/SConscript',            exports='en
 gdynamicDigitization = SConscript('gdynamicDigitization/SConscript', exports='env')
 gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='env')
 
-
 # output plugins
 gstreamerDLLS = SConscript('gstreamer/SConscriptDLLS', exports='env')
-Requires(gstreamerDLLS, gdata)
+
+Depends(gstreamerDLLS, gdata)
+
+# to make the depends/requires directives work, the individual
+# SConscript must contain these two lines as opposed to
+# the single line containing target='../lib/textProgressBar'
+# lib = env.Library(source = sources, target='textProgressBar')
+# env.Install('../lib', lib)

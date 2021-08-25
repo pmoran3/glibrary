@@ -7,4 +7,5 @@ sources = [
 			  ]
 
 # destination library is one dir up - relative to this SConscript
-lib = env.Library(source = sources, target = "../lib/gdynamic")
+lib = env.Library(source = sources, target='gdynamic')
+env.Install('../lib', lib)
