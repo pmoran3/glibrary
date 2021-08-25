@@ -3,6 +3,7 @@
 
 // exit codes: 600s
 #define EC__GSDETECTORNOTFOUND  601
+#define EC__VARIABLENOTFOUND    602
 
 #define GDATALOGITEM " ℹ︎"
 

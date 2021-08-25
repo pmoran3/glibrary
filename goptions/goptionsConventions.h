@@ -9,7 +9,6 @@
 #define GDESC          "JsonTagGDESCription"
 #define GDFLT          "jsonTagDefault"
 #define NODFLT         "NODFLT"
-#define GNOTAPPLICABLE "na"
 
 #define IMPORTJCARD "import jcard"
 

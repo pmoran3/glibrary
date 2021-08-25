@@ -188,7 +188,8 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		else if( units == "gauss")     answer *= gauss;
 		else if( units == "kilogauss") answer *= gauss*1000;
 		else if( units == "ns")        answer *= ns;
-		else if( units == "na")        answer *= 1;
+		else if( units == "ms")        answer *= ms;
+		else if( units == "us")        answer *= us;
 		else if( units == "counts")    answer *= 1;
 		else cerr << GWARNING << ">" << units << "<: unit not recognized for string <" << v << ">" << endl;
 		return answer;

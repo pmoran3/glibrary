@@ -1,9 +1,11 @@
 #ifndef  GOPTIONS_H
 #define  GOPTIONS_H  1
 
-
 // conventions
 #include "goptionsConventions.h"
+
+// glibrary
+#include "gutsConventions.h"
 
 // json parser
 #include "json.hpp"
@@ -78,7 +80,7 @@ public:
 	 * \param help the full description of the option. Multiple lines are separated by \"\n\".
 	 * \param cumulative if an option belongs to a group, options can be collected by using -add-\<name\>.\n
 	 */
-	GOption(string name, string description, json joptionDefinition, vector<string> help = {"na"}, bool cumulative = false);
+	GOption(string name, string description, json joptionDefinition, vector<string> help = {UNINITIALIZEDSTRINGQUANTITY}, bool cumulative = false);
 
 
 private:

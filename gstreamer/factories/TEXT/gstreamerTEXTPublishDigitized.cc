@@ -18,10 +18,11 @@ bool GstreamerTextFactory::publishEventDigitizedData(string detectorName, const 
 
 		*ofile << GTABTAB << "Hit address: " << identifierString << " {" << endl;
 
-		for ( auto [variableName, value]: dgtzHit->getIntObservablesMap() ) {
+		// argument passed to getter: 0 = do not get sro vars
+		for ( auto [variableName, value]: dgtzHit->getIntObservablesMap(0)  ) {
 			*ofile << GTABTABTAB << variableName << ": " << value << endl;
 		}
-		for ( auto [variableName, value]: dgtzHit->getFltObservablesMap() ) {
+		for ( auto [variableName, value]: dgtzHit->getFltObservablesMap(0) ) {
 			*ofile << GTABTABTAB << variableName << ": " << value << endl;
 		}
 

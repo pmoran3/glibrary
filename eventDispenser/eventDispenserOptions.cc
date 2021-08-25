@@ -35,7 +35,7 @@ namespace eventDispenser {
 		json jsonRunWeights = {
 			{GNAME, "runWeightsFile"},
 			{GDESC, whelp},
-			{GDFLT, "na"}
+			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
 		};
 		goptions.push_back(GOption(jsonRunWeights));
 

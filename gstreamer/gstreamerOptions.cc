@@ -51,12 +51,12 @@ namespace gstreamer {
 		json jsonOutputFormat = {
 			{GNAME, "format"},
 			{GDESC, "Output file format"},
-			{GDFLT, "na"}
+			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
 		};
 		json jsonOutputName = {
 			{GNAME, "name"},
 			{GDESC, "Output file name"},
-			{GDFLT, "na"}
+			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
 		};
 
 		json jsonOutput = {

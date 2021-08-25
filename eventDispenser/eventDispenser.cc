@@ -30,7 +30,7 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	// no filename
 	// run number from options
 	// number of events from options
-	if(filename == "na" && neventsToProcess > 0 ) {
+	if(filename == UNINITIALIZEDSTRINGQUANTITY && neventsToProcess > 0 ) {
 		// only one run, defined in the option
 		runEvents[userRunno] = neventsToProcess;
 		return;

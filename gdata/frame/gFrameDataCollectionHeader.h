@@ -30,6 +30,8 @@ public:
 		}
 	}
 
+	inline long int const getFrameID() const { return frameID; }
+
 private:
 
 	long int frameID;

@@ -26,7 +26,7 @@ public:
 
 protected:
 
-	string outputFileName = "na";
+	string outputFileName = UNINITIALIZEDSTRINGQUANTITY;
 
 	// event virtual methods called by publishRunData, in order
 	virtual bool startEvent() { return false;}

@@ -121,7 +121,7 @@ string GOptions::findBaseJCard(int argc, char *argv[])
 		size_t pos = arg.find(".jcard");
 		if(pos != string::npos) return arg;
 	}
-	return "na";
+	return UNINITIALIZEDSTRINGQUANTITY;
 }
 
 
@@ -131,7 +131,7 @@ vector<json> GOptions::getUserJsonsFromJCard(string jcardFilename)
 	vector<json> userJsons;
 
 	// nothing happens if jcard wasn't found
-	if (jcardFilename == "na") {
+	if (jcardFilename == UNINITIALIZEDSTRINGQUANTITY) {
 		return userJsons;
 	}
 

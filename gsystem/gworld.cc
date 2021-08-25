@@ -169,7 +169,7 @@ vector<string> GWorld::getSensitiveDetectorsList() {
 	for (auto& system: *gsystemsMap) {
 		for (auto &gvolume: *system.second->getGVolumesMap()) {
 			string digitization = gvolume.second->getDigitization();
-			if ( digitization != GSYSTEMNOTAPPLICABLEENTRY) {
+			if ( digitization != UNINITIALIZEDSTRINGQUANTITY) {
 				snames.push_back(digitization);
 			}
 		}

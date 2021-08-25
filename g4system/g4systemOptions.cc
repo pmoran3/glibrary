@@ -21,7 +21,7 @@ namespace g4system {
 		json jsonVolumeLogVerbosity = {
 			{GNAME, "logVolume"},
 			{GDESC, "log all information for volume"},
-			{GDFLT, "na"}
+			{GDFLT, UNINITIALIZEDSTRINGQUANTITY}
 		};
 		goptions.push_back(GOption(jsonVolumeLogVerbosity));
 

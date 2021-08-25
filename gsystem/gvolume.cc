@@ -44,8 +44,8 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		description  = trimSpacesFromString(pars[i++]);
 
 		// modifiers - accessed through options/jcard
-		shift = GSYSTEMNOTAPPLICABLEENTRY;
-		tilt  = GSYSTEMNOTAPPLICABLEENTRY;
+		shift = UNINITIALIZEDSTRINGQUANTITY;
+		tilt  = UNINITIALIZEDSTRINGQUANTITY;
 
 		// set file with path if it's a CAD/GDML import
 		importFilename = importPath;
@@ -101,24 +101,24 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	material     = rootDefinitions.back();
 	pos          = DEFAULTPOSITION;
 	rot          = DEFAULTROTATION;
-	emfield      = GSYSTEMNOTAPPLICABLEENTRY;
+	emfield      = UNINITIALIZEDSTRINGQUANTITY;
 	visible      = false;
 	style        = 0; // wireframe
 	color        = "ccffff";
-	digitization = GSYSTEMNOTAPPLICABLEENTRY;
-	gidentity    = GSYSTEMNOTAPPLICABLEENTRY;
-	copyOf       = GSYSTEMNOTAPPLICABLEENTRY;
-	replicaOf    = GSYSTEMNOTAPPLICABLEENTRY;
-	solidsOpr    = GSYSTEMNOTAPPLICABLEENTRY;
-	mirror       = GSYSTEMNOTAPPLICABLEENTRY;
+	digitization = UNINITIALIZEDSTRINGQUANTITY;
+	gidentity    = UNINITIALIZEDSTRINGQUANTITY;
+	copyOf       = UNINITIALIZEDSTRINGQUANTITY;
+	replicaOf    = UNINITIALIZEDSTRINGQUANTITY;
+	solidsOpr    = UNINITIALIZEDSTRINGQUANTITY;
+	mirror       = UNINITIALIZEDSTRINGQUANTITY;
 	exist        = 1;
 
 	description  = "root volume";
 
 
 	// modifiers - accessed through options/jcard
-	shift = GSYSTEMNOTAPPLICABLEENTRY;
-	tilt  = GSYSTEMNOTAPPLICABLEENTRY;
+	shift = UNINITIALIZEDSTRINGQUANTITY;
+	tilt  = UNINITIALIZEDSTRINGQUANTITY;
 
 	// set file with path if it's a CAD/GDML import
 	importFilename = "none";

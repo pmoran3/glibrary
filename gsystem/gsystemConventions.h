@@ -12,7 +12,6 @@
 #define EC__GSETUPFILENOTOFOUND    203
 #define EC__GVOLUMENOTFOUND        204
 
-#define GSYSTEMNOTAPPLICABLEENTRY  "na"
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GWORLDNAME                 "world"
 #define NOMODIFIER                 "noModifier"

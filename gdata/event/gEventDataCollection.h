@@ -44,6 +44,7 @@ public:
 	// we want to crash if the pointers do not exist
 	GEventDataCollectionHeader *getHeader() {return gheader;}
 	map<string, GDataCollection*> *getDataCollection() {return gdataCollection;}
+	inline int const getEventNumber() const { return gheader->getG4LocalEvn(); }
 
 private:
 	int verbosity;
