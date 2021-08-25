@@ -35,7 +35,7 @@ public:
 	map<string, float> const getFltObservablesMap(int which) const;
 
 	int getIntObservable(string varName);
-	float getflotObservable(string varName);
+	float getFltObservable(string varName);
 
 	inline map<string, vector<int>>   getArrayIntObservablesMap() const {return arrayIntObservablesMap;}
 	inline map<string, vector<float>> getArrayFltObservablesMap() const {return arrayFltObservablesMap;}

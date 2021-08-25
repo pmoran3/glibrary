@@ -23,10 +23,4 @@ gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='en
 # output plugins
 gstreamerDLLS = SConscript('gstreamer/SConscriptDLLS', exports='env')
 
-Depends(gstreamerDLLS, gdata)
 
-# to make the depends/requires directives work, the individual
-# SConscript must contain these two lines as opposed to
-# the single line containing target='../lib/textProgressBar'
-# lib = env.Library(source = sources, target='textProgressBar')
-# env.Install('../lib', lib)

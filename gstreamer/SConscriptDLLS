@@ -27,5 +27,7 @@ env.Replace(SHLIBSUFFIX = ".gplugin")
 env.Replace(SHLIBPREFIX = "")
 
 # destination library is one dir up - relative to this SConscript
-txt_dll = env.Library(source = txtSources, target='gstreamerTEXTFactory')
-env.Install('../lib', txt_dll)
+txt_dll = env.SharedLibrary(source = txtSources, target='../lib/gstreamerTEXTFactory')
+Depends(txt_dll, '../lib/libgstreamer.a')
+Depends(txt_dll, '../lib/libgdata.a')
+Depends(txt_dll, '../lib/libguts.a')

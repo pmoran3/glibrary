@@ -16,7 +16,7 @@ public:
 	// construct event data using a GEventHeader
 	GEventDataCollection(GEventDataCollectionHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
 		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogClassConstruct("GEventData");
+			gLogClassConstruct("GEventDataCollection");
 		}
 		gdataCollection = new map<string, GDataCollection*>();
 	}
@@ -24,7 +24,7 @@ public:
 	~GEventDataCollection() {
 
 		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogDestruct("GEventData");
+			gLogDestruct("GEventDataCollection");
 		}
 
 		// PRAGMA TODO: what do delete here?

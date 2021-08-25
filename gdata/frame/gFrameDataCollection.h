@@ -16,15 +16,15 @@ public:
 	// construct event data using a GEventHeader
 	GFrameDataCollection(GFrameDataCollectionHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
 		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogClassConstruct("GEventData");
+			gLogClassConstruct("GFrameDataCollection");
 		}
-		integralPayload = new vector<GIntegralPayload>();
+		integralPayload = new vector<GIntegralPayload*>();
 	}
 
 	~GFrameDataCollection() {
 
 		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogDestruct("GEventData");
+			gLogDestruct("GFrameDataCollection");
 		}
 
 		delete gheader;
@@ -36,14 +36,16 @@ public:
 	// getters
 	// we want to crash if the pointers do not exist
 	GFrameDataCollectionHeader *getHeader() {return gheader;}
-	vector<GIntegralPayload> *getIntegralPayload() {return integralPayload;}
+	void addIntegralPayload(vector<int> payload, int verbosity);
+	vector<GIntegralPayload*> const *getIntegralPayload() const {return integralPayload;}
+
 
 private:
 	int verbosity;
 
 	GFrameDataCollectionHeader *gheader = nullptr;
 
-	vector<GIntegralPayload> *integralPayload;
+	vector<GIntegralPayload*> *integralPayload;
 
 
 };

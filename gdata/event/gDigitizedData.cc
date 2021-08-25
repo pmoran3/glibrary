@@ -13,7 +13,8 @@ map<string, int> const GDigitizedData::getIntObservablesMap(int which) const {
 	map<string, int> filteredIntObservablesMap;
 
 	for ( auto [varName, value]: intObservablesMap) {
-		if (validVarName(varName, which) ) {
+		cout << " ASD i" << varName << " " << validVarName(varName, which) << endl;
+		if ( validVarName(varName, which) ) {
 			filteredIntObservablesMap[varName] = value;
 		}
 	}
@@ -23,7 +24,9 @@ map<string, int> const GDigitizedData::getIntObservablesMap(int which) const {
 map<string, float> const GDigitizedData::getFltObservablesMap(int which) const {
 	map<string, float> filteredFltObservablesMap;
 
+
 	for ( auto [varName, value]: fltObservablesMap) {
+		cout << " ASD f" << varName << " " << validVarName(varName, which) << endl;
 		if ( validVarName(varName, which) ) {
 			filteredFltObservablesMap[varName] = value;
 		}
@@ -39,11 +42,11 @@ bool const GDigitizedData::validVarName(string varName, int which) const {
 	bool isSROVar = (varName == CRATESTRINGID || varName == SLOTSTRINGID || varName == CHANNELSTRINGID || varName == CHARGEATELECTRONICS || varName == TIMEATELECTRONICS);
 
 	if ( which == 0 ) {
-		if (isSROVar) {
+		if ( isSROVar ) {
 			return false;
 		}
 	} else if ( which == 1 ) {
-		if (!isSROVar) {
+		if ( !isSROVar ) {
 			return false;
 		}
 	}
@@ -72,7 +75,7 @@ int GDigitizedData::getIntObservable(string varName) {
 
 }
 
-float GDigitizedData::getflotObservable(string varName) {
+float GDigitizedData::getFltObservable(string varName) {
 	if ( fltObservablesMap.find(varName) == fltObservablesMap.end() ) {
 		cerr << FATALERRORL << "variable name <" << varName << "> not found in GDigitizedData::fltObservablesMap" << endl;
 		gexit(EC__VARIABLENOTFOUND);
