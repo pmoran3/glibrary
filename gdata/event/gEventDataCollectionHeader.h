@@ -48,7 +48,7 @@ public:
 	}
 
 private:
-	int g4localEventNumber;
+	int g4localEventNumber;  // G4Run-local 
 	int threadID;
 	int verbosity;
 
