@@ -30,8 +30,6 @@ detectorDimenions(dimensions) {
 	for ( auto& gid: identity) {
 		vector<string> identifier = gutilities::getStringVectorFromStringWithDelimiter(gid, ":");
 
-		//		cout << " ASD " << gid << endl;
-
 		string idName  = identifier[0];
 		int idValue = stoi(identifier[1]);
 

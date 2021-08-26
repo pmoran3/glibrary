@@ -4,6 +4,7 @@
 // geant4
 #include "G4PVPlacement.hh"
 
+// TODO: print everything about this volume if verbosity
 G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
@@ -51,8 +52,6 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 	if(gopt->getInt("checkOverlaps") > 0) checkForOverlaps = true;
 
 	G4Volume *thisG4Volume = (*g4s)[vMapname];
-
-	//std::cout << " ASD " << thisG4Volume->getLogical()->GetMaterial() << std::endl;
 
 	if(thisG4Volume->getPhysical() == nullptr) {
 		thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),

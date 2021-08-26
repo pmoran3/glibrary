@@ -4,4 +4,7 @@
 // exit codes: 800s
 #define EC__GSTREAMERFACTORYNOTFOUND  801
 
+#define EVTLOGHEADER   " ⊳ "
+#define SROLOGHEADER   " ⊪ "
+
 #endif

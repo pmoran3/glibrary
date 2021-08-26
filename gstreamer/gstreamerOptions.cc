@@ -38,13 +38,20 @@ namespace gstreamer {
 
 		vector<GOption> goptions;
 
-
-		json jsonGStreamerVerbosity = {
-			{GNAME, "gstreamv"},
+		// two verbosities: one for events, one for streaming
+		json jsonGStreamerEventVerbosity = {
+			{GNAME, "geventstreamv"},
 			{GDESC, GVERBOSITY_DESCRIPTION},
-			{GDFLT, 1}
+			{GDFLT, 0}
 		};
-		goptions.push_back(GOption(jsonGStreamerVerbosity));
+		goptions.push_back(GOption(jsonGStreamerEventVerbosity));
+
+		json jsonGStreamerFrameVerbosity = {
+			{GNAME, "gframestreamv"},
+			{GDESC, GVERBOSITY_DESCRIPTION},
+			{GDFLT, 0}
+		};
+		goptions.push_back(GOption(jsonGStreamerFrameVerbosity));
 
 		// default material to use when a material is not found
 		json jsonOutputFormat = {

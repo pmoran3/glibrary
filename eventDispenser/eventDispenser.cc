@@ -144,8 +144,11 @@ int EventDispenser::processEvents()
 			if(verbosity >= GVERBOSITY_DETAILS) {
 				cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
 			}
-			digiRoutine->loadConstants(runNumber, variation);
-			digiRoutine->loadTT(runNumber, variation);
+			if ( runNumber != currentRunno ) {
+				digiRoutine->loadConstants(runNumber, variation);
+				digiRoutine->loadTT(runNumber, variation);
+				currentRunno = runNumber;
+			}
 		}
 
 		// I think we may need this here
