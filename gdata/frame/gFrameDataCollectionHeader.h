@@ -25,7 +25,7 @@ public:
 
 	~GFrameDataCollectionHeader() {
 		if ( verbosity >= GVERBOSITY_DETAILS) {
-			string log = "GEventHeader id " + to_string(frameID);
+			string log = "GFrameHeader id " + to_string(frameID);
 			gLogDestruct(log);
 		}
 	}
