@@ -23,7 +23,6 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 
 	neventsToProcess = gopt->getInt("n");
 
-
 	// nothing to do here
 	if(neventsToProcess == 0) return;
 
@@ -62,7 +61,13 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 			printRunsDetails(neventsToProcess);
 		}
 	}
+}
 
+// TODO: Get runno
+void EventDispenser::setNumberOfEvents(int nevts) {
+	int userRunno        = 1;
+	runEvents.clear();
+	runEvents[userRunno] = nevts;
 }
 
 

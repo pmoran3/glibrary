@@ -58,6 +58,8 @@ public:
 	// log on screen infos if enough verbosity
 	int processEvents();
 
+	void setNumberOfEvents(int nevts);
+
 
 };
 
