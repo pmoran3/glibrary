@@ -30,6 +30,7 @@ public:
 		}
 	}
 
+	// getters
 	inline long int const getFrameID() const { return frameID; }
 
 private:
@@ -39,8 +40,8 @@ private:
 	long int frameID;
 	float frameDuration;
 
-	// will be needed when writing it out
-	long int time_ns() const {return frameID*frameDuration;}
+	long int time_ns() const;
+
 };
 
 

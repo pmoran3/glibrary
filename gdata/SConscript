@@ -12,7 +12,7 @@ sources = [
 			  'event/gEventDataCollectionHeader.cc',
 			  'event/gEventDataCollection.cc',
 			  'frame/gIntegralPayload.cc',
-#			  'frame/gFrameDataCollectionHeader.cc',
+			  'frame/gFrameDataCollectionHeader.cc',
 			  'frame/gFrameDataCollection.cc'
 			  ]
 

@@ -28,19 +28,21 @@ public:
 		}
 
 		delete gheader;
+
+		for ( auto* payload: *integralPayload )  { delete payload; }
 		delete integralPayload;
 	}
 
 public:
 
-	// getters
-	// we want to crash if the pointers do not exist
-	GFrameDataCollectionHeader *getHeader() {return gheader;}
-
 	// integral payload: integrated quantity
 	void addIntegralPayload(vector<int> payload, int verbosity);
-	vector<GIntegralPayload*> const *getIntegralPayload() const {return integralPayload;}
+	void addEvent(int evn);
+	bool const shouldWriteFrame() const;
 
+	// getters
+	GFrameDataCollectionHeader *getHeader() {return gheader;}
+	vector<GIntegralPayload*> const *getIntegralPayload() const {return integralPayload;}
 	inline long int const getFrameID() const { return gheader->getFrameID(); }
 
 private:
