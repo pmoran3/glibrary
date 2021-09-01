@@ -43,6 +43,14 @@ private:
 
 private:
 	TFile *rootfile;
+
+	// return header tree from map. If not there, initialize it.
+	// done at startEvent
+	GRootTree* getOrInstantiateHeaderTree(GEventDataCollection* eventData);
+	GRootTree *getOrInstantiateDigitizedDataTree(string detectorName, GEventDataCollection* eventData);
+	GRootTree *getOrInstantiateTrueInfoDataTree(string detectorName,  GEventDataCollection* eventData);
+
+	// instantiated (and their variable maps) during the first event in startEvent
 	map<string, GRootTree*> *gRootTrees;
 
 };

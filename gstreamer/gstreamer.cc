@@ -15,7 +15,7 @@ map<string, bool> GStreamer::publishEventRunData(GOptions *gopts, vector<GEventD
 		gstreamReport["Event Stream report #1 <startEvent>: "] = startEvent(eventDataCollection);
 		gstreamReport["Event Stream report #2 <header>: "]     = publishEventHeader(eventDataCollection->getHeader());
 
-		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollection() ) {
+		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollectionMap() ) {
 			// publish true info
 			string reportName = "Event Stream report #3 <" + detectorName + "__TrueInfo>: ";
 			gstreamReport[reportName] = publishEventTrueInfoData(detectorName, gDataCollection->getTrueInfoData());

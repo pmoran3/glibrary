@@ -46,8 +46,8 @@ public:
 private:
 
 	// index is hit number
-	vector<GTrueInfoData*>  *trueInfosData;
-	vector<GDigitizedData*> *digitizedData;
+	vector<GTrueInfoData*>  *trueInfosData = nullptr;
+	vector<GDigitizedData*> *digitizedData = nullptr;
 
 };
 

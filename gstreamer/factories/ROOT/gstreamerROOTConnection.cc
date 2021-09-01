@@ -4,6 +4,8 @@
 bool GstreamerRootFactory::openConnection()
 {
 	rootfile = new TFile(string(outputFileName + ".root").c_str(), "RECREATE");
+	gRootTrees = new map<string, GRootTree*>;
+
 
 	// PRAGMA: need to check if file opened successfully
 	return true;
@@ -12,7 +14,6 @@ bool GstreamerRootFactory::openConnection()
 bool GstreamerRootFactory::closeConnection()
 {
 	rootfile->Write();
-
 	rootfile->Close();
 
 	delete rootfile;

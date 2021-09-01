@@ -5,10 +5,10 @@
 void GEventDataCollection::addDetectorTrueInfoData(string sdName, GTrueInfoData *data) {
 
 	// digitized data not found, creating it
-	if ( gdataCollection->find(sdName) == gdataCollection->end() ) {
-		(*gdataCollection)[sdName] = new GDataCollection();
+	if ( gdataCollectionMap->find(sdName) == gdataCollectionMap->end() ) {
+		(*gdataCollectionMap)[sdName] = new GDataCollection();
 	}
-	(*gdataCollection)[sdName]->addTrueInfoData(data);
+	(*gdataCollectionMap)[sdName]->addTrueInfoData(data);
 
 
 }
@@ -16,11 +16,30 @@ void GEventDataCollection::addDetectorTrueInfoData(string sdName, GTrueInfoData 
 void GEventDataCollection::addDetectorDigitizedData(string sdName, GDigitizedData *data) {
 
 	// digitized data not found, creating it
-	if ( gdataCollection->find(sdName) == gdataCollection->end() ) {
-		(*gdataCollection)[sdName] = new GDataCollection();
+	if ( gdataCollectionMap->find(sdName) == gdataCollectionMap->end() ) {
+		(*gdataCollectionMap)[sdName] = new GDataCollection();
 	}
-	(*gdataCollection)[sdName]->addDigitizedData(data);
+	(*gdataCollectionMap)[sdName]->addDigitizedData(data);
 
 
 }
 
+
+const vector<GTrueInfoData*>* GEventDataCollection::getTrueInfoDataForDetector(string detector) const {
+
+	if ( gdataCollectionMap->find(detector) != gdataCollectionMap->end() ) {
+		return (*gdataCollectionMap)[detector]->getTrueInfoData();
+	}
+
+	return nullptr;
+}
+
+
+const vector<GDigitizedData*>* GEventDataCollection::getDigitizedDataForDetector(string detector) const {
+
+	if ( gdataCollectionMap->find(detector) != gdataCollectionMap->end() ) {
+		return (*gdataCollectionMap)[detector]->getDigitizedData();
+	}
+
+	return nullptr;
+}

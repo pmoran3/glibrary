@@ -12,7 +12,7 @@ if os.path.exists(ROOTSYS):
 else:
 	Import('env')
 
-env.Append(CPPPATH = [Dir('factories/TEXT')] )
+env.Append(CPPPATH = [Dir('factories/TEXT'), Dir('factories/ROOT')] )
 
 txtSources = [
 				  'factories/TEXT/gstreamerTEXTFactory.cc',
@@ -29,7 +29,14 @@ txtSources = [
 rootSources = [
 				  'factories/ROOT/gRootTree.cc',
 				  'factories/ROOT/gstreamerROOTFactory.cc',
-				  'factories/ROOT/gstreamerROOTConnection.cc'
+				  'factories/ROOT/gstreamerROOTConnection.cc',
+				  'factories/ROOT/event/event.cc',
+				  'factories/ROOT/event/eventHeader.cc',
+				  'factories/ROOT/event/publishTrueInfo.cc',
+				  'factories/ROOT/event/publishDigitized.cc',
+				  'factories/ROOT/stream/stream.cc',
+				  'factories/ROOT/stream/eventHeader.cc',
+				  'factories/ROOT/stream/publishPayload.cc'
 				  ]
 
 

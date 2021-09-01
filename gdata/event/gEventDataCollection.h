@@ -18,7 +18,7 @@ public:
 		if ( verbosity >= GVERBOSITY_DETAILS) {
 			gLogClassConstruct("GEventDataCollection");
 		}
-		gdataCollection = new map<string, GDataCollection*>();
+		gdataCollectionMap = new map<string, GDataCollection*>();
 	}
 
 	~GEventDataCollection() {
@@ -28,11 +28,11 @@ public:
 		}
 
 		// PRAGMA TODO: what do delete here?
-		for (auto& [keys, values]: (*gdataCollection) ) {
+		for (auto& [keys, values]: (*gdataCollectionMap) ) {
 			delete values;
 		}
 		delete gheader;
-		delete gdataCollection;
+		delete gdataCollectionMap;
 	}
 
 public:
@@ -43,8 +43,11 @@ public:
 	// getters
 	// we want to crash if the pointers do not exist
 	GEventDataCollectionHeader *getHeader() {return gheader;}
-	map<string, GDataCollection*> *getDataCollection() {return gdataCollection;}
+	inline map<string, GDataCollection*> *getDataCollectionMap() {return gdataCollectionMap;}
 	inline int const getEventNumber() const { return gheader->getG4LocalEvn(); }
+
+	const vector<GTrueInfoData*>  *getTrueInfoDataForDetector(string detector) const;
+	const vector<GDigitizedData*> *getDigitizedDataForDetector(string detector) const;
 
 private:
 	int verbosity;
@@ -53,7 +56,7 @@ private:
 
 	// key is sensitive detector name
 	// each GDataCollection is a vector, indexed by hit number
-	map<string, GDataCollection*> *gdataCollection;
+	map<string, GDataCollection*> *gdataCollectionMap;
 
 
 };

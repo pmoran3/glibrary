@@ -10,33 +10,51 @@
 // glibrary
 #include "event/gEventDataCollection.h"
 
+#define TRUEINFONAMEPREFIX   "trueInfo_"
+#define DIGITIZEDNAMEPREFIX  "digitized_"
+
+#define EC__GSTREAMERROOTTREENOTFOUND   850
+
+#define HEADERTREENAME "header"
+
+#define HEADERTREENAMESUFFIX    "GEMC Root Event Header"
+#define TRUEINFOTREENAMESUFFIX  "True Info Data Root Tree"
+#define DIGITIZEDTREENAMESUFFIX "Digitized Data Root Tree"
 
 // connection between gdata and root
 class GRootTree
 {
 public:
-	// return header tree with initialzed leafs
+
+	// types of TTree
 	GRootTree(GEventDataCollectionHeader *gheader);
-
-	// return observables tree with initialzed leafs
-	GRootTree(string tName, GEventDataCollection* eventData);
-
-	bool initTreeForTheEvent();
+	GRootTree(string detectorName, GTrueInfoData* gdata);
+	GRootTree(string detectorName, GDigitizedData* gdata);
 
 	// filling trees
 	bool fillTree(GEventDataCollectionHeader *gheader);
-	bool fillTree(GEventDataCollection* eventData);
+	bool fillTree(GTrueInfoData* gdata);
+	bool fillTree(GDigitizedData* gdata);
 
+	// clear variables map below
+	bool initTreeForTheEvent();
 
 private:
-	TTree *rootTree;
+	TTree *rootTree = nullptr;
 
 	// variable maps
 	// index is hit number
-	map<string, vector<int>* >    intVars;
-	map<string, vector<float>* >  floatVars;
-	map<string, vector<double>* > doubleVars;
-	map<string, vector<string>* > stringVars;
+	map<string, vector<int>* >    intVarsMap;
+	map<string, vector<float>* >  floatVarsMap;
+	map<string, vector<double>* > doubleVarsMap;
+	map<string, vector<string>* > stringVarsMap;
+
+
+	// the second argument is needed to select the VarsMap type and its content
+	void registerVariable(string varname, int value);
+	void registerVariable(string varname, float value);
+	void registerVariable(string varname, double value);
+	void registerVariable(string varname, string value);
 
 };
 
