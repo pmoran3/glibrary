@@ -1,19 +1,22 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "gstreamerROOTFactory.h"
 
-bool GstreamerTextFactory::openConnection()
+bool GstreamerRootFactory::openConnection()
 {
-	ofile = new ofstream(outputFileName);
-	
+	rootfile = new TFile(string(outputFileName + ".root").c_str(), "RECREATE");
+
 	// PRAGMA: need to check if file opened successfully
 	return true;
 }
 
-bool GstreamerTextFactory::closeConnection()
+bool GstreamerRootFactory::closeConnection()
 {
-	ofile->close();
-	delete ofile;
+	rootfile->Write();
 
+	rootfile->Close();
+
+	delete rootfile;
+	delete gRootTrees;
 	
 	// PRAGMA: need to check if file closed successfully
 	return true;

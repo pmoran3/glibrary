@@ -1,16 +1,21 @@
-#ifndef GSTREAMERTXTFACTORY_H
-#define GSTREAMERTXTFACTORY_H 1
+#ifndef GSTREAMERROOTFACTORY_H
+#define GSTREAMERROOTFACTORY_H 1
 
 // gstreamer
 #include "gstreamer.h"
+#include "gRootTree.h"
 
-#include <fstream>
-using std::ofstream;
+// c++
+#include <map>
+//using std::ofstream;
 
-class GstreamerTextFactory : public GStreamer
+// ROOT
+#include "TFile.h"
+
+class GstreamerRootFactory : public GStreamer
 {
 public:
-	GstreamerTextFactory() {}
+	GstreamerRootFactory() {}
 
 private:
 	// open and close the output media
@@ -19,8 +24,8 @@ private:
 
 	// event streams
 	// start and end each event
-	bool startEvent();
-	bool endEvent();
+	bool startEvent(GEventDataCollection* eventData);
+	bool endEvent(GEventDataCollection* eventData);
 
 	// write the header
 	bool publishEventHeader(GEventDataCollectionHeader *gheader);
@@ -30,14 +35,16 @@ private:
 	bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData);
 
 	// frame streams
-	bool startStream();
-	bool endStream();
+	bool startStream(GFrameDataCollection* frameRunData);
+	bool endStream(GFrameDataCollection* frameRunData);
 	bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader);
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
 
 private:
-	ofstream *ofile = nullptr;
+	TFile *rootfile;
+	map<string, GRootTree*> *gRootTrees;
+
 };
 
 #endif // GSTREAMERTXTFACTORY_H

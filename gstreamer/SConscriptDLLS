@@ -27,7 +27,9 @@ txtSources = [
 				  ]
 
 rootSources = [
-				  'factories/ROOT/gRootTree.cc'
+				  'factories/ROOT/gRootTree.cc',
+				  'factories/ROOT/gstreamerROOTFactory.cc',
+				  'factories/ROOT/gstreamerROOTConnection.cc'
 				  ]
 
 

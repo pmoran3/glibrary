@@ -27,12 +27,12 @@ public:
 	bool fillTree(GEventDataCollectionHeader *gheader);
 	bool fillTree(GEventDataCollection* eventData);
 
-//	bool defineNewVar(string varName, GObservableType gt);
 
 private:
 	TTree *rootTree;
 
 	// variable maps
+	// index is hit number
 	map<string, vector<int>* >    intVars;
 	map<string, vector<float>* >  floatVars;
 	map<string, vector<double>* > doubleVars;
