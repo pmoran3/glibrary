@@ -1,7 +1,7 @@
 // gstreamer
 #include "gstreamerTEXTFactory.h"
 
-bool GstreamerTextFactory::startStream()
+bool GstreamerTextFactory::startStream(GFrameDataCollection* frameRunData)
 {
 	if(ofile == nullptr) return false;
 
@@ -13,7 +13,7 @@ bool GstreamerTextFactory::startStream()
 
 
 
-bool GstreamerTextFactory::endStream()
+bool GstreamerTextFactory::endStream(GFrameDataCollection* frameRunData)
 {
 	if(ofile == nullptr) return false;
 

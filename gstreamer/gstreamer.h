@@ -41,18 +41,18 @@ protected:
 	// event virtual methods called by publishRunData, in order
 	// --------------------------------------------------------
 	
-	virtual bool startEvent() { return false;}
+	virtual bool startEvent(GEventDataCollection* eventData) { return false;}
 	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
 	virtual bool publishEventTrueInfoData(string detectorName,  const vector<GTrueInfoData*>* trueInfoData)   { return false;}
 	virtual bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData) { return false;}
-	virtual bool endEvent()   { return false;}
+	virtual bool endEvent(GEventDataCollection* eventData)   { return false;}
 
 	// stream virtual methods
-	virtual bool startStream() { return false;}
-	virtual bool endStream()   { return false;}
+	virtual bool startStream(GFrameDataCollection* frameRunData) { return false;}
 	virtual bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) { return false;}
 	virtual bool publishPayload(const vector<GIntegralPayload*> *payload)           { return false;}
+	virtual bool endStream(GFrameDataCollection* frameRunData)   { return false;}
 
 
 public:

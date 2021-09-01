@@ -1,11 +1,12 @@
 // gstreamer
 #include "gstreamerTEXTFactory.h"
 
-bool GstreamerTextFactory::startEvent()
+bool GstreamerTextFactory::startEvent(GEventDataCollection* eventData)
 {
 	if(ofile == nullptr) return false;
-	
-	*ofile  << "Event {" << endl;
+
+	auto eventNumber = eventData->getHeader()->getG4LocalEvn();
+	*ofile  << "Event n. " << eventNumber << "{" << endl;
 	
 	return true;
 }
@@ -13,11 +14,13 @@ bool GstreamerTextFactory::startEvent()
 
 
 
-bool GstreamerTextFactory::endEvent()
+bool GstreamerTextFactory::endEvent(GEventDataCollection* eventData)
 {
 	if(ofile == nullptr) return false;
-	
-	*ofile  << "}" << endl;
+
+	int eventNumber = eventData->getHeader()->getG4LocalEvn();
+
+	*ofile  << "} end of event " << eventNumber << endl;
 	
 	return true;
 }

@@ -165,8 +165,6 @@ int EventDispenser::processEvents()
 		}
 	}
 
-	cout << endl;
-
 	return 1;
 }
 

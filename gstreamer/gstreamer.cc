@@ -12,7 +12,7 @@ map<string, bool> GStreamer::publishEventRunData(GOptions *gopts, vector<GEventD
 	// looping over events
 	for(auto eventDataCollection: runData) {
 
-		gstreamReport["Event Stream report #1 <startEvent>: "] = startEvent();
+		gstreamReport["Event Stream report #1 <startEvent>: "] = startEvent(eventDataCollection);
 		gstreamReport["Event Stream report #2 <header>: "]     = publishEventHeader(eventDataCollection->getHeader());
 
 		for (auto& [detectorName, gDataCollection] : *eventDataCollection->getDataCollection() ) {
@@ -24,7 +24,7 @@ map<string, bool> GStreamer::publishEventRunData(GOptions *gopts, vector<GEventD
 			reportName = "Event Stream report #4: <" +  detectorName + "__Digitized>: ";
 			gstreamReport[reportName] = publishEventDigitizedData(detectorName, gDataCollection->getDigitizedData());
 		}
-		gstreamReport["Event Stream report #5 <endEvent>: "] = endEvent();
+		gstreamReport["Event Stream report #5 <endEvent>: "] = endEvent(eventDataCollection);
 	}
 
 	return gstreamReport;
@@ -35,12 +35,10 @@ map<string, bool> GStreamer::publishEventRunData(GOptions *gopts, vector<GEventD
 map<string, bool> GStreamer::publishFrameRunData(GOptions *gopts, GFrameDataCollection* frameRunData) {
 	map<string, bool> gstreamReport;
 
-	gstreamReport["Frame Stream report #1 <startStream>: "] = startStream();
+	gstreamReport["Frame Stream report #1 <startStream>: "] = startStream(frameRunData);
 	gstreamReport["Frame Stream report #2 <frameHeader>: "] = publishFrameHeader(frameRunData->getHeader());
 	gstreamReport["Frame Stream report #3 <payload>: "]     = publishPayload(frameRunData->getIntegralPayload());
-	gstreamReport["Frame Stream report #3 <endStream>: "]   = endStream();
-
-
+	gstreamReport["Frame Stream report #4 <endStream>: "]   = endStream(frameRunData);
 
 	return gstreamReport;
 }

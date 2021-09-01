@@ -3,9 +3,7 @@
 // goptions
 #include "goptions.h"
 
-// c++
-#include <iostream>
-using namespace std;
+NOT IMPLEMENTED YET
 
 // a simple struct to model the detector option
 namespace goptions {
