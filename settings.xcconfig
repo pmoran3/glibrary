@@ -54,7 +54,7 @@ GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 // - core
 // - RIO for files
 // - TTree for trees
-ROOT_VERSION = 6.24.02
+ROOT_VERSION = 6.24.04
 ROOTSYS      = $JLAB_SOFTWARE/root/$ROOT_VERSION
 ROOT_HEADS   = $ROOTSYS/include
 
