@@ -17,15 +17,17 @@ bool GDosimeterDigitization::defineReadoutSpecs() {
 // digitized the hit
 GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
 
-	vector<GIdentifier> identity = ghit->getGID();
-
+	// ghit->getGID() must have a single entry
+	GIdentifier identity = ghit->getGID().front();
 
 	GDigitizedData* gdata = new GDigitizedData(ghit);
 
-	gdata->includeVariable("hitn",      hitn);
+	gdata->includeVariable(identity.getName(), identity.getValue()             );
+	gdata->includeVariable("hitn",             hitn                            );
+	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
+	gdata->includeVariable("time",             ghit->getAverageTime()          );
 
 	return gdata;
-
 }
 
 
