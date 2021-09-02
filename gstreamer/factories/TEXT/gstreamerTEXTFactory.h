@@ -19,19 +19,19 @@ private:
 
 	// event streams
 	// start and end each event
-	bool startEvent(GEventDataCollection* eventData);
-	bool endEvent(GEventDataCollection* eventData);
+	bool startEvent(const GEventDataCollection* eventData);
+	bool endEvent(const GEventDataCollection* eventData);
 
 	// write the header
-	bool publishEventHeader(GEventDataCollectionHeader *gheader);
+	bool publishEventHeader(const GEventDataCollectionHeader *gheader);
 
 	// vector index is hit number
-	bool publishEventTrueInfoData( string detectorName, const vector<GTrueInfoData*>*  trueInfoData);
-	bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData);
+	bool publishEventTrueInfoData( const string detectorName, const vector<GTrueInfoData*>*  trueInfoData);
+	bool publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData);
 
 	// frame streams
-	bool startStream(GFrameDataCollection* frameRunData);
-	bool endStream(GFrameDataCollection* frameRunData);
+	bool startStream(const GFrameDataCollection* frameRunData);
+	bool endStream(const GFrameDataCollection* frameRunData);
 	bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader);
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 

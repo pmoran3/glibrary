@@ -2,7 +2,7 @@
 #include "gstreamerTEXTFactory.h"
 
 
-bool GstreamerTextFactory::publishEventHeader(GEventDataCollectionHeader *gheader)
+bool GstreamerTextFactory::publishEventHeader(const GEventDataCollectionHeader *gheader)
 {
 	if(ofile == nullptr) return false;
 	

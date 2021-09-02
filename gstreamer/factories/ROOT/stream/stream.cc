@@ -1,7 +1,7 @@
 // gstreamer
 #include "gstreamerROOTFactory.h"
 
-bool GstreamerRootFactory::startStream(GFrameDataCollection* frameRunData)
+bool GstreamerRootFactory::startStream(const GFrameDataCollection* frameRunData)
 {
 	if(rootfile == nullptr) return false;
 
@@ -11,7 +11,7 @@ bool GstreamerRootFactory::startStream(GFrameDataCollection* frameRunData)
 
 
 
-bool GstreamerRootFactory::endStream(GFrameDataCollection* frameRunData)
+bool GstreamerRootFactory::endStream(const GFrameDataCollection* frameRunData)
 {
 	if(rootfile == nullptr) return false;
 

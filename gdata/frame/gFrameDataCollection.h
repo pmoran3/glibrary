@@ -41,9 +41,9 @@ public:
 	bool const shouldWriteFrame() const;
 
 	// getters
-	GFrameDataCollectionHeader *getHeader() {return gheader;}
-	vector<GIntegralPayload*> const *getIntegralPayload() const {return integralPayload;}
-	inline long int const getFrameID() const { return gheader->getFrameID(); }
+	inline const GFrameDataCollectionHeader* getHeader()         const { return gheader; }
+	inline const vector<GIntegralPayload*>* getIntegralPayload() const { return integralPayload; }
+	inline const long int getFrameID()                           const { return gheader->getFrameID(); }
 
 private:
 	int verbosity;

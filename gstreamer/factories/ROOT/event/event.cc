@@ -1,11 +1,9 @@
 // gstreamer
 #include "gstreamerROOTFactory.h"
 
-bool GstreamerRootFactory::startEvent(GEventDataCollection* eventData)
+bool GstreamerRootFactory::startEvent(const GEventDataCollection* eventData)
 {
 	if(rootfile == nullptr) return false;
-
-	
 
 	// clearing maps vectors for all trees
 	for(auto t: (*gRootTrees)) {
@@ -18,7 +16,7 @@ bool GstreamerRootFactory::startEvent(GEventDataCollection* eventData)
 
 
 
-bool GstreamerRootFactory::endEvent(GEventDataCollection* eventData)
+bool GstreamerRootFactory::endEvent(const GEventDataCollection* eventData)
 {
 	if(rootfile == nullptr) return false;
 

@@ -31,14 +31,16 @@ public:
 	void includeVariable(string vname, vector<int> values);
 	void includeVariable(string vname, vector<float> values);
 
-	map<string, int>   const getIntObservablesMap(int which) const;
-	map<string, float> const getFltObservablesMap(int which) const;
+	// which = 0: only returns non SRO vars
+	// which = 1: returns all vars
+	const map<string, int>    getIntObservablesMap(int which) const;
+	const map<string, float>  getFltObservablesMap(int which) const;
 
 	int getIntObservable(string varName);
 	float getFltObservable(string varName);
 
-	inline map<string, vector<int>>   getArrayIntObservablesMap() const {return arrayIntObservablesMap;}
-	inline map<string, vector<float>> getArrayFltObservablesMap() const {return arrayFltObservablesMap;}
+	inline const map<string, vector<int>>   getArrayIntObservablesMap() const {return arrayIntObservablesMap;}
+	inline const map<string, vector<float>> getArrayFltObservablesMap() const {return arrayFltObservablesMap;}
 
 
 private:
@@ -47,8 +49,8 @@ private:
 	map<string, int>    intObservablesMap;
 	map<string, float>  fltObservablesMap;
 
-	map<string, vector<int> >    arrayIntObservablesMap;
-	map<string, vector<float> >  arrayFltObservablesMap;
+	map<string, vector<int> >   arrayIntObservablesMap;
+	map<string, vector<float> > arrayFltObservablesMap;
 
 	// set at constructor, from the hit
 	vector<GIdentifier> gidentity;

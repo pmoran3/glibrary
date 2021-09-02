@@ -24,19 +24,19 @@ private:
 
 	// event streams
 	// start and end each event
-	bool startEvent(GEventDataCollection* eventData);
-	bool endEvent(GEventDataCollection* eventData);
+	bool startEvent(const GEventDataCollection* eventData);
+	bool endEvent(const GEventDataCollection* eventData);
 
 	// write the header
-	bool publishEventHeader(GEventDataCollectionHeader *gheader);
+	bool publishEventHeader(const GEventDataCollectionHeader *gheader);
 
 	// vector index is hit number
-	bool publishEventTrueInfoData( string detectorName, const vector<GTrueInfoData*>*  trueInfoData);
-	bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData);
+	bool publishEventTrueInfoData( const string detectorName, const vector<GTrueInfoData*>*  trueInfoData);
+	bool publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData);
 
 	// frame streams
-	bool startStream(GFrameDataCollection* frameRunData);
-	bool endStream(GFrameDataCollection* frameRunData);
+	bool startStream(const GFrameDataCollection* frameRunData);
+	bool endStream(const GFrameDataCollection* frameRunData);
 	bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader);
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
@@ -46,9 +46,9 @@ private:
 
 	// return header tree from map. If not there, initialize it.
 	// done at startEvent
-	GRootTree* getOrInstantiateHeaderTree(GEventDataCollection* eventData);
-	GRootTree *getOrInstantiateDigitizedDataTree(string detectorName, GEventDataCollection* eventData);
-	GRootTree *getOrInstantiateTrueInfoDataTree(string detectorName,  GEventDataCollection* eventData);
+	GRootTree* getOrInstantiateHeaderTree(const GEventDataCollectionHeader *gheader);
+	GRootTree *getOrInstantiateTrueInfoDataTree(const string detectorName,  const GTrueInfoData*  gdata);
+	GRootTree *getOrInstantiateDigitizedDataTree(const string detectorName, const GDigitizedData* gdata);
 
 	// instantiated (and their variable maps) during the first event in startEvent
 	map<string, GRootTree*> *gRootTrees;

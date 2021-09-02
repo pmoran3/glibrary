@@ -19,7 +19,7 @@ public:
 	vector<GIdentifier> getIdentity() const {return gidentity;}
 
 	void includeVariable(string varName, float var);
-	inline map<string, float> getVariablesMap() const {return trueInfoVariablesMap;}
+	inline const map<string, float> getVariablesMap() const {return trueInfoVariablesMap;}
 
 private:
 	// the data map are keyd with the variable name

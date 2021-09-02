@@ -1,7 +1,7 @@
 // gstreamer
 #include "gstreamerTEXTFactory.h"
 
-bool GstreamerTextFactory::startEvent(GEventDataCollection* eventData)
+bool GstreamerTextFactory::startEvent(const GEventDataCollection* eventData)
 {
 	if(ofile == nullptr) return false;
 
@@ -14,7 +14,7 @@ bool GstreamerTextFactory::startEvent(GEventDataCollection* eventData)
 
 
 
-bool GstreamerTextFactory::endEvent(GEventDataCollection* eventData)
+bool GstreamerTextFactory::endEvent(const GEventDataCollection* eventData)
 {
 	if(ofile == nullptr) return false;
 

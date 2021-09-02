@@ -35,6 +35,8 @@ map<string, float> const GDigitizedData::getFltObservablesMap(int which) const {
 
 
 // criteria for valid var name: it's not any of the streaming var
+// which = 0: only returns non SRO vars
+// which = 1: returns all vars
 bool const GDigitizedData::validVarName(string varName, int which) const {
 
 	bool isSROVar = (varName == CRATESTRINGID || varName == SLOTSTRINGID || varName == CHANNELSTRINGID || varName == CHARGEATELECTRONICS || varName == TIMEATELECTRONICS);

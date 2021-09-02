@@ -3,7 +3,7 @@
 
 bool GstreamerRootFactory::openConnection()
 {
-	rootfile = new TFile(string(outputFileName + ".root").c_str(), "RECREATE");
+	rootfile = new TFile(string(outputFileName).c_str(), "RECREATE");
 	gRootTrees = new map<string, GRootTree*>;
 
 

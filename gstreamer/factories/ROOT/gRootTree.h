@@ -27,14 +27,14 @@ class GRootTree
 public:
 
 	// types of TTree
-	GRootTree(GEventDataCollectionHeader *gheader);
-	GRootTree(string detectorName, GTrueInfoData* gdata);
-	GRootTree(string detectorName, GDigitizedData* gdata);
+	GRootTree(const GEventDataCollectionHeader *gheader);
+	GRootTree(const string detectorName, const GTrueInfoData* gdata);
+	GRootTree(const string detectorName, const GDigitizedData* gdata);
 
 	// filling trees
-	bool fillTree(GEventDataCollectionHeader *gheader);
-	bool fillTree(GTrueInfoData* gdata);
-	bool fillTree(GDigitizedData* gdata);
+	bool fillTree(const GEventDataCollectionHeader *gheader);
+	bool fillTree(const vector<GTrueInfoData*>*  trueInfoData);
+	bool fillTree(const vector<GDigitizedData*>* digitizedData);
 
 	// clear variables map below
 	bool initTreeForTheEvent();
@@ -51,10 +51,10 @@ private:
 
 
 	// the second argument is needed to select the VarsMap type and its content
-	void registerVariable(string varname, int value);
-	void registerVariable(string varname, float value);
-	void registerVariable(string varname, double value);
-	void registerVariable(string varname, string value);
+	void registerVariable(const string varname, const int value);
+	void registerVariable(const string varname, const float value);
+	void registerVariable(const string varname, const double value);
+	void registerVariable(const string varname, const string value);
 
 };
 

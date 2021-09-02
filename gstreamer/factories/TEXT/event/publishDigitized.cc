@@ -1,7 +1,7 @@
 // gstreamer
 #include "gstreamerTEXTFactory.h"
 
-bool GstreamerTextFactory::publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData) {
+bool GstreamerTextFactory::publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData) {
 
 	if(ofile == nullptr) return false;
 

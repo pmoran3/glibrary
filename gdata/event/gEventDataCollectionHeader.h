@@ -36,9 +36,9 @@ public:
 		}
 	}
 	
-	string getTimeStamp() {return timeStamp;}
-	inline int const getG4LocalEvn()  const {return g4localEventNumber;}
-	inline int const getThreadID()    const {return threadID;}
+	inline string const getTimeStamp() const { return timeStamp; }
+	inline int const getG4LocalEvn()  const  { return g4localEventNumber; }
+	inline int const getThreadID()    const  { return threadID; }
 
 	void print() {
 		cout << CONSTRUCTORLOG <<  " Event header: " << endl;

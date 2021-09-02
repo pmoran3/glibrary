@@ -22,15 +22,15 @@ public:
 	// called in GRunAction::EndOfRunAction
 	// runs the protected virtual methods below to write events from a run to file
 	// the key is the routine name + sensitive detector name
-	map<string, bool> publishEventRunData(GOptions *gopts, vector<GEventDataCollection*> runData);
+	map<string, bool> publishEventRunData(const GOptions *gopts, const vector<GEventDataCollection*> runData);
 
 	// called in GRunAction::EndOfRunAction
 	// runs the protected virtual methods below to write frames from a run to file
 	// the key is the routine name + frame streamer id
-	map<string, bool> publishFrameRunData(GOptions *gopts, GFrameDataCollection* frameRunData);
+	map<string, bool> publishFrameRunData(const GOptions *gopts, const GFrameDataCollection* frameRunData);
 
-	void setOutputName(string output) {outputFileName = output;}
-	void setStreamType(string stype)  {streamType = stype;}
+	void setOutputName(const string output) {outputFileName = output;}
+	void setStreamType(const string stype)  {streamType = stype;}
 	inline string const getStreamType() const {return streamType;}
 
 protected:
@@ -41,18 +41,18 @@ protected:
 	// event virtual methods called by publishRunData, in order
 	// --------------------------------------------------------
 	
-	virtual bool startEvent(GEventDataCollection* eventData) { return false;}
-	virtual bool publishEventHeader(GEventDataCollectionHeader *gheader) { return false;}
+	virtual bool startEvent(const GEventDataCollection* eventData) { return false;}
+	virtual bool publishEventHeader(const GEventDataCollectionHeader *gheader) { return false;}
 	// vector index is hit number
-	virtual bool publishEventTrueInfoData(string detectorName,  const vector<GTrueInfoData*>* trueInfoData)   { return false;}
-	virtual bool publishEventDigitizedData(string detectorName, const vector<GDigitizedData*>* digitizedData) { return false;}
-	virtual bool endEvent(GEventDataCollection* eventData)   { return false;}
+	virtual bool publishEventTrueInfoData(const string detectorName,  const vector<GTrueInfoData*>* trueInfoData)   { return false;}
+	virtual bool publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData) { return false;}
+	virtual bool endEvent(const GEventDataCollection* eventData)   { return false;}
 
 	// stream virtual methods
-	virtual bool startStream(GFrameDataCollection* frameRunData) { return false;}
+	virtual bool startStream(const GFrameDataCollection* frameRunData) { return false;}
 	virtual bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) { return false;}
 	virtual bool publishPayload(const vector<GIntegralPayload*> *payload)           { return false;}
-	virtual bool endStream(GFrameDataCollection* frameRunData)   { return false;}
+	virtual bool endStream(const GFrameDataCollection* frameRunData)   { return false;}
 
 
 public:
