@@ -31,7 +31,9 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 	trueInfoData->includeVariable("hitn",  hitn);
 
 
-	// bit 1
+	// bit 1:
+
+	
 	return trueInfoData;
 }
 

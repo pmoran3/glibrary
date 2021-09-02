@@ -32,7 +32,7 @@ public:
 	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep) {return { gTouchID } ;}
 
 	// filter true information into GTrueInfoHit
-	// this integrates all available information built in GHit::buildHitInfosForBit
+	// this integrates all available information built in GHit::addHitInfosForBitset
 	GTrueInfoData *collectTrueInformation(GHit *ghit, int hitn);
 
 	// digitize true information into GDigitizedHit

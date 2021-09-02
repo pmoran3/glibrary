@@ -9,10 +9,11 @@ using std::string;
 using std::ostream;
 using std::vector;
 
-// - readout: electronic Time Window is the discriminating factor
-// - flux: track id is the discriminating factor
-// - particleCounter: no other discriminating factors
-enum GTouchableType { readout, flux, particleCounter };
+// - readout: electronic Time Window is the discriminating factor. True infos variable determined by defineReadoutSpecs in the plugin
+// - flux: track id is the discriminating factor, standard true infos variable
+// - particleCounter: no other discriminating factors, standard true infos variable
+// - dosimeter: track id is the discriminating factor, radiation digitization
+enum GTouchableType { readout, flux, particleCounter, dosimeter };
 
 struct GIdentifier {
 

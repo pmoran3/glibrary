@@ -170,6 +170,7 @@ vector<string> GWorld::getSensitiveDetectorsList() {
 		for (auto &gvolume: *system.second->getGVolumesMap()) {
 			string digitization = gvolume.second->getDigitization();
 			if ( digitization != UNINITIALIZEDSTRINGQUANTITY) {
+				if ( find(snames.begin(), snames.end(), digitization) == snames.end())
 				snames.push_back(digitization);
 			}
 		}
