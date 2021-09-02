@@ -7,6 +7,7 @@ using namespace gutilities;
 
 // geant4
 #include "G4Box.hh"
+#include "G4Sphere.hh"
 #include "G4Tubs.hh"
 #include "G4CutTubs.hh"
 #include "G4Cons.hh"
@@ -64,6 +65,19 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 													 pars[2],   ///< Half length in z
 													 pars[3],   ///< Starting phi angle
 													 pars[4]    ///< Delta Phi angle
+													 ), verbosity
+									  );
+
+		return thisG4Volume->getSolid();
+
+	} else 	if(type == "G4Sphere") {
+		thisG4Volume->setSolid(new G4Sphere(vMapname, ///< name
+													 pars[0],    ///< Inner radius
+													 pars[1],    ///< Outer radius
+													 pars[2],    ///< Starting phi angle
+													 pars[3],     ///< Delta Phi angle
+													 pars[4],    ///< Starting delta angle
+													 pars[5]     ///< Delta delta angle
 													 ), verbosity
 									  );
 
@@ -150,7 +164,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 
 		return thisG4Volume->getSolid();
 	} else {
-		G4cerr << " " << vname << " solid " << type << " uknown! " << G4endl;
+		G4cerr << " " << vname << " solid " << type << " unknown! " << G4endl;
 	}
 
 	// if we are at this point the solid is not built
