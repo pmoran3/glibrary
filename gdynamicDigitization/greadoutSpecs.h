@@ -12,11 +12,6 @@
 class GReadoutSpecs {
 
 private:
-
-	// set by "readout" in the gvolume if flux, particleCounter
-	// otherwise it's "readout" and uses the time window
-	// GType readoutType;
-
 	// readout specs, set by plugin function loadReadoutSpecs
 	float     timeWindow;       // electronic readout time-window of the detector
 	float     gridStartTime;    // defines the windows grid
@@ -37,21 +32,10 @@ public:
 
 public:
 	
-	// bitset setter and getter
-//	void setHitBitset(string hbs)   {    // define the hit bitset from a string.
-//		if(hbs.size() == NHITBITS) {
-//			hitBitSet = bitset<NHITBITS>(hbs);
-//		} else {
-//			hitBitSet = bitset<NHITBITS>("000000");
-//		}
-//	}
-	HitBitSet getHitBitSet() {return hitBitSet;}
+	inline const HitBitSet getHitBitSet() const { return hitBitSet; }
 
-
-public:
-	
 	// for readout detectors, return the index time cell in the timewindow
-	inline int timeCellIndex(float time) {
+	inline const int timeCellIndex(float time) const {
 		return (int) (floor((time - gridStartTime)/timeWindow) + 1);
 	}
 	

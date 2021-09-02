@@ -1,5 +1,6 @@
 // gtouchable
 #include "gtouchable.h"
+#include "gtouchableConventions.h"
 
 // glibrary
 #include "gutilities.h"
@@ -15,10 +16,12 @@ gridTimeIndex(0),
 detectorDimenions(dimensions) {
 
 	// gtype from digitization
-	if ( digitization == "flux" ) {
+	if ( digitization == FLUXNAME ) {
 		gType = flux;
-	} else if ( digitization == "flux" ) {
+	} else if ( digitization == COUNTERNAME ) {
 		gType = particleCounter;
+	} else if ( digitization == DOSIMETERNAME ) {
+		gType = dosimeter;
 	} else {
 		gType = readout;
 	}
@@ -71,6 +74,8 @@ bool GTouchable::operator == (const GTouchable& that) const
 		case readout:
 			return this->gridTimeIndex == that.gridTimeIndex;
 		case flux:
+			return this->trackId == that.trackId;
+		case dosimeter:
 			return this->trackId == that.trackId;
 		case particleCounter:
 			return true;
