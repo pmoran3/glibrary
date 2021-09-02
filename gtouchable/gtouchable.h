@@ -35,9 +35,8 @@ public:
 
 // api
 public:
-	inline string getName() const {return idName;}
-	inline int getValue() const {return idValue;}
-
+	inline const string getName() const { return idName; }
+	inline const int getValue()   const { return idValue; }
 
 };
 

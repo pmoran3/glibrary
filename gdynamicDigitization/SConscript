@@ -4,7 +4,9 @@ Import('env')
 
 sources = [
 			  'gdynamicdigitization.cc',
-			  'ginternaldigitization.cc'
+			  'gFluxDigitization.cc',
+			  'gParticleCounterDigitization.cc',
+			  'gDosimeterDigitization.cc',
 			  ]
 
 # destination library is one dir up - relative to this SConscript
