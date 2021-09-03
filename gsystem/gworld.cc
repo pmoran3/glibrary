@@ -44,21 +44,21 @@ GWorld::GWorld(GOptions* gopts) {
 	// registering factories in gSystemManager
 	// and adding them to systemFactory
 	// if a factory is not existing already, registering it in the manager, instantiating it, and loading it into the map
+
+	// text factory created no matter what, needed to create ROOT volume
+	gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
+	systemFactory[GSYSTEMTEXTFACTORY] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
+
 	for (auto& system: *gsystemsMap) {
 		
 		string factoryName = system.second->getFactoryName();
 
-		if(factoryName == "text") {
-			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
-				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
-			}
-		} else if(factoryName == "cad") {
+		if(factoryName == GSYSTEMCADTFACTORY) {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemCADFactory>(GSYSTEMCADFACTORY);
 				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
 			}
-		}  else if(factoryName == "gdml") {
+		}  else if(factoryName == GSYSTEMGDMLTFACTORY) {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
 				gSystemManager.RegisterObjectFactory<GSystemGDMLFactory>(GSYSTEMGDMLFACTORY);
 				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMLFACTORY);
@@ -96,15 +96,11 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 	// adding root volume to the a "root" gsystem
-	// using the first existing factory name (if there is anything in the factory)
-	// otherwise use "TEXT"
-	string firstFactory = "text";
-	if (gsystemsMap->size() > 0) {
-		firstFactory = gsystemsMap->begin()->second->getFactoryName();
-	} 
-	string worldVolume = gopts->getString("worldVolume");
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, firstFactory, "default", verbosity);
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolume);
+	// using the text factory
+	
+	string worldVolumeDefinition = gopts->getString("worldVolumeDefinition");
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, GSYSTEMTEXTFACTORY, "default", verbosity);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolumeDefinition);
 
 	// applying gvolumes modifiers
 	for (auto& [volumeNameToModify, gmodifier] : gmodifiersMap ) {

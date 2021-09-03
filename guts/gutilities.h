@@ -54,21 +54,16 @@ namespace gutilities {
 	// retrieve string between two strings
 	string retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter);
 
-	// TODO: notice: I would like to use map<string, T*> but getting errors, to be researched
-	template<typename T> T getOrCreateItemInMap(map<string, T> *gmap, string vname) {
-		// check if g4s already exists
-		if(gmap->find(vname) != gmap->end()) {
-			return (*gmap)[vname];
-		} else {
-			(*gmap)[vname] = T();
-			return (*gmap)[vname];
-		}
+	// retrieve string between two strings
+	string retrieveStringBetweenChars(string input, string firstDelimiter, string secondDelimiter);
 
-	}
+	// string search for a path with <name> from a possible list of absolute paths
+	// returns UNINITIALIZEDSTRINGQUANTITY if not found
+	string searchForDirInLocations(string dirName, vector<string> possibleLocations);
 
+	vector<string> getListOfFilesInDirectory(string dirName, vector<string> extensions) ;
 
 	template<class KEY, class VALUE> vector<KEY> getKeys(const map<KEY, VALUE>& map);
-
 
 };
 

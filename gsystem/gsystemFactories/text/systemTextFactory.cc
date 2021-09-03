@@ -22,16 +22,15 @@ GSystemTextFactory::GSystemTextFactory() {
 			for ( auto& dirDB: dirsDB ) {
 				possibleLocationOfTextDatabases.push_back(dirDB);
 			}
-			
 		}
 	}  
 }
 
 
 // returns the file stream, checking all possible directories.
-ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE, int verbosity)
+ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYSTEMTYPE, int verbosity)
 {
-	string fileName  = system->getFile();
+	string fileName  = system->getFilePath();
 	string variation = system->getVariation();
 	
 	string fname = fileName +  SYSTEMTYPE + variation + ".txt";

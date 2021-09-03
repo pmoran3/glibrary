@@ -7,8 +7,6 @@
 #include "g4objectsFactories/g4native/g4NativeObjectsFactory.h"
 #include "g4objectsFactories/cad/cadSystemFactory.h"
 
-
-
 G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 
@@ -27,12 +25,12 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 		string factory = s.second->getFactoryName();
 		string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
-		if(factory == "text" || factory == "mysql") {
+		if(factory == GSYSTEMTEXTFACTORY || factory == GSYSTEMMYSQLTFACTORY) {
 			// if factory not found, registering it in the manager and loading it into the map
 			if(g4systemFactory.find(g4Factory) == g4systemFactory.end()) {
 				g4SystemManager.RegisterObjectFactory<G4NativeSystemFactory>(g4Factory);
 			}
-		} else if(factory == "cad") {
+		} else if(factory == GSYSTEMCADTFACTORY) {
 			// if factory not found, registering it in the manager and loading it into the map
 			if(g4systemFactory.find(G4SYSTEMCADFACTORY) == g4systemFactory.end()) {
 				g4SystemManager.RegisterObjectFactory<G4CadSystemFactory>(g4Factory);
@@ -100,9 +98,9 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 
 string G4World::g4FactoryNameFromSystemFactory(string factory) {
-	if (factory == "text" || factory == "mysql" ) {
+	if ( factory == GSYSTEMTEXTFACTORY || factory == GSYSTEMMYSQLTFACTORY ) {
 		return G4SYSTEMNATFACTORY;
-	} else if (factory == "cad" ) {
+	} else if ( factory == GSYSTEMCADTFACTORY ) {
 		return G4SYSTEMCADFACTORY;
 	} else {
 		cerr << FATALERRORL << "g4systemFactory factory <" << factory << "> not found in g4FactoryNameFromSystemFactory." << endl;

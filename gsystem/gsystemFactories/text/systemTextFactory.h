@@ -27,8 +27,8 @@ private:
 	virtual void loadMaterial(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
-	// returns the file stream, checking all possible directories.
-	ifstream* gSystemTextFile(GSystem *system, string SYSTEMTYPE, int verbosity);  // SYTEMTYPE one of file types above
+	// returns the requested system file stream, checking all possibleLocationOfTextDatabases
+	ifstream* gSystemTextFileStream(GSystem *system, string SYSTEMTYPE, int verbosity);  // SYTEMTYPE one of file types above
 
 };
 

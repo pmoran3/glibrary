@@ -1,6 +1,8 @@
 #ifndef  GSYSTEM_CONVENTIONS_H
 #define  GSYSTEM_CONVENTIONS_H  1
 
+#define GSYSTEMNOTAPPLICABLEENTRY  "na"
+
 // number of database pars defining a gvolume
 #define GVOLUMENUMBEROFPARS    19
 #define DEFAULTPOSITION       "0*cm, 0*cm, 0*cm";
@@ -24,5 +26,10 @@
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"
+
+#define GSYSTEMTEXTFACTORY   "text"
+#define GSYSTEMCADTFACTORY   "cad"
+#define GSYSTEMGDMLTFACTORY  "gdml"
+#define GSYSTEMMYSQLTFACTORY "mysql"
 
 #endif

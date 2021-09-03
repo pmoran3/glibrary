@@ -12,8 +12,10 @@ sources = [
 			  'gsystemFactories/text/systemTextFactory.cc',
 			  'gsystemFactories/text/loadMaterial.cc',
 			  'gsystemFactories/text/loadGeometry.cc',
+			  'gsystemFactories/cad/systemCadFactory.cc',
 			  'gsystemFactories/cad/loadMaterial.cc',
 			  'gsystemFactories/cad/loadGeometry.cc',
+			  'gsystemFactories/gdml/systemGdmlFactory.cc',
 			  'gsystemFactories/gdml/loadMaterial.cc',
 			  'gsystemFactories/gdml/loadGeometry.cc'
 			  ]

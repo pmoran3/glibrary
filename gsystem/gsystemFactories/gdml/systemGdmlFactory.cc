@@ -3,13 +3,13 @@
 using namespace gutilities;
 
 // gsystem
-#include "systemCadFactory.h"
+#include "systemGdmlFactory.h"
 
 // c++
 using namespace std;
 
 
-GSystemCADFactory::GSystemCADFactory() {
+GSystemGDMLFactory::GSystemGDMLFactory() {
 
 	possibleLocationOfTextDatabases.push_back(".");
 	possibleLocationOfTextDatabases.push_back("");

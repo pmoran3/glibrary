@@ -10,7 +10,7 @@
 void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity)
 {
 	// will exit if not found
-	ifstream *IN = gSystemTextFile(system, GTEXTGEOMTYPE, verbosity);
+	ifstream *IN = gSystemTextFileStream(system, GTEXTGEOMTYPE, verbosity);
 
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {

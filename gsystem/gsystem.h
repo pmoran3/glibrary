@@ -40,21 +40,16 @@ public:
 	inline const string getName()        const { return name; }
 	inline const string getFactoryName() const { return factoryName; }
 	inline const string getVariation()   const { return variation; }
-	inline const string getFile()        const { return path + "/" + name; }
-	inline const string getPath()        const { return path ;}
+	inline const string getFilePath()    const { return path + "/" + name; }
 
-	
-	// returns a vector of import files, checking all possible directories.
-	// this should be in some general utility library? gutilities?
-	// vector<string> gImportFiles(vector<string> locations, int verbosity, vector<string> possibleExtensions);
-
-	// load all names in the directory matching extension
-	// this should be in some general utility library? gutilities?
-	// vector<string> loadImportFilesInDir(string path, DIR* directory, vector<string> withExtension);
-
-	void addGVolume(vector<string> pars, int verbosity);
+	// add root. rootVolumeDefinition
 	void addROOTVolume(string rootVolumeDefinition);
-	// void addGImportedVolume(string importType, string filename, int verbosity);
+
+	// add volume using parameters (TEXT or MYSQL factories)
+	void addGVolume(vector<string> pars, int verbosity);
+
+	// add volume from file (CAD or GDML factories)
+	void addVolumeFromFile(string importType, string filename, int verbosity);
 
 	// need to filter system name from key
 	inline GVolume* getGVolume(string detectorName) const {
