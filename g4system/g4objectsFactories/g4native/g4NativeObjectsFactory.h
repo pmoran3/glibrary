@@ -11,7 +11,6 @@ class G4NativeSystemFactory : G4ObjectsFactory
 public:
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {
 
-
 		int verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
 		string vname = s->getMapName();
 

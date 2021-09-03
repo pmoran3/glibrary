@@ -5,23 +5,25 @@
 #include "g4systemConventions.h"
 #include "g4objectsFactories/g4objectsFactory.h"
 
+// Cadmesh single header library, @tag 2.0.3
+// https://github.com/christopherpoole/CADMesh
+#include "CADMesh.hh"
+
+
 // system factory
 class G4CadSystemFactory : G4ObjectsFactory
 {
 public:
-
-	G4CadSystemFactory() = default;
-
-
 	bool loadG4System(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s) {
 
 		int verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
+		string vname = s->getMapName();
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes." << G4endl;
+			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes <" << vname << ">" << G4endl;
 		}
 
-//		bool sbuild = buildSolid(gopt, s, g4s);
+		//G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
 //		bool lbuild = buildLogical(gopt, s, g4s);
 //		bool pbuild = buildPhysical(gopt, s, g4s);
 //
@@ -38,13 +40,11 @@ public:
 //		} else {
 //			return false;
 //		}
-
-
 		return true;
 	}
 
 private:
-//	G4VSolid*          buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4VSolid*          buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 //	G4LogicalVolume*   buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 //	G4VPhysicalVolume* buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 

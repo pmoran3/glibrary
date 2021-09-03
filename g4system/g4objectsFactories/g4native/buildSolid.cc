@@ -15,7 +15,6 @@ using namespace gutilities;
 #include "G4Trd.hh"
 #include "G4Polycone.hh"
 
-
 G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname    = s->getName();
