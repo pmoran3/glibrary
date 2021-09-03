@@ -7,6 +7,9 @@
 
 // Cadmesh single header library, @tag 2.0.3
 // https://github.com/christopherpoole/CADMesh
+// notice I made some changes to silence the warnings:
+// - added virtual destructor on line 342,
+// - made destructor virtual on line 400
 #include "CADMesh.hh"
 
 
@@ -23,30 +26,29 @@ public:
 			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes <" << vname << ">" << G4endl;
 		}
 
-		//G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
-//		bool lbuild = buildLogical(gopt, s, g4s);
-//		bool pbuild = buildPhysical(gopt, s, g4s);
-//
-//		if(verbosity == GVERBOSITY_DETAILS) {
-//			string vname = s->getName();
-//			string solid = sbuild ? " solid build, "    : " solid not build, ";
-//			string logic = lbuild ? " logical build, "  : " logical not not build, ";
-//			string physi = pbuild ? " physical build. " : " physical not build. ";
-//			G4cout << G4SYSTEMLOGHEADER << " g4volume <" << vname << "> solid, logical and physical volume pointers: " << solid << logic << physi << G4endl;
-//		}
-//
-//		if(sbuild && lbuild && pbuild) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-		return true;
+		G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
+		G4LogicalVolume*   lbuild = buildLogical(gopt, s, g4s);
+		lbuild->SetVisAttributes(createVisualAttributes(s));
+		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
+
+		if(verbosity >= GVERBOSITY_DETAILS) {
+			string solid = sbuild != nullptr ? " solid build, "    : " solid not build, ";
+			string logic = lbuild != nullptr ? " logical build, "  : " logical not not build, ";
+			string physi = pbuild != nullptr ? " physical build. " : " physical not build. ";
+			G4cout << G4SYSTEMLOGHEADER << "g4volume <" << vname << "> " << solid << logic << physi << " with pointers: " << sbuild << ", " << lbuild << ", " << pbuild << G4endl;
+		}
+
+		if(sbuild && lbuild && pbuild) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 private:
 	G4VSolid*          buildSolid(   GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-//	G4LogicalVolume*   buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
-//	G4VPhysicalVolume* buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4LogicalVolume*   buildLogical( GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
+	G4VPhysicalVolume* buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s);
 
 };
 

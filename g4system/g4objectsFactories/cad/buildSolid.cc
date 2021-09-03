@@ -25,8 +25,15 @@ G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string,
 		(*g4s)[vMapname] = thisG4Volume;
 	}
 
+	string extension = s->getType();
 
+	if ( extension == ".ply" ) {
+		auto mesh = CADMesh::TessellatedMesh::FromPLY("mesh.ply");
+		mesh->SetScale(CLHEP::mm);
+		mesh->SetReverse(false);
 
+		thisG4Volume->setSolid(mesh->GetSolid(), verbosity);
+	}
 
 	
 	return nullptr;

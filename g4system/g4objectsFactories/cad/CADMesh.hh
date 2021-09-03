@@ -339,6 +339,7 @@ namespace CADMesh {
 		class BuiltInReader : public Reader {
 		public:
 			BuiltInReader() : Reader("BuiltInReader"){};
+			virtual ~BuiltInReader();
 
 		public:
 			G4bool Read(G4String filepath);
@@ -396,7 +397,7 @@ namespace CADMesh {
 		static std::shared_ptr<T> FromOBJ(G4String file_name,
 													 std::shared_ptr<File::Reader> reader);
 
-		~CADMeshTemplate();
+		virtual ~CADMeshTemplate();
 
 	public:
 		virtual G4VSolid *GetSolid() = 0;

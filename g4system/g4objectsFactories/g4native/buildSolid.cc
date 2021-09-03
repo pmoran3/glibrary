@@ -38,7 +38,6 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		(*g4s)[vMapname] = thisG4Volume;
 	}
 
-
 	// the order of these objects is the same as on the geant4 website
 	// https://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/ForApplicationDeveloper/html/ch04.html
 
