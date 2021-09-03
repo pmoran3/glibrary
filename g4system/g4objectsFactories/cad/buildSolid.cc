@@ -25,14 +25,29 @@ G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string,
 		(*g4s)[vMapname] = thisG4Volume;
 	}
 
-	string extension = s->getType();
+	string fileName  = s->getDescription();
+	auto extension = getStringVectorFromStringWithDelimiter(fileName, ".").back();
+
+
+
+	std::cout << " ASD " << fileName <<  " " << extension << std::endl;
 
 	if ( extension == ".ply" ) {
-		auto mesh = CADMesh::TessellatedMesh::FromPLY("mesh.ply");
+		auto mesh = CADMesh::TessellatedMesh::FromPLY(fileName);
 		mesh->SetScale(CLHEP::mm);
 		mesh->SetReverse(false);
 
 		thisG4Volume->setSolid(mesh->GetSolid(), verbosity);
+		return thisG4Volume->getSolid();
+
+	} else if ( extension == ".stl" ) {
+		auto mesh = CADMesh::TessellatedMesh::FromSTL(fileName);
+		mesh->SetScale(CLHEP::mm);
+		mesh->SetReverse(false);
+
+		thisG4Volume->setSolid(mesh->GetSolid(), verbosity);
+		return thisG4Volume->getSolid();
+
 	}
 
 	

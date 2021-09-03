@@ -64,15 +64,15 @@ private:
 	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
 
 public:
-	inline string getName() const {return name;}
-	inline string getMapName() const {
+	inline const string getName() const {return name;}
+	inline const string getMapName() const {
 		if (mother == MOTHEROFUSALL) {
 			return ROOTWORLDGVOLUMENAME;
 		}
 		return system + "__" + name;
 	}
-	inline string getMother() const {return mother;}
-	inline string getMotherMapName() const {
+	inline const string getMother() const {return mother;}
+	inline const string getMotherMapName() const {
 		if (mother == ROOTWORLDGVOLUMENAME) {
 			return ROOTWORLDGVOLUMENAME;
 		} else if (mother == MOTHEROFUSALL) {
@@ -83,26 +83,28 @@ public:
 
 	inline vector<double> getDetectorDimensions() const {return getG4NumbersFromString(parameters);}
 
-	inline string getType()       const {return type;}
-	inline string getParameters() const {return parameters;}
-	inline string getMaterial()   const {return material;}
-	inline int    getPCopyNo()    const {return pCopyNo;}
-	inline string getColor()      const {return color;}
-	inline bool   isVisible()     const {return visible;}
-	inline int    getStyle()      const {return style;}
+	inline const string getType()       const {return type;}
+	inline const string getParameters() const {return parameters;}
+	inline const string getMaterial()   const {return material;}
+	inline const int    getPCopyNo()    const {return pCopyNo;}
+	inline const string getColor()      const {return color;}
+	inline const bool   isVisible()     const {return visible;}
+	inline const int    getStyle()      const {return style;}
 
-	inline string getPos()   const {return pos;}
-	inline string getRot()   const {return rot;}
-	inline string getShift() const {return shift;}
-	inline string getTilt()  const {return tilt;}
+	inline const string getPos()   const {return pos;}
+	inline const string getRot()   const {return rot;}
+	inline const string getShift() const {return shift;}
+	inline const string getTilt()  const {return tilt;}
 
-	inline string  getDigitization() const {return digitization;}
-	inline string  getGIdentity()    const {return gidentity;}
+	inline const string  getDigitization() const {return digitization;}
+	inline const string  getGIdentity()    const {return gidentity;}
 
 	// special cases
-	inline string getCopyOf()     const {return copyOf;}
-	inline string getReplicaOf()  const {return replicaOf;}
-	inline string getSolidsOpr()  const {return solidsOpr;}
+	inline const string getCopyOf()     const {return copyOf;}
+	inline const string getReplicaOf()  const {return replicaOf;}
+	inline const string getSolidsOpr()  const {return solidsOpr;}
+
+	inline const string getDescription()  const {return description;}
 
 	// assign modifier
 	void applyShift(string s)    {shift = s;}

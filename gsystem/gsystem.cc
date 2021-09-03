@@ -57,8 +57,6 @@ void GSystem::addROOTVolume(string rootVolumeDefinition) {
 // includes factory and filename in the definitions
 void GSystem::addVolumeFromFile(string importType, string filename, int verbosity) {
 
-	auto extension = getStringVectorFromStringWithDelimiter(filename, ".").back();
-
 	vector<string> pars;
 
 	vector<string> gvpaths = getStringVectorFromStringWithDelimiter(filename, ".");
@@ -73,7 +71,7 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 	// order is defined in gvolume.cc
 	pars.push_back(gvolumeName);                           // 01 name
 	pars.push_back(GWORLDNAME);                            // 02 mother: by default is GWORLDNAME
-	pars.push_back(extension);                             // 03 type contains the extension
+	pars.push_back(importType);                            // 03 type
 	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 04 parameters
 	pars.push_back("G4_AIR");                              // 05 material: default is air
 	pars.push_back("0*cm 0*cm 0*cm");                      // 06 pos
@@ -89,7 +87,7 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 16 solidsOpr
 	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 17 mirrot
 	pars.push_back("1");                                   // 18 exist
-	pars.push_back(importType + " import of " + filename); // 19 description: contains full path
+	pars.push_back(filename);                              // 19 description: contains full path
 
 	addGVolume(pars, verbosity);
 }

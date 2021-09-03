@@ -339,7 +339,7 @@ namespace CADMesh {
 		class BuiltInReader : public Reader {
 		public:
 			BuiltInReader() : Reader("BuiltInReader"){};
-			virtual ~BuiltInReader();
+			virtual ~BuiltInReader() {;}
 
 		public:
 			G4bool Read(G4String filepath);
