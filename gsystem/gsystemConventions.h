@@ -16,11 +16,11 @@
 #define GWORLDNAME                 "world"
 #define NOMODIFIER                 "noModifier"
 
-#define GEMC_TEXTDB       "GEMC_TEXTDB"
-#define GSYSTEMTXTFACTORY "GSystemTEXTFactory"
-#define GSYSTEMCADFACTORY "GSystemCADFactory"
-#define GSYSTEMGDMFACTORY "GSystemGDMLFactory"
-#define GSYSTEMSQLFACTORY "GSystemMYSQLFactory"
+#define GEMC_TEXTDB        "GEMC_TEXTDB"
+#define GSYSTEMTXTFACTORY  "GSystemTEXTFactory"
+#define GSYSTEMCADFACTORY  "GSystemCADFactory"
+#define GSYSTEMGDMLFACTORY "GSystemGDMLFactory"
+#define GSYSTEMYSQLFACTORY "GSystemMYSQLFactory"
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"

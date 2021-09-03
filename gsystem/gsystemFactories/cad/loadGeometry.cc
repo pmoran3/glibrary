@@ -1,15 +1,8 @@
 // gsystem
 #include "systemCadFactory.h"
 
-// mlibrary
-#include "gutilities.h"
-using namespace gutilities;
 
-// c++
-#include <iostream>
-using namespace std;
-
-void GSystemCadFactory::loadGeometry(GSystem *s, int verbosity)
+void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 {
 //	vector<string> possibleLocations = gopt->getStringVectorValue("setupDir");
 	
@@ -19,4 +12,6 @@ void GSystemCadFactory::loadGeometry(GSystem *s, int verbosity)
 //		s->addGImportedVolume("cad", cf, verbosity);
 //	}
 }
+
+
 

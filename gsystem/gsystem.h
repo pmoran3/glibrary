@@ -19,8 +19,8 @@ public:
 
 private:
 	string      name;               // System name
-	string      path;               // System path (directory for text, gdml, cad factories, mysql db name for mysql)
-	string   factoryName;               // Factory that builds the detector
+	string      path;               // System absolute or relative path (directory for text, gdml, cad factories, mysql db name for mysql)
+	string   factoryName;           // Factory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
 
 	// map containing the volumes
@@ -29,7 +29,7 @@ private:
 	// each system name must be unique
 	map<string, GVolume*> *gvolumesMap;
 
-	string formVolumeKey(string detectorName) {
+	inline const string formVolumeKey(string detectorName) const {
 		if (name == ROOTWORLDGVOLUMENAME) {
 			return ROOTWORLDGVOLUMENAME;
 		}
@@ -37,10 +37,11 @@ private:
 	}
 
 public:
-	string getName() const      { return name; }
-	string getFactoryName() const   { return factoryName; }
-	string getVariation() const { return variation; }
-	string getFile() const      { return path + "/" + name; }
+	inline const string getName()        const { return name; }
+	inline const string getFactoryName() const { return factoryName; }
+	inline const string getVariation()   const { return variation; }
+	inline const string getFile()        const { return path + "/" + name; }
+	inline const string getPath()        const { return path ;}
 
 	
 	// returns a vector of import files, checking all possible directories.
@@ -56,7 +57,7 @@ public:
 	// void addGImportedVolume(string importType, string filename, int verbosity);
 
 	// need to filter system name from key
-	GVolume* getGVolume(string detectorName) {
+	inline GVolume* getGVolume(string detectorName) const {
 
 		string key = formVolumeKey(detectorName);
 

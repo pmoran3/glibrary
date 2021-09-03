@@ -26,8 +26,9 @@ private:
 	map<string, GSystem*>  *gsystemsMap;    // key is system name
 	map<string, GModifier*> gmodifiersMap;  // key is volume name
 
-	// seerch for a volume among systems in gsystemsMap
-	GVolume* searchForVolume(string volumeName, string purpose) ;
+	// search for a volume among systems in gsystemsMap
+	// cannot return const because this is used in the constructor to apply shifts
+	GVolume* searchForVolume(string volumeName, string purpose) const;
 
 
 public:

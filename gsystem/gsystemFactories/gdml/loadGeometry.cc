@@ -1,41 +1,16 @@
 // gsystem
-#include "systemTextFactory.h"
+#include "systemGdmlFactory.h"
 
-// mlibrary
-#include "gutilities.h"
-using namespace gutilities;
-
-// c++
-#include <iostream>
-using namespace std;
-
-void GSystemTextFactory::loadGeometry(GOptions* gopt, GSystem *s)
+void GSystemGDMLFactory::loadGeometry(GSystem *s, int verbosity)
 {
-	vector<string> possibleLocations = gopt->getStringVectorValue("setupDir");
-	ifstream *IN = s->gSystemFile(1, possibleLocations, verbosity);
-	
-	// it could be not found
-	if(!IN->good()) {
-		return;
-	}
-	
-	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << setupLogHeader << " Loading <text> geometry for " <<  s->getName() << endl;
-	}
-	
-	// loading volumes
-	while(!IN->eof()) {
-		
-		string dbline;
-		getline(*IN, dbline);
-		
-		if(!dbline.size())
-			continue;
-		
-		s->addGVolume(getStringVectorFromStringWithDelimiter(dbline, "|"), verbosity);
-	}
-	
-	IN->close();
-	
+	//	vector<string> possibleLocations = gopt->getStringVectorValue("setupDir");
+
+	//	vector<string> cadFiles = s->gImportFiles(possibleLocations, verbosity, {"stl", "ply", "obj"});
+	//
+	//	for(auto cf: cadFiles) {
+	//		s->addGImportedVolume("cad", cf, verbosity);
+	//	}
 }
+
+
 

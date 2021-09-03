@@ -8,7 +8,6 @@ using namespace gutilities;
 // c++
 using namespace std;
 
-//#include "dirent.h" // for directory access to DIR object
 
 GSystemTextFactory::GSystemTextFactory() {
 	
@@ -32,8 +31,8 @@ GSystemTextFactory::GSystemTextFactory() {
 // returns the file stream, checking all possible directories.
 ifstream* GSystemTextFactory::gSystemTextFile(GSystem *system, string SYSTEMTYPE, int verbosity)
 {
-	string fileName = system->getFile();
-	string variation  = system->getVariation();
+	string fileName  = system->getFile();
+	string variation = system->getVariation();
 	
 	string fname = fileName +  SYSTEMTYPE + variation + ".txt";
 	

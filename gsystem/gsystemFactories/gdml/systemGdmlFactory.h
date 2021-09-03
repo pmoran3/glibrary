@@ -1,17 +1,17 @@
-#ifndef SYSTEMCADFACTORY_H
-#define SYSTEMCADFACTORY_H 1
+#ifndef SYSTEMGDMLFACTORY_H
+#define SYSTEMGDMLFACTORY_H 1
 
 // gsystem
-#include "systemFactory.h"
+#include "../systemFactory.h"
 
 // system factory
-class GSystemCADFactory : GSystemFactory
+class GSystemGDMLFactory : GSystemFactory
 {
 
 public:
-	
+
 	// constructor will load the possible location(s) of the geometry and material databases
-	GSystemCADFactory();
+	GSystemGDMLFactory();
 
 private:
 	vector<string> possibleLocationOfTextDatabases;

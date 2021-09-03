@@ -13,6 +13,7 @@
 // system factory
 class GSystemTextFactory : GSystemFactory
 {
+
 public:
 
 	// constructor will load the possible location(s) of the geometry and material databases

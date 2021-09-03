@@ -13,7 +13,9 @@ sources = [
 			  'gsystemFactories/text/loadMaterial.cc',
 			  'gsystemFactories/text/loadGeometry.cc',
 			  'gsystemFactories/cad/loadMaterial.cc',
-			  'gsystemFactories/cad/loadGeometry.cc'
+			  'gsystemFactories/cad/loadGeometry.cc',
+			  'gsystemFactories/gdml/loadMaterial.cc',
+			  'gsystemFactories/gdml/loadGeometry.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

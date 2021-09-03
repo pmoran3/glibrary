@@ -7,7 +7,7 @@
 #include "gsystemFactories/systemFactory.h"
 #include "gsystemFactories/text/systemTextFactory.h"
 #include "gsystemFactories/cad/systemCadFactory.h"
-//#include "gsystemFactories/gdml/systemCadFactory.h"
+#include "gsystemFactories/gdml/systemGdmlFactory.h"
 //#include "gsystemFactories/mysql/systemCadFactory.h"
 
 
@@ -55,18 +55,13 @@ GWorld::GWorld(GOptions* gopts) {
 			}
 		} else if(factoryName == "cad") {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMCADFACTORY);
+				gSystemManager.RegisterObjectFactory<GSystemCADFactory>(GSYSTEMCADFACTORY);
 				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
 			}
 		}  else if(factoryName == "gdml") {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMGDMFACTORY);
-				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMFACTORY);
-			}
-		} else if(factoryName == "mysql") {
-			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemCadFactory>(GSYSTEMSQLFACTORY);
-				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMSQLFACTORY);
+				gSystemManager.RegisterObjectFactory<GSystemGDMLFactory>(GSYSTEMGDMLFACTORY);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMLFACTORY);
 			}
 		}
 	}
@@ -145,7 +140,7 @@ GWorld::GWorld(GOptions* gopts) {
 
 
 // seerch for a volume among systems in gsystemsMap
-GVolume* GWorld::searchForVolume(string volumeName, string purpose) {
+GVolume* GWorld::searchForVolume(string volumeName, string purpose) const {
 
 	GVolume* volumeFound = nullptr;
 

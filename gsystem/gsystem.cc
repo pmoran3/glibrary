@@ -53,8 +53,8 @@ void GSystem::addROOTVolume(string rootVolumeDefinition) {
 }
 
 
-// build and add an imported volume to the map
-//void GSystem::addGImportedVolume(string importType, string filename, int verbosity)
+// define and add a CAD imported volume to gvolumesMap
+//void GSystem::importCadVolumeFromFile(string importType, string filename, int verbosity)
 //{
 //	string nameKey = getFilenameFromFilenameWithPath(filename);
 //	vector<string> pars;
