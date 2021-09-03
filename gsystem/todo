@@ -1,6 +1,4 @@
 - doxygen
-- API name? 
-- gvolumesMap should it be a pointer?
-- GWorld vars should be pointers?
+- assign each gvolume var to a specific entry in pars instead of using pars[i++]
 - add proper log messages
 - improve gvolume << printout

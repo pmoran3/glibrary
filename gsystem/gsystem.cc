@@ -58,28 +58,35 @@ void GSystem::addROOTVolume(string rootVolumeDefinition) {
 void GSystem::addVolumeFromFile(string importType, string filename, int verbosity) {
 	vector<string> pars;
 
-	string gvolumeName = getFileFromPath(filename);
+	vector<string> gvpaths = getStringVectorFromStringWithDelimiter(filename, ".");
+
+	// first, get fist item w/o path
+	string gvolumeName = getFileFromPath(gvpaths.front());
+	// adding the rest except the extension
+	for ( int i=1; i<gvpaths.size() - 1; i++) {
+		gvolumeName += gvpaths[i];
+	}
 
 	// order is defined in gvolume.cc
 	pars.push_back(gvolumeName);                           // 01 name
 	pars.push_back(GWORLDNAME);                            // 02 mother: by default is GWORLDNAME
-	pars.push_back(importType + " import of " + filename); // 03 description: contains full path
-	pars.push_back(importType);                            // 04 type
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 05 parameters
-	pars.push_back("1");                                   // 06 visible
-	pars.push_back("1");                                   // 07 style
-	pars.push_back("999999");                              // 08 color
-	pars.push_back("G4_AIR");                              // 09 material: default is air
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 10 emfield
-	pars.push_back("0*cm 0*cm 0*cm");                      // 11 pos
-	pars.push_back("0*deg 0*deg 0*deg");                   // 12 rot
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 13 sensitivity
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 14 touchableID
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 15 copyOf
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 16 replicaOf
-	pars.push_back("1");                                   // 17 pCopyNo
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 18 solidsOpr
-	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 19 mirror
+	pars.push_back(importType);                            // 03 type
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 04 parameters
+	pars.push_back("G4_AIR");                              // 05 material: default is air
+	pars.push_back("0*cm 0*cm 0*cm");                      // 06 pos
+	pars.push_back("0*deg 0*deg 0*deg");                   // 07 rot
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 08 emfield
+	pars.push_back("1");                                   // 09 visible
+	pars.push_back("1");                                   // 10 style
+	pars.push_back("999999");                              // 11 color
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 12 digitization
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 13 gidentity
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 14 copyOf
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 15 replicaOf
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 16 solidsOpr
+	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 17 mirrot
+	pars.push_back("1");                                   // 18 exist
+	pars.push_back(importType + " import of " + filename); // 19 description: contains full path
 
 	addGVolume(pars, verbosity);
 }
