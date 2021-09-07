@@ -1,8 +1,6 @@
 #ifndef  GSYSTEM_CONVENTIONS_H
 #define  GSYSTEM_CONVENTIONS_H  1
 
-#define GSYSTEMNOTAPPLICABLEENTRY  "na"
-
 // number of database pars defining a gvolume
 #define GVOLUMENUMBEROFPARS    19
 #define DEFAULTPOSITION       "0*cm, 0*cm, 0*cm";
@@ -15,7 +13,7 @@
 #define EC__GVOLUMENOTFOUND        204
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
-#define NOMODIFIER                 "noModifier"
+#define GSYSTEMNOMODIFIER          "noModifier"
 
 #define GEMC_TEXTDB        "GEMC_TEXTDB"
 #define GSYSTEMTXTFACTORY  "GSystemTEXTFactory"

@@ -106,5 +106,5 @@ string G4World::g4FactoryNameFromSystemFactory(string factory) {
 		cerr << FATALERRORL << "g4systemFactory factory <" << factory << "> not found in g4FactoryNameFromSystemFactory." << endl;
 		gexit(EC__G4SYSTEMFACTORYNOTFOUND);
 	}
-	return G4SYSTEMNOTAPPLICABLEENTRY;
+	return UNINITIALIZEDSTRINGQUANTITY;
 }

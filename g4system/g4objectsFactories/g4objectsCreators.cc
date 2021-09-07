@@ -90,12 +90,12 @@ G4RotationMatrix* G4ObjectsFactory::getRotation(GVolume *s)
 	}
 
 	// tilt modifier (only xyz order)
-	if(s->getTilt() != G4SYSTEMNOTAPPLICABLEENTRY) {
+	if(s->getTilt() != GSYSTEMNOMODIFIER) {
 		vector<double> tiltVector = getG4NumbersFromString(s->getTilt());
 		if(tiltVector.size() == 3) {
 			rot->rotateX(tiltVector[0]);
-			rot->rotateZ(tiltVector[1]);
-			rot->rotateY(tiltVector[2]);
+			rot->rotateY(tiltVector[1]);
+			rot->rotateZ(tiltVector[2]);
 		}
 	}
 	return rot;
@@ -113,7 +113,7 @@ G4ThreeVector G4ObjectsFactory::getPosition(GVolume *s)
 	}
 
 	// shift modifier
-	if(s->getShift() != G4SYSTEMNOTAPPLICABLEENTRY) {
+	if(s->getShift() != GSYSTEMNOMODIFIER) {
 		vector<double> shiftVector = getG4NumbersFromString(s->getShift());
 		if(shiftVector.size() == 3) {
 			G4ThreeVector shift(shiftVector[0], shiftVector[1], shiftVector[2]);

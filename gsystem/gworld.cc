@@ -31,7 +31,7 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// loading gmodifiersMap
 	for (auto& modifier: jmodifiers) {
-		if ( modifier.volume != NOMODIFIER) {
+		if ( modifier.volume != GSYSTEMNOMODIFIER) {
 			gmodifiersMap[modifier.volume] = new GModifier(modifier.volume, modifier.shift, modifier.tilt, modifier.isPresent, verbosity);
 		}
 	}

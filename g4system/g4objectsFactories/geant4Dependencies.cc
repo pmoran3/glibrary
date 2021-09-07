@@ -15,7 +15,7 @@ bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<st
 	string solidsOpr = s->getSolidsOpr();
 
 	// copy
-	if(copyOf != G4SYSTEMNOTAPPLICABLEENTRY) {
+	if(copyOf != UNINITIALIZEDSTRINGQUANTITY) {
 		vector<string> copies = gutilities::getStringVectorFromString(copyOf);
 		if(copies.size() == 2) {
 			// first string must be copyOf
@@ -38,10 +38,10 @@ bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<st
 			return false;
 		}
 		// replica
-	} else if(replicaOf != G4SYSTEMNOTAPPLICABLEENTRY) {
+	} else if(replicaOf != UNINITIALIZEDSTRINGQUANTITY) {
 
 		// solid operation
-	} else if(solidsOpr != G4SYSTEMNOTAPPLICABLEENTRY) {
+	} else if(solidsOpr != UNINITIALIZEDSTRINGQUANTITY) {
 		vector<string> solidOperations = gutilities::getStringVectorFromString(solidsOpr);
 		if(solidOperations.size() == 3) {
 			if(solidOperations[1] == "+" || solidOperations[1] == "-" || solidOperations[1] == "*") {

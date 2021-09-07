@@ -44,8 +44,8 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		description  = trimSpacesFromString(pars[i++]);
 
 		// modifiers - accessed through options/jcard
-		shift = UNINITIALIZEDSTRINGQUANTITY;
-		tilt  = UNINITIALIZEDSTRINGQUANTITY;
+		shift = GSYSTEMNOMODIFIER;
+		tilt  = GSYSTEMNOMODIFIER;
 
 		// set file with path if it's a CAD/GDML import
 		importFilename = importPath;
@@ -115,10 +115,9 @@ GVolume::GVolume(string rootVolumeDefinition) {
 
 	description  = "root volume";
 
-
 	// modifiers - accessed through options/jcard
-	shift = UNINITIALIZEDSTRINGQUANTITY;
-	tilt  = UNINITIALIZEDSTRINGQUANTITY;
+	shift = GSYSTEMNOMODIFIER;
+	tilt  = GSYSTEMNOMODIFIER;
 
 	// set file with path if it's a CAD/GDML import
 	importFilename = "none";

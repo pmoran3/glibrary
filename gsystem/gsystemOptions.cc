@@ -111,17 +111,17 @@ namespace gsystem {
 		json jsonModifierNameTag = {
 			{GNAME, "volume"},
 			{GDESC, "volume name (optional) "},
-			{GDFLT, NOMODIFIER}
+			{GDFLT, GSYSTEMNOMODIFIER}
 		};
 		json jsonModifierShiftTag = {
 			{GNAME, "shift"},
 			{GDESC, "volume shift added to existing position"},
-			{GDFLT, NOMODIFIER}
+			{GDFLT, GSYSTEMNOMODIFIER}
 		};
 		json jsonModifierTiltTag = {
 			{GNAME, "tilt"},
 			{GDESC, "volume tilt added to existing rotation"},
-			{GDFLT, NOMODIFIER}
+			{GDFLT, GSYSTEMNOMODIFIER}
 		};
 
 		json jsonModifierPresentTag = {
@@ -140,7 +140,7 @@ namespace gsystem {
 		help.clear();
 		help.push_back("The volume modifer can shift, tilt, or delete a volume from the gworld");
 		help.push_back("");
-		help.push_back("Example: +gmodifier={volume: targetCell; tilt: 0, 0, -10, cm; }");
+		help.push_back("Example: +gmodifier={volume: targetCell; tilt: 0*deg, 0*deg, -10*deg }");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));

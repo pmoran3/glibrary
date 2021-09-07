@@ -19,8 +19,8 @@ public:
 
 		if( verbosity ) {
 			cout << GSYSTEMLOGHEADER <<  "volume " << name << " modified with:";
-			if (  shift != NOMODIFIER) cout << " - shift: "     << shift   ;
-			if (  tilts != NOMODIFIER) cout << " - tilts: "     << tilts   ;
+			if (  shift != GSYSTEMNOMODIFIER) cout << " - shift: "     << shift   ;
+			if (  tilts != GSYSTEMNOMODIFIER) cout << " - tilts: "     << tilts   ;
 			if ( !isPresent )         cout << " - existance: " << isPresent ;
 			cout << endl;
 		}
