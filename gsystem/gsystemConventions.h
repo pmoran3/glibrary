@@ -15,7 +15,6 @@
 #define EC__GVOLUMENOTFOUND        204
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
-#define GWORLDNAME                 "world"
 #define NOMODIFIER                 "noModifier"
 
 #define GEMC_TEXTDB        "GEMC_TEXTDB"

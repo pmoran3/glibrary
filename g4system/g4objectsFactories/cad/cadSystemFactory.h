@@ -5,13 +5,6 @@
 #include "g4systemConventions.h"
 #include "g4objectsFactories/g4objectsFactory.h"
 
-// Cadmesh single header library, @tag 2.0.3
-// https://github.com/christopherpoole/CADMesh
-// notice I made some changes to silence the warnings:
-// - added virtual destructor on line 342,
-// - made destructor virtual on line 400
-#include "CADMesh.hh"
-
 
 // system factory
 class G4CadSystemFactory : G4ObjectsFactory
@@ -28,7 +21,9 @@ public:
 
 		G4VSolid*          sbuild = buildSolid(gopt, s, g4s);
 		G4LogicalVolume*   lbuild = buildLogical(gopt, s, g4s);
-		lbuild->SetVisAttributes(createVisualAttributes(s));
+		if ( lbuild != nullptr) {
+			lbuild->SetVisAttributes(createVisualAttributes(s));
+		}
 		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
 
 		if(verbosity >= GVERBOSITY_DETAILS) {

@@ -1,7 +1,7 @@
 from init_env import init_environment
 
 # load needed environment for all glibraries
-env = init_environment('glibrary clhep geant4 qt5')
+env = init_environment('glibrary clhep geant4 qt5 cadmesh')
 env.Append(CXXFLAGS=['-std=c++17'])
 
 gdata                = SConscript('gdata/SConscript',                exports='env')

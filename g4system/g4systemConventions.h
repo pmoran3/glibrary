@@ -6,7 +6,7 @@
 #define G4SYSTEMNOTAPPLICABLEENTRY  "na"
 #define G4SYSTEMLOGHEADER           " ⌂ G4System ▸ "
 
-#define G4SYSTEMNATFACTORY "G4SystemNATVFactory"
+#define G4SYSTEMNATFACTORY "G4SystemNativeFactory"
 #define G4SYSTEMCADFACTORY "G4SystemCADFactory"
 #define G4SYSTEMGDMFACTORY "G4SystemGDMLFactory"
 

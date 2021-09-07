@@ -70,12 +70,12 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 
 	// order is defined in gvolume.cc
 	pars.push_back(gvolumeName);                           // 01 name
-	pars.push_back(GWORLDNAME);                            // 02 mother: by default is GWORLDNAME
+	pars.push_back(ROOTWORLDGVOLUMENAME);                  // 02 mother: by default is ROOTWORLDGVOLUMENAME
 	pars.push_back(importType);                            // 03 type
 	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 04 parameters
 	pars.push_back("G4_AIR");                              // 05 material: default is air
-	pars.push_back("0*cm 0*cm 0*cm");                      // 06 pos
-	pars.push_back("0*deg 0*deg 0*deg");                   // 07 rot
+	pars.push_back("0*cm, 0*cm, 0*cm");                      // 06 pos
+	pars.push_back("0*deg, 0*deg, 0*deg");                   // 07 rot
 	pars.push_back(GSYSTEMNOTAPPLICABLEENTRY);             // 08 emfield
 	pars.push_back("1");                                   // 09 visible
 	pars.push_back("1");                                   // 10 style

@@ -65,7 +65,7 @@ GLIB_ROOT   = /opt/projects/gemc/glibrary
 GLIB_HEADS1 = $GLIB_ROOT/guts $GLIB_ROOT/goptions $GLIB_ROOT/gsplash
 GLIB_HEADS2 = $GLIB_ROOT/gdata $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit $GLIB_ROOT/gdynamicDigitization
 GLIB_HEADS3 = $GLIB_ROOT/gsystem $GLIB_ROOT/g4system $GLIB_ROOT/gstreamer $GLIB_ROOT/textProgressBar $GLIB_ROOT/eventDispenser
-GLIB_HEADS4 = $GLIB_ROOT/gQtButtonsWidget $GLIB_ROOT/g4display $GLIB_ROOT/gtranslationTable
+GLIB_HEADS4 = $GLIB_ROOT/gQtButtonsWidget $GLIB_ROOT/g4display $GLIB_ROOT/gtranslationTable $GLIB_ROOT/include
 
 //GLIB_CMESH    = $GLIB_ROOT/cadmesh/include $GLIB_ROOT/cadmesh/external/tetgen $GLIB_ROOT/cadmesh/external/assimp/include/
 GLIB_HEADS = $GLIB_HEADS1 $GLIB_HEADS2 $GLIB_HEADS3 $GLIB_HEADS4

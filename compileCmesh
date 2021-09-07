@@ -1,0 +1,23 @@
+#!/bin/csh -f
+
+# making sure we're using the right compiler
+setenv CC gcc
+setenv CXX g++
+
+
+rm -rf cadmeshBuild
+mkdir cadmeshBuild
+cd cadmeshBuild
+
+# setting
+set ncpu = `getconf _NPROCESSORS_ONLN`
+set opt = " -j"$ncpu" "
+
+echo
+echo Compiling with options $opt
+echo
+
+cmake ../cadmesh -DCMAKE_INSTALL_PREFIX:PATH=$GLIBRARY
+make $opt install
+echo done
+
