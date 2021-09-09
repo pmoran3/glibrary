@@ -55,6 +55,8 @@ private:
 	map<int, vector<double> > nielfactorMap;
 	map<int, vector<double> > E_nielfactorMap;
 
+	map<int, double> pMassMeV;
+
 	double getNielFactorForParticleAtEnergy(int pid, double energy);
 };
 

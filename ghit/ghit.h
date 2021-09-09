@@ -50,8 +50,13 @@ private:
 	vector<G4ThreeVector> localPositions;
 
 	// bit 1
+	vector<int> pids;
+	vector<float> Es;
+
+	// bit 2
 	vector<float> stepSize;
 
+	// calculated quantities
 	// initialized to UNINITIALIZEDNUMBERQUANTITY. Set/retrieved with methods below
 	float totalEnergyDeposited;
 	float averageTime;
@@ -63,12 +68,14 @@ private:
 
 public:
 	// public interface: getting step by step quantities
-	vector<float> getEdeps() {return edeps;}
-	vector<float> getTimes() {return times;}
-	vector<G4ThreeVector> getGlobalPositions() {return globalPositions;}
-	vector<G4ThreeVector> getLocalPositions()  {return localPositions;}
+	const vector<float> getEdeps()                   const { return edeps;}
+	const vector<float> getTimes()                   const { return times;}
+	const vector<G4ThreeVector> getGlobalPositions() const { return globalPositions;}
+	const vector<G4ThreeVector> getLocalPositions()  const { return localPositions; }
+	const vector<int> getPids()                      const { return pids;}
+	const vector<float> getEs()                      const { return Es;}
 
-	// public interface: calculated quantities defined in calculationscc
+	// calculated quantities
 	void calculateInfosForBit(int bit);
 	float getTotalEnergyDeposited();
 	float getAverageTime();

@@ -5,7 +5,7 @@
 bool GDosimeterDigitization::defineReadoutSpecs() {
 	float     timeWindow = 10;                  // electronic readout time-window of the detector
 	float     gridStartTime = 0;                // defines the windows grid
-	HitBitSet hitBitSet = HitBitSet("000000");  // defines what information to be stored in the hit
+	HitBitSet hitBitSet = HitBitSet("000001");  // defines what information to be stored in the hit
 	bool      verbosity = true;
 
 	readoutSpecs = new GReadoutSpecs(timeWindow, gridStartTime, hitBitSet, verbosity);
@@ -23,9 +23,24 @@ GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
 	GDigitizedData* gdata = new GDigitizedData(ghit);
 
 	gdata->includeVariable(identity.getName(), identity.getValue()             );
+
 	gdata->includeVariable("hitn",             hitn                            );
 	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
 	gdata->includeVariable("time",             ghit->getAverageTime()          );
+
+	auto pids = ghit->getPids();
+	auto pEnergies = ghit->getEs();
+
+	double nielWeight = 0;
+	for( int stepIndex = 0; stepIndex < pids.size(); stepIndex++) {
+		int pid = pids[stepIndex];
+		int E = pEnergies[stepIndex] - pMassMeV[pid];
+
+		nielWeight += getNielFactorForParticleAtEnergy(pid, E);
+	}
+
+
+
 
 	return gdata;
 }
@@ -46,10 +61,12 @@ bool GDosimeterDigitization::loadConstants(int runno, string variation) {
 
 	for ( auto [pid, filename]: nielDataFiles) {
 
+		string dataFileWithPath = "dosimeterData/Niel/" + filename;
+
 		ifstream inputfile;;
-		inputfile.open(filename, ifstream::in);
+		inputfile.open(dataFileWithPath, ifstream::in);
 		if( !inputfile ) {
-			cerr << " Error loading dosimeter data for pid <" << pid << "> from file " << filename  << endl;
+			cerr << " Error loading dosimeter data for pid <" << pid << "> from file " << dataFileWithPath  << endl;
 			return false;
 		}
 
@@ -63,14 +80,46 @@ bool GDosimeterDigitization::loadConstants(int runno, string variation) {
 			E_nielfactorMap[pid].push_back(p1);
 		}
 		inputfile.close();
-
-
 	}
+
+	// load particle masses map
+	pMassMeV[11]   = 0.510;
+	pMassMeV[211]  = 139.570;
+	pMassMeV[2112] = 939.565;
+	pMassMeV[2212] = 938.272;
 
 
 	return true;
 }
 
-double GDosimeterDigitization::getNielFactorForParticleAtEnergy(int pid, double energy) {
+double GDosimeterDigitization::getNielFactorForParticleAtEnergy(int pid, double energyMeV) {
 
+	// input energy in MeV
+	auto niel_N = nielfactorMap[pid].size();
+	auto j = niel_N;
+
+	for ( int i=0; i<niel_N; i++ ) {
+		if ( energyMeV < E_nielfactorMap[pid][i] ) {
+			j=i;
+			break;
+		}
+	}
+
+	double value;
+
+	if (j>0 && j<niel_N) {
+		auto nielfactorAtJ     = nielfactorMap[pid][j-1];
+		auto nielfactorAtJM1   = nielfactorMap[pid][j];
+		auto E_nielfactorAtJ   = E_nielfactorMap[pid][j-1];
+		auto E_nielfactorAtJM1 = E_nielfactorMap[pid][j];
+
+		value = nielfactorAtJM1 + ( nielfactorAtJ - nielfactorAtJM1 ) / ( E_nielfactorAtJ - E_nielfactorAtJM1 )*( energyMeV - E_nielfactorAtJM1);
+
+	} else if (j==0) {
+		value = nielfactorMap[pid].front();
+	} else {
+		value = nielfactorMap[pid].back();
+	}
+
+	return value;
 }
