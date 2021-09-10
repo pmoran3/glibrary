@@ -12,8 +12,8 @@ using namespace std;
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
 GOption::GOption(string name, string d):
-name{name},
-description{d},
+name(name),
+description(d),
 isSwitch(true),
 cumulative(false)
 {
@@ -25,14 +25,18 @@ cumulative(false)
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
 GOption::GOption(json j):
-name{j[GNAME]},
-description{j[GDESC]},
-joptionDefinition{j},
-help{j[GDESC]},
+name(j[GNAME]),
+description(j[GDESC]),
+joptionDefinition(j),
 cumulative{false}
 {
 	// assigning defaults values
 	json jValue;
+	for (auto& h: joptionDefinition[GDESC]) {
+		help.push_back(h);
+	}
+
+	cout <<  "ASD " << joptionDefinition[GDESC] << endl;
 
 	// by constructon the keys will always be there
 	auto defaultValue = joptionDefinition[GDFLT];
@@ -50,11 +54,11 @@ cumulative{false}
 // if an option is defined with default values, it will be passed to jUserValues
 // users reset default values in the jcard or command lines
 GOption::GOption(string n, string d, json j, vector<string> h, bool m):
-name{n},
-description{d},
-joptionDefinition{j},
-help{h},
-cumulative{m}
+name(n),
+description(d),
+joptionDefinition(j),
+help(h),
+cumulative(m)
 {
 	// don't do anything if any tag has GDFLT = NODFLT
 	for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items()) {

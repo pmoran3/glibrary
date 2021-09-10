@@ -100,7 +100,7 @@ private:
 
 	// help: here we can put the full description of the option.
 	// multiple lines are defined by using "\n"
-	const vector<string> help;
+	vector<string> help;
 
 	// the option assigned values, validated against the definition
 	// this is a vector of size 1 if the option is not cumulative

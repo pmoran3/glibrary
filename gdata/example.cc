@@ -26,17 +26,17 @@ int main(int argc, char* argv[])
 		// hit with null G4Step (not used)
 		// a bitset
 		HitBitSet hitBitSet("000000");
-		GHit *newHit = new GHit(ctof, nullptr, hitBitSet);
-
-		GDigitizedData *thisHitData = new GDigitizedData(newHit);
-		
-		thisHitData->includeVariable(CRATESTRINGID,     evn);
-		thisHitData->includeVariable(SLOTSTRINGID,    2*evn);
-		thisHitData->includeVariable(CHANNELSTRINGID, 3*evn);
-
-		eventData->addDetectorDigitizedData("dc", thisHitData);
-
-		runData->push_back(eventData);
+//		GHit *newHit = new GHit(ctof, nullptr, hitBitSet);
+//
+//		GDigitizedData *thisHitData = new GDigitizedData(newHit);
+//		
+//		thisHitData->includeVariable(CRATESTRINGID,     evn);
+//		thisHitData->includeVariable(SLOTSTRINGID,    2*evn);
+//		thisHitData->includeVariable(CHANNELSTRINGID, 3*evn);
+//
+//		eventData->addDetectorDigitizedData("dc", thisHitData);
+//
+//		runData->push_back(eventData);
 	}
 
 	// we probably want to print events here 
