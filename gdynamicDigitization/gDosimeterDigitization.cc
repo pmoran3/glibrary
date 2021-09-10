@@ -32,7 +32,7 @@ GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
 	auto pEnergies = ghit->getEs();
 
 	float nielWeight = 0;
-	for( int stepIndex = 0; stepIndex < pids.size(); stepIndex++) {
+	for( size_t stepIndex = 0; stepIndex < pids.size(); stepIndex++) {
 		int pid = fabs(pids[stepIndex]); // absolute so we can catch -11 and -211
 
 		if ( pid == 11 || pid == 211 || pid == 2212 || pid == 2112) {
@@ -102,7 +102,7 @@ double GDosimeterDigitization::getNielFactorForParticleAtEnergy(int pid, double 
 	auto niel_N = nielfactorMap[pid].size();
 	auto j = niel_N;
 
-	for ( int i=0; i<niel_N; i++ ) {
+	for ( size_t i=0; i<niel_N; i++ ) {
 		if ( energyMeV < E_nielfactorMap[pid][i] ) {
 			j=i;
 			break;

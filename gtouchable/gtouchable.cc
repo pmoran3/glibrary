@@ -57,14 +57,14 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	if (verbosity) {
 		cout << " Touchable comparison:  " << endl;
-		for (int i=0; i<that.gidentity.size(); i++) {
+		for (size_t i=0; i<that.gidentity.size(); i++) {
 			cout << this->gidentity[i] << " " <<  that.gidentity[i] << endl;
 		}
 	}
 
 	// now compare that the identity is actuallty the same
 	// return false if something is different
-	for (int i=0; i<that.gidentity.size(); i++) {
+	for (size_t i=0; i<that.gidentity.size(); i++) {
 		if (this->gidentity[i] != that.gidentity[i]) {
 			return false;
 		}

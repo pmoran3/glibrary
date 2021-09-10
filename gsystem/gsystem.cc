@@ -64,7 +64,7 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 	// first, get fist item w/o path
 	string gvolumeName = getFileFromPath(gvpaths.front());
 	// adding the rest except the extension
-	for ( int i=1; i<gvpaths.size() - 1; i++) {
+	for ( size_t i=1; i<gvpaths.size() - 1; i++) {
 		gvolumeName += gvpaths[i];
 	}
 

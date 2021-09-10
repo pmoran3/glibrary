@@ -12,7 +12,7 @@ using namespace std;
 string GTranslationTable::formTTKey(vector<int> identity)
 {
 	string ttKey = "";
-	for( int v=0; v<identity.size() - 1; v++ ) {
+	for( size_t v=0; v<identity.size() - 1; v++ ) {
 		ttKey += to_string(identity[v]) + "-" ;
 	}
 	ttKey += to_string(identity.back());

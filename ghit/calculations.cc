@@ -21,7 +21,7 @@ void GHit::calculateInfosForBit(int bit)
 		float averageTime= 0;
 
 		auto nsteps = edeps.size();
-		for ( auto s=0; s<nsteps; s++) {
+		for ( size_t s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
 				averageTime += times[s]*edeps[s]/totalEnergyDeposited;
 				avgx  += globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
@@ -103,7 +103,7 @@ G4ThreeVector GHit::getAvgGlobaPosition() {
 		float  avgx = 0, avgy = 0, avgz = 0;
 
 		auto nsteps = edeps.size();
-		for ( auto s=0; s<nsteps; s++) {
+		for ( size_t s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
 				avgx  += globalPositions[s].getX()*edeps[s]/totalEnergyDeposited;
 				avgy  += globalPositions[s].getY()*edeps[s]/totalEnergyDeposited;
@@ -133,7 +133,7 @@ G4ThreeVector GHit::getAvgLocalPosition() {
 		float  avgx = 0, avgy = 0, avgz = 0;
 
 		auto nsteps = edeps.size();
-		for ( auto s=0; s<nsteps; s++) {
+		for ( size_t s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
 				avgx  += localPositions[s].getX()*edeps[s]/totalEnergyDeposited;
 				avgy  += localPositions[s].getY()*edeps[s]/totalEnergyDeposited;

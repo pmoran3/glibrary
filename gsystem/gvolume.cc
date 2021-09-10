@@ -90,7 +90,7 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	vector<string> rootDefinitions = getStringVectorFromStringWithDelimiter(rootVolumeDefinition, ",");
 	string volumeParameters = "";
 
-	for (int i=1; i<rootDefinitions.size()-1; i++) {
+	for (size_t i=1; i<rootDefinitions.size()-1; i++) {
 		volumeParameters += ", " + rootDefinitions[i];
 	}
 
