@@ -175,11 +175,11 @@ private:
 	// an option cannot be used because the parsing is part of the debug
 	// activate exit on:
 	// - duplicate options
-	bool gstrict;
+	bool gstrict = false;
 
 	// print option help and exit if set to true
 	// with any of these flags: -h --h -help --help
-	bool printHelp;
+	bool printHelp = false;
 
 	// GOption array
 	vector<GOption> goptions;
