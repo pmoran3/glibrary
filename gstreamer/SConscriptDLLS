@@ -52,6 +52,8 @@ env.Append(LIBS = ['gdata', 'guts'])
 txt_dll = env.SharedLibrary(source = txtSources, target='../lib/gstreamerTEXTFactory')
 Depends(txt_dll, '../lib/libgdata.a')
 
-# destination library is one dir up - relative to this SConscript
-root_dll = env.SharedLibrary(source = rootSources, target='../lib/gstreamerROOTFactory')
-Depends(txt_dll, '../lib/libgdata.a')
+
+if os.path.exists(ROOTSYS):
+	# destination library is one dir up - relative to this SConscript
+	root_dll = env.SharedLibrary(source = rootSources, target='../lib/gstreamerROOTFactory')
+	Depends(txt_dll, '../lib/libgdata.a')
