@@ -11,7 +11,7 @@ bool GstreamerTextFactory::publishEventDigitizedData(const string detectorName, 
 
 		string identifierString = "";
 		vector<GIdentifier> gidentity = dgtzHit->getIdentity();
-		for ( int i=0; i<gidentity.size() - 1; i++ ) {
+		for ( size_t i=0; i<gidentity.size() - 1; i++ ) {
 			identifierString += gidentity[i].getName() + "->" + to_string(gidentity[i].getValue()) + ", ";
 		}
 		identifierString += gidentity.back().getName() + "->" + to_string(gidentity.back().getValue()) ;

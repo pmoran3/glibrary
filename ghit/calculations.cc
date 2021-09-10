@@ -77,7 +77,7 @@ float GHit::getAverageTime()
 
 		averageTime = 0;
 		auto nsteps = edeps.size();
-		for ( auto s=0; s<nsteps; s++) {
+		for ( size_t s=0; s<nsteps; s++) {
 			if ( totalEnergyDeposited > 0 ) {
 				averageTime += times[s]*edeps[s]/totalEnergyDeposited;
 			} else {
