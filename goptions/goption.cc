@@ -36,8 +36,6 @@ cumulative{false}
 		help.push_back(h);
 	}
 
-	cout <<  "ASD " << joptionDefinition[GDESC] << endl;
-
 	// by constructon the keys will always be there
 	auto defaultValue = joptionDefinition[GDFLT];
 
