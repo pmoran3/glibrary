@@ -31,15 +31,19 @@ GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
 	auto pids = ghit->getPids();
 	auto pEnergies = ghit->getEs();
 
-	double nielWeight = 0;
+	float nielWeight = 0;
 	for( int stepIndex = 0; stepIndex < pids.size(); stepIndex++) {
-		int pid = pids[stepIndex];
-		int E = pEnergies[stepIndex] - pMassMeV[pid];
+		int pid = fabs(pids[stepIndex]); // absolute so we can catch -11 and -211
 
-		nielWeight += getNielFactorForParticleAtEnergy(pid, E);
+		if ( pid == 11 || pid == 211 || pid == 2212 || pid == 2112) {
+
+			int E = pEnergies[stepIndex] - pMassMeV[pid];
+
+			nielWeight += getNielFactorForParticleAtEnergy(pid, E);
+		}
 	}
 
-
+	gdata->includeVariable("nielWeight", nielWeight);
 
 
 	return gdata;
@@ -54,10 +58,10 @@ bool GDosimeterDigitization::loadConstants(int runno, string variation) {
 	// Niel Data
 	// key is PID
 	map<int, string> nielDataFiles;
-	nielDataFiles[11]    = "niel_electron.txt";
-	nielDataFiles[211]   = "niel_pion.txt";
-	nielDataFiles[2112]  = "niel_neutron.txt";
-	nielDataFiles[22212] = "niel_proton.txt";
+	nielDataFiles[11]   = "niel_electron.txt";
+	nielDataFiles[211]  = "niel_pion.txt";
+	nielDataFiles[2112] = "niel_neutron.txt";
+	nielDataFiles[2212] = "niel_proton.txt";
 
 	for ( auto [pid, filename]: nielDataFiles) {
 
@@ -105,6 +109,7 @@ double GDosimeterDigitization::getNielFactorForParticleAtEnergy(int pid, double 
 		}
 	}
 
+
 	double value;
 
 	if (j>0 && j<niel_N) {
@@ -120,6 +125,8 @@ double GDosimeterDigitization::getNielFactorForParticleAtEnergy(int pid, double 
 	} else {
 		value = nielfactorMap[pid].back();
 	}
+
+	// cout << " pid: " << pid << ", j: " << j << ", value: " << value << ", energy: " << energyMeV << endl;
 
 	return value;
 }

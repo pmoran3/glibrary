@@ -21,8 +21,8 @@ void GHit::addHitInfosForBitset(const HitBitSet hbs, const G4Step* thisStep) {
 	times.push_back(time);
 
 	// build hit information based on the bit index and the touchable
-	// starting from 1 as no bit set is handled aboce
-	for(size_t hbIndex = 1; hbIndex < hbs.size(); hbIndex++) {
+	// starting from 1 as no bit set is handled above
+	for(size_t hbIndex = 0; hbIndex < hbs.size(); hbIndex++) {
 		addHitInfosForBitIndex(hbIndex, hbs.test(hbIndex), thisStep);
 	}
 
@@ -38,18 +38,17 @@ bool GHit::addHitInfosForBitIndex(size_t bitIndex, const bool test, const G4Step
 	G4StepPoint   *prestep  = thisStep->GetPreStepPoint();
 //	G4StepPoint   *poststep = thisStep->GetPostStepPoint();
 
-	// bit 1: pid, energies
-	if(bitIndex == 1) {
+	// pid, energies
+	if(bitIndex == 0) {
 		pids.push_back(trk->GetDefinition()->GetPDGEncoding());
 		Es.push_back(prestep->GetTotalEnergy());
+	} else if(bitIndex == 1) {
 
 	} else if(bitIndex == 2) {
 
 	} else if(bitIndex == 3) {
 
 	} else if(bitIndex == 4) {
-
-	} else if(bitIndex == 5) {
 
 	}
 	

@@ -15,11 +15,12 @@ using HitBitSet = std::bitset<NHITBITS> ;
 // Information always present:
 // - local and global positions (G4ThreeVector)
 // - energy deposited, time
+// - detector dimensions
 //
 // Toggle existance by bit
-// 1st bit 000001: detector dimensions
+// 1st bit 000001: pids, total energies Es
 
-// Not implemented yet:
+// not set yet:
 // 2nd bit 000010: step length, track informations: momentum, total energy, vertex, pid, track id
 // 3rd bit 000100: mother particle tracks information
 // 4th bit 001000: meta information: magnetic field. process id name that created the particle
