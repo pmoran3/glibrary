@@ -11,6 +11,9 @@
 - "Enable Testability" for release should be set to "yes"
 - search at the workspace level for: 'active' and 'dwarf' and 'Testability'
 - make sure the scheme is set to build "Release" so that archiving build the exact same way as normal build
+- unless there is a developer account, everything should be signed to run locally
+- disable "Harneder Runtime" to allow non signed code (both debug and release)
+- also, in Signing and Capabilities, disable library validation
 - notice: test scheme should also be release
 - make sure any needed library is "linked to" and not "embedded" in the frameworks
 - Publish Your App With Symbol Information: add dSYM file so the symbols are kept in the crash reports (for example testflights). However this is only useful if we have different xcode versions. See: https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information/

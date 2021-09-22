@@ -18,9 +18,13 @@ bool GstreamerTextFactory::publishEventTrueInfoData(const string detectorName, c
 
 		*ofile << GTABTAB << "Hit address: " << identifierString << " {" << endl;
 
-		for ( auto [variableName, value]: trueInfoHit->getVariablesMap() ) {
+		for ( auto [variableName, value]: trueInfoHit->getFloatVariablesMap() ) {
 			*ofile << GTABTABTAB << variableName << ": " << value << endl;
 		}
+		for ( auto [variableName, value]: trueInfoHit->getStringVariablesMap() ) {
+			*ofile << GTABTABTAB << variableName << ": " << value << endl;
+		}
+
 		*ofile << GTABTAB << "}" << endl;
 
 

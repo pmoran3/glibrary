@@ -1,8 +1,8 @@
 open $G4ROOT/$GEANT4_VERSION/lib
 
-- graphics_reps
 - digits_hits
 - global
+- graphics_reps
 
 For the example:
 - global
@@ -11,3 +11,6 @@ For the example:
 
 
 
+open $CLHEP_BASE_DIR/lib
+
+ -

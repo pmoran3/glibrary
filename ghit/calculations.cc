@@ -43,6 +43,10 @@ void GHit::calculateInfosForBit(int bit)
 		avgGlobalPosition = G4ThreeVector(avgx,  avgy,  avgz);
 		avgLocalPosition  = G4ThreeVector(avglx, avgly, avglz);
 
+		if ( processNames.size() > 0) {
+			processName = processNames.front();
+		}
+		
 	} else if ( bit == 1 ) {
 
 	} else if ( bit == 2 ) {

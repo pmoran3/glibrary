@@ -50,7 +50,11 @@ GRootTree::GRootTree(const string detectorName, const GTrueInfoData* gdata) {
 
 	rootTree = new TTree(treeName.c_str(), description.c_str());
 
-	for ( auto& [varname, value]: gdata->getVariablesMap() ) {
+	for ( auto& [varname, value]: gdata->getFloatVariablesMap() ) {
+		registerVariable(varname, value);
+	}
+
+	for ( auto& [varname, value]: gdata->getStringVariablesMap() ) {
 		registerVariable(varname, value);
 	}
 
@@ -59,11 +63,18 @@ GRootTree::GRootTree(const string detectorName, const GTrueInfoData* gdata) {
 // true infos are floats only
 bool GRootTree::fillTree(const vector<GTrueInfoData*>*  trueInfoData) {
 
-	// all true info are floats
 	for ( auto &dataHits: *trueInfoData) {
-		for ( auto& [varname, value]: dataHits->getVariablesMap() ) {
+		// floats true info
+		for ( auto& [varname, value]: dataHits->getFloatVariablesMap() ) {
 			floatVarsMap[varname]->push_back(value);
 		}
+
+		// string true info
+		for ( auto& [varname, value]: dataHits->getStringVariablesMap() ) {
+			stringVarsMap[varname]->push_back(value);
+		}
+
+
 	}
 
 	rootTree->Fill();

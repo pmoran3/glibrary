@@ -1,5 +1,5 @@
 // location of libraries
-JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx11.5-clang12.0.5
+JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx11.6-clang13.0.0
 
 // build directory is on the home dir
 MYBUILDDIR = /Users/ungaro/builds

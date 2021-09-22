@@ -1,15 +1,1 @@
-## Glibrary Utilities (GUTS)
-
-
-
-## From Scratch:
-
-* Library Target:
-
-Sources:
- - gutilities.cc
-
-* Example Target:
-
-Sources:
- - example.cc
+No additional frameworks needed

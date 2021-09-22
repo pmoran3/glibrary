@@ -28,10 +28,11 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 	trueInfoData->includeVariable("avglx",   avgLocalPos.getX());
 	trueInfoData->includeVariable("avgly",   avgLocalPos.getY());
 	trueInfoData->includeVariable("avglz",   avgLocalPos.getZ());
-	trueInfoData->includeVariable("hitn",  hitn);
+	trueInfoData->includeVariable("hitn",    hitn);
 
 
 	// bit 1:
+	trueInfoData->includeVariable("processName",  ghit->getProcessName());
 
 	
 	return trueInfoData;

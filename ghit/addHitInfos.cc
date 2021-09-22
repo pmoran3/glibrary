@@ -1,7 +1,9 @@
 // ghit
 #include "ghit.h"
 
+// geant4
 #include "G4TouchableHistory.hh"
+#include "G4VProcess.hh"
 
 void GHit::addHitInfosForBitset(const HitBitSet hbs, const G4Step* thisStep) {
 
@@ -40,8 +42,12 @@ bool GHit::addHitInfosForBitIndex(size_t bitIndex, const bool test, const G4Step
 
 	// pid, energies
 	if(bitIndex == 0) {
+
 		pids.push_back(trk->GetDefinition()->GetPDGEncoding());
 		Es.push_back(prestep->GetTotalEnergy());
+		if( trk->GetCreatorProcess() ) {
+			processNames.push_back(trk->GetCreatorProcess()->GetProcessName());
+		}
 	} else if(bitIndex == 1) {
 
 	} else if(bitIndex == 2) {

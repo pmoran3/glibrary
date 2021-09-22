@@ -5,9 +5,6 @@ open $QTDIR/lib
   - QtCore
   - QtWidgets
 
-> glibraries:
-  - goptions
-  - guts
 
 open $G4ROOT/$GEANT4_VERSION/lib
   - intercoms

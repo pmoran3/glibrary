@@ -52,28 +52,31 @@ private:
 	// bit 1
 	vector<int> pids;
 	vector<float> Es;
+	vector<string> processNames;
 
 	// bit 2
 	vector<float> stepSize;
 
-	// calculated quantities
+	// calculated/single quantities
 	// initialized to UNINITIALIZEDNUMBERQUANTITY. Set/retrieved with methods below
 	float totalEnergyDeposited;
 	float averageTime;
 	G4ThreeVector avgGlobalPosition;
 	G4ThreeVector avgLocalPosition;
+	string processName;
 
 	// build hit information based on the bit index and the touchable
 	bool addHitInfosForBitIndex(size_t bitIndex, const bool test, const G4Step* thisStep);
 
 public:
 	// public interface: getting step by step quantities
-	const vector<float> getEdeps()                   const { return edeps;}
-	const vector<float> getTimes()                   const { return times;}
-	const vector<G4ThreeVector> getGlobalPositions() const { return globalPositions;}
-	const vector<G4ThreeVector> getLocalPositions()  const { return localPositions; }
-	const vector<int> getPids()                      const { return pids;}
-	const vector<float> getEs()                      const { return Es;}
+	inline const vector<float> getEdeps()                   const { return edeps;}
+	inline const vector<float> getTimes()                   const { return times;}
+	inline const vector<G4ThreeVector> getGlobalPositions() const { return globalPositions;}
+	inline const vector<G4ThreeVector> getLocalPositions()  const { return localPositions; }
+	inline const vector<int> getPids()                      const { return pids;}
+	inline const vector<float> getEs()                      const { return Es;}
+	inline const string getProcessName()                    const { return processName; }
 
 	// calculated quantities
 	void calculateInfosForBit(int bit);

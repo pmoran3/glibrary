@@ -9,6 +9,10 @@ GTrueInfoData::GTrueInfoData(GHit *ghit) {
 }
 
 void GTrueInfoData::includeVariable(string varName, float var) {
-	trueInfoVariablesMap[varName] = var;
+	trueInfoFloatVariablesMap[varName] = var;
+}
+
+void GTrueInfoData::includeVariable(string varName, string var) {
+	trueInfoStringVariablesMap[varName] = var;
 }
 
