@@ -141,7 +141,7 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 			cerr << " ! Warning: value " << v << " does not contain units." << endl;
 		}
 		
-		double answer;
+		double answer = 0;
 		
 		try {
 			answer = stod(value);
