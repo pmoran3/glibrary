@@ -55,18 +55,16 @@ void GSystem::addROOTVolume(string rootVolumeDefinition) {
 
 // add volume from file (CAD or GDML factories)
 // includes factory and filename in the definitions
+#include <filesystem>
+namespace fs = std::filesystem;
 void GSystem::addVolumeFromFile(string importType, string filename, int verbosity) {
 
 	vector<string> pars;
 
-	vector<string> gvpaths = getStringVectorFromStringWithDelimiter(filename, ".");
+	vector<string> gvpaths = getStringVectorFromStringWithDelimiter( fs::path(filename).filename(), ".");
 
 	// first, get fist item w/o path
-	string gvolumeName = getFileFromPath(gvpaths.front());
-	// adding the rest except the extension
-	for ( size_t i=1; i<gvpaths.size() - 1; i++) {
-		gvolumeName += gvpaths[i];
-	}
+	string gvolumeName = gvpaths.front();
 
 	// order is defined in gvolume.cc
 	pars.push_back(gvolumeName);                           // 01 name

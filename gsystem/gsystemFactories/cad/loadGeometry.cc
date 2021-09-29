@@ -10,7 +10,7 @@ void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 	vector<string> cadFiles = getListOfFilesInDirectory(dirLocation, {".stl"});
 
 	for(auto cf: cadFiles) {
-		s->addVolumeFromFile(GSYSTEMCADTFACTORY, cf, verbosity);
+		s->addVolumeFromFile(GSYSTEMCADTFACTORY, dirLocation + "/" + cf, verbosity);
 	}
 }
 
