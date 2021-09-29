@@ -30,9 +30,10 @@ private:
 	map<string, GVolume*> *gvolumesMap;
 
 	inline const string formVolumeKey(string detectorName) const {
-		if (name == ROOTWORLDGVOLUMENAME) {
+		if (detectorName == ROOTWORLDGVOLUMENAME) {
 			return ROOTWORLDGVOLUMENAME;
 		}
+
 		return name + "__" + detectorName;
 	}
 
@@ -52,16 +53,7 @@ public:
 	void addVolumeFromFile(string importType, string filename, int verbosity);
 
 	// need to filter system name from key
-	inline GVolume* getGVolume(string detectorName) const {
-
-		string key = formVolumeKey(detectorName);
-
-		if(gvolumesMap->find(key) != gvolumesMap->end()) {
-			return (*gvolumesMap)[key];
-		} else {
-			return nullptr;
-		}
-	}
+	GVolume* getGVolume(string volumeName) const;
 	
 	map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
 

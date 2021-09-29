@@ -35,7 +35,6 @@ G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string,
 	string fileName  = s->getDescription();
 	auto extension = getStringVectorFromStringWithDelimiter(fileName, ".").back();
 
-	// std::cout << " ASD extension >" << extension << "< " << fileName << std::endl;
 
 	if ( extension == "ply" ) {
 //		auto mesh = CADMesh::TessellatedMesh::FromPLY(fileName);

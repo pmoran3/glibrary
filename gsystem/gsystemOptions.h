@@ -29,7 +29,7 @@ namespace gsystem {
 		string volume;    // volume name
 		string shift;
 		string tilt;
-		bool isPresent; // true by default
+		bool isPresent;  // true by default
 	};
 
 	void from_json(const json& j, JModifier& mods);

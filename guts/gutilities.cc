@@ -135,7 +135,7 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 	// no * found
 	if(value.find("*") == string::npos) {
 		// no * found, this should be a number
-		// No unit is still ok if the number is 0
+		// no unit is still ok if the number is 0 or if it's meant to be a count
 		
 		if(value.length()>0 && warnIfNotUnit && stod(value) != 0) {
 			cerr << " ! Warning: value " << v << " does not contain units." << endl;
@@ -147,7 +147,9 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 			answer = stod(value);
 		}
 		catch(exception& e) {
-			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double " << e.what() << endl;
+			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double. ";
+			cerr << "Value: >" << v << "<, error: " << e.what() << endl;
+			gexit(EC__G4NUMBERERROR);
 		}
 		
 		return answer;
@@ -156,17 +158,19 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		string rootValue = value.substr(0, value.find("*"));
 		string units     = value.substr(value.find("*") + 1);
 		
-		double answer;
+		double answer = 0;
 		
 		try {
 			answer = stod(rootValue);
 		}
 		catch(exception& e) {
-			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double " << e.what() << endl;
+			cerr << FATALERRORL << "stod exception in gutilities: could not convert string to double. ";
+			cerr << "Value: >" << v << "<, error: " << e.what() << endl;
+			gexit(EC__G4NUMBERERROR);
 		}
 		
 		
-		if( units == "m")        answer *= m;
+		if( units == "m")              answer *= m;
 		else if( units == "inches")    answer *= 2.54*cm;
 		else if( units == "inch")      answer *= 2.54*cm;
 		else if( units == "cm")        answer *= cm;
@@ -319,7 +323,7 @@ vector<string> gutilities::getListOfFilesInDirectory(string dirName, vector<stri
 	for (const auto & entry : fs::directory_iterator(dirName)) {
 		for ( auto& extension: extensions ) {
 			if ( entry.path().extension() == extension ) {
-				fileList.push_back(entry.path());
+				fileList.push_back(entry.path().filename());
 			}
 		}
 	}

@@ -6,6 +6,7 @@
 
 // exit codes: 600
 #define EC__FILENOTFOUND     601
+#define EC__G4NUMBERERROR    602
 
 // use of colors in iostream
 // example:

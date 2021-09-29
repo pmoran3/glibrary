@@ -91,13 +91,16 @@ G4RotationMatrix* G4ObjectsFactory::getRotation(GVolume *s)
 
 	// tilt modifier (only xyz order)
 	if(s->getTilt() != GSYSTEMNOMODIFIER) {
-		vector<double> tiltVector = getG4NumbersFromString(s->getTilt());
+		vector<double> tiltVector = getG4NumbersFromString(s->getTilt(), true);
+
 		if(tiltVector.size() == 3) {
+
 			rot->rotateX(tiltVector[0]);
 			rot->rotateY(tiltVector[1]);
 			rot->rotateZ(tiltVector[2]);
 		}
 	}
+
 	return rot;
 }
 

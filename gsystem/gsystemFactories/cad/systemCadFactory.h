@@ -21,9 +21,6 @@ private:
 	virtual void loadMaterial(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
-	// returns the requested CAD directory, checking all possibleLocationOfTextDatabases
-	string gSystemCadDirectoryName(GSystem *system, int verbosity);  
-
 };
 
 

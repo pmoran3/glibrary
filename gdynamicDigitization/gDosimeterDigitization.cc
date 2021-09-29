@@ -63,14 +63,26 @@ bool GDosimeterDigitization::loadConstants(int runno, string variation) {
 	nielDataFiles[2112] = "niel_neutron.txt";
 	nielDataFiles[2212] = "niel_proton.txt";
 
+	// the data is loaded from the GPLUGIN_PATH location
+	auto pluginPathENV = getenv("GPLUGIN_PATH"); // char*
+	string pluginPath = UNINITIALIZEDSTRINGQUANTITY;
+
+	if ( pluginPathENV != nullptr ) {
+		pluginPath = string(pluginPathENV) + "/";
+	}
+	// set to current dir if pluginPath is still not defined
+	if ( pluginPath == UNINITIALIZEDSTRINGQUANTITY ) {
+		pluginPath = "./";
+	}
+
 	for ( auto [pid, filename]: nielDataFiles) {
 
-		string dataFileWithPath = "dosimeterData/Niel/" + filename;
+		string dataFileWithPath = pluginPath + "/dosimeterData/Niel/" + filename;
 
-		ifstream inputfile;;
-		inputfile.open(dataFileWithPath, ifstream::in);
-		if( !inputfile ) {
+		ifstream inputfile(dataFileWithPath);
+		if(!inputfile) {
 			cerr << " Error loading dosimeter data for pid <" << pid << "> from file " << dataFileWithPath  << endl;
+			gexit(EC__FILENOTFOUND);
 			return false;
 		}
 

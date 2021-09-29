@@ -92,3 +92,15 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 	addGVolume(pars, verbosity);
 }
 
+
+// need to filter system name from key
+GVolume* GSystem::getGVolume(string volumeName) const {
+
+	string key = formVolumeKey(volumeName);
+
+	if(gvolumesMap->find(key) != gvolumesMap->end()) {
+		return (*gvolumesMap)[key];
+	} else {
+		return nullptr;
+	}
+}

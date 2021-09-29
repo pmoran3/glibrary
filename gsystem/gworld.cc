@@ -4,17 +4,16 @@
 
 // gsystem
 #include "gworld.h"
+#include "gmodifier.h"
 #include "gsystemFactories/systemFactory.h"
 #include "gsystemFactories/text/systemTextFactory.h"
 #include "gsystemFactories/cad/systemCadFactory.h"
 #include "gsystemFactories/gdml/systemGdmlFactory.h"
-//#include "gsystemFactories/mysql/systemCadFactory.h"
-
 
 GWorld::GWorld(GOptions* gopts) {
 
-	gsystemsMap = new map<string, GSystem*>;
-	
+	gsystemsMap   = new map<string, GSystem*>;
+
 	int verbosity = gopts->getInt("gsystemv");
 
 	// projecting json options onto vector of JSystem
@@ -107,6 +106,7 @@ GWorld::GWorld(GOptions* gopts) {
 
 		// looping over systems, searching for volume
 		GVolume *thisVolume = searchForVolume(volumeNameToModify, " is marked for modifications ");
+
 		if(thisVolume != nullptr) {
 			thisVolume->applyShift(gmodifier->getShift());
 			thisVolume->applyTilt(gmodifier->getTilts());
@@ -138,9 +138,8 @@ GWorld::GWorld(GOptions* gopts) {
 // seerch for a volume among systems in gsystemsMap
 GVolume* GWorld::searchForVolume(string volumeName, string purpose) const {
 
-	GVolume* volumeFound = nullptr;
-
 	for (auto& system: *gsystemsMap) {
+
 		GVolume *thisVolume = system.second->getGVolume(volumeName);
 		if(thisVolume != nullptr) {
 			return thisVolume;
@@ -151,7 +150,7 @@ GVolume* GWorld::searchForVolume(string volumeName, string purpose) const {
 	cerr << FATALERRORL << "gvolume named <" << volumeName << "> (" << purpose << ") not found in gsystemsMap " << endl;
 	gexit(EC__GVOLUMENOTFOUND);
 
-	return volumeFound;
+	return nullptr;
 }
 
 
