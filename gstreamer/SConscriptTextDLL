@@ -1,0 +1,41 @@
+# The environment is not passed here, checking for root library
+from init_env import init_environment
+import os
+
+
+
+
+
+env = init_environment('glibrary geant4 clhep')
+
+
+
+
+
+env.Append(CPPPATH = [Dir('factories/TEXT')])
+env.Append(CXXFLAGS=['-std=c++17'])
+
+txtSources = [
+				  'factories/TEXT/gstreamerTEXTFactory.cc',
+				  'factories/TEXT/gstreamerTEXTConnection.cc',
+				  'factories/TEXT/event/event.cc',
+				  'factories/TEXT/event/eventHeader.cc',
+				  'factories/TEXT/event/publishTrueInfo.cc',
+				  'factories/TEXT/event/publishDigitized.cc',
+				  'factories/TEXT/stream/stream.cc',
+				  'factories/TEXT/stream/eventHeader.cc',
+				  'factories/TEXT/stream/publishPayload.cc'
+				  ]
+
+
+# standard pre and suffix for gemc plugins
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
+
+# notice: these two libraries needs to be added explicitly, with also the dependency below,
+# as the env scanner may run at a time where the libraries are not built yet
+env.Append(LIBS = ['gdata', 'guts'])
+
+# destination library is one dir up - relative to this SConscript
+txt_dll = env.SharedLibrary(source = txtSources, target='../lib/gstreamerTEXTFactory')
+Depends(txt_dll, '../lib/libgdata.a')

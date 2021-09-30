@@ -12,8 +12,10 @@ env.Default('../')
 # build the library
 lib = SConscript('SConscript', exports='env')
 
-# build the factories. Notice: the environment is not passed here but loaded in SConscriptDLL
-libsDLL = SConscript('SConscriptDLLS', exports='env')
+# build the factories. Notice: the environment are not passed
+# but individually loaded in each plugin
+libsTextDLL = SConscript('SConscriptTextDLL')
+libsRootDLL = SConscript('SConscriptRootDLL')
 
 
 # example(s)

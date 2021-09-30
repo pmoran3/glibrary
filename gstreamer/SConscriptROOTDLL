@@ -1,0 +1,41 @@
+# The environment is not passed here, checking for root library
+from init_env import init_environment
+import os
+
+if os.environ.get('ROOTSYS') is not None:
+	ROOTSYS = os.environ['ROOTSYS']
+
+if os.path.exists(ROOTSYS):
+	env = init_environment('glibrary geant4 clhep root')
+else:
+	print("Error: ROOT not found")
+	sys.exit(1)
+
+
+env.Append(CPPPATH = [Dir('factories/ROOT')])
+env.Append(CXXFLAGS=['-std=c++17'])
+
+rootSources = [
+					'factories/ROOT/gRootTree.cc',
+					'factories/ROOT/gstreamerROOTFactory.cc',
+					'factories/ROOT/gstreamerROOTConnection.cc',
+					'factories/ROOT/event/event.cc',
+					'factories/ROOT/event/eventHeader.cc',
+					'factories/ROOT/event/publishTrueInfo.cc',
+					'factories/ROOT/event/publishDigitized.cc',
+					'factories/ROOT/stream/stream.cc',
+					'factories/ROOT/stream/eventHeader.cc',
+					'factories/ROOT/stream/publishPayload.cc'
+					]
+
+# standard pre and suffix for gemc plugins
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
+
+# notice: these two libraries needs to be added explicitly, with also the dependency below,
+# as the env scanner may run at a time where the libraries are not built yet
+env.Append(LIBS = ['gdata', 'guts'])
+
+# destination library is one dir up - relative to this SConscript
+root_dll = env.SharedLibrary(source = rootSources, target='../lib/gstreamerROOTFactory')
+Depends(root_dll, '../lib/libgdata.a')
