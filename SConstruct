@@ -21,6 +21,6 @@ gdynamicDigitization = SConscript('gdynamicDigitization/SConscript', exports='en
 gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='env')
 
 # output plugins
-libsTextDLL = SConscript('gstreamer/SConscriptTextDLL')
-libsRootDLL = SConscript('gstreamer/SConscriptRootDLL')
+libsTextDLL = SConscript('gstreamer/SConscriptTEXTDLL')
+libsRootDLL = SConscript('gstreamer/SConscriptROOTDLL')
 
