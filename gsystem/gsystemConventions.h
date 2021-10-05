@@ -11,6 +11,7 @@
 #define EC__GVOLUMENUMBEROFPARS    202
 #define EC__GSETUPFILENOTOFOUND    203
 #define EC__GVOLUMENOTFOUND        204
+#define EC__GDIRNOTFOUND           205
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
