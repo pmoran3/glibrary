@@ -14,7 +14,7 @@ public:
 	GSystemCADFactory();
 
 private:
-	vector<string> possibleLocationOfTextDatabases;
+	vector<string> possibleLocationOfCadFiles;
 
 private:
 

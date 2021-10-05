@@ -14,7 +14,7 @@ GSystemGDMLFactory::GSystemGDMLFactory() {
 	possibleLocationOfTextDatabases.push_back(".");
 	possibleLocationOfTextDatabases.push_back("");
 
-	auto gtextEnv = getenv(GEMC_TEXTDB); // char*
+	auto gtextEnv = getenv(GEMCDB_ENV); // char*
 	if ( gtextEnv != nullptr) {
 		vector<string> dirsDB = getStringVectorFromString(gtextEnv);
 

@@ -15,8 +15,9 @@ lib = SConscript('SConscript', exports='env')
 
 # build the factories. Notice: the environment are not passed
 # but individually loaded in each plugin
-libsTextDLL = SConscript('SConscriptTEXTDLL')
-libsRootDLL = SConscript('SConscriptROOTDLL')
+libsTextDLL    = SConscript('SConscriptTEXTDLL')
+libsRootDLL    = SConscript('SConscriptROOTDLL')
+libsJlabSRODLL = SConscript('SConscriptJLABSRODLL')
 
 
 # example(s)

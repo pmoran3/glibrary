@@ -15,7 +15,7 @@
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
 
-#define GEMC_TEXTDB        "GEMC_TEXTDB"
+#define GEMCDB_ENV        "GEMCDB_ENV"
 #define GSYSTEMTXTFACTORY  "GSystemTEXTFactory"
 #define GSYSTEMCADFACTORY  "GSystemCADFactory"
 #define GSYSTEMGDMLFACTORY "GSystemGDMLFactory"

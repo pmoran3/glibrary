@@ -11,19 +11,21 @@ using namespace std;
 
 GSystemCADFactory::GSystemCADFactory() {
 
-	possibleLocationOfTextDatabases.push_back(".");
-	possibleLocationOfTextDatabases.push_back("");
+	possibleLocationOfCadFiles.push_back(".");
+	possibleLocationOfCadFiles.push_back("");
 
-	auto gtextEnv = getenv(GEMC_TEXTDB); // char*
+	// environment for cad
+	auto gtextEnv = getenv(GEMCDB_ENV); // char*
 	if ( gtextEnv != nullptr) {
 		vector<string> dirsDB = getStringVectorFromString(gtextEnv);
 
 		if ( dirsDB.size() > 0) {
 			for ( auto& dirDB: dirsDB ) {
-				possibleLocationOfTextDatabases.push_back(dirDB);
+				possibleLocationOfCadFiles.push_back(dirDB);
 			}
-
 		}
 	}
+
+	
 }
 

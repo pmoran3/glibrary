@@ -12,21 +12,17 @@ env = init_environment('glibrary geant4 clhep')
 
 
 
-env.Append(CPPPATH = [Dir('factories/TEXT')])
+env.Append(CPPPATH = [Dir('factories/JLABSRO')])
 env.Append(CXXFLAGS=['-std=c++17'])
 # needed for the plugin so we can use install_name_tool to change path for DMG installation
 env.Append(SHLINKFLAGS=['-headerpad_max_install_names'])
 
-txtSources = [
-				  'factories/TEXT/gstreamerTEXTFactory.cc',
-				  'factories/TEXT/gstreamerTEXTConnection.cc',
-				  'factories/TEXT/event/event.cc',
-				  'factories/TEXT/event/eventHeader.cc',
-				  'factories/TEXT/event/publishTrueInfo.cc',
-				  'factories/TEXT/event/publishDigitized.cc',
-				  'factories/TEXT/stream/stream.cc',
-				  'factories/TEXT/stream/frameHeader.cc',
-				  'factories/TEXT/stream/publishPayload.cc'
+jsroSources = [
+				  'factories/JLABSRO/gstreamerJLABSROFactory.cc',
+				  'factories/JLABSRO/gstreamerJLABSROConnection.cc',
+				  'factories/JLABSRO/stream/stream.cc',
+				  'factories/JLABSRO/stream/frameHeader.cc',
+				  'factories/JLABSRO/stream/publishPayload.cc'
 				  ]
 
 
@@ -39,5 +35,5 @@ env.Replace(SHLIBPREFIX = "")
 env.Append(LIBS = ['gdata', 'guts'])
 
 # destination library is one dir up - relative to this SConscript
-txt_dll = env.SharedLibrary(source = txtSources, target='../lib/gstreamerTEXTFactory')
-Depends(txt_dll, '../lib/libgdata.a')
+jsro_dll = env.SharedLibrary(source = jsroSources, target='../lib/gstreamerJLABSROFactory')
+Depends(jsro_dll, '../lib/libgdata.a')

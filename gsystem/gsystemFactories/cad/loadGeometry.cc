@@ -1,12 +1,9 @@
 // gsystem
 #include "systemCadFactory.h"
 
-
-
 void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 {
-
-	string dirLocation = searchForDirInLocations(s->getFilePath(), possibleLocationOfTextDatabases);
+	string dirLocation = searchForDirInLocations(s->getFilePath(), possibleLocationOfCadFiles);
 	vector<string> cadFiles = getListOfFilesInDirectory(dirLocation, {".stl"});
 
 	for(auto cf: cadFiles) {

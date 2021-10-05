@@ -26,7 +26,7 @@ rootSources = [
 					'factories/ROOT/event/publishTrueInfo.cc',
 					'factories/ROOT/event/publishDigitized.cc',
 					'factories/ROOT/stream/stream.cc',
-					'factories/ROOT/stream/eventHeader.cc',
+					'factories/ROOT/stream/frameHeader.cc',
 					'factories/ROOT/stream/publishPayload.cc'
 					]
 

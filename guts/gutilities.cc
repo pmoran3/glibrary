@@ -328,8 +328,6 @@ vector<string> gutilities::getListOfFilesInDirectory(string dirName, vector<stri
 		}
 	}
 
-
-
 	return fileList;
 }
 
