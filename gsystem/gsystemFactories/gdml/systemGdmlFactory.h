@@ -13,8 +13,6 @@ public:
 	// constructor will load the possible location(s) of the geometry and material databases
 	GSystemGDMLFactory();
 
-private:
-	vector<string> possibleLocationOfTextDatabases;
 
 private:
 

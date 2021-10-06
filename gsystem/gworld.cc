@@ -74,6 +74,7 @@ GWorld::GWorld(GOptions* gopts) {
 		string factory = system.second->getFactoryName();
 
 		if(systemFactory.find(factory) != systemFactory.end()) {
+			systemFactory[factory]->addPossibleFileLocation(getDirFromPath(gopts->jcardFilename));
 			systemFactory[factory]->loadSystem(system.second, verbosity);
 		} else {
 			cerr << FATALERRORL << "systemFactory factory <" << factory << "> not found for " << systemName << endl;
@@ -88,7 +89,7 @@ GWorld::GWorld(GOptions* gopts) {
 		for (auto system: *gsystemsMap) {
 			// first collect all volume names
 			for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
-				cout << GSYSTEMLOGHEADER << "system " << system.first << " volume " << volumeName << endl;
+				cout << GSYSTEMLOGHEADER << "System <" << system.first << "> volume " << volumeName << endl;
 			}
 		}
 	}

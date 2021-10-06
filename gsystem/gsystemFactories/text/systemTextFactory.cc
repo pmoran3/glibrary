@@ -11,19 +11,6 @@ using namespace std;
 
 GSystemTextFactory::GSystemTextFactory() {
 	
-	possibleLocationOfTextDatabases.push_back(".");
-	possibleLocationOfTextDatabases.push_back("");
-	
-	auto gtextEnv = getenv(GEMCDB_ENV); // char*
-	if ( gtextEnv != nullptr) {
-		vector<string> dirsDB = getStringVectorFromString(gtextEnv);
-		
-		if ( dirsDB.size() > 0) {
-			for ( auto& dirDB: dirsDB ) {
-				possibleLocationOfTextDatabases.push_back(dirDB);
-			}
-		}
-	}  
 }
 
 
@@ -42,7 +29,7 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 		return IN;
 	} else {
 		// file not good, now trying other locations
-		for(auto trialLocation : possibleLocationOfTextDatabases) {
+		for(auto trialLocation : possibleLocationOfFiles) {
 			
 			string newName = trialLocation + "/" + fname;
 			if( verbosity == GVERBOSITY_DETAILS ) {

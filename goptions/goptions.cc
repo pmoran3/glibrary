@@ -79,7 +79,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 	}
 
 	// finds a configuration file (jcard). Returns "na' if not found.
-	string jcardFilename = findBaseJCard(argc, argv);
+	jcardFilename = findBaseJCard(argc, argv);
 
 	// parsing json can throw
 	// returns all jsons objects pointed by the base and imported jcards

@@ -20,14 +20,11 @@ public:
 	GSystemTextFactory();
 
 private:
-	vector<string> possibleLocationOfTextDatabases;
-
-private:
 
 	virtual void loadMaterial(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
-	// returns the requested system file stream, checking all possibleLocationOfTextDatabases
+	// returns the requested system file stream, checking all possibleLocationOfFiles
 	ifstream* gSystemTextFileStream(GSystem *system, string SYSTEMTYPE, int verbosity);  // SYTEMTYPE one of file types above
 
 };

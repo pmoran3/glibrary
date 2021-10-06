@@ -7,7 +7,7 @@ using namespace std;
 
 void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 {
-	string dirLocation = searchForDirInLocations(s->getFilePath(), possibleLocationOfCadFiles);
+	string dirLocation = searchForDirInLocations(s->getFilePath(), possibleLocationOfFiles);
 
 	if ( filesystem::exists(dirLocation) ) {
 		vector<string> cadFiles = getListOfFilesInDirectory(dirLocation, {".stl"});

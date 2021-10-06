@@ -14,17 +14,10 @@ public:
 	GSystemCADFactory();
 
 private:
-	vector<string> possibleLocationOfCadFiles;
-
-private:
 
 	virtual void loadMaterial(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
 };
 
-
 #endif
-// returns a vector of import files, checking all possible directories.
-// this should be in some general utility library? gutilities?
-// vector<string> gImportFiles(vector<string> locations, int verbosity, vector<string> possibleExtensions);

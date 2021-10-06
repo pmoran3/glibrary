@@ -224,6 +224,8 @@ public:
 	string getString(string tag); ///< gets the string value associated with non structured option \"tag\"
 	bool getSwitch(string tag);   ///< gets the bool value associated with switch \"tag\"
 
+	string jcardFilename;         ///< jcard with path, specified by the command line
+
 	/**
 	 * @brief Get the (structured) option json values corresponding to a tag
 	 * \param tag the structured option json tag
