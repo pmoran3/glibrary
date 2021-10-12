@@ -42,7 +42,7 @@ echo Compilation completed, content of lib:
 ls -l lib/
 
 # checking on various libraries
-ls lib/libeventDispenser.a lib/libgdata.a lib/libguts.a lib/libassimp.dylib libgstreamer.a
+ls lib/libeventDispenser.a lib/libgdata.a lib/libguts.a lib/libassimp.so lib/gstreamer.a
 if [ $? -ne 0 ]; then
   echo compilation not completed
   exit 1
