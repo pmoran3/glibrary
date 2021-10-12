@@ -4,7 +4,6 @@
 setenv CC gcc
 setenv CXX g++
 
-
 rm -rf cadmeshBuild
 mkdir cadmeshBuild
 cd cadmeshBuild

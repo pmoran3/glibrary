@@ -26,18 +26,20 @@ echo "::set-output name=time::$time"
 cd /root
 git clone http://github.com/gemc/glibrary
 cd glibrary
+export GLIBRARY=`pwd`
 
 echo
 echo Compiling CadMesh
 ./compileCmesh
 
-# getting number
+# getting number of available CPUS
 copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
 echo
 echo Compiling glibrary with options: "$copt"
 scons $copt
 
-ls -l lib
+echo Compilation completed, content of lib:
+ls -l lib/
 
 # checking on various libraries
 ls lib/libeventDispenser.a lib/libgdata.a lib/libguts.a lib/libassimp.dylib libgstreamer.a
