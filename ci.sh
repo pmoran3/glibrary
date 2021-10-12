@@ -37,6 +37,8 @@ echo
 echo Compiling glibrary with options: "$copt"
 scons $copt
 
+ls -l lib
+
 # checking on various libraries
 ls lib/libeventDispenser.a lib/libgdata.a lib/libguts.a lib/libassimp.dylib libgstreamer.a
 if ($? != 0) then
