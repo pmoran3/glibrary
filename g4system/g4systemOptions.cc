@@ -36,9 +36,15 @@ namespace g4system {
 		// add a "useDefaultMaterial" switch
 		goptions.push_back(GOption("useDefaultMaterial", "use material defined by \"defaultMaterial\" option if a volume's material is not defined"));
 
+		string overlapsHelp = "Check for volumes overlaps.\n";
+		overlapsHelp += string(HELPFILLSPACE) + "Possibles values are:\n";
+		overlapsHelp += string(HELPFILLSPACE) + " - 0 (default): no check.\n";
+		overlapsHelp += string(HELPFILLSPACE) + " - 1: check for overlaps at physical volume construction.\n";
+		overlapsHelp += string(HELPFILLSPACE) + " - 2: use the geant4 overlap validator with 10,000 points on the surface\n";
+		overlapsHelp += string(HELPFILLSPACE) + " - Any number greater than 100 : use the geant4 overlap validator with this number of points on the surface";
 		json jsonG4CheckOverlaps = {
 			{GNAME, "checkOverlaps"},
-			{GDESC, "check overlaps (need better help)"},
+			{GDESC, overlapsHelp},
 			{GDFLT, 0}
 		};
 		goptions.push_back(GOption(jsonG4CheckOverlaps));

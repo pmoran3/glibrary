@@ -1,6 +1,6 @@
-- parse command line
+- add help as vector<string> for non structured option n the constructor
 
-- jcard filename string name should be a variable of goptions?
+- parse command line
 
 - non-cumulative: the last item wins, and a warning should be given if the option was found (-strict should return error instead)
 
