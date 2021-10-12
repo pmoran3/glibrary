@@ -10,7 +10,7 @@ on:
 jobs:
   validation_job:
     runs-on: ubuntu-latest
-    name: Sci-g Geometry Validation
+    name: GLibrary Validation
     steps:
       # GitHub Actions do not automatically checkout your projects. If you need the code
       # you need to check it out.

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Purpose: creates the doxygen documentation for all the glibraries
-# This script is used by TRAVIS
+# Purpose: creates the doxygen documentation for the selected glibraries
+# This script is used by the github actions
 #
 # Arguments: none
 

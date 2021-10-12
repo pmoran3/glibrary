@@ -1,9 +1,7 @@
-- right now we're passing the same environment to all libraries
-
-
 - Check github action workflows
 - add PROJECTNUMBER support in makeDoxyfileForLibrary
-- for now we need to append on this SConstruct and inside each glibrary SConstruct
+
+- for now we need to append this to the SConstruct and inside each glibrary SConstruct
 env.Append(CXXFLAGS=['-std=c++17'])
 
 
