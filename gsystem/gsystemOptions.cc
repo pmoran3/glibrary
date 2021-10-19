@@ -19,11 +19,11 @@ namespace gsystem {
 
 		vector<JSystem> systems;
 
-		auto gdets = gopts->getStructuredOptionAssignedValues("gsystem");
+		auto jdets = gopts->getStructuredOptionAssignedValues("gsystem");
 
 		// looking over each of the vector<json> items
-		for ( const auto& gdet: gdets ) {
-			systems.push_back(gdet.get<JSystem>());
+		for ( const auto& jdet: jdets ) {
+			systems.push_back(jdet.get<JSystem>());
 		}
 
 		return systems;
@@ -98,7 +98,7 @@ namespace gsystem {
 		vector<string> help;
 		help.push_back("A system definition includes the geometry location, factory and variation");
 		help.push_back("");
-		help.push_back("Example: +gsetup={detector: experiments/clas12/targets; factory: TEXT; variation: bonus;}");
+		help.push_back("Example: +gsystem={detector: \"experiments/clas12/targets\"; factory: \"TEXT\"; variation: \"bonus\";}");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gsystem", "defines a group of detectors", jsonDetectorOption, help, true));

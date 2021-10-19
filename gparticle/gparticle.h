@@ -3,6 +3,7 @@
 
 // geant4
 #include "G4ThreeVector.hh"
+#include "G4GeneralParticleSource.hh"
 
 // This class interfaces to the Geant4 General Particle Source
 class  Gparticle
@@ -20,7 +21,8 @@ private:
 
 
 public:
-	
+
+	void shootParticle(G4GeneralParticleSource* particleGun, G4Event* anEvent);
 
 };
 

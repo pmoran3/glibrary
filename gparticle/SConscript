@@ -3,7 +3,8 @@
 Import('env')
 
 sources = [
-			  'gparticle.cc'
+			  'gparticle.cc',
+			  'gparticleOptions.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript

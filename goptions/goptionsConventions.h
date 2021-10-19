@@ -8,7 +8,7 @@
 #define GNAME          "JsonTagGNAME"
 #define GDESC          "JsonTagGDESCription"
 #define GDFLT          "jsonTagDefault"
-#define NODFLT         "NODFLT"
+#define NODFLT          "NODFLT"
 
 #define IMPORTJCARD "import jcard"
 
