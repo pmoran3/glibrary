@@ -4,8 +4,8 @@
 - Close it. Move the project from  its own dir created to one dir up. Delete dir.
 - Add all the files (make sure to do scons -c to avoid including objects). Added folders: Create groups (create folder reference won't let add sources later)
 - On the general project add "settings.xcconfig" configuration for debug and release
-- Add macos Library target "libraryName". Dynamic .
-- remove libraryName directoy
+- Add macos Library target "libraryName". Dynamic. Currently 2 type of "Library" targets, choose second one, make sure it's STL C++
+- remove libraryName directory
 - add sources libraryName.cc in Compile Sources "Build Phases"
 - build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64
 - "Enable Testability" for release should be set to "yes"

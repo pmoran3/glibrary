@@ -17,6 +17,7 @@ gstreamer            = SConscript('gstreamer/SConscript',            exports='en
 eventDispenser       = SConscript('eventDispenser/SConscript',       exports='env')
 gQtButtonsWidget     = SConscript('gQtButtonsWidget/SConscript',     exports='env')
 g4display            = SConscript('g4display/SConscript',            exports='env')
+gparticle            = SConscript('gparticle/SConscript',            exports='env')
 gdynamicDigitization = SConscript('gdynamicDigitization/SConscript', exports='env')
 gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='env')
 

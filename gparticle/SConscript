@@ -1,0 +1,13 @@
+# called from the local SConstruct or
+# the glibrary SConstruct one dir up
+Import('env')
+
+sources = [
+			  'gparticle.cc'
+			  ]
+
+# destination library is one dir up - relative to this SConscript
+# this will ensure that the main glibrary SConstructs aknowledge the
+# gparticle object as 'install' instead of just the library build
+lib = env.Library(source = sources, target='gparticle')
+env.Install('../lib', lib)
