@@ -11,6 +11,14 @@ class GstreamerJSROFactory : public GStreamer
 {
 public:
 	GstreamerJSROFactory() {}
+	//FrameGenerator(unsigned int crateid, unsigned int slots,
+	//                 unsigned int channels, double hit_rate);
+	void generate_data(unsigned int counter);
+	//void update_counter(unsigned int counter);
+
+	//DataFrameHeader const& get_header() const;
+	//std::vector<unsigned int> const& get_frame_data() const;
+	//PayloadPrinter payload_printer(int nFADC, bool verbose, int rc) const;
 
 private:
 	// open and close the output media
