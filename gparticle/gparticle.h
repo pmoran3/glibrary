@@ -6,7 +6,7 @@
 
 // geant4
 #include "G4ThreeVector.hh"
-#include "G4GeneralParticleSource.hh"
+#include "G4ParticleGun.hh"
 
 // This class interfaces to the Geant4 General Particle Source
 class  Gparticle
@@ -20,16 +20,21 @@ private:
 
 	// PDG Monte Carlo Particle Numbering Scheme:
 	// https://pdg.lbl.gov/2019/reviews/rpp2019-rev-monte-carlo-numbering.pdf
+	string name;
 	int pid;
 	int multiplicity;
-	string pname;
-	G4ThreeVector p;
+
+	// momentum
+	float p;
+	G4ThreeVector pdir;
+
+	// vertex
 	G4ThreeVector v;
 
 
 public:
 
-	void shootParticle(G4GeneralParticleSource* particleGun, G4Event* anEvent);
+	void shootParticle(G4ParticleGun* particleGun, G4Event* anEvent);
 
 };
 

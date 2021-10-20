@@ -18,10 +18,11 @@ namespace gparticle {
 		int pid;
 		int multiplicity;
 
-		float px;
-		float py;
-		float pz;
+		float p;
+		float theta;
+		float phi;
 		string punit;
+		string aunit;
 
 		float vx;
 		float vy;
