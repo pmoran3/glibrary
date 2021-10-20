@@ -42,6 +42,8 @@ namespace gutilities {
 	// gets a g4number from a string that contains units
 	double getG4Number(string input, bool warnIfNotUnit = false);
 
+	double getG4Number(double input, string unit);
+
 	// gets a vector of g4numbers from a vector of strings containing units
 	vector<double> getG4NumbersFromStringVector(vector<string> vstring, bool warnIfNotUnit = false);
 

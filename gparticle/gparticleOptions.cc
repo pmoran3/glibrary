@@ -1,5 +1,7 @@
 // gparticle
 #include "gparticleOptions.h"
+#include "gparticleConventions.h"
+
 // namespace to define options
 namespace gparticle {
 
@@ -9,6 +11,7 @@ namespace gparticle {
 
 	void from_json(const json& j, JParticle& jpar) {
 		j.at("pid").get_to(jpar.pid);
+		j.at("pname").get_to(jpar.pname);
 		j.at("multiplicity").get_to(jpar.multiplicity);
 		j.at("px").get_to(jpar.px);
 		j.at("py").get_to(jpar.py);
@@ -42,11 +45,18 @@ namespace gparticle {
 		// ---------
 
 		// gparticle is cumulative structured (groupable): can use -add
-		json jpid = {
-			{GNAME, "pid"},
-			{GDESC, "particle id. Follow the PDG Monte Carlo Particle Numbering Scheme."},
+		json jpname = {
+			{GNAME, "pname"},
+			{GDESC, "particle name, for example \"proton\". This is not used if pid is given."},
 			{GDFLT, NODFLT}
 		};
+
+		json jpid = {
+			{GNAME, "pid"},
+			{GDESC, "particle id. Follow the PDG Monte Carlo Particle Numbering Scheme. Overwrites pname"},
+			{GDFLT, GPARTICLENOTDEFINED}
+		};
+
 		json jmulti = {
 			{GNAME, "multiplicity"},
 			{GDESC, "How many copies of this particle will be generated per event"},
@@ -77,13 +87,42 @@ namespace gparticle {
 			{GDFLT, "MeV"}
 		};
 
+
+		json jvx = {
+			{GNAME, "vx"},
+			{GDESC, "x component of the particle vertex. Default: 0. "},
+			{GDFLT, 0}
+		};
+
+		json jvy = {
+			{GNAME, "py"},
+			{GDESC, "v component of the particle vertex. Default: 0. "},
+			{GDFLT, 0}
+		};
+
+		json jvz = {
+			{GNAME, "vz"},
+			{GDESC, "z component of the particle vertex. Default: 0. "},
+			{GDFLT, 0}
+		};
+
+		json jvunit = {
+			{GNAME, "vunit"},
+			{GDESC, "Unit for the particle vertex. Default: \"mm\" "},
+			{GDFLT, "MeV"}
+		};
 		json jparticleOption = {
+			jpname,
 			jpid,
 			jmulti,
 			jpx,
 			jpy,
 			jpz,
-			jpunit
+			jpunit,
+			jvx,
+			jvy,
+			jvz,
+			jvunit
 		};
 
 		vector<string> help;

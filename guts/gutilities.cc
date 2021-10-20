@@ -202,6 +202,14 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 	return EXIT_SUCCESS;
 }
 
+
+
+double gutilities::getG4Number(double input, string unit)
+{
+	string gnumber = to_string(input) + "*" + unit;
+	return  getG4Number(gnumber);
+}
+
 vector<double> gutilities::getG4NumbersFromStringVector(vector<string> vstring, bool warnIfNotUnit)
 {
 	vector<double> output;

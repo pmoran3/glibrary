@@ -14,7 +14,8 @@ namespace gparticle {
 	// ------
 
 	struct JParticle {
-		string pid;
+		string pname;
+		int pid;
 		int multiplicity;
 
 		float px;
