@@ -38,7 +38,8 @@ function compileGLibrary {
 
 function checkLibsExistence {
 
-	libExtension=".a"
+	# shared (dynamic) library extension is different on linux/darwin
+	libExtension=".so"
 	[[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
 
 	# cadmesh
