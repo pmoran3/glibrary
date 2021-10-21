@@ -10,7 +10,6 @@ set -e
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci.sh
 
-
 # load environment if we're on the container
 FILE=/etc/profile.d/jlab.sh
 if test -f "$FILE"; then
@@ -77,7 +76,8 @@ function checkLibsExistence {
 }
 
 
-
+# these are all run in sequence so there's no actual need
+# to split them into functions. Still, it organize things better
 echo
 echo "GLIBRARY Validation: $1"
 echo
@@ -86,7 +86,11 @@ echo "::set-output name=time::$time"
 
 if [ $# -eq 1 ]; then
 	echo "Running check: "$1
-	if [ $1 == "libs" ]; then
+	if [ $1 == "cadmesh" ]; then
+		compileCadmesh
+	elif [ $1 == "compile" ]; then
+		compileGLibrary
+	elif [ $1 == "checklibs" ]; then
 		checkLibsExistence
 	fi
 else
