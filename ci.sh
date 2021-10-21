@@ -73,8 +73,6 @@ function checkLibsExistence {
 		exit 1
 		fi
 	done
-
-
 }
 
 

@@ -1,5 +1,7 @@
 #include "VTPFrameGenerator.h"
 
+// c++
+#include <cassert>
 //#include <functional>
 //#include <random>
 

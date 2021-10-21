@@ -13,7 +13,7 @@ set ncpu = `getconf _NPROCESSORS_ONLN`
 set opt = " -j"$ncpu" "
 
 echo
-echo Compiling with options $opt
+echo Compiling cadmesh with make $opt install
 echo
 
 cmake ../cadmesh -DCMAKE_INSTALL_PREFIX:PATH=$GLIBRARY
