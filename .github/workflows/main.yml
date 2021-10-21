@@ -5,22 +5,27 @@ name: glibrary
 
 on:
   push:
-    branches: master
+  pull_request:
+    types:
+      # only run workflow when a commit is pushed to a PR branch
+      # instead of running for all other PR events
+      - synchronize
 
 jobs:
   validation_job:
     runs-on: ubuntu-latest
+    container: jeffersonlab/gemc:3.0
     name: GLibrary Validation
+    strategy:
+      fail-fast: false
     steps:
       # GitHub Actions do not automatically checkout your projects. If you need the code
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Validation
-        uses: ./ # Uses an action in the root directory
-        id: run
-      # Use the output from the `hello` step
+      - name: Run ci.sh
+        run: |
+          ./ci.sh
       - name: Get the Validation time
         run: echo "The time was ${{ steps.run.outputs.time }}"
-
 
