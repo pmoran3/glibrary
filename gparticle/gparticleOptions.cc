@@ -225,10 +225,23 @@ namespace gparticle {
 		help.push_back("Examples");
 		help.push_back("");
 		help.push_back("• 5 GeV electron along z:");
-		help.push_back("  +gparticle={\"name\": \"e-\"; \"p\": 5000;}");
+		help.push_back("  +gparticle={\"pname\": \"e-\"; \"p\": 5000;}");
 		help.push_back("");
-		help.push_back("• 1 500 MeV neutron at theta=20 deg and uniform distribution in phi:");
-		help.push_back("  +gparticle={\"name\": \"neutron\"; \"p\": 500; \"theta\": 20; \"delta_phi\": 180}");
+		help.push_back("• a 500 MeV neutron at theta=20 deg and uniform distribution in phi:");
+		help.push_back("  +gparticle={\"pname\": \"neutron\"; \"p\": 500; \"theta\": 20; \"delta_phi\": 180}");
+		help.push_back("");
+		help.push_back("• 150 2.1 GeV electrons at theta=3deg, uniform in phi, at z=-2mm");
+		help.push_back("  +gparticle={ \"pname\": \"e-\", \"multiplicity\": 150, \"p\": 2100, \"theta\": 3.0, \"delta_phi\": 180.0, \"vz\": -2.0}");
+		help.push_back("");
+		help.push_back("• 250 3 GeV pions+ at theta between 5 and 15 deg (uniform in cos(theta)), phi = 180");
+		help.push_back("  +gparticle={ \"pname\": \"pi+\", \"multiplicity\": 250, \"p\": 3000, \"theta\": 10.0, \"delta_theta\": 5.0, \"phi\": 180}");
+		help.push_back("");
+		help.push_back("• 250 3 GeV pions+ at theta between 5 and 15 deg (uniform in theta), phi = 180");
+		help.push_back("  +gparticle={ \"pname\": \"pi+\", \"multiplicity\": 250, \"p\": 3000, \"theta\": 10.0, \"delta_theta\": 5.0, \"phi\": 180, \"thetaModel\": \"flat\"}");
+		help.push_back("");
+		help.push_back("• 400 MeV protons at theta=90deg, uniform in phi, v on a sphere of radius 0.5mm at vz=-4mm");
+		help.push_back("  +gparticle={ \"pname\": \"proton\", \"multiplicity\": 400, \"p\": 150, \"theta\": 90.0, \"delta_phi\": 180.0, \"delta_VR\": 0.5, \"vz\": -4.0}");
+
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gparticle", "adds a particle to the event generator", jparticleOption, help, true));
