@@ -39,12 +39,14 @@ cumulative{false}
 	// by constructon the keys will always be there
 	auto defaultValue = joptionDefinition[GDFLT];
 
+	// if the option can be assigned the default value, do it here
 	if ( defaultValue != NODFLT ) {
 		string jKey  = joptionDefinition[GNAME];
 		jValue[jKey] = defaultValue;
 		jOptionAssignedValues.push_back(jValue);
 		isDefault = true;
 	}
+
 	return;
 }
 
@@ -314,7 +316,7 @@ json GOption::assignSingleValueFromCumulativeStructuredJson(string userJsonKey, 
 
 
 
-// check if userValue matches the default value
+// check if a userValue in this option matches the default value
 bool GOption::isDefaultValue(string key, json userValue) {
 
 	// false if there is no default
@@ -338,6 +340,21 @@ bool GOption::isDefaultValue(string key, json userValue) {
 			}
 		}
 	} else {
+		// structured option. If all values are user defaults, then set the switch to true
+		bool allDefault = true;
+		for (auto& [definitionJsonKey, definitionJsonValue] : joptionDefinition.items())  {
+
+		for ( auto& jsonTagValue : definitionJsonValue.items() )  {
+			if ( jsonTagValue.key() == GNAME && key == jsonTagValue.value() ) {
+				cout << " ASD " << jsonTagValue.value() << endl;
+//				if ( gdebug ) {
+//					cout << TTPOINTITEM << "key matches " << jsonTagValue.value() << endl;
+//				}
+//				isDefined = true;
+			}
+		}
+		}
+		isUserDefault = allDefault;
 
 	}
 
@@ -390,6 +407,7 @@ void GOption::checkTagIsValid(string key, bool gdebug) {
 					isDefined = true;
 				}
 			}
+
 		}
 	}
 
@@ -411,18 +429,25 @@ void GOption::printOption(bool withDefaults)
 	// non structured option, the jOptionAssignedValues has only one object, the json size is 1
 	if ( jOptionAssignedValues.size() == 1 && jOptionAssignedValues.front().size() == 1 ) {
 		json onlyOption = jOptionAssignedValues.front();
-		string isDefault = "";
-		
-		// pointing out this is a default option
-		if (onlyOption.begin().value() == joptionDefinition[GDFLT]) {
-			isDefault = " (default)";
+
+		bool isDefault = (onlyOption.begin().value() == joptionDefinition[GDFLT]);
+
+		if ( withDefaults ) {
+			string isDefaultString = isDefault ? " (default)" : "";
+
+			cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefaultString << endl;
+		} else {
+			if ( !isDefault) {
+				cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value()  << endl;
+			}
 		}
-		
-		cout << KGRN << ARROWITEM << onlyOption.begin().key() << RST << ": " << onlyOption.begin().value() << isDefault << endl;
+
 		return;
 	}
 
 	// structured option
+
+
 	cout << KGRN << ARROWITEM << name << RST << ":" << endl << endl;
 
 	for (auto& jValue: jOptionAssignedValues) {

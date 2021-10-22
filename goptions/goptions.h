@@ -89,8 +89,8 @@ private:
 	const string description;  // summary description. This is used in the search.
 	bool isSwitch = false;     // if it's a switch, it will not be added to the vector<GOption> but to the map of switches
 
-	// the json definition contains the verbosity (defaulted at silent) and array of these objects:
-	// Example: {
+	// the json definition contains json objects like these:
+	// {
 	// 	[
 	//    	{ GNAME: "runno",    GDESC: "run number",       GDFLT: 11},
 	//    	{ GNAME: "nthreads", GDESC: "number of thrads", GDFLT: 4}
@@ -102,8 +102,12 @@ private:
 	// multiple lines are defined by using "\n"
 	vector<string> help;
 
-	// the option assigned values, validated against the definition
-	// this is a vector of size 1 if the option is not cumulative
+	// jOptionAssignedValues is a vector containing the user assigned option values
+	//
+	// It is a vector of size 1 if the option is not cumulative
+	//
+	// Each of the jOptionAssignedValues elements contains the option
+	// assigned values, validated against joptionDefinition
 	//
 	// if some tags are not set, they will be set to the joptionDefinition default
 	// if an option is defined with default values, it will be passed to jValues
@@ -112,7 +116,7 @@ private:
 	// 1. each key must match a defined tag
 	// 2. if the definition does not provide a default, the option must provide one
 	vector<json> jOptionAssignedValues;
-	bool isDefault = false;    // true if jOptionAssignedValues is (are) the one coming from the definition
+	bool isDefault = false;  // true if jOptionAssignedValues is (are) the one coming from the definition
 
 
 	// utilities to characterize the option

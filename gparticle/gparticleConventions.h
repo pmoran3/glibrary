@@ -4,7 +4,8 @@
 #define GPARTICLENOTDEFINED -999
 
 // error codes in the 900s
-#define EC__GGPARTICLENOTFOUND 901
+#define EC__GGPARTICLENOTFOUND        901
+#define EC__GGPARTICLEWRONGTHETAMODEL 902
 
 
 #endif

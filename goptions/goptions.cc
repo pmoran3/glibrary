@@ -272,17 +272,30 @@ void GOptions::printSettings(bool withDefaults)
 
 	// nothing to do.
 	if (!canPrint) {
-		cout << KGRN << " No Settings. " << RST << endl;
+		cout << KGRN << " No settings defined. " << RST << endl;
 		return;
 	}
 
-	cout << endl << KGRN << " User Settings: " << RST << endl << endl;
-
-	for (auto& s: switches) {
-		cout << KGRN << ARROWITEM << s.first << RST << ": " << (s.second.getStatus() ? "true" : "false") << endl;
+	if ( withDefaults ) {
+		cout << endl << KGRN << " All Settings: " << RST << endl << endl;
+	} else {
+		cout << endl << KGRN << " Non Default User Settings: " << RST << endl << endl;
+	}
+	// switches
+	for (auto [name, switchValue]: switches) {
+		if ( withDefaults ) {
+			// print all switches
+			cout << KGRN << ARROWITEM << name << RST << ": " << (switchValue.getStatus() ? "on" : "off") << endl;
+		} else {
+			// only print the active switches
+			if (switchValue.getStatus() ) {
+				cout << KGRN << ARROWITEM << name << RST << ": on" << endl;
+			}
+		}
 	}
 
 	for(auto& jOption: goptions) {
+
 		jOption.printOption(withDefaults);
 
 		// non structured option, the jOptionAssignedValues has only one object, the json size is 1

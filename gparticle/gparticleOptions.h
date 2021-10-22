@@ -21,12 +21,35 @@ namespace gparticle {
 		float p;
 		float theta;
 		float phi;
+
+		float delta_p;
+		float delta_theta;
+		float delta_phi;
+		string thetaModel;
+
+		// gaussian spread around values or uniform in range
+		string randomMomentumModel;
+
 		string punit;
 		string aunit;
 
 		float vx;
 		float vy;
 		float vz;
+
+		// mutually exclusive vertex distributions
+		//
+		// xyz components separately
+		float delta_vx;
+		float delta_vy;
+		float delta_vz;
+
+		// sphere centered on v. This overwrites
+		float delta_VR;
+
+		// gaussian spread around values or uniform in range
+		string randomVertexModel;
+
 		string vunit;
 
 	};

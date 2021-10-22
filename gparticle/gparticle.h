@@ -24,17 +24,37 @@ private:
 	int pid;
 	int multiplicity;
 
-	// momentum
+	// assigned momentum and distributions
 	float p;
-	G4ThreeVector pdir;
+	float delta_p;
+	float theta;
+	float phi;
+	float delta_theta;
+	float delta_phi;
+	string thetaModel;  // 'ct' (default): cosTheta is uniform. 'flat': theta is uniform
+	bool momentumGaussianSpread;  // true: gaussian around values, using the deltas as sigmas. false: uniform distribution in speficied range
 
-	// vertex
+	// assigned vertex and distributions
 	G4ThreeVector v;
+	G4ThreeVector delta_v;
+	float delta_VR;
+	bool vertexGaussianSpread;  // true: gaussian around values, using the deltas as sigmas. false: uniform distribution in speficied range
 
 
 public:
 
 	void shootParticle(G4ParticleGun* particleGun, G4Event* anEvent);
+
+
+	// methods that uniformly distribute the particles
+private:
+
+	float randomize(float center, float delta, bool gaussianSPread);
+
+	float         calculateMomentum();
+	G4ThreeVector calculateBeamDirection();
+	G4ThreeVector calculateVertex();
+
 
 };
 
