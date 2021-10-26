@@ -15,7 +15,7 @@ using std::to_string;
 class GFrameDataCollectionHeader
 {
 public:
-	GFrameDataCollectionHeader(long int fid, float fd, int v = 0) : verbosity(v), frameID(fid), frameDuration(fd)  {
+	GFrameDataCollectionHeader(long int frameID_, float frameDuration_, int v = 0) : verbosity(v), frameID(frameID_), frameDuration(frameDuration_)  {
 
 		if ( verbosity >= GVERBOSITY_DETAILS ) {
 			string log = "GFrameHeader id " + to_string(frameID) + ", time: " + to_string(time_ns()) + "ns";

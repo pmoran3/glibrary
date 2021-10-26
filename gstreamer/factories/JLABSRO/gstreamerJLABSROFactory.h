@@ -7,18 +7,27 @@
 #include <fstream>
 using std::ofstream;
 
+
+#pragma pack(push, 1)
+struct DataFrameHeader
+{
+	uint32_t source_id;
+	uint32_t total_length;
+	uint32_t payload_length;
+	uint32_t compressed_length;
+	uint32_t magic;
+	uint32_t format_version;
+	uint32_t flags;
+	uint64_t record_counter;
+	uint64_t ts_sec;
+	uint64_t ts_nsec;
+};
+#pragma pack(pop)
+
 class GstreamerJSROFactory : public GStreamer
 {
 public:
 	GstreamerJSROFactory() {}
-	//FrameGenerator(unsigned int crateid, unsigned int slots,
-	//                 unsigned int channels, double hit_rate);
-	void generate_data(unsigned int counter);
-	//void update_counter(unsigned int counter);
-
-	//DataFrameHeader const& get_header() const;
-	//std::vector<unsigned int> const& get_frame_data() const;
-	//PayloadPrinter payload_printer(int nFADC, bool verbose, int rc) const;
 
 private:
 	// open and close the output media
@@ -31,6 +40,8 @@ private:
 	bool publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader);
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
+	// JLAB specific
+	DataFrameHeader dataFrameHeader;
 
 private:
 	ofstream *ofile = nullptr;
@@ -38,3 +49,49 @@ private:
 
 #endif // GSTREAMERJSROFACTORY_H
 
+
+
+/**
+
+Note on Pragma Pack
+
+
+ #pragma pack instructs the compiler to pack structure members with particular alignment.
+ Most compilers, when you declare a struct, will insert padding between members to ensure that
+ they are aligned to appropriate addresses in memory (usually a multiple of the type's size).
+ This avoids the performance penalty (or outright error) on some architectures associated
+ with accessing variables that are not aligned properly.
+
+ For example, given 4-byte integers and the following struct:
+
+ struct Test
+ {
+	char AA;
+	int BB;
+	char CC;
+ };
+ The compiler could choose to lay the struct out in memory like this:
+
+ |   1        |   2       |   3      |   4     |
+
+ | AA(1)   |  pad......................... |
+ | BB(1)   | BB(2) | BB(3) | BB(4) |
+ | CC(1)   | pad.......................... |
+
+ and sizeof(Test) would be 4 × 3 = 12, even though it only contains 6 bytes of data.
+ The most common use case for the #pragma (to my knowledge) is when working with hardware devices
+ where you need to ensure that the compiler does not insert padding into the data and each member
+ follows the previous one.
+
+ With #pragma pack(1), the struct above would be laid out like this:
+
+ |     1    |
+
+ | AA(1) |
+ | BB(1) |
+ | BB(2) |
+ | BB(3) |
+ | BB(4) |
+ | CC(1) |
+
+ */
