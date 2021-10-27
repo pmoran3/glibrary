@@ -42,6 +42,10 @@ private:
 
 	// JLAB specific
 	DataFrameHeader dataFrameHeader;
+	inline std::uint64_t llswap(unsigned long long val)
+	{
+		return (val >> 32) | (val << 32);
+	}
 
 private:
 	ofstream *ofile = nullptr;
@@ -53,7 +57,7 @@ private:
 
 /**
 
-Note on Pragma Pack
+ Note on Pragma Pack
 
 
  #pragma pack instructs the compiler to pack structure members with particular alignment.
