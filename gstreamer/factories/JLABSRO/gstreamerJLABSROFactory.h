@@ -4,6 +4,7 @@
 // gstreamer
 #include "gstreamer.h"
 
+#include <iostream>
 #include <fstream>
 using std::ofstream;
 
