@@ -11,18 +11,16 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	const std::vector<GIntegralPayload*> *payload = frameRunData->getIntegralPayload();
 
 	// fill dataFrameHeader here or in publishFrameHeader
-	DataFrameHeader dfh;
-
-	dfh.source_id = 0;
-	dfh.magic = 0xC0DA2019;
-	dfh.format_version = 257;
-	dfh.flags = 0;
-	dfh.record_counter = llswap(frameID);
-	dfh.ts_sec = llswap((frameID * 65536) / static_cast<int>(1e9));
-	dfh.ts_nsec = llswap((frameID * 65536) % static_cast<int>(1e9));
-	dfh.payload_length = payload->size() * sizeof(unsigned int);
-	dfh.compressed_length = dfh.payload_length;
-	dfh.total_length = dfh.compressed_length + sizeof(DataFrameHeader) - 4;
+	dataFrameHeader.source_id = 0;
+	dataFrameHeader.magic = 0xC0DA2019;
+	dataFrameHeader.format_version = 257;
+	dataFrameHeader.flags = 0;
+	dataFrameHeader.record_counter = llswap(frameID);
+	dataFrameHeader.ts_sec = llswap((frameID * 65536) / static_cast<int>(1e9));
+	dataFrameHeader.ts_nsec = llswap((frameID * 65536) % static_cast<int>(1e9));
+	dataFrameHeader.payload_length = payload->size() * sizeof(unsigned int);
+	dataFrameHeader.compressed_length = dataFrameHeader.payload_length;
+	dataFrameHeader.total_length = dataFrameHeader.compressed_length + sizeof(DataFrameHeader) - 4;
 
 	return true;
 }
