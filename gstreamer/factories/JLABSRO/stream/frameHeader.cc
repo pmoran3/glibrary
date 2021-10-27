@@ -9,7 +9,7 @@ bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 {
 	if(ofile == nullptr) return false;
 
-	cout<<Publishing frame header<<endl;
+	cout << " Publishing frame header " << endl;
 
 	// fill dataFrameHeader here or in startStream
 	vector<unsigned int> frame_data;
