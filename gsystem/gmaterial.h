@@ -47,12 +47,12 @@ private:
 	// scintillation properties
 	vector<double> fastcomponent;      ///< A list of the fast component relative spectra values evaluated at the energies in photonEnergy
 	vector<double> slowcomponent;      ///< A list of the fast component relative spectra values evaluated at the energies in photonEnergy
-	double         scintillationyield; ///< Characteristic light yield in photons/MeV e-, given as a single number
-	double         resolutionscale;    ///< Resolution scale broadens the statistical distribution of generated photons
-	double         fasttimeconstant;   ///< FIX ME believe this is related to the scintillator pulse rise time.
-	double         slowtimeconstant;   ///< FIX ME believe this is related to scintillator slow decay time.
-	double         yieldratio;         ///< Relative strength of the fast component as a fraction of total scintillation yield, given as a single number
-	double         birkConstant;       ///<  FIX ME
+	float          scintillationyield; ///< Characteristic light yield in photons/MeV e-, given as a single number
+	float          resolutionscale;    ///< Resolution scale broadens the statistical distribution of generated photons
+	float          fasttimeconstant;   ///< FIX ME believe this is related to the scintillator pulse rise time.
+	float          slowtimeconstant;   ///< FIX ME believe this is related to scintillator slow decay timefloat
+	float          yieldratio;         ///< Relative strength of the fast component as a fraction of total scintillation yield, given as a single number
+	float          birkConstant;       ///<  FIX ME
 
 	// other optical properties
 	vector<double> rayleigh;           ///< A list of the Rayleigh scattering attenuation coefficient evaluated at the energies in photonEnergy
@@ -60,8 +60,8 @@ private:
 	// load material components from DB entry
 	void setComponentsFromString(string composition);
 
-	// load optical properties from DB entry
-	void opticalsFromString(string, string);
+	// load property from DB entry based on its name
+	void getMaterialPropertyFromString(string parameter, string propertyName);
 
 	friend ostream &operator<<(ostream &stream, GMaterial); ///< Logs infos on screen.
 
