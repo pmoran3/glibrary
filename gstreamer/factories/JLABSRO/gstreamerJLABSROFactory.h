@@ -4,10 +4,10 @@
 // gstreamer
 #include "gstreamer.h"
 
+#include <random>
 #include <iostream>
 #include <fstream>
 using std::ofstream;
-
 
 #pragma pack(push, 1)
 struct DataFrameHeader
@@ -42,14 +42,18 @@ private:
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
 	// JLAB specific
-	DataFrameHeader dataFrameHeader;
+	std::default_random_engine gen_;
+	std::exponential_distribution<> time_gen_;
+//	DataFrameHeader dataFrameHeader;
 	inline std::uint64_t llswap(unsigned long long val)
 	{
 		return (val >> 32) | (val << 32);
 	}
 
+
 private:
 	ofstream *ofile = nullptr;
+	vector<unsigned int> frame_data;
 };
 
 #endif // GSTREAMERJSROFACTORY_H

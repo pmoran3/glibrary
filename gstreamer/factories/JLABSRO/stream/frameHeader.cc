@@ -12,11 +12,11 @@ bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 	cout << " Publishing frame header " << endl;
 
 	// fill dataFrameHeader here or in startStream
-	vector<unsigned int> frame_data;
-	dataFrameHeader = *reinterpret_cast<DataFrameHeader*>(frame_data.data());
+	//vector<unsigned int> frame_data;
+	//dataFrameHeader = *reinterpret_cast<DataFrameHeader*>(frame_data.data());
 	ofile->write(reinterpret_cast<const char*>(frame_data.data()), 
-				sizeof(DataFrameHeader));
-
+//				sizeof(DataFrameHeader));
+				 sizeof(unsigned int) * frame_data.size());
 	return true;
 
 
