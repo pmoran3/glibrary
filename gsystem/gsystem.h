@@ -43,7 +43,10 @@ public:
 	inline const string getVariation()   const { return variation; }
 	inline const string getFilePath()    const { return path + "/" + name; }
 
-	// add root. rootVolumeDefinition
+
+	// GVOLUMES
+
+	// add root rootVolumeDefinition
 	void addROOTVolume(string rootVolumeDefinition);
 
 	// add volume using parameters (TEXT or MYSQL factories)
@@ -56,6 +59,10 @@ public:
 	GVolume* getGVolume(string volumeName) const;
 	
 	map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
+
+
+	// GMATERIALS
+
 
 };
 

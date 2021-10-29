@@ -4,13 +4,12 @@
 // conventions
 #include "gsystemConventions.h"
 
-// glibrary
+// glibrary, namespace for the inline functions below
 #include "gutilities.h"
 using namespace gutilities;
 
 // c++
 #include <string>
-#include <vector>
 using std::string;
 using std::ostream;
 using std::vector;
@@ -18,7 +17,7 @@ using std::vector;
 class GVolume
 {
 public:
-	GVolume(string s, vector<string> pars, string importPath = UNINITIALIZEDSTRINGQUANTITY);
+	GVolume(string system, vector<string> pars, string importPath = UNINITIALIZEDSTRINGQUANTITY);
 	GVolume(string rootVolumeDefinition); // special constructor for root volume
 
 private:

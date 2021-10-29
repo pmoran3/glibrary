@@ -6,6 +6,7 @@ env.Append(CPPPATH = [Dir('gsystemFactories'), Dir('gsystemFactories/cad'), Dir(
 
 sources = [
 			  'gvolume.cc',
+			  'gmaterial.cc',
 			  'gsystem.cc',
 			  'gworld.cc',
 			  'gsystemOptions.cc',

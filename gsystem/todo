@@ -2,3 +2,4 @@
 - assign each gvolume var to a specific entry in pars instead of using pars[i++]
 - add proper log messages
 - improve gvolume << printout
+- add material documentation in one place, currently in sci-g/gemc_api_materials

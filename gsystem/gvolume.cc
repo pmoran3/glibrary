@@ -3,19 +3,14 @@
 
 // c++
 #include <iostream>
-
-// glibrary
-#include "gutilities.h"
-
 using namespace std;
-using namespace gutilities;
 
 GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
-		gexit(GVOLUMENUMBEROFPARS);
+		gexit(EC__GWRONGNUMBEROFPARS);
 	} else {
 		// size is already checked in addVolume, the only interface to volume
 		int i=0;
