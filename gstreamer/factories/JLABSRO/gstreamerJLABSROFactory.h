@@ -28,7 +28,7 @@ struct DataFrameHeader
 class GstreamerJSROFactory : public GStreamer
 {
 public:
-	GstreamerJSROFactory() : gen_(108), time_gen_(30000) {}
+	GstreamerJSROFactory() {}
 
 private:
 	// open and close the output media
@@ -42,9 +42,6 @@ private:
 	bool publishPayload(const vector<GIntegralPayload*> *payload);
 
 	// JLAB specific
-	std::default_random_engine gen_;
-	std::exponential_distribution<> time_gen_;
-//	DataFrameHeader dataFrameHeader;
 	inline std::uint64_t llswap(unsigned long long val)
 	{
 		return (val >> 32) | (val << 32);
