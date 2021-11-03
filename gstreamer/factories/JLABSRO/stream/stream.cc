@@ -3,7 +3,12 @@
 
 bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 {
-	if(ofile == nullptr) return false;
+	if(ofile == nullptr) {
+		cout << "ofile == nullptr" << endl;
+		return false;
+	}
+	std::vector<std::uint32_t> const super_magic = {0xC0DA2019, 0XC0DA0001};
+	ofile->write(reinterpret_cast<const char*>(super_magic.data()), sizeof(std::uint32_t) * 2);
 
 	static constexpr int header_offset = sizeof(DataFrameHeader) / 4;
 	const GFrameDataCollectionHeader* header = frameRunData->getHeader();
@@ -19,17 +24,19 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	dataFrameHeader.magic = 0xC0DA2019;
 	dataFrameHeader.format_version = 257;
 	dataFrameHeader.flags = 0;
-	dataFrameHeader.record_counter = llswap(frameID);
-	dataFrameHeader.ts_sec = llswap((frameID * 65536) / static_cast<int>(1e9));
-	dataFrameHeader.ts_nsec = llswap((frameID * 65536) % static_cast<int>(1e9));
-	dataFrameHeader.payload_length = payload->size() * sizeof(unsigned int);
-	dataFrameHeader.compressed_length = dataFrameHeader.payload_length;
-	dataFrameHeader.total_length = dataFrameHeader.compressed_length + sizeof(DataFrameHeader) - 4;
+	dataFrameHeader.record_counter = 0;//llswap(frameID);
+	dataFrameHeader.ts_sec = 0;//llswap((frameID * 65536) / static_cast<int>(1e9));
+	dataFrameHeader.ts_nsec = 0;//llswap((frameID * 65536) % static_cast<int>(1e9));
+	dataFrameHeader.payload_length = 228;//payload->size() * sizeof(unsigned int);
+	dataFrameHeader.compressed_length = 228;//dataFrameHeader.payload_length;
+	dataFrameHeader.total_length = 258;//dataFrameHeader.compressed_length + sizeof(DataFrameHeader) - 4;
+
 
 	//make payload data
 	unsigned int crateid = 0;
 	unsigned int slots = 8;
 	unsigned int channel = 16;
+
 	frame_data.resize(header_offset);
 	frame_data.push_back(0x80000000);
 	frame_data.insert(frame_data.end(), slots, 0);
@@ -45,7 +52,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 
 		while (generating) {
 		  for (unsigned int i = 0; i < channel; ++i) {
-		    times[i] += 1e9 * time_gen_(gen_);
+		    times[i] += header->getTime();//1e9 * time_gen_(gen_);
 		    if (times[i] > 65536) {
 		      generating = false;
 		      break;
@@ -64,7 +71,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 
 		frame_data[header_offset + 1 + slot] =
 		    ((hit_counter) << 16) | starting_point;
-	}
+		    }
 
 		return true;
 }

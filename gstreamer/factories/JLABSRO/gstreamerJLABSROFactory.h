@@ -28,7 +28,7 @@ struct DataFrameHeader
 class GstreamerJSROFactory : public GStreamer
 {
 public:
-	GstreamerJSROFactory() {}
+	GstreamerJSROFactory() : gen_(108), time_gen_(30000) {}
 
 private:
 	// open and close the output media
