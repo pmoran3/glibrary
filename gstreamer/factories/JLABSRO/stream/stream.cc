@@ -16,8 +16,6 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 
 	const std::vector<GIntegralPayload*> *payload = frameRunData->getIntegralPayload();
 
-	cout << "payload size: " << payload->size() << endl;
-
 	frame_data.resize(header_offset,0);
 
 	// fill dataFrameHeader here or in publishFrameHeader
