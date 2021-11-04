@@ -15,6 +15,9 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	long int frameID = header->getFrameID();
 
 	const std::vector<GIntegralPayload*> *payload = frameRunData->getIntegralPayload();
+
+	cout << "payload size: " << payload->size() << endl;
+
 	frame_data.resize(header_offset,0);
 
 	// fill dataFrameHeader here or in publishFrameHeader
@@ -24,12 +27,9 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	dataFrameHeader.magic = 0xC0DA2019;
 	dataFrameHeader.format_version = 257;
 	dataFrameHeader.flags = 0;
-	dataFrameHeader.record_counter = 0;//llswap(frameID);
-	dataFrameHeader.ts_sec = 0;//llswap((frameID * 65536) / static_cast<int>(1e9));
-	dataFrameHeader.ts_nsec = 0;//llswap((frameID * 65536) % static_cast<int>(1e9));
-	dataFrameHeader.payload_length = 228;//payload->size() * sizeof(unsigned int);
-	dataFrameHeader.compressed_length = 228;//dataFrameHeader.payload_length;
-	dataFrameHeader.total_length = 258;//dataFrameHeader.compressed_length + sizeof(DataFrameHeader) - 4;
+	dataFrameHeader.record_counter = llswap(frameID);
+	dataFrameHeader.ts_sec = llswap((frameID * 65536) / static_cast<int>(1e9));
+	dataFrameHeader.ts_nsec = llswap((frameID * 65536) % static_cast<int>(1e9));
 
 
 	//make payload data
@@ -52,7 +52,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 
 		while (generating) {
 		  for (unsigned int i = 0; i < channel; ++i) {
-		    times[i] += header->getTime();//1e9 * time_gen_(gen_);
+		    times[i] += header->getTime();
 		    if (times[i] > 65536) {
 		      generating = false;
 		      break;
@@ -72,6 +72,12 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 		frame_data[header_offset + 1 + slot] =
 		    ((hit_counter) << 16) | starting_point;
 		    }
+
+        DataFrameHeader& dfh = *reinterpret_cast<DataFrameHeader*>(frame_data.data());
+
+	dfh.payload_length = frame_data.size()*sizeof(unsigned int) - sizeof(DataFrameHeader);
+	dfh.compressed_length = dfh.payload_length;
+	dfh.total_length = dfh.compressed_length + sizeof(DataFrameHeader) - 4;
 
 		return true;
 }
