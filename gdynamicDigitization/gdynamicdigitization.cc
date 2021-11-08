@@ -43,7 +43,8 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn
 // - timeAtElectronics
 // and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
 // this will exit with error if the TT is not defined, or if
-void GDynamicDigitization::chargeAndTimeAtHardware(float time, int q, GHit *ghit, GDigitizedData *gdata)
+// notice time is an int (assumed unit: ns)
+void GDynamicDigitization::chargeAndTimeAtHardware(int time, int q, GHit *ghit, GDigitizedData *gdata)
 {
 
 	// gexit if translation table not defined

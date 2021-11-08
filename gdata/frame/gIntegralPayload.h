@@ -15,7 +15,13 @@ using std::to_string;
 struct GIntegralPayload
 {
 public:
-	GIntegralPayload(int c, int s, int h, int q, int v = 0) :  verbosity(v), crate(c), slot(s), channel(h), charge(q) {
+	GIntegralPayload(int c, int s, int h, int q, int t, int v = 0) :
+	verbosity(v),
+	crate(c),
+	slot(s),
+	channel(h),
+	charge(q),
+	time(t) {
 
 		if ( verbosity >= GVERBOSITY_DETAILS ) {
 			gLogClassConstruct("GIntegralPayload");
@@ -37,6 +43,7 @@ private:
 	int slot;
 	int channel;
 	int charge;
+	int time;
 
 };
 

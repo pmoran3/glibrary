@@ -10,6 +10,7 @@ vector<int> GIntegralPayload::getPayload() {
 	payload.push_back(slot);
 	payload.push_back(channel);
 	payload.push_back(charge);
+	payload.push_back(time);
 
 	return payload;
 }

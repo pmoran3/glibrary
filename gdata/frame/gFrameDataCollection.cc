@@ -11,8 +11,9 @@ void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity
 		int slot    = payload[1];
 		int channel = payload[2];
 		int charge  = payload[3];
+		int time    = payload[4];
 
-		GIntegralPayload *gpayload = new GIntegralPayload(crate, slot, channel, charge, verbosity);
+		GIntegralPayload *gpayload = new GIntegralPayload(crate, slot, channel, charge, time, verbosity);
 		integralPayload->push_back(gpayload);
 		
 	} else {

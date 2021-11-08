@@ -81,7 +81,7 @@ void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 
 	} else {
 		cerr << FATALERRORL << " particle " << name << " not found in G4ParticleTable." << endl;
-		gexit(EC__GGPARTICLENOTFOUND);
+		gexit(EC__GPARTICLENOTFOUND);
 	}
 
 
@@ -108,7 +108,7 @@ G4ThreeVector Gparticle::calculateBeamDirection() {
 		thetaRad =  randomize(theta/CLHEP::rad, delta_theta/CLHEP::rad, momentumGaussianSpread) ;
 	} else {
 		cerr << FATALERRORL << " thetaModel >" << thetaModel << "< not recognized." << endl;
-		gexit(EC__GGPARTICLEWRONGTHETAMODEL);
+		gexit(EC__GPARTICLEWRONGTHETAMODEL);
 	}
 
 	double phiRad = randomize(phi/CLHEP::rad, delta_phi/CLHEP::rad, momentumGaussianSpread) ;
