@@ -36,50 +36,42 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	unsigned int channel;
 	unsigned int charge;
 	unsigned int time;
-	unsigned int slots = 8;
-	unsigned int channels = 16;
+	unsigned int slots = 16;
 	
 	frame_data.resize(header_offset);
 	frame_data.push_back(0x80000000);
 	frame_data.insert(frame_data.end(), slots, 0);
 
-	for(unsigned int hit = 0; hit < intPayloadvec->size(); ++hit) {
 
-		GIntegralPayload* intpayload = intPayloadvec->at(hit);
-		vector<int> payload = intpayload->getPayload();
-		crate   = payload[0];
-		slot    = payload[1];
-		channel = payload[2];
-		charge  = payload[3];
-		time    = payload[4];
+	for(unsigned int i = 0; i < slots; ++i) {
 
-		int starting_point = frame_data.size() - header_offset;
-		frame_data.push_back(0x80008000 | (crate << 8) | slot);
-
-		bool generating = true;
-		int hit_counter = 0;
-		std::vector<unsigned int> times(channels, 0);
-
-		while (generating) {
-			for (unsigned int i = 0; i < channels; ++i) {
-				times[i] += header->getTime();
-				if (times[i] > 65536) {
-					generating = false;
-					break;
-				}
-				assert((times[i] / 4) < 0x8000 && i < 0x10);
-				frame_data.push_back(charge | (channel << 13) | ((times[i] / 4) << 17));
-				++hit_counter;
-			}
-		}
-
-		if (hit_counter == 0) {
-			frame_data.pop_back();
-		} else {
-			++hit_counter;
-		}
-
-		frame_data[header_offset + 1 + slot] =
+	  int starting_point = frame_data.size() - header_offset;
+	  frame_data.push_back(0x80008000 | (crate << 8) | i);
+	  int hit_counter = 0;
+	  
+	  for(unsigned int hit = 0; hit < intPayloadvec->size(); ++hit) {
+	 
+	    GIntegralPayload* intpayload = intPayloadvec->at(hit);
+	    vector<int> payload = intpayload->getPayload();
+	    crate   = payload[0];
+	    slot    = payload[1];
+	    channel = payload[2];
+	    charge  = payload[3];
+	    time    = payload[4];
+	    
+	    if(i == slot) {
+	      
+	      frame_data.push_back(charge | (channel << 13) | ((time / 4) << 17));
+	    }
+	  }
+	  
+	      if (hit_counter == 0) {
+		frame_data.pop_back();
+	      } else {
+		++hit_counter;
+	      }
+	      
+	      frame_data[header_offset + 1 + slot] =
 		((hit_counter) << 16) | starting_point;
 	}
 	
