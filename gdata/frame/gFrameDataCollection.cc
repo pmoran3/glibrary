@@ -6,7 +6,7 @@ using namespace std;
 
 void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity) {
 
-	if (payload.size() == 4 ) {
+	if (payload.size() == 5 ) {
 		int crate   = payload[0];
 		int slot    = payload[1];
 		int channel = payload[2];

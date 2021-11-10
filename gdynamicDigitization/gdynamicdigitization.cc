@@ -67,10 +67,10 @@ void GDynamicDigitization::chargeAndTimeAtHardware(int time, int q, GHit *ghit, 
 			// include crate/slot/channel address
 			// include payload time and charge for this hit
 
-			gdata->includeVariable(CRATESTRINGID,   haddress[0]);
-			gdata->includeVariable(SLOTSTRINGID,    haddress[1]);
-			gdata->includeVariable(CHANNELSTRINGID, haddress[2]);
-			gdata->includeVariable(TIMEATELECTRONICS, time);
+			gdata->includeVariable(CRATESTRINGID,       haddress[0]);
+			gdata->includeVariable(SLOTSTRINGID,        haddress[1]);
+			gdata->includeVariable(CHANNELSTRINGID,     haddress[2]);
+			gdata->includeVariable(TIMEATELECTRONICS,   time);
 			gdata->includeVariable(CHARGEATELECTRONICS, q);
 		}
 	}
