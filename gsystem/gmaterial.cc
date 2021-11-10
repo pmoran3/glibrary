@@ -69,7 +69,7 @@ void GMaterial::setComponentsFromString(string composition) {
 
 	vector<string> allComponents = getStringVectorFromString(composition);
 
-	for( int e=0; e < allComponents.size()/2; e++ ) {
+	for( unsigned e=0; e < allComponents.size()/2; e++ ) {
 		components.push_back(allComponents[e*2]);
 		amounts.push_back(stod(allComponents[e*2+1]));
 	}

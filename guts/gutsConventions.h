@@ -4,9 +4,9 @@
 #define UNINITIALIZEDNUMBERQUANTITY -123456
 #define UNINITIALIZEDSTRINGQUANTITY "na"
 
-// exit codes: 600
-#define EC__FILENOTFOUND     601
-#define EC__G4NUMBERERROR    602
+// exit codes: 300
+#define EC__FILENOTFOUND     301
+#define EC__G4NUMBERERROR    302
 
 // use of colors in iostream
 // example:
