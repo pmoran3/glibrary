@@ -45,7 +45,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity) {
 				cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumesMap with name <" << nameKey << ">" << endl;
 			} 
 		} else {
-			cerr << FATALERRORL << "a volume with the name <" << nameKey << "> already exists. " << endl;
+			cerr << FATALERRORL << "a gVolume with the name <" << nameKey << "> already exists. " << endl;
 			gexit(EC__GVOLUMEALREADYPRESENT);
 		}
 	}
@@ -112,24 +112,24 @@ GVolume* GSystem::getGVolume(string volumeName) const {
 
 // add gmaterial using parameters (TEXT or MYSQL factories)
 void GSystem::addGMaterial(vector<string> pars, int verbosity) {
-	if( pars.size() != GMATERIALNUMBEROFPARS) {
-		cerr << FATALERRORL << "incorrect number of material parameters (" << pars.size() << ") for " << pars[0]  ;
-		cerr << " It should be " << GMATERIALNUMBEROFPARS << endl;
-		gexit(EC__GWRONGNUMBEROFPARS);
-	} else {
-		string nameKey = formVolumeKey(pars[0]);
-
-		if(gmaterialsMap->find(nameKey) == gmaterialsMap->end()) {
-
-			(*gmaterialsMap)[nameKey] = new GMaterial(name, pars);
-			if(verbosity >= GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << "Adding gMaterial " << pars[0] << " to gmaterialsMap with name <" << nameKey << ">" << endl;
-			}
-
-		} else {
-			cerr << FATALERRORL << "a volume with the name <" << nameKey << "> already exists. " << endl;
-			gexit(EC__GVOLUMEALREADYPRESENT);
-		}
-	}
+//	if( pars.size() != GMATERIALNUMBEROFPARS) {
+//		cerr << FATALERRORL << "incorrect number of material parameters (" << pars.size() << ") for " << pars[0]  ;
+//		cerr << " It should be " << GMATERIALNUMBEROFPARS << endl;
+//		gexit(EC__GWRONGNUMBEROFPARS);
+//	} else {
+//		string nameKey = formVolumeKey(pars[0]);
+//
+//		if(gmaterialsMap->find(nameKey) == gmaterialsMap->end()) {
+//
+//			(*gmaterialsMap)[nameKey] = new GMaterial(name, pars);
+//			if(verbosity >= GVERBOSITY_SUMMARY) {
+//				cout << GSYSTEMLOGHEADER << "Adding gMaterial " << pars[0] << " to gmaterialsMap with name <" << nameKey << ">" << endl;
+//			}
+//
+//		} else {
+//			cerr << FATALERRORL << "a gMaterial with the name <" << nameKey << "> already exists. " << endl;
+//			gexit(EC__GVOLUMEALREADYPRESENT);
+//		}
+//	}
 
 }
