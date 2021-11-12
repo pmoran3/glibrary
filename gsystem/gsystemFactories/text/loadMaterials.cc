@@ -8,7 +8,7 @@ void GSystemTextFactory::loadMaterials(GSystem *system, int verbosity) {
 	ifstream *IN = gSystemTextFileStream(system, GTEXTMATSTYPE, verbosity);
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << "Loading <text> materials for " <<  system->getName() << endl;
+		cout << GSYSTEMLOGHEADER << "Loading <text> materials for <" << KWHT << system->getName() << RST << ">" << endl;
 	}
 
 	// loading volumes

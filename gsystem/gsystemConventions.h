@@ -3,7 +3,7 @@
 
 // number of database pars defining a gvolume and a gmaterial
 #define GVOLUMENUMBEROFPARS    19
-#define GMATERIALNUMBEROFPARS  19
+#define GMATERIALNUMBEROFPARS  18
 
 // must match the API definitions
 #define GMATERIALNOTASSIGNEDPROPERTYSTRING "na"

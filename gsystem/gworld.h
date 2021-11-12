@@ -18,7 +18,7 @@ public:
 	// - apply modifiers
 	GWorld(GOptions* gopts);
 	~GWorld() {
-		delete gsystemsMap;
+	//	delete gsystemsMap;
 	}
 
 

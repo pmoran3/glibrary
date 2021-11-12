@@ -18,8 +18,6 @@ public:
 	// constructor, from command line or jcard
 	GSystem(string givenname, string factory, string variation, int verbosity);
 
-
-	
 private:
 
 	// MARK: class vars
