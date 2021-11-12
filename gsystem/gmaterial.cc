@@ -11,6 +11,9 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 {
 	if( pars.size() != GMATERIALNUMBEROFPARS) {
 		cerr << FATALERRORL << "incorrect number of material parameters (" << pars.size() << ") for " << pars[0] ;
+		for ( auto& parameter: pars  ) {
+			cerr << " par " << parameter << endl;
+		}
 		cerr << " It should be " << GMATERIALNUMBEROFPARS << endl;
 		gexit(EC__GWRONGNUMBEROFPARS);
 	} else {
@@ -47,7 +50,6 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 
 ostream &operator<<(ostream &stream, GMaterial gMat)
 {
-
 	stream  << endl;
 	stream << "   - Material: "    << gMat.name     << "  in system  " <<  gMat.system << ": " <<  endl;
 	stream << "     " << gMat.description << endl;
@@ -118,10 +120,10 @@ void GMaterial::getMaterialPropertyFromString(string parameter, string propertyN
 			slowtimeconstant = getG4Number(trimmedComponent);
 		} else if(propertyName == "yieldratio") {
 			yieldratio = getG4Number(trimmedComponent);
-		} else if(propertyName == "rayleigh") {
-			rayleigh.push_back(getG4Number(trimmedComponent));
 		} else if(propertyName == "birkConstant") {
 			birkConstant = getG4Number(trimmedComponent);
+		} else if(propertyName == "rayleigh") {
+			rayleigh.push_back(getG4Number(trimmedComponent));
 		}
 
 
@@ -129,33 +131,34 @@ void GMaterial::getMaterialPropertyFromString(string parameter, string propertyN
 			// rayleigh is the last quantity to be loaded
 			// now we can check the vector sizes for comparison
 			// if they do match, behaviour is unknown, we need to exit
+			unsigned long photonEnergyVectorSize = photonEnergy.size();
 
-			if ( indexOfRefraction.size() > 0 &&  indexOfRefraction.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "indexOfRefraction size " << indexOfRefraction.size() << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( indexOfRefraction.size() > 0 &&  indexOfRefraction.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "indexOfRefraction size " << indexOfRefraction.size() << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( absorptionLength.size() > 0 &&  absorptionLength.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "absorptionLength size " << absorptionLength.size()   << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( absorptionLength.size() > 0 &&  absorptionLength.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "absorptionLength size " << absorptionLength.size()   << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( reflectivity.size() > 0 &&  reflectivity.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "reflectivity size " << reflectivity.size()           << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( reflectivity.size() > 0 &&  reflectivity.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "reflectivity size " << reflectivity.size()           << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( efficiency.size() > 0 &&  efficiency.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "efficiency size " << efficiency.size()               << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( efficiency.size() > 0 &&  efficiency.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "efficiency size " << efficiency.size()               << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( fastcomponent.size() > 0 &&  fastcomponent.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "fastcomponent size " << fastcomponent.size()         << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( fastcomponent.size() > 0 &&  fastcomponent.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "fastcomponent size " << fastcomponent.size()         << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( slowcomponent.size() > 0 &&  slowcomponent.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "slowcomponent size " << slowcomponent.size()         << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( slowcomponent.size() > 0 &&  slowcomponent.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "slowcomponent size " << slowcomponent.size()         << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
-			if ( rayleigh.size() > 0 &&  rayleigh.size() != photonEnergy.size() ) {
-				cerr << FATALERRORL << "rayleigh size " << rayleigh.size()                   << " mismatch: photonEnergy has size " << photonEnergy.size() << endl;
+			if ( rayleigh.size() > 0 &&  rayleigh.size() != photonEnergyVectorSize ) {
+				cerr << FATALERRORL << "rayleigh size " << rayleigh.size()                   << " mismatch: photonEnergy has size " << photonEnergyVectorSize << endl;
 				gexit(EC__GMATERIALOPTICALPROPERTYMISMATCH);
 			}
 
