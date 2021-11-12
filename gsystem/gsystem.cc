@@ -42,7 +42,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity) {
 
 			(*gvolumesMap)[nameKey] = new GVolume(name, pars);
 			if(verbosity >= GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumes map with name <" << nameKey << ">" << endl;
+				cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumesMap with name <" << nameKey << ">" << endl;
 			} 
 		} else {
 			cerr << FATALERRORL << "a volume with the name <" << nameKey << "> already exists. " << endl;
@@ -119,11 +119,11 @@ void GSystem::addGMaterial(vector<string> pars, int verbosity) {
 	} else {
 		string nameKey = formVolumeKey(pars[0]);
 
-		if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
+		if(gmaterialsMap->find(nameKey) == gmaterialsMap->end()) {
 
-			(*gvolumesMap)[nameKey] = new GVolume(name, pars);
+			(*gmaterialsMap)[nameKey] = new GMaterial(name, pars);
 			if(verbosity >= GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumes map with name <" << nameKey << ">" << endl;
+				cout << GSYSTEMLOGHEADER << "Adding gMaterial " << pars[0] << " to gmaterialsMap with name <" << nameKey << ">" << endl;
 			}
 
 		} else {
