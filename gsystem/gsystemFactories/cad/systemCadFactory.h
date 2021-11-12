@@ -15,7 +15,7 @@ public:
 
 private:
 
-	virtual void loadMaterial(GSystem *system, int verbosity);
+	virtual void loadMaterials(GSystem *system, int verbosity);
 	virtual void loadGeometry(GSystem *system, int verbosity);
 
 };

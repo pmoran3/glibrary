@@ -49,16 +49,16 @@ ostream &operator<<(ostream &stream, GMaterial gMat)
 {
 
 	stream  << endl;
-	//	stream << "   - Name:            "    << gMat.name     << "  -  " <<  gMat.description << endl;
-	//	stream << "   - Mother:          "    << gMat.mother      << endl;
-	//	stream << "   - Type:            "    << gMat.type        << endl;
-	//	stream << "   - Parameters:      "    << gMat.parameters  << endl;
-	//	stream << "   - Material:        "    << gMat.material << endl;
-	//	stream << "   - E.M. Field:      "    << gMat.emfield << endl;
-	//	stream << "   - Positions:       "    << gMat.pos << endl;
-	//	stream << "   - Rotation(s):     "    << gMat.rot << endl;
-	//	stream << "   - Digitization:    "    << gMat.digitization << endl;
-	//	stream << "   - GIdentity:       "    << gMat.gidentity << endl;
+	stream << "   - Material: "    << gMat.name     << "  in system  " <<  gMat.system << ": " <<  endl;
+	stream << "     " << gMat.description << endl;
+	stream << "     Density:          "    << gMat.density      << endl;
+	if ( gMat.components.size() > 0 ) {
+		stream << "     Composition:          "    << endl;
+		for ( unsigned m=0; m<gMat.components.size(); m++ ) {
+			string quantity = gMat.amounts[m] > 1 ? " atoms " : " fractional mass";
+			stream << "       ・ " << gMat.components[m] << quantity << " " << gMat.amounts[m] << endl;
+		}
+	}
 
 	return stream;
 }

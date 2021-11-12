@@ -19,9 +19,6 @@ void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 		cerr << FATALERRORL << " CAD Directory >" << s->getFilePath() << "< not found." << endl;
 		gexit(EC__GDIRNOTFOUND);
 	}
-
-
-
 }
 
 
