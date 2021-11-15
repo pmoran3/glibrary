@@ -18,33 +18,36 @@ variation(v) {
 	path = gutilities::getDirFromPath(n);
 	name = gutilities::getFileFromPath(n);
 
-	gvolumesMap = new map<string, GVolume*>;
+	gvolumesMap   = new map<string, GVolume*>;
+	gmaterialsMap = new map<string, GMaterial*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
 		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KWHT << name  << RST << "> using path <" << KWHT << path << RST << ">" << endl;
 	}
 }
 
+// MARK: GVOLUMES
+
 // build and add a gvolume to the map from system parameters
 void GSystem::addGVolume(vector<string> pars, int verbosity) {
-	if( pars.size() != GVOLUMENUMBEROFPARS) {
-		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
-		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
-		gexit(EC__GWRONGNUMBEROFPARS);
-	} else {
-		string nameKey = formVolumeKey(pars[0]);
-		
-		if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
 
-			(*gvolumesMap)[nameKey] = new GVolume(name, pars);
-			if(verbosity >= GVERBOSITY_SUMMARY) {
-				cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumes map with name <" << nameKey << ">" << endl;
-			} 
-		} else {
-			cerr << FATALERRORL << "a volume with the name <" << nameKey << "> already exists. " << endl;
-			gexit(EC__GVOLUMEALREADYPRESENT);
+	string nameKey = formVolumeKey(pars[0]);
+
+	if(gvolumesMap->find(nameKey) == gvolumesMap->end()) {
+
+		if(verbosity >= GVERBOSITY_SUMMARY) {
+			cout << GSYSTEMLOGHEADER << "Adding gVolume " << pars[0] << " to gvolumesMap with name <" << nameKey << ">" << endl;
 		}
+		(*gvolumesMap)[nameKey] = new GVolume(name, pars);
+		if(verbosity >= GVERBOSITY_DETAILS) {
+			cout << *(*gvolumesMap)[nameKey] ;
+		}
+
+	} else {
+		cerr << FATALERRORL << "a gVolume with the name <" << nameKey << "> already exists. " << endl;
+		gexit(EC__GVOLUMEALREADYPRESENT);
 	}
+
 }
 
 void GSystem::addROOTVolume(string rootVolumeDefinition) {
@@ -101,4 +104,29 @@ GVolume* GSystem::getGVolume(string volumeName) const {
 	} else {
 		return nullptr;
 	}
+}
+
+// MARK: GMATERIALS
+
+
+// add gmaterial using parameters (TEXT or MYSQL factories)
+void GSystem::addGMaterial(vector<string> pars, int verbosity) {
+	string nameKey = formVolumeKey(pars[0]);
+
+	if(gmaterialsMap->find(nameKey) == gmaterialsMap->end()) {
+
+		if(verbosity >= GVERBOSITY_SUMMARY) {
+			cout << GSYSTEMLOGHEADER << "Adding gMaterial " << pars[0] << " to gmaterialsMap with name <" << nameKey << ">" << endl;
+		}
+		(*gmaterialsMap)[nameKey] = new GMaterial(name, pars);
+		if(verbosity >= GVERBOSITY_DETAILS) {
+			cout << *(*gmaterialsMap)[nameKey] ;
+		}
+
+	} else {
+		cerr << FATALERRORL << "a gMaterial with the name <" << nameKey << "> already exists. " << endl;
+		gexit(EC__GVOLUMEALREADYPRESENT);
+	}
+
+
 }

@@ -9,6 +9,9 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {
 		cerr << FATALERRORL << "incorrect number of system parameters (" << pars.size() << ") for " << pars[0] ;
+		for ( auto& parameter: pars  ) {
+			cerr << " par " << parameter << endl;
+		}
 		cerr << " It should be " << GVOLUMENUMBEROFPARS << endl;
 		gexit(EC__GWRONGNUMBEROFPARS);
 	} else {

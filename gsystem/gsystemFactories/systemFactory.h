@@ -45,21 +45,18 @@ public:
 			}
 		}
 
-
-
-		loadMaterial(system, verbosity);
+		loadMaterials(system, verbosity);
 		loadGeometry(system, verbosity);
 	}
 
 	virtual ~GSystemFactory() = default;
 
 private:
-	virtual void loadMaterial(GSystem *system, int verbosity) = 0;
+	virtual void loadMaterials(GSystem *system, int verbosity) = 0;
 	virtual void loadGeometry(GSystem *system, int verbosity) = 0;
 
 protected:
 	vector<string> possibleLocationOfFiles;
-
 
 public:
 	void addPossibleFileLocation(string fl) { possibleLocationOfFiles.push_back(fl);}

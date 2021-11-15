@@ -130,7 +130,6 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	// PRAGMA TODO: Loads material
-	// PRAGMA TODO: Loads system parameters
 
 
 }
@@ -173,5 +172,10 @@ vector<string> GWorld::getSensitiveDetectorsList() {
 
 
 // PRAGMA TODO: Loads materials
-// PRAGMA TODO: Loads system parameters
+
+
+
+
+
+
 

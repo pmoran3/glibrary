@@ -26,6 +26,9 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 	ifstream *IN = new ifstream(fname.c_str());
 	
 	if( IN->good() ) {
+		if( verbosity == GVERBOSITY_DETAILS ) {
+			cout << GSYSTEMLOGHEADER << "Opening file " <<  KMAG << fname << RST  << endl;
+		}
 		return IN;
 	} else {
 		// file not good, now trying other locations
@@ -39,7 +42,7 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 			
 			if( IN->good() ) {
 				if(verbosity >= GVERBOSITY_SUMMARY) {
-					cout << GSYSTEMLOGHEADER << "Opening " << newName << endl;
+					cout << GSYSTEMLOGHEADER << "Opening file " << KMAG << newName << RST << endl;
 				}
 				// file found, return stream
 				return  IN;

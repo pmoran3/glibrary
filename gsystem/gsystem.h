@@ -3,6 +3,7 @@
 
 // gsystem
 #include "gvolume.h"
+#include "gmaterial.h"
 
 // c++
 #include <map>
@@ -18,10 +19,19 @@ public:
 	GSystem(string givenname, string factory, string variation, int verbosity);
 
 private:
-	string      name;               // System name
-	string      path;               // System absolute or relative path (directory for text, gdml, cad factories, mysql db name for mysql)
-	string   factoryName;           // Factory that builds the detector
+
+	// MARK: class vars
+	string name;                    // System name
+	string path;                    // Absolute/relative path
+	string factoryName;             // Name of actory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
+
+	inline const string formVolumeKey(string detectorName) const {
+		if (detectorName == ROOTWORLDGVOLUMENAME) {
+			return ROOTWORLDGVOLUMENAME;
+		}
+		return name + "__" + detectorName;
+	}
 
 	// map containing the volumes
 	// the key is system + volume name;
@@ -29,13 +39,10 @@ private:
 	// each system name must be unique
 	map<string, GVolume*> *gvolumesMap;
 
-	inline const string formVolumeKey(string detectorName) const {
-		if (detectorName == ROOTWORLDGVOLUMENAME) {
-			return ROOTWORLDGVOLUMENAME;
-		}
+	// materials are part of a system and cannot be shared among systems
+	// (for that, the G4 Material database should be sufficient
+	map<string, GMaterial*> *gmaterialsMap;
 
-		return name + "__" + detectorName;
-	}
 
 public:
 	inline const string getName()        const { return name; }
@@ -44,15 +51,15 @@ public:
 	inline const string getFilePath()    const { return path + "/" + name; }
 
 
-	// GVOLUMES
+	// MARK: GVOLUMES
 
 	// add root rootVolumeDefinition
 	void addROOTVolume(string rootVolumeDefinition);
 
-	// add volume using parameters (TEXT or MYSQL factories)
+	// add gvolume using parameters (TEXT or MYSQL factories)
 	void addGVolume(vector<string> pars, int verbosity);
 
-	// add volume from file (CAD or GDML factories)
+	// add gvolume from file (CAD or GDML factories)
 	void addVolumeFromFile(string importType, string filename, int verbosity);
 
 	// need to filter system name from key
@@ -61,7 +68,10 @@ public:
 	map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
 
 
-	// GMATERIALS
+	// MARK: GMATERIALS
+
+	// add gmaterial using parameters (TEXT or MYSQL factories)
+	void addGMaterial(vector<string> pars, int verbosity);
 
 
 };
