@@ -53,7 +53,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 
 	    GIntegralPayload* intpayload = intPayloadvec->at(hit);
 	    vector<int> payload = intpayload->getPayload();
-	    crate   = 0;//payload[0];
+	    crate   = payload[0];
 	    slot    = payload[1];
 	    channel = payload[2];
 	    charge  = payload[3];
