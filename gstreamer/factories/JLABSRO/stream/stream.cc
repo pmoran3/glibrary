@@ -3,7 +3,8 @@
 
 bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 {
-	if(ofile == nullptr) {
+
+  if(ofile == nullptr) {
 		cout << "ofile == nullptr" << endl;
 		return false;
 	}
@@ -42,7 +43,6 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	frame_data.push_back(0x80000000);
 	frame_data.insert(frame_data.end(), slots, 0);
 
-
 	for(unsigned int i = 0; i < slots; ++i) {
 
 	  int starting_point = frame_data.size() - header_offset;
@@ -50,7 +50,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	  int hit_counter = 0;
 	  
 	  for(unsigned int hit = 0; hit < intPayloadvec->size(); ++hit) {
-	 
+
 	    GIntegralPayload* intpayload = intPayloadvec->at(hit);
 	    vector<int> payload = intpayload->getPayload();
 	    crate   = payload[0];
@@ -58,10 +58,11 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	    channel = payload[2];
 	    charge  = payload[3];
 	    time    = payload[4];
-	    
+
 	    if(i == slot) {
 	      
 	      frame_data.push_back(charge | (channel << 13) | ((time / 4) << 17));
+	      ++hit_counter;
 	    }
 	  }
 	  
@@ -71,7 +72,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 		++hit_counter;
 	      }
 	      
-	      frame_data[header_offset + 1 + slot] =
+	      frame_data[header_offset + 1 + i] =
 		((hit_counter) << 16) | starting_point;
 	}
 	
