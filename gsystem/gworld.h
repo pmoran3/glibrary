@@ -18,7 +18,7 @@ public:
 	// - apply modifiers
 	GWorld(GOptions* gopts);
 	~GWorld() {
-	//	delete gsystemsMap;
+		delete gsystemsMap;
 	}
 
 
@@ -29,7 +29,6 @@ private:
 	// search for a volume among systems in gsystemsMap
 	// cannot return const because this is used in the constructor to apply shifts
 	GVolume* searchForVolume(string volumeName, string purpose) const;
-
 
 public:
 	map<string, GSystem*>* getSystemsMap() const {return gsystemsMap;}

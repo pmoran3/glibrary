@@ -50,6 +50,10 @@ namespace g4system {
 		goptions.push_back(GOption(jsonG4CheckOverlaps));
 
 
+		// log materials switches
+		goptions.push_back(GOption("logG4Materials",        "Log Geant4 Predefined Materials"));
+		goptions.push_back(GOption("printSystemsMaterials", "Print the materials used in this simulation"));
+
 		return goptions;
 	}
 

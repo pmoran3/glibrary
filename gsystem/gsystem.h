@@ -43,7 +43,6 @@ private:
 	// (for that, the G4 Material database should be sufficient
 	map<string, GMaterial*> *gmaterialsMap;
 
-
 public:
 	inline const string getName()        const { return name; }
 	inline const string getFactoryName() const { return factoryName; }
@@ -65,7 +64,7 @@ public:
 	// need to filter system name from key
 	GVolume* getGVolume(string volumeName) const;
 	
-	map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
+	inline const map<string, GVolume*>* getGVolumesMap() const {return gvolumesMap;}
 
 
 	// MARK: GMATERIALS
@@ -73,7 +72,11 @@ public:
 	// add gmaterial using parameters (TEXT or MYSQL factories)
 	void addGMaterial(vector<string> pars, int verbosity);
 
+	const GMaterial* getMaterialForGVolume(string volumeName) const;
 
+	inline const map<string, GMaterial*>* getGMaterialMap() const {return gmaterialsMap;}
+
+	
 };
 
 

@@ -130,3 +130,20 @@ void GSystem::addGMaterial(vector<string> pars, int verbosity) {
 
 
 }
+
+const GMaterial* GSystem::getMaterialForGVolume(string volumeName) const {
+	string key = formVolumeKey(volumeName);
+
+	if( gvolumesMap->find(key) != gvolumesMap->end() ) {
+		string materialName= (*gvolumesMap)[key]->getMaterial();
+
+		if( gmaterialsMap->find(materialName) != gmaterialsMap->end() ) {
+			return  (*gmaterialsMap)[materialName];
+		} else {
+			cerr << FATALERRORL << "gMaterial <" << materialName << "> not found for volume <" << volumeName << ">" << endl;
+			gexit(EC__GMATERIALNOTFOUND);
+		}
+	}
+
+	return nullptr;
+}

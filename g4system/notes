@@ -16,3 +16,14 @@ open $G4ROOT/$GEANT4_VERSION/lib
 open $GLIBRARY/lib
 
 - cadmesh
+
+
+
+# Material Classese References:
+
+- G4NistManager
+- G4Material
+- G4Element
+
+https://geant4.kek.jp/Reference/
+

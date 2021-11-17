@@ -10,10 +10,12 @@ using namespace gutilities;
 
 // c++
 #include <string>
-#include <vector>
 using std::string;
 using std::ostream;
+#include <vector>
 using std::vector;
+#include <numeric>
+using std::accumulate;
 
 class GMaterial
 {
@@ -69,7 +71,6 @@ public:
 	// getters
 	inline const string getName()         const {return name;}
 	inline const string getDescription()  const {return description;}
-
 	
 	inline const int            getNcomponents()        const;
 	inline const double         getDensity()            const {return density;}
@@ -95,6 +96,11 @@ public:
 
 	// other optical properties
 	inline const vector<double> getRayleigh()           const {return rayleigh;}
+
+	// return true if this is a chemical formula (the sum of all components amounts is > 1 )
+	inline const bool isChemicalFormula() const {
+		return accumulate(amounts.begin(), amounts.end(), 0) > 1;
+	}
 
 };
 

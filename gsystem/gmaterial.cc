@@ -61,6 +61,7 @@ ostream &operator<<(ostream &stream, GMaterial gMat)
 			stream << "       ・ " << gMat.components[m] << quantity << " " << gMat.amounts[m] << endl;
 		}
 	}
+	stream  << endl;
 
 	return stream;
 }

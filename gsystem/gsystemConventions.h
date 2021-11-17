@@ -19,6 +19,7 @@
 #define EC__GVOLUMENOTFOUND                  204
 #define EC__GDIRNOTFOUND                     205
 #define EC__GMATERIALOPTICALPROPERTYMISMATCH 206
+#define EC__GMATERIALNOTFOUND                207
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"

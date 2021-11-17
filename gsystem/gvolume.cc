@@ -76,6 +76,7 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 	stream << "   - Digitization:    "    << gVol.digitization << endl;
 	stream << "   - GIdentity:       "    << gVol.gidentity << endl;
 	stream << "   - Col, Vis, Style: "    << gVol.color   << ", " << visibility << ", "  << style << endl;
+	stream  << endl;
 
 	return stream;
 }
