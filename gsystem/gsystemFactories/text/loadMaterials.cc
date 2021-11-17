@@ -4,8 +4,10 @@
 
 void GSystemTextFactory::loadMaterials(GSystem *system, int verbosity) {
 
-	// will exit if not found
+	// will continue if not found
 	ifstream *IN = gSystemTextFileStream(system, GTEXTMATSTYPE, verbosity);
+
+	if ( IN != nullptr) {
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
 		cout << GSYSTEMLOGHEADER << "Loading <text> materials for <" << KWHT << system->getName() << RST << ">" << endl;
@@ -26,4 +28,5 @@ void GSystemTextFactory::loadMaterials(GSystem *system, int verbosity) {
 	}
 
 	IN->close();
+}
 }

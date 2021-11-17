@@ -15,6 +15,9 @@ GSystemTextFactory::GSystemTextFactory() {
 
 
 // returns the file stream, checking all possible directories.
+// SYSTEMTYPE can be:
+// - GTEXTGEOMTYPE (mandatory, exit if not found)
+// - GTEXTMATSTYPE
 ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYSTEMTYPE, int verbosity)
 {
 	string fileName  = system->getFilePath();
@@ -50,10 +53,11 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 		}
 	}
 	
-	// at this point file was not found, error
-	cerr << GSYSTEMLOGHEADER << "File " << fname << " not found " << endl;
-	gexit(EC__GSETUPFILENOTOFOUND);
-	
+	// at this point file was not found, error if it was a geometry file
+	if ( SYSTEMTYPE == GTEXTGEOMTYPE ) {
+		cerr << GSYSTEMLOGHEADER << "File " << fname << " not found " << endl;
+		gexit(EC__GSETUPFILENOTOFOUND);
+	}
 	
 	// file was not found
 	return nullptr;
