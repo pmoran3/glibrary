@@ -20,6 +20,11 @@
 - for executables: Add macos command line tool exampleName
 
 
+## After versions update:
+
+- May have to clean LIBRARY_SEARCH as it may point to wrong version dirs
+
+
 ## QT Objects derived classes
 
 Select your project target and in Build Rules make a new custom rule ("+" button).
