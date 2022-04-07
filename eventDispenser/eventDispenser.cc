@@ -97,10 +97,10 @@ void EventDispenser::distributeEvents(int nevts)
 	}
 }
 
-
+// TODO: fix this as ntot is not used
 void EventDispenser::printRunsDetails(int neventsToProcess)
 {
-	int ntot = 0;
+//	int ntot = 0;
 
 	cout << EVENTDISPENSERLOGMSGITEM << " EventDispenser initialized with " << neventsToProcess << " events distributed among " << runWeights.size() << " runs:" << endl;
 
@@ -109,7 +109,7 @@ void EventDispenser::printRunsDetails(int neventsToProcess)
 		for(const auto &weight : runWeights) {
 			cout << GTAB << EVENTDISPENSERLOGMSGITEM << " run: " << weight.first << "\t weight: " << runWeights[weight.first] ;
 			cout << "\t  n. events: " << runEvents[weight.first] << endl;
-			ntot += runEvents[weight.first];
+//			ntot += runEvents[weight.first];
 		}
 	}
 }
