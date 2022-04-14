@@ -8,8 +8,6 @@ using namespace std;
 
 G4DisplaySlice::G4DisplaySlice(GOptions* gopt, QWidget* parent) : QWidget(parent)
 {
-
-
 	// x slice
 	sliceXEdit = new QLineEdit(tr("0"));
 	sliceXEdit->setMaximumWidth(100);
