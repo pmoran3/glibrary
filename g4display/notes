@@ -12,8 +12,9 @@ open $G4ROOT/$GEANT4_VERSION/lib
 
 
 scons 4.2.0 will not work due to  bug: https://bugs.gentoo.org/806085
-looks like downgrading to 4.1.0 will work on fedora but that's not available
-scons 4.3 works on the mac
+works on fedora34 because it's scons 4.1.0
+scons 4.3 works on the mac but not on fedora37
+
 
 
 
