@@ -224,11 +224,11 @@ bool G4World::createG4Material(const GMaterial *gmaterial, int verbosity) {
 	if ( isChemical ) {
 		if(verbosity == GVERBOSITY_DETAILS) {
 			G4cout << G4SYSTEMLOGHEADER << " Building material " << materialName << " with components: " << endl;
-			for ( auto i=0; i<components.size(); i++ ) {
+			for ( size_t i=0; i<components.size(); i++ ) {
 				G4cout << GTAB << components[i] << ": " << amounts[i] << " atoms" << endl;
 			}
 		}
-		for ( auto i=0; i<components.size(); i++ ) {
+		for ( size_t i=0; i<components.size(); i++ ) {
 			auto element = NISTman->FindOrBuildElement(components[i]);
 			(*g4materialsMap)[materialName]->AddElement(element, (int) amounts[i]);
 		}
@@ -236,11 +236,11 @@ bool G4World::createG4Material(const GMaterial *gmaterial, int verbosity) {
 	} else {
 		if(verbosity == GVERBOSITY_DETAILS) {
 			G4cout << G4SYSTEMLOGHEADER << " Building material " << materialName << " with components: " << endl;
-			for ( auto i=0; i<components.size(); i++ ) {
+			for ( size_t i=0; i<components.size(); i++ ) {
 				G4cout << GTAB << components[i] << ": " << amounts[i] << " fractional mass" << endl;
 			}
 		}
-		for ( auto i=0; i<components.size(); i++ ) {
+		for ( size_t i=0; i<components.size(); i++ ) {
 			auto material = NISTman->FindOrBuildMaterial(components[i]);
 			(*g4materialsMap)[materialName]->AddMaterial(material, amounts[i]);
 		}

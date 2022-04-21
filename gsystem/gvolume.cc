@@ -5,6 +5,8 @@
 #include <iostream>
 using namespace std;
 
+// need to set pCopyNo with unique identifier
+// see c++ thread safe ID generation function
 GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 {
 	if( pars.size() != GVOLUMENUMBEROFPARS) {

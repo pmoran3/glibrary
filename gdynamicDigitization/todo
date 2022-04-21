@@ -2,3 +2,6 @@
 - create routine should be in $GEMC
 
 
+- Add initialize constant message: "entering loadConstants"
+- add digitization function: fastSimulation
+

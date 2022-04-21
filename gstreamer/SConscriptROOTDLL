@@ -1,9 +1,13 @@
 # The environment is not passed here, checking for root library
 from init_env import init_environment
 import os
+import sys
 
 if os.environ.get('ROOTSYS') is not None:
 	ROOTSYS = os.environ['ROOTSYS']
+else:
+	print("Error: ROOT not found")
+	sys.exit(1)
 
 if os.path.exists(ROOTSYS):
 	env = init_environment('glibrary geant4 clhep root')

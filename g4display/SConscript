@@ -6,8 +6,8 @@ sources = [
 			  'g4displayOptions.cc',
 			  'g4display.cc',
 			  'g4controls.cc',
-			  'tabs/gcamera.cc',
-			  'tabs/gslice.cc'
+			  'tabs/g4displaycamera.cc',
+			  'tabs/g4displayslice.cc'
 			  ]
 
 # destination library is one dir up - relative to this SConscript
