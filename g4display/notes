@@ -9,3 +9,13 @@ open $QTDIR/lib
 open $G4ROOT/$GEANT4_VERSION/lib
   - intercoms
 
+
+
+scons 4.2.0 will not work due to  bug: https://bugs.gentoo.org/806085
+works on fedora34 because it's scons 4.1.0
+scons 4.3 works on the mac but not on fedora37
+
+
+
+
+

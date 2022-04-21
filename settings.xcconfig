@@ -1,5 +1,5 @@
 // location of libraries
-JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx11.6-clang13.0.0
+JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx11.6.2-clang13.0.0
 
 // build directory is on the home dir
 MYBUILDDIR = /Users/ungaro/builds
@@ -24,6 +24,7 @@ MYBUILDDIR = /Users/ungaro/builds
 // ln -s /opt/jlab_software/devel/Darwin_macosx10.15-x86_64-clang11.0.0/qt/5.10.1/5.10.1/clang_64/lib/QtConcurrent.framework/Versions/Current/Headers/* QtConcurrent/
 
 // Remember to manually add the frameworks in the xcode project
+// Remember to change the moc path in the Build rules
 QT_VERSION = system
 QT_ARCH    = clang_64
 QTDIR      = $JLAB_SOFTWARE/qt/$QT_VERSION/$QT_ARCH
@@ -45,7 +46,7 @@ CLHEP_HEADS   = $CLHEP_ROOT/include $CLHEP_ROOT/include/CLHEP
 
 // GEANT4
 // for libraries: open $G4LIB/
-GEANT4_VERSION = 4.10.07.p02MT
+GEANT4_VERSION = 4.10.07.p03MT
 GEANT4_ROOT    = $JLAB_SOFTWARE/geant4/$GEANT4_VERSION
 GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 
@@ -54,7 +55,7 @@ GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 // - core
 // - RIO for files
 // - TTree for trees
-ROOT_VERSION = 6.24.04
+ROOT_VERSION = 6.24.06
 ROOTSYS      = $JLAB_SOFTWARE/root/$ROOT_VERSION
 ROOT_HEADS   = $ROOTSYS/include/root
 

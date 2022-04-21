@@ -21,12 +21,12 @@ public:
 private:
 	QSlider *cameraTheta;
 	QSlider *cameraPhi;
-
-	// geant4 UIManager
-	G4UImanager  *g4uim;
+	QSlider *lightTheta;
+	QSlider *lightPhi;
 
 private slots:
 	void changeCameraDirection();
+	void changeLightDirection();
 
 };
 
