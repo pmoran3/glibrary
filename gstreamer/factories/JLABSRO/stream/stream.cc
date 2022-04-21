@@ -14,7 +14,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	static constexpr int header_offset = sizeof(DataFrameHeader) / 4;
 	const GFrameDataCollectionHeader* header = frameRunData->getHeader();
 	long int frameID = header->getFrameID();
-	cout << endl << "frameID: " << frameID << endl << endl;
+	//	cout << endl << "frameID: " << frameID << endl << endl;
 	const std::vector<GIntegralPayload*> *intPayloadvec = frameRunData->getIntegralPayload();
 	
 	frame_data.resize(header_offset,0);
@@ -57,10 +57,10 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	    slot    = payload[1];
 	    channel = payload[2];
 	    charge  = payload[3];
-	    time    = payload[4]*1e9;
+	    time    = payload[4];
 
 	    if(i == slot) {
-	      if(hit<100) cout << time << endl;
+	      //	      if(hit<100) cout << time << endl;
 	      frame_data.push_back(charge | (channel << 13) | ((time / 4) << 17));
 	      ++hit_counter;
 	    }
