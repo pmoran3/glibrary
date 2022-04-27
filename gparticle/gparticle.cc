@@ -98,8 +98,9 @@ float Gparticle::calculateMomentum() {
 float Gparticle::calculateKinEnergy(float mass) {
 	
 	float pmev = calculateMomentum();
-
+	
 	return sqrt(pmev*pmev + mass*mass) - mass ;
+
 }
 
 
