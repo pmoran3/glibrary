@@ -66,14 +66,15 @@ Gparticle::Gparticle(gparticle::JParticle jparticle) {
 void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 
 	auto particleDef = G4ParticleTable::GetParticleTable()->FindParticle(name);
+	float mass = particleDef->GetPDGMass();
 
 	if ( particleDef ) {
 
 		particleGun->SetParticleDefinition(particleDef);
 
 		for ( int i=0; i<multiplicity; i++) {
-
-			particleGun->SetParticleMomentum(calculateMomentum());
+			particleGun->SetParticleEnergy(calculateKinEnergy(mass));
+			
 			particleGun->SetParticleMomentumDirection(calculateBeamDirection());
 			particleGun->SetParticlePosition(calculateVertex());
 			particleGun->GeneratePrimaryVertex(anEvent);
@@ -83,17 +84,24 @@ void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 		cerr << FATALERRORL << " particle " << name << " not found in G4ParticleTable." << endl;
 		gexit(EC__GPARTICLENOTFOUND);
 	}
-
-
+	
 }
 
 
 float Gparticle::calculateMomentum() {
 
-	double pmev = randomize(p/CLHEP::MeV, delta_p/CLHEP::MeV, momentumGaussianSpread);
+	float pmev = randomize(p/CLHEP::MeV, delta_p/CLHEP::MeV, momentumGaussianSpread);
 
 	return pmev;
 }
+
+float Gparticle::calculateKinEnergy(float mass) {
+	
+	float pmev = calculateMomentum();
+
+	return sqrt(pmev*pmev + mass*mass) - mass ;
+}
+
 
 G4ThreeVector Gparticle::calculateBeamDirection() {
 

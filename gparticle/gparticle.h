@@ -15,7 +15,6 @@ public:
 
 	Gparticle(gparticle::JParticle jparticle);
 
-
 private:
 
 	// PDG Monte Carlo Particle Numbering Scheme:
@@ -28,6 +27,8 @@ private:
 	float p;
 	float delta_p;
 	float theta;
+	
+	
 	float phi;
 	float delta_theta;
 	float delta_phi;
@@ -52,6 +53,7 @@ private:
 	float randomize(float center, float delta, bool gaussianSPread);
 
 	float         calculateMomentum();
+	float         calculateKinEnergy(float mass);
 	G4ThreeVector calculateBeamDirection();
 	G4ThreeVector calculateVertex();
 
