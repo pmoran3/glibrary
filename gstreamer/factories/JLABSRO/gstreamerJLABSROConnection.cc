@@ -13,7 +13,6 @@ bool GstreamerJSROFactory::closeConnection()
 {
 	ofile->close();
 	delete ofile;
-
 	
 	// PRAGMA: need to check if file closed successfully
 	return true;
