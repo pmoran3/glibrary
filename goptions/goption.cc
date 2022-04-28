@@ -346,7 +346,6 @@ bool GOption::isDefaultValue(string key, json userValue) {
 
 		for ( auto& jsonTagValue : definitionJsonValue.items() )  {
 			if ( jsonTagValue.key() == GNAME && key == jsonTagValue.value() ) {
-				cout << " ASD " << jsonTagValue.value() << endl;
 //				if ( gdebug ) {
 //					cout << TTPOINTITEM << "key matches " << jsonTagValue.value() << endl;
 //				}
