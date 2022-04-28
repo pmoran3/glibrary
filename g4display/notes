@@ -4,6 +4,7 @@
 open $QTDIR/lib
   - QtCore
   - QtWidgets
+  - QtGui
 
 
 open $G4ROOT/$GEANT4_VERSION/lib

@@ -1,5 +1,5 @@
 // location of libraries
-JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx11.6.2-clang13.0.0
+JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx12.3-clang13.1.6
 
 // build directory is on the home dir
 MYBUILDDIR = /Users/ungaro/builds
@@ -46,7 +46,7 @@ CLHEP_HEADS   = $CLHEP_ROOT/include $CLHEP_ROOT/include/CLHEP
 
 // GEANT4
 // for libraries: open $G4LIB/
-GEANT4_VERSION = 4.10.07.p03MT
+GEANT4_VERSION = 4.10.07.p03
 GEANT4_ROOT    = $JLAB_SOFTWARE/geant4/$GEANT4_VERSION
 GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 

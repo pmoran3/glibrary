@@ -33,8 +33,8 @@ public:
 	GQTButtonsWidget(double h, double v, std::vector<std::string> bicons, QWidget *parent = Q_NULLPTR);
 
 	~GQTButtonsWidget() {
-//		delete buttonsWidget;
-//		for ( auto* button: buttons )  { delete button; }
+		delete buttonsWidget;
+		for ( auto* button: buttons )  { delete button; }
 	}
 
 private:
