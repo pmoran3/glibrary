@@ -169,3 +169,7 @@ void G4DisplaySlice::clearSlices()
 	sliceYActi->setChecked(false);
 	sliceZActi->setChecked(false);
 }
+
+G4DisplaySlice::~G4DisplaySlice() {
+
+}

@@ -13,7 +13,6 @@
 class G4DisplayCamera: public QWidget {
 
 	// metaobject required for non-qt slots
-	Q_OBJECT
 
 public:
 	G4DisplayCamera(GOptions* gopts, QWidget* parent = Q_NULLPTR);
