@@ -1,27 +1,15 @@
-## GSplash
 
-qt frameworks needed:
+>> For the library:
 
-- QtCore
-- QtGui
-- QtWidgets
+open $QTDIR/lib
+
+	- QtCore
+	- QtGui
+	- QtWidgets
 
 
 >> For the example:
 
-- QtCore
-- QtWidgets
+	- QtCore
+	- QtWidgets
 
-
-
-## From Scratch:
-
-* Library Target:
-
-Sources:
- - gsplash.cc
-
-* Example Target:
-
-Sources:
-- gsplashExample.cc

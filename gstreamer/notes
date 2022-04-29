@@ -1,7 +1,15 @@
-Root:
+gstreamerROOTFactory:
 
-Core
-RIO
-Tree
+to check the original library location (they may be simlinks)
+
+l $ROOTSYS
+
+example: /usr/local/Cellar/root/6.26.02/lib
+
+open libs
+
+	- Core
+	- RIO
+	- Tree
 
 These are symlinks so they should come from the correct place, i.e. /usr/local/Cellar/root/6.24.04/lib

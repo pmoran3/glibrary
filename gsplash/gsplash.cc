@@ -43,7 +43,7 @@ GSplash::GSplash(string imageName) : splash(nullptr)
 
 void GSplash::message(string msg) {
 	if(splash != nullptr) {
-		splash->showMessage(msg.c_str(),  Qt::AlignLeft,  Qt::white );
+		splash->showMessage(msg.c_str(),  Qt::AlignLeft,  Qt::black );
 		qApp->processEvents();
 	}
 }

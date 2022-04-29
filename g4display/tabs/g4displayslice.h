@@ -13,6 +13,7 @@
 class G4DisplaySlice: public QWidget {
 
 	// metaobject required for non-qt slots
+	Q_OBJECT
 
 public:
 	G4DisplaySlice(GOptions* gopt, QWidget* parent = Q_NULLPTR);
