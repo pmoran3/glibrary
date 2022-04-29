@@ -1,10 +1,9 @@
 
 
-
-
 open $CLHEP_BASE_DIR/lib
 
-- libCLHEP-2.4.4.2
+	- libCLHEP.dylib
+
 
 
 open $G4ROOT/$GEANT4_VERSION/lib

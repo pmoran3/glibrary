@@ -16,13 +16,13 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-	GTouchable *ctof = new GTouchable(readout, {GIdentifier("paddle", 22)});
-
-	// a bitset
-	HitBitSet hitBitSet("000000");
-
-	// hit with null G4Step (not used)
-	GHit *newHit = new GHit(ctof, nullptr, hitBitSet);
+//	GTouchable *ctof = new GTouchable(readout, {GIdentifier("paddle", 22)});
+//
+//	// a bitset
+//	HitBitSet hitBitSet("000000");
+//
+//	// hit with null G4Step (not used)
+//	GHit *newHit = new GHit(ctof, nullptr, hitBitSet);
 
 
 	return EXIT_SUCCESS;

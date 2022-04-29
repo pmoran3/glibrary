@@ -15,9 +15,9 @@ int main(int argc, char* argv[])
 	identity.push_back(GIdentifier("paddle", 22));
 
 	// a touchable
-	GTouchable ctof(readout, identity, true);
+	// GTouchable ctof(readout, identity, true);
 
-	cout << " ctof energy multiplier: " << ctof.getEnergyMultiplier() << endl;
+	// cout << " ctof energy multiplier: " << ctof.getEnergyMultiplier() << endl;
 
 
 	return 1;

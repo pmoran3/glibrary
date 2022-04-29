@@ -1,6 +1,6 @@
 #include "ctofRoutinesExample.h"
 
-bool CTofRoutineExample::defineReadoutSpecs(int runno, string variation) {
+bool CTofRoutineExample::defineReadoutSpecs() {
 
 	float     timeWindow = 10;                  // electronic readout time-window of the detector
 	float     gridStartTime = 0;                // defines the windows grid
@@ -31,3 +31,7 @@ bool CTofRoutineExample::loadConstants(int runno, string variation)
 	return true;
 }
 
+// tells the DLL how to create a GDynamicFactory
+extern "C" GDynamicDigitization* GDynamicFactory(void) {
+	return static_cast<GDynamicDigitization*>(new CTofRoutineExample);
+}

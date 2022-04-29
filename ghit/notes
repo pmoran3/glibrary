@@ -1,16 +1,18 @@
 open $G4ROOT/$GEANT4_VERSION/lib
 
-- digits_hits
-- global
-- graphics_reps
+	- digits_hits
+	- global
+	- graphics_reps
 
 For the example:
-- global
-- track
-- gtouchable
+
+	- global
+	- track
+	- gtouchable
 
 
 
 open $CLHEP_BASE_DIR/lib
 
- -
+
+	- libCLHEP.dylib
