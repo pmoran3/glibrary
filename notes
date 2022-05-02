@@ -19,6 +19,12 @@
 - Publish Your App With Symbol Information: add dSYM file so the symbols are kept in the crash reports (for example testflights). However this is only useful if we have different xcode versions. See: https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information/
 - for executables: Add macos command line tool exampleName
 
+## Gstreamer prefix/suffix xcode:
+
+- Build Settings > Executable Prefix set to empty
+- Build Settings > Executable Extension set to gplugin
+
+
 
 ## After versions update:
 
