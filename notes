@@ -34,7 +34,7 @@ Select your project target and in Build Rules make a new custom rule ("+" button
 Set the "Process" drop down to "Source files with names matching" and type in *.h next to that.
 Set the "Using" drop down to "Custom script:" and in the script type (find path to moc):
 
-/pathTo/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
+$QTDIR/bin/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
 
 Now add the "Output files" ("+" button):
 
@@ -47,7 +47,7 @@ that the output from moc is a .cpp and needs to be compiled and linked into you 
 
 ## Cocoa plugin not found
 
-Add $QTDIR/plugins/ explicit, currently: /opt/jlab_software/2.4/Darwin_macosx10.15-clang12.0.0/qt/system/clang_64/plugins
+Add $QTDIR/plugins/ explicit, currently: /opt/jlab_software/2.5/Darwin_macosx12.3.1-clang13.1.6/qt/system/clang_64/plugins/
 to scheme environment var QT_PLUGIN_PATH
 
 - if problems with plugin "cocoa":
@@ -82,7 +82,7 @@ Select your project target and in Build Rules make a new custom rule ("+" button
 Set the "Process" drop down to "Source files with names matching" and type in *.qrc next to that.
 Set the "Using" drop down to "Custom script:" and in the script type (find path to rcc):
 
-path to/rcc -name ${INPUT_FILE_BASE} ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/qrc_${INPUT_FILE_BASE}.cc
+$QTDIR/bin/rcc -name ${INPUT_FILE_BASE} ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/qrc_${INPUT_FILE_BASE}.cc
 
 Now add the "Output files" ("+" button):
 
@@ -98,11 +98,28 @@ ${DERIVED_FILE_DIR}/qrc_${INPUT_FILE_BASE}.cc
 
 ## Framework and library dir of interest
 
-	Qt:     open $QTDIR/lib/
-	geant4: open $G4ROOT/$GEANT4_VERSION/lib/
-	ccdb:   open $CCDB_HOME/lib/
-	clhep:  open $CLHEP_BASE_DIR/lib/
-	root:   open $ROOTSYS/lib/
+	open $QTDIR/lib/
+	open $G4ROOT/$GEANT4_VERSION/lib/
+	open $CLHEP_BASE_DIR/lib/
+	open $ROOTSYS/lib/
+	open $XERCESCROOT/lib/
+	open $GLIBRARY/lib
+	open $CCDB_HOME/lib/
+
+	Geant4 Environment:
+	
+	echo " \
+G4LEDATA           $G4LEDATA \
+G4LEVELGAMMADATA   $G4LEVELGAMMADATA \
+G4NEUTRONHPDATA    $G4NEUTRONHPDATA \
+G4PIIDATA          $G4PIIDATA \
+G4RADIOACTIVEDATA  $G4RADIOACTIVEDATA \
+G4REALSURFACEDATA  $G4REALSURFACEDATA \
+G4SAIDXSDATA       $G4SAIDXSDATA \
+G4ABLADATA         $G4ABLADATA \
+G4ENSDFSTATEDATA   $G4ENSDFSTATEDATA \
+G4PARTICLEXSDATA   $G4PARTICLEXSDATA \
+"
 
 
 ## Shared schemes:
