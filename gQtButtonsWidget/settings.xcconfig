@@ -4,5 +4,6 @@
 // destination of libraries and binaries
 CONFIGURATION_BUILD_DIR = $MYBUILDDIR
 
-// includes
-HEADER_SEARCH_PATHS = $GLIB_HEADS $QT_HEADS
+// includes and framework search paths
+HEADER_SEARCH_PATHS    = $GLIB_HEADS $QT_HEADS
+FRAMEWORK_SEARCH_PATHS = $QTFRAMES

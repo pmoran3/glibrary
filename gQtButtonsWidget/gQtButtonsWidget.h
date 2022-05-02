@@ -32,10 +32,8 @@ class  GQTButtonsWidget : public QWidget
 public:
 	GQTButtonsWidget(double h, double v, std::vector<std::string> bicons, QWidget *parent = Q_NULLPTR);
 
-	~GQTButtonsWidget() {
-		delete buttonsWidget;
-		for ( auto* button: buttons )  { delete button; }
-	}
+	// no need to delete the pointers below, done by qt parenting
+	~GQTButtonsWidget() {}
 
 private:
 	QListWidget *buttonsWidget;

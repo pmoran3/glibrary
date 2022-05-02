@@ -24,7 +24,9 @@
 - Build Settings > Executable Prefix set to empty
 - Build Settings > Executable Extension set to gplugin
 
+## Add explicit FRAMEWORK_SEARCH_PATHS:
 
+FRAMEWORK_SEARCH_PATHS = $QTFRAMES
 
 ## After versions update:
 

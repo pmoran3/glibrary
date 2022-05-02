@@ -29,11 +29,7 @@ public:
 
 	GSplash(string imageName = NOSPLASHIMAGESELECTED);
 	
-	~GSplash() {
-		if(splash != nullptr) {
-			delete splash ;
-		}
-	}
+	~GSplash() {}
 
 	void message(string message);
 
