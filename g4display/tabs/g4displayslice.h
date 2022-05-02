@@ -17,7 +17,9 @@ class G4DisplaySlice: public QWidget {
 
 public:
 	G4DisplaySlice(GOptions* gopt, QWidget* parent = Q_NULLPTR);
-	~G4DisplaySlice();
+
+	// no need to delete the pointers below, done by qt parenting
+	~G4DisplaySlice() {}
 
 private:
 

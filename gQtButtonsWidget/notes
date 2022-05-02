@@ -1,8 +1,5 @@
 
 
-
-
-
 open $QTDIR/lib
 
   - QtCore

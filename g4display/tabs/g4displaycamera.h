@@ -18,12 +18,8 @@ class G4DisplayCamera: public QWidget {
 public:
 	G4DisplayCamera(GOptions* gopts, QWidget* parent = Q_NULLPTR);
 
-	~G4DisplayCamera() {
-		delete cameraTheta;
-		delete cameraPhi;
-		delete lightTheta;
-		delete lightPhi;
-	}
+	// no need to delete the pointers below, done by qt parenting
+	~G4DisplayCamera() {}
 
 private:
 	QSlider *cameraTheta;

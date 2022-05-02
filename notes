@@ -27,6 +27,9 @@
 
 ## QT Objects derived classes
 
+Make sure the headers are added as source. A bug in XCODE 13.3.1 show them in the target membership but that's not enough.
+It has to be in Build Phases > Compile Sources
+
 Select your project target and in Build Rules make a new custom rule ("+" button).
 Set the "Process" drop down to "Source files with names matching" and type in *.h next to that.
 Set the "Using" drop down to "Custom script:" and in the script type (find path to moc):
@@ -47,6 +50,17 @@ that the output from moc is a .cpp and needs to be compiled and linked into you 
 Add $QTDIR/plugins/ explicit, currently: /opt/jlab_software/2.4/Darwin_macosx10.15-clang12.0.0/qt/system/clang_64/plugins
 to scheme environment var QT_PLUGIN_PATH
 
+- if problems with plugin "cocoa":
+* can set QT_DEBUG_PLUGINS to 1 in the env variables for more debugging
+* can set QT_PLUGIN_PATH to plugin locations (cocoa plugin is under platforms there), currently /opt/jlab_software/2.4/Darwin_macosx10.15-clang12.0.0/qt/system/clang_64/plugins
+
+
+## QT Widgets
+
+QWidgets that are newed can be given a parent.
+When the parent is destroyed, all of its children will be destroyed.
+Hence, in Qt it is common practice to allocate objects on the stack with new, give them a parent, and never delete the memory yourself.
+Also, when you add widgets to the layout, it reparents them to the widget the layout has been set on.
 
 ## QT Resources
 

@@ -2,19 +2,22 @@
 
 open $CLHEP_BASE_DIR/lib
 
-	- libCLHEP.dylib
+	- libCLHEP-2.4.4.2.dylib
 
 
 
 open $G4ROOT/$GEANT4_VERSION/lib
-- geometry
-- global
-- graphics
-- materials
+
+	- geometry
+	- global
+	- graphics
+	- materials
+
+
 
 open $GLIBRARY/lib
 
-- cadmesh
+	- cadmesh
 
 
 

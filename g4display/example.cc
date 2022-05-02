@@ -29,7 +29,6 @@ int main(int argc, char* argv[])
 
 
 	window->show();
-//	delete dUI;
 	delete g4Display;
 
 	return app.exec();

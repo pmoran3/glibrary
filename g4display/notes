@@ -1,16 +1,22 @@
 
 
-
 open $QTDIR/lib
+
   - QtCore
-  - QtWidgets
   - QtGui
+  - QtWidgets
 
 
 open $G4ROOT/$GEANT4_VERSION/lib
+
   - intercoms
 
+For the example, need to satisfy g4 libraries needed:
+ 
+	- copy g4 libraries and clhep to build dir
+	- copy 
 
+Compilation errors (gcc):
 
 scons 4.2.0 will not work due to  bug: https://bugs.gentoo.org/806085
 works on fedora34 because it's scons 4.1.0
