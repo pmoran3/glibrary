@@ -29,7 +29,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	
 	
 	//make payload data
-	unsigned int crate;
+	unsigned int crate = 0;
 	unsigned int slot;
 	unsigned int channel;
 	unsigned int charge;
@@ -42,7 +42,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	
 	for(unsigned int i = 0; i < slots; ++i) {
 		
-		int starting_point = frame_data.size() - header_offset;
+		int starting_point = (int) frame_data.size() - header_offset;
 		frame_data.push_back(0x80008000 | (crate << 8) | i);
 		int hit_counter = 0;
 		
@@ -75,7 +75,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection* frameRunData)
 	
 	DataFrameHeader& dfh = *reinterpret_cast<DataFrameHeader*>(frame_data.data());
 	
-	dfh.payload_length = frame_data.size()*sizeof(unsigned int) - sizeof(DataFrameHeader);
+	dfh.payload_length = (uint32_t) frame_data.size()*sizeof(unsigned int) - sizeof(DataFrameHeader);
 	dfh.compressed_length = dfh.payload_length;
 	dfh.total_length = dfh.compressed_length + sizeof(DataFrameHeader) - 4;
 	
