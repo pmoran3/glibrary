@@ -8,7 +8,7 @@
 
 // notice: if the energy deposited is very low (~50eV)
 // the rounding error on the averave calculations could be up to 10^-3
-GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, int hitn)
+GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, size_t hitn)
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData(ghit);
 

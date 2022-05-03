@@ -13,7 +13,7 @@ public:
 	bool defineReadoutSpecs();
 
 	// digitized the hit
-	GDigitizedData* digitizeHit(GHit *ghit, int hitn);
+	GDigitizedData* digitizeHit(GHit *ghit, size_t hitn);
 
 };
 
@@ -25,7 +25,7 @@ public:
 	bool defineReadoutSpecs();
 
 	// digitized the hit
-	GDigitizedData* digitizeHit(GHit *ghit, int hitn);
+	GDigitizedData* digitizeHit(GHit *ghit, size_t hitn);
 
 };
 
@@ -38,7 +38,7 @@ public:
 	bool defineReadoutSpecs();
 
 	// digitized the hit
-	GDigitizedData* digitizeHit(GHit *ghit, int hitn);
+	GDigitizedData* digitizeHit(GHit *ghit, size_t hitn);
 
 	// loads digitization constants
 	bool loadConstants(int runno, string variation);

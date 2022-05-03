@@ -15,7 +15,7 @@ bool GDosimeterDigitization::defineReadoutSpecs() {
 
 
 // digitized the hit
-GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
+GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, size_t hitn) {
 
 	// ghit->getGID() must have a single entry
 	GIdentifier identity = ghit->getGID().front();
@@ -24,7 +24,7 @@ GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, int hitn) {
 
 	gdata->includeVariable(identity.getName(), identity.getValue()             );
 
-	gdata->includeVariable("hitn",             hitn                            );
+	gdata->includeVariable("hitn",             (int) hitn                      );
 	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
 	gdata->includeVariable("time",             ghit->getAverageTime()          );
 

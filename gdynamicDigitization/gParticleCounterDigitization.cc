@@ -14,7 +14,7 @@ bool GParticleCounterDigitization::defineReadoutSpecs() {
 
 
 // digitized the hit
-GDigitizedData* GParticleCounterDigitization::digitizeHit(GHit *ghit, int hitn) {
+GDigitizedData* GParticleCounterDigitization::digitizeHit(GHit *ghit, size_t hitn) {
 
 	// ghit->getGID() must have a single entry
 	GIdentifier identity = ghit->getGID().front();
@@ -22,7 +22,7 @@ GDigitizedData* GParticleCounterDigitization::digitizeHit(GHit *ghit, int hitn) 
 	GDigitizedData* gdata = new GDigitizedData(ghit);
 
 	gdata->includeVariable(identity.getName(), identity.getValue()             );
-	gdata->includeVariable("hitn",             hitn                            );
+	gdata->includeVariable("hitn",             (int) hitn                      );
 	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
 	gdata->includeVariable("time",             ghit->getAverageTime()          );
 

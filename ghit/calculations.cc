@@ -18,7 +18,7 @@ void GHit::calculateInfosForBit(int bit)
 
 		float  avgx = 0,  avgy = 0,  avgz = 0;
 		float avglx = 0, avgly = 0, avglz = 0;
-	//	float averageTime= 0;
+		averageTime= 0;
 
 		auto nsteps = edeps.size();
 		for ( size_t s=0; s<nsteps; s++) {
@@ -72,7 +72,6 @@ float GHit::getTotalEnergyDeposited()
 
 float GHit::getAverageTime()
 {
-
 	if(averageTime == UNINITIALIZEDNUMBERQUANTITY) {
 
 		if(totalEnergyDeposited == UNINITIALIZEDNUMBERQUANTITY) {

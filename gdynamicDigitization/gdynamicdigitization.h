@@ -33,10 +33,10 @@ public:
 
 	// filter true information into GTrueInfoHit
 	// this integrates all available information built in GHit::addHitInfosForBitset
-	GTrueInfoData *collectTrueInformation(GHit *ghit, int hitn);
+	GTrueInfoData *collectTrueInformation(GHit *ghit, size_t hitn);
 
 	// digitize true information into GDigitizedHit
-	virtual GDigitizedData *digitizeHit(GHit *ghit, int hitn) {return nullptr;}
+	virtual GDigitizedData *digitizeHit(GHit *ghit, size_t hitn) {return nullptr;}
 
 	// loads the digitization constants
 	// return false for failure
