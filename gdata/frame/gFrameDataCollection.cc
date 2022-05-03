@@ -14,7 +14,7 @@ void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity
 		int time    = payload[4];
 
 		GIntegralPayload *gpayload = new GIntegralPayload(crate, slot, channel, charge, time, verbosity);
-		integralPayload->push_back(gpayload);
+		integralPayloads->push_back(gpayload);
 		
 	} else {
 		cerr << FATALERRORL << "payload size is not 4 but " << payload.size() << endl;

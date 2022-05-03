@@ -18,7 +18,7 @@ public:
 		if ( verbosity >= GVERBOSITY_DETAILS) {
 			gLogClassConstruct("GFrameDataCollection");
 		}
-		integralPayload = new vector<GIntegralPayload*>();
+		integralPayloads = new vector<GIntegralPayload*>();
 	}
 
 	~GFrameDataCollection() {
@@ -29,8 +29,8 @@ public:
 
 		delete gheader;
 
-		for ( auto* payload: *integralPayload )  { delete payload; }
-		delete integralPayload;
+		for ( auto* payload: *integralPayloads )  { delete payload; }
+		delete integralPayloads;
 	}
 
 public:
@@ -42,7 +42,7 @@ public:
 
 	// getters
 	inline const GFrameDataCollectionHeader* getHeader()         const { return gheader; }
-	inline const vector<GIntegralPayload*>* getIntegralPayload() const { return integralPayload; }
+	inline const vector<GIntegralPayload*>* getIntegralPayload() const { return integralPayloads; }
 	inline const long int getFrameID()                           const { return gheader->getFrameID(); }
 
 private:
@@ -50,7 +50,7 @@ private:
 
 	GFrameDataCollectionHeader *gheader = nullptr;
 
-	vector<GIntegralPayload*> *integralPayload;
+	vector<GIntegralPayload*> *integralPayloads;
 
 
 };
