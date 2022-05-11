@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Purpose: creates the doxygen documentation for all the glibraries
-# This script is used by TRAVIS
 #
 # Arguments: none
 
@@ -41,5 +39,3 @@ do
 	fi
 	cd ..
 done
-
-exit 0

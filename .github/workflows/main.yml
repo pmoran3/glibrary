@@ -1,9 +1,8 @@
-# For all pushes to the main branch run the tests and push the image to the
-# GitHub registry under an edge tag so we can use it for the nightly
-# integration tests
+
 name: glibrary
 
 on:
+  # Triggers the workflow on all pushes
   push:
   pull_request:
     types:
@@ -11,11 +10,14 @@ on:
       # instead of running for all other PR events
       - synchronize
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  validation_job:
+  build:
     runs-on: ubuntu-latest
     container: jeffersonlab/gemc:3.0
-    name: GLibrary Validation
+    name: Build
     strategy:
       fail-fast: false
     steps:
@@ -23,9 +25,7 @@ jobs:
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Run ci.sh
+      - name: Build geo
         run: |
-          ./ci.sh
-      - name: Get the Validation time
-        run: echo "The time was ${{ steps.run.outputs.time }}"
+          ./ci/build.sh
 

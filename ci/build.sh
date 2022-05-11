@@ -1,53 +1,47 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env zsh
 
-# GLIBRARY Continuous Integration
-# ----------------------------
-#
-# To debug this on the container:
-#
-# docker run -it --rm jeffersonlab/gemc:3.0 bash
+# Purpose: compiles the Cadmesh glibrary libraries
+
+# Container run example:
+# docker run -it --rm jeffersonlab/gemc:3.0-clas12 bash
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
-# ./ci.sh
+# ./ci/build.sh
 
 # load environment if we're on the container
+# notice the extra argument to the source command
+TERM=xterm # source script use tput for colors, TERM needs to be specified
 FILE=/etc/profile.d/jlab.sh
-if test -f "$FILE"; then
-    source "$FILE"
-fi
+test -f $FILE && source $FILE keepmine
 
 # using the checked out GLIBRARY
 export GLIBRARY=`pwd`
-
-function compileCadmesh {
-	echo
-	echo Compiling CadMesh
-	./compileCmesh
-}
+echo GLIBRARY is $GLIBRARY
 
 function compileGLibrary {
 	# getting number of available CPUS
 	copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
 	echo
-	echo Compiling glibrary with options: "$copt"
+	echo Compiling Glibrary with options: "$copt"
 	scons $copt
+	echo
 	echo Compilation completed, content of lib:
-	ls -l lib/
+		ls -ltrh lib/
 }
 
 function checkLibsExistence {
-
+	echo
+	echo Checking libraries existence
 	# shared (dynamic) library extension is different on linux/darwin
 	libExtension=".so"
 	[[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
 
 	# cadmesh
 	for lib in assimp cadmesh
-		do
+	do
 		ls lib/lib$lib$libExtension
 		if [ $? -ne 0 ]; then
 			echo $lib not present
-		exit 1
+			exit 1
 		fi
 	done
 
@@ -55,47 +49,41 @@ function checkLibsExistence {
 	libExtension=".a"
 	for lib in eventDispenser g4display g4system gQtButtonsWidget gdata gdynamic ghit goptions \
 	           gparticle gsplash gstreamer gsystem gtouchable gtranslationTable guts textProgressBar
-		do
+	do
 		ls lib/lib$lib$libExtension
 		if [ $? -ne 0 ]; then
 			echo $lib not present
-		exit 1
+			exit 1
 		fi
 	done
 
 	# plugins
 	libExtension=".gplugin"
 	for lib in gstreamerJLABSROFactory gstreamerROOTFactory gstreamerTEXTFactory
-		do
+	do
 		ls lib/$lib$libExtension
 		if [ $? -ne 0 ]; then
 			echo $lib not present
-		exit 1
+			exit 1
 		fi
 	done
 }
 
 
-# these are all run in sequence so there's no actual need
-# to split them into functions. Still, it organize things better
-echo
-echo "GLIBRARY Validation: $1"
-echo
-time=$(date)
-echo "::set-output name=time::$time"
+function buildGEMC {
+	# getting number of available CPUS
+	copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
+	echo
+	echo Compiling GEMC with options: "$copt"
+	cd $GEMC
+	scons $copt
+	echo
+	echo Compilation completed
+	ls -ltrh ./
 
-if [ $# -eq 1 ]; then
-	echo "Running check: "$1
-	if [ $1 == "cadmesh" ]; then
-		compileCadmesh
-	elif [ $1 == "compile" ]; then
-		compileGLibrary
-	elif [ $1 == "checklibs" ]; then
-		checkLibsExistence
-	fi
-else
-	echo "Running all checks"
-	compileCadmesh
-	compileGLibrary
-	checkLibsExistence
-fi
+}
+
+compileCadmesh
+compileGLibrary
+checkLibsExistence
+
