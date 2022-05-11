@@ -83,7 +83,7 @@ function buildGEMC {
 
 }
 
-compileCadmesh
+./compileCmesh
 compileGLibrary
 checkLibsExistence
 
